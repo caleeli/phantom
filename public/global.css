@@ -193,6 +193,45 @@ main input[type="checkbox"]:disabled::after {
 	background-color: var(--plomo);
 }
 
+/** Checkbox **/
+main label {
+	cursor: pointer;
+}
+main input[type="radio"] {
+	cursor: pointer;
+	position: relative;
+	transform: translate(1px, 1px);
+}
+main input[type="radio"]::before {
+	content: '';
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border-radius: 8px;
+	background-color: var(--azafran);
+	border: 1px solid var(--plomo);
+	transition: all var(--speed) cubic-bezier(.72,.32,.98,.69);
+	transform: translate(-1px, -1px);
+}
+main input[type="radio"]::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 10px;
+    height: 10px;
+	border-radius: 8px;
+	background-color: var(--rojo);
+	opacity: 0;
+	transition: all var(--speed) cubic-bezier(.72,.32,.98,.69);
+	transform: translate(0px, 0px);
+}
+main input[type="radio"]:checked::after {
+	opacity: 1;
+}
+
 /** nav bars **/
 main nav {
 	display: flex;
