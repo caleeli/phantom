@@ -72,7 +72,20 @@
 				<i class="fas fa-search"></i>
 				Buscar
 			</legend>
-			<input type="text" placeholder="Buscar por nombre, apellido, cédula, etc.">
+			<input type="text" size="47" placeholder="Buscar por nombre, apellido, cédula, etc.">
+			<select name="country">
+				<option value="">Seleccione un país</option>
+				<option value="Argentina">Argentina</option>
+				<option value="Bolivia">Bolivia</option>
+				<option value="Brasil">Brasil</option>
+				<option value="Chile">Chile</option>
+				<option value="Colombia">Colombia</option>
+				<option value="Ecuador">Ecuador</option>
+				<option value="Perú">Perú</option>
+				<option value="Paraguay">Paraguay</option>
+				<option value="Uruguay">Uruguay</option>
+				<option value="Venezuela">Venezuela</option>
+			</select>
 		</fieldset>
 		<!-- Login form -->
 		<fieldset>
@@ -80,7 +93,7 @@
 				<i class="fas fa-lock"></i>
 				Login
 			</legend>
-			<input type="text" placeholder="Correo electrónico">
+			<input type="email" placeholder="Correo electrónico">
 			<input type="password" placeholder="Contraseña">
 			<button type="submit">
 				Iniciar sesión

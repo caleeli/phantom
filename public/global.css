@@ -6,6 +6,7 @@
 	--azafran: #F3BE26;
 	--rubor: #E669A2;
 	--blanco: #FFFFFF;
+	--plomo: #ccc;
 
 	--elevacion: 2px;
 	--_elevacion: -2px;
@@ -65,6 +66,7 @@ main h2 {
 main fieldset {
 	margin: 0.5rem 0rem;
 	border: 2px solid var(--azafran);
+	border-radius: 4px;
 }
 /** Standar button **/
 main button {
@@ -222,10 +224,15 @@ input, button, select, textarea {
 	padding: 0.4rem;
 	margin: 0 0.4rem 0.5rem 0;
 	box-sizing: border-box;
-	border: 1px solid #ccc;
+	border: 1px solid var(--plomo);
+	background-color: var(--blanco);
 	border-radius: 2px;
 }
 
 input:disabled {
-	color: #ccc;
+	color: var(--plomo);
+}
+
+input:focus, select:focus, textarea:focus {
+	outline: var(--rojo) auto 1px;
 }
