@@ -1,0 +1,89 @@
+<script lang="ts">
+	// expandido por defecto
+	let aside="expanded";
+	// avatar aleatorio
+	let avatar="https://i.pravatar.cc/300";
+	// colapsa el menu lateral
+	function collapseSidebar() {
+		aside="collapsed";
+	}
+	// expande el menu lateral
+	function expandSidebar() {
+		aside="expanded";
+	}
+</script>
+
+<header>Talento Humano</header>
+
+<aside class={aside}>
+	<button id="hide-sidebar" on:click={collapseSidebar}><i class="fas fa-chevron-circle-left"></i></button>
+	<button id="show-sidebar" on:click={expandSidebar}><i class="fas fa-chevron-circle-right"></i></button>
+	<figure>
+		<img src={avatar} alt="user">
+		<figcaption>
+			@username
+		</figcaption>
+	</figure>
+	<a class="active" href="#/home"><i class="fas fa-home"></i> <span>Home</span></a>
+	<a href="#/users"><i class="fas fa-users"></i> <span>Users</span></a>
+	<a href="#/about"><i class="fas fa-question-circle"></i> <span>About</span></a>
+	<footer>
+		<span>© 2021 phantom</span>
+	</footer>
+</aside>
+
+<main>
+	<h1>Busqueda de candidatos</h1>
+	<form>
+		<h2>Buttons</h2>
+		<nav>
+			<button>
+				Perfiles<br>
+				<i class="fas fa-id-card-alt"></i>
+				<mark>5</mark>
+			</button>
+			<i class="fas fa-arrow-right"></i>
+			<button type="button">
+				Fuentes de reclutamiento<br>
+				<i class="fas fa-globe"></i>
+				<mark>2</mark>
+			</button>
+			<i class="fas fa-arrow-right"></i>
+			<button type="reset">
+				Potenciales<br>
+				<i class="fas fa-users"></i>
+				<mark>14</mark>
+			</button>
+			<i class="fas fa-arrow-right"></i>
+			<button type="submit">
+				Contactos<br>
+				<i class="fas fa-address-card"></i>
+				<mark>8</mark>
+			</button>
+			<i class="fas fa-arrow-right"></i>
+			<button type="reset">
+				Evaluación<br>
+				<i class="fas fa-check-circle"></i>
+				<mark>5</mark>
+			</button>
+		</nav>
+		<nav>
+			<button>
+				default
+			</button>
+			<button type="button">
+				button
+			</button>
+			<button type="reset">
+				reset
+			</button>
+			<button type="submit">
+				submit
+			</button>
+		</nav>
+	</form>
+</main>
+
+<style>
+
+</style>
