@@ -25,6 +25,7 @@
     "@tsconfig/svelte": "^2.0.0"
   },
   "dependencies": {
+    "gh-pages": "^3.2.3",
     "sirv-cli": "^1.0.0"
   }
 }
