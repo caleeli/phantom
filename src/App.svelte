@@ -95,6 +95,20 @@
 				<option value="Uruguay">Uruguay</option>
 				<option value="Venezuela">Venezuela</option>
 			</select>
+			<input type="text" placeholder="disabled" disabled>
+			<select name="country" disabled>
+				<option value="">Seleccione un país</option>
+				<option value="Argentina">Argentina</option>
+				<option selected value="Bolivia">Bolivia</option>
+				<option value="Brasil">Brasil</option>
+				<option value="Chile">Chile</option>
+				<option value="Colombia">Colombia</option>
+				<option value="Ecuador">Ecuador</option>
+				<option value="Perú">Perú</option>
+				<option value="Paraguay">Paraguay</option>
+				<option value="Uruguay">Uruguay</option>
+				<option value="Venezuela">Venezuela</option>
+			</select>
 		</fieldset>
 		<!-- Login form -->
 		<fieldset>
@@ -158,6 +172,21 @@
 				submit
 			</button>
 		</nav>
+		<textarea></textarea>
+		<div>
+			<label for="exampleFormControlSelect2">Example multiple select</label>
+			<select multiple size="5" id="exampleFormControlSelect2">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+			</select>
+		</div>
+		<div>
+			<label for="exampleFormControlFile1">Example file input</label>
+			<input type="file" id="exampleFormControlFile1">
+		</div>
 	</form>
 </main>
 

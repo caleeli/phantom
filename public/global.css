@@ -368,6 +368,12 @@ input, button, select, textarea {
 
 input:disabled {
 	color: var(--plomo);
+	font-style: italic;
+}
+
+select:disabled {
+	color: var(--plomo);
+	font-style: italic;
 }
 
 input:focus, select:focus, textarea:focus {
