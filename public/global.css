@@ -189,10 +189,18 @@ main input[type="checkbox"]:checked::before {
 	opacity: 1;
 	transform: rotate(45deg);
 }
+main input[type="checkbox"]:disabled::after {
+	background-color: var(--plomo);
+}
 
+/** nav bars **/
 main nav {
 	display: flex;
 	align-items: center;
+	flex-direction: row;
+}
+main nav > label{
+	margin-right: 1rem;
 }
 
 /** SIDEBAR **/
