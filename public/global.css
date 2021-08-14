@@ -215,6 +215,9 @@ main input[type="radio"]::before {
 	transition: all var(--speed) cubic-bezier(.72,.32,.98,.69);
 	transform: translate(-1px, -1px);
 }
+main input[type="radio"]:disabled:before {
+	background-color: var(--plomo);
+}
 main input[type="radio"]::after {
     content: '';
     position: absolute;
@@ -230,6 +233,9 @@ main input[type="radio"]::after {
 }
 main input[type="radio"]:checked::after {
 	opacity: 1;
+}
+main input[type="radio"]:checked:disabled::after {
+	background-color: var(--blanco);
 }
 
 /** nav bars **/

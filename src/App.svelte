@@ -135,7 +135,7 @@
 					Amarillo
 				</label>
 				<label>
-					<input type="radio" name="color" value="orange">
+					<input type="radio" name="color" value="orange" disabled checked>
 					Naranja
 				</label>
 			</nav>
