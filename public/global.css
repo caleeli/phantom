@@ -119,6 +119,20 @@ main button[type="button"] {
 	border-color: var(--bambu);
 	color: var(--blanco);
 }
+/** Disabled button **/
+main button:disabled {
+	background-color: var(--plomo);
+	border-color: var(--plomo);
+	box-shadow: none;
+	transform: translate(0px, 0px);
+}
+main button:disabled:hover {
+	box-shadow: none;
+}
+main button mark {
+	background-color: var(--plomo);
+}
+
 /** Checkbox **/
 main label {
 	cursor: pointer;
