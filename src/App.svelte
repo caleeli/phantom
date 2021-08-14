@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	// expandido por defecto
 	let aside="expanded";
 	// avatar aleatorio
@@ -11,6 +13,13 @@
 	function expandSidebar() {
 		aside="expanded";
 	}
+	onMount(() => {
+		// focus first visible input or select in main content
+		const input = document.querySelector('main input, main select');
+		if (input) {
+			input.focus();
+		}
+	});
 </script>
 
 <header>Talento Humano</header>
@@ -102,6 +111,34 @@
 				<input type="checkbox" name="remember" id="remember">
 				Recordarme
 			</label>
+			<label>
+				<input type="checkbox" name="remember" disabled>
+				<input type="checkbox" name="remember" disabled checked>
+				Recordarme (Disabled)
+			</label>
+			<!-- radio buttons -->
+			<nav>
+				<label>
+					<input type="radio" name="color" value="red">
+					Rojo
+				</label>
+				<label>
+					<input type="radio" name="color" value="green">
+					Verde
+				</label>
+				<label>
+					<input type="radio" name="color" value="blue">
+					Azul
+				</label>
+				<label>
+					<input type="radio" name="color" value="yellow">
+					Amarillo
+				</label>
+				<label>
+					<input type="radio" name="color" value="orange">
+					Naranja
+				</label>
+			</nav>
 		</fieldset>
 
 		<nav>
