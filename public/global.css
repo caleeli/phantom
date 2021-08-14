@@ -6,6 +6,10 @@
 	--azafran: #F3BE26;
 	--rubor: #E669A2;
 	--blanco: #FFFFFF;
+
+	--elevacion: 2px;
+	--_elevacion: -2px;
+	--speed: 300ms;
 }
 
 html, body {
@@ -57,6 +61,11 @@ main h1, main form {
 main h2 {
 	margin: 0.5rem auto;
 }
+/** Fieldset **/
+main fieldset {
+	margin: 0.5rem 0rem;
+	border: 2px solid var(--azafran);
+}
 /** Standar button **/
 main button {
 	border-radius: 0.5rem;
@@ -66,12 +75,10 @@ main button {
 	border: 2px solid var(--dorado);
 	color: var(--blanco);
 
-	transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
-	box-shadow: 0px 0px 4px rgba(0, 0, 0, .5), 0 0 20px rgba(0, 0, 0, .2);
-	margin-top: 4px;
-	margin-left: 4px;
-	margin-bottom: 0px;
-	margin-right: 0px;
+	transition: all var(--speed) cubic-bezier(0.19, 1, 0.22, 1);
+	box-shadow: 0px 0px var(--elevacion) rgba(0, 0, 0, .5), 0 0 20px rgba(0, 0, 0, .2);
+	margin-top: var(--elevacion);
+	margin-left: var(--elevacion);
 }
 main button mark {
 	padding: 0 0.5rem;
@@ -80,11 +87,8 @@ main button mark {
 	color: var(--blanco);
 }
 main button:hover {
-	box-shadow:  4px 4px 4px rgba(0, 0, 0, .5), 0 0 20px rgba(0, 0, 0, .2);
-	margin-top: 0px;
-	margin-left: 0px;
-	margin-bottom: 4px;
-	margin-right: 4px;
+	box-shadow:  var(--elevacion) var(--elevacion) var(--elevacion) rgba(0, 0, 0, .5), 0 0 20px rgba(0, 0, 0, .2);
+	transform: translate(var(--_elevacion), var(--_elevacion));
 }
 /** Reset button **/
 main button[type="reset"] {

@@ -67,6 +67,26 @@
 				<mark>5</mark>
 			</button>
 		</nav>
+		<fieldset>
+			<legend>
+				<i class="fas fa-search"></i>
+				Buscar
+			</legend>
+			<input type="text" placeholder="Buscar por nombre, apellido, cédula, etc.">
+		</fieldset>
+		<!-- Login form -->
+		<fieldset>
+			<legend>
+				<i class="fas fa-lock"></i>
+				Login
+			</legend>
+			<input type="text" placeholder="Correo electrónico">
+			<input type="password" placeholder="Contraseña">
+			<button type="submit">
+				Iniciar sesión
+			</button>
+		</fieldset>
+
 		<nav>
 			<button>
 				default
