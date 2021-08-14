@@ -98,6 +98,10 @@
 			<button type="submit">
 				Iniciar sesión
 			</button>
+			<label>
+				<input type="checkbox" name="remember" id="remember">
+				Recordarme
+			</label>
 		</fieldset>
 
 		<nav>

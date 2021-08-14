@@ -119,6 +119,76 @@ main button[type="button"] {
 	border-color: var(--bambu);
 	color: var(--blanco);
 }
+/** Checkbox **/
+main label {
+	cursor: pointer;
+}
+main input[type="checkbox"] {
+	cursor: pointer;
+	position: relative;
+}
+main input[type="checkbox"]::after {
+	content: '';
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border-radius: 2px;
+	background-color: var(--azafran);
+	border: 1px solid var(--plomo);
+	transition: all var(--speed) cubic-bezier(.72,.32,.98,.69);
+}
+main input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 6px;
+    width: 2px;
+    height: 2px;
+	border: 0.5px solid var(--blanco);
+	background: var(--blanco);
+	box-shadow: 
+		4px 0 0 var(--blanco),
+		4px 0 0 var(--blanco),
+		4px -0px 0 var(--blanco),
+		4px -0px 0 var(--blanco),
+		4px -0px 0 var(--blanco),
+		4px -0px 0 var(--blanco);
+	transform: rotate(0deg);
+	opacity: 0;
+	transition: all var(--speed) cubic-bezier(.72,.32,.98,.69);
+}
+main input[type="checkbox"]:checked::after {
+	content: '';
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border-radius: 2px;
+	background-color: var(--rojo);
+	border: 1px solid var(--plomo);
+}
+main input[type="checkbox"]:checked::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 6px;
+    width: 2px;
+    height: 2px;
+	border: 0.5px solid var(--blanco);
+	background: var(--blanco);
+	box-shadow: 
+		2px 0 0 var(--blanco),
+		4px 0 0 var(--blanco),
+		4px -2px 0 var(--blanco),
+		4px -4px 0 var(--blanco),
+		4px -6px 0 var(--blanco),
+		4px -8px 0 var(--blanco);
+	opacity: 1;
+	transform: rotate(45deg);
+}
 
 main nav {
 	display: flex;
