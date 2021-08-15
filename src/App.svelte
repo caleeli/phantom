@@ -81,7 +81,7 @@
 				<i class="fas fa-search"></i>
 				Buscar
 			</legend>
-			<input type="text" size="47" placeholder="Buscar por nombre, apellido, cédula, etc.">
+			<input type="text" placeholder="Buscar por nombre, apellido, cédula, etc.">
 			<select name="country">
 				<option value="">Seleccione un país</option>
 				<option value="Argentina">Argentina</option>
@@ -191,5 +191,7 @@
 </main>
 
 <style>
-
+main {
+	margin-top: 0px;
+}
 </style>
