@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap');
+
+:root {
+	--negro: #000000;
+	--text: #101010;
+	--secondary: #F5F5F5;
+	--primary: #DAE8FC;
+	--azafran: #F3BE26;
+	--danger: #F8CECC;
+	--blanco: #FFFFFF;
+	--plomo: #D8D8D8;
+    --success: #D5E8D4;
+
+	--elevacion: 2px;
+	--_elevacion: -2px;
+	--speed: 200ms;
+
+	--font: 'Montserrat', sans-serif;
+
+	--body-color: var(--negro);
+	--body-bg: var(--blanco);
+
+	--header-color: var(--negro);
+	--header-bg: var(--plomo);
+
+	--sidebar-color: var(--negro);
+	--sidebar-bg: var(--secondary);
+	--sidebar-username-color: var(--negro);
+    --sidebar-username-bg: url("images/banner_gray.jpg");
+
+	--sidebar-active-color: var(--text);
+	--sidebar-active-bg: var(--blanco);
+
+	--main-bg: var(--blanco);
+
+	--main-content-color: var(--negro);
+	--main-content-bg: var(--blanco);
+
+	--button-default-color: var(--negro);
+	--button-default-bg: var(--primary);
+	--button-default-border: var(--primary);
+
+	--button-button-color: var(--negro);
+	--button-button-bg: var(--secondary);
+	--button-button-border: var(--secondary);
+
+	--button-reset-color: var(--text);
+	--button-reset-bg: var(--danger);
+	--button-reset-border: var(--danger);
+
+	--button-submit-color: var(--negro);
+	--button-submit-bg: var(--success);
+	--button-submit-border: var(--success);
+
+	--button-disabled-color: var(--blanco);
+	--button-disabled-bg: var(--plomo);
+	--button-disabled-border: var(--plomo);
+
+	--button-mark-color: inherit;
+	--button-mark-bg: var(--azafran);
+
+	--checkbox-color: var(--blanco);
+	--checkbox-bg: var(--blanco);
+	--checkbox-checked-color: var(--text);
+	--checkbox-checked-bg: var(--blanco);
+	--checkbox-border: var(--text);
+
+	--link-color: var(--secondary);
+
+	--input-color: var(--negro);
+	--input-bg: var(--blanco);
+	--input-border: var(--plomo);
+	--input-focus-color: var(--text);
+	--input-disable-color: var(--plomo);
+	--input-disable-bg: var(--blanco);
+}
