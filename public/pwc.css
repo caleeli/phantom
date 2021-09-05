@@ -24,6 +24,7 @@
 	--sidebar-bg: var(--blanco);
 	--sidebar-username-color: var(--blanco);
     --sidebar-username-bg: url("images/banner.jpg");
+	--sidebar-username-border: var(--plomo);
 
 	--sidebar-active-color: var(--rojo);
 	--sidebar-active-bg: var(--blanco);

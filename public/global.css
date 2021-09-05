@@ -328,6 +328,7 @@ aside figure img {
 	border-radius: 2rem;
 	width: 2rem;
 	height: 2rem;
+	border: 2px solid var(--sidebar-username-border);
 }
 aside figure figcaption {
 	margin-left: 1rem;

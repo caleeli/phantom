@@ -3,7 +3,7 @@
 :root {
 	--negro: #000000;
 	--text: #101010;
-	--secondary: #F5F5F5;
+	--secondary: #F7F7F7;
 	--primary: #DAE8FC;
 	--azafran: #F3BE26;
 	--danger: #F8CECC;
@@ -27,6 +27,7 @@
 	--sidebar-bg: var(--secondary);
 	--sidebar-username-color: var(--negro);
     --sidebar-username-bg: url("images/banner_gray.jpg");
+	--sidebar-username-border: var(--negro);
 
 	--sidebar-active-color: var(--text);
 	--sidebar-active-bg: var(--blanco);
