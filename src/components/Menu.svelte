@@ -3,7 +3,7 @@ import { location } from 'svelte-spa-router'
 	// expandido por defecto
 	let aside=isMobile() ? "collapsed" : "expanded";
 	// avatar aleatorio
-	let avatar="https://i.pravatar.cc/300";
+	let avatar="images/user-regular.svg";
 	// colapsa el menu lateral
 	function collapseSidebar() {
 		aside="collapsed";

@@ -74,4 +74,6 @@
 	--input-focus-color: var(--text);
 	--input-disable-color: var(--plomo);
 	--input-disable-bg: var(--blanco);
+
+	--form-leyend: var(--secondary);
 }
