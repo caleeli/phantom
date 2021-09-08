@@ -1,0 +1,15 @@
+<screen>
+# Agregar tarea
+Tarea:        [$tarea                     ]
+Fecha límite: [$Fecha                     ]
+Entregables:  [$entregables               ]
+Notas:
+[$a][$comentario                          ]
+                                 [$guardar]
+</screen>
+
+<script>
+    $entregables.$type = "tags";
+    $comentario.rows = 2;
+    $comentario.placeholder = "Escribe una nota o comentario";
+</script>

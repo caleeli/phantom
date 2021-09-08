@@ -1,0 +1,11 @@
+{
+    "items": [
+        {
+            "$type": "input",
+            "label": "Tarea",
+            "variable": "tarea"
+        }
+    ]
+}
+
+Tarea:

@@ -314,6 +314,7 @@ aside a {
 aside a.active {
 	color: var(--sidebar-active-color);
 	background-color: var(--sidebar-active-bg);
+	font-weight: bold;
 }
 aside footer {
 	margin-top: auto;

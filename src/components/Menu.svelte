@@ -27,7 +27,6 @@ import { location } from 'svelte-spa-router'
             @username
         </figcaption>
     </figure>
-	{$location}
     <a class={$location=='/home' ? 'active' : ''} href="#/home"><i class="fas fa-home"></i> <span>Inicio</span></a>
     <a href="#/users"><i class="fas fa-users"></i> <span>Users</span></a>
     <a href="#/about"><i class="fas fa-question-circle"></i> <span>About</span></a>

@@ -4,10 +4,12 @@
 	import Login from "./pages/Login.svelte";
 	import Home from "./pages/Home.svelte";
 	import Test from "./pages/Test.svelte";
+	import Task from "./pages/Task.svelte";
 	const routes = {
 		"/": Login,
 		"/home": Home,
-		"/test": Test
+		"/test": Test,
+		"/task/:id": Task,
 	};
 </script>
 

@@ -1,6 +1,7 @@
 <script>
 import Menu from "../components/Menu.svelte";
 import DropList from "../components/DropList.svelte";
+import Screen from "../components/Screen.svelte";
 let tasks = [
     {
         name: "Pendientes",
@@ -33,6 +34,28 @@ let tasks = [
         ]
     },
 ];
+function editTask(task) {
+    fetch("http://localhost:5000/api/tasks/1.svelte", {
+      "method": "GET",
+      "body": null,
+      "mode": "cors",
+      "credentials": "include"
+    }).then(response => {
+      return response.text();
+    }).then(data => {
+      console.log(data);
+    });
+}
+function deleteTask(task, column) {
+    column.items.splice(column.items.indexOf(task), 1);
+    tasks = tasks;
+}
+function addTask() {
+    console.log("add task");
+}
+function addComment(task) {
+    console.log(task);
+}
 </script>
 
 <header>Inicio</header>
@@ -41,17 +64,17 @@ let tasks = [
 
 <main>
     <nav>
-        {#each tasks as task}
+        {#each tasks as column}
         <form>
-            <leyend>{task.name}</leyend>
-            <DropList class="abc" let:item bind:items={task.items}>
+            <leyend>{column.name}</leyend>
+            <DropList class="abc" let:item bind:items={column.items}>
                 <div class="card">
                     <div class="user"><img class="avatar" alt ="avatar" src="images/user-regular.svg" onerror="this.onerror=null;this.src='images/user-regular.svg';"></div>
                     <div class="task">{item.name}</div>
                     <div class="bar">
-                        <button><i class="fas fa-pen"></i></button>
-                        <button><i class="far fa-comment"></i></button>
-                        <button type="reset"><i class="fas fa-trash"></i></button>
+                        <button on:click={() => editTask(item, column)}><i class="fas fa-pen"></i></button>
+                        <button on:click={() => addComment(item, column)}><i class="far fa-comment"></i></button>
+                        <button on:click={() => deleteTask(item, column)} type="reset"><i class="fas fa-trash"></i></button>
                         <div>2 días</div>
                     </div>
                 </div>
@@ -59,6 +82,7 @@ let tasks = [
         </form>
         {/each}
     </nav>
+    <Screen url="../api/tasks/1.html" />
 </main>
 
 <style>
@@ -66,7 +90,7 @@ let tasks = [
         width: 250px;
         height: 300px;
     }
-    .card {
+    :global(.card) {
         border: 1px solid #DFCF41;
         margin-top: 1rem;
         background: #FFED4A;

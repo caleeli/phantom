@@ -30,7 +30,7 @@
 	--sidebar-username-border: var(--negro);
 
 	--sidebar-active-color: var(--text);
-	--sidebar-active-bg: var(--blanco);
+	--sidebar-active-bg: inherit;
 
 	--main-bg: var(--blanco);
 
