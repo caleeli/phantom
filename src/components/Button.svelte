@@ -1,6 +1,5 @@
 <script>
   export let size = 1;
-  export let value;
   let styles = {
     size: `${size}%`,
   };
@@ -9,8 +8,7 @@
     .join(";");
 </script>
 
-<input {...$$props} style={cssVarStyles} bind:value={value} />
-<slot />
+<button {...$$props} style={cssVarStyles}><slot /></button>
 
 <style>
   input {

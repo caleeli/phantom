@@ -1,15 +1,18 @@
 <screen>
-# Agregar tarea
-Tarea:        [$tarea                     ]
-Fecha límite: [$Fecha                     ]
-Entregables:  [$entregables               ]
+<h2>Agregar tarea</h2>                    
+Tarea:        [tarea                     ]
+[            ]{{tarea}}
+Fecha límite: [fecha                     ]
+Entregables:  [entregables               ]
 Notas:
-[$a][$comentario                          ]
-                                 [$guardar]
+[a][comentario                           ]
+                                 [guardar]
 </screen>
 
 <script>
-    $entregables.$type = "tags";
-    $comentario.rows = 2;
-    $comentario.placeholder = "Escribe una nota o comentario";
+    $fecha.props.type = "date";
+    $comentario.type = TextArea;
+    $comentario.props.placeholder = "Escribe una nota o comentario";
+    $guardar.type = Button;
+    $guardar.text = "Guardar";
 </script>

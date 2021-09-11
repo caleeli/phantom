@@ -9,11 +9,11 @@
     .join(";");
 </script>
 
-<input {...$$props} style={cssVarStyles} bind:value={value} />
+<textarea {...$$props} style={cssVarStyles} bind:value={value}></textarea>
 <slot />
 
 <style>
-  input {
+  textarea {
     width: var(--size);
   }
 </style>
