@@ -1,10 +1,11 @@
 <script type="ts">
+  import { get, set } from "lodash";
+  import { tick } from "svelte";
   import Input from "./Input.svelte";
   import Label from "./Label.svelte";
   import Button from "./Button.svelte";
   import TextArea from "./TextArea.svelte";
   import Avatar from "./Avatar.svelte";
-  import { get, set } from "lodash";
 
   export let url: string = "";
   export let params: object;
@@ -62,6 +63,16 @@
     const response = await fetch(url);
     const source = await response.text();
     const compiled = compile(source);
+    setTimeout(() => {
+      tick().then(() => {
+        const input = document.querySelector(
+          "main input, main select, main textarea"
+        );
+        if (input) {
+          input.focus();
+        }
+      });
+    }, 0);
     return compiled;
   }
   function parseTemplate(tpl) {
