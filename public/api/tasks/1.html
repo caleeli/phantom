@@ -1,5 +1,5 @@
 <screen>
-<h2>{{titulo}}</h2>                    
+<h2>Tarea {{id}}</h2>
 Tarea:        [tarea                     ]
 [            ]{{tarea}}
 Fecha límite: [fecha                     ]
@@ -10,15 +10,22 @@ Notas:
 </screen>
 
 <script>
-    data.titulo = `Tarea ${params.id}`;
+    data.id = params.id;
+    data.tarea = '';
+    data.fecha = new Date().toISOString().substring(0, 10);
+    data.entregables = params.entregables;
+    data.comentario = params.comentario;
+
     $fecha.props.type = "date";
     $comentario.type = TextArea;
     $comentario.props.placeholder = "Escribe una nota o comentario";
     $guardar.type = Button;
     $guardar.text = "Guardar";
     $guardar.props.onclick = function(e) {
-        console.log('hola mundo', e);
+        api['tasks'].patch({
+            id: data.id,
+            attributes: data
+        });
     };
     $a.type = Avatar;
-    $a.props.align = "right";
 </script>
