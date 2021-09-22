@@ -1,7 +1,6 @@
 <script>
 import Menu from "../components/Menu.svelte";
 import DropList from "../components/DropList.svelte";
-import Screen from "../components/Screen.svelte";
 let tasks = [
     {
         name: "Pendientes",
@@ -35,16 +34,7 @@ let tasks = [
     },
 ];
 function editTask(task) {
-    fetch("http://localhost:5000/api/tasks/1.svelte", {
-      "method": "GET",
-      "body": null,
-      "mode": "cors",
-      "credentials": "include"
-    }).then(response => {
-      return response.text();
-    }).then(data => {
-      console.log(data);
-    });
+    window.location.hash = `#/task/${task.id}`;
 }
 function deleteTask(task, column) {
     column.items.splice(column.items.indexOf(task), 1);
@@ -82,7 +72,6 @@ function addComment(task) {
         </form>
         {/each}
     </nav>
-    <Screen url="../api/tasks/1.html" />
 </main>
 
 <style>

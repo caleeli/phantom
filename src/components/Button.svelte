@@ -1,17 +1,16 @@
 <script>
-  export let size = 1;
-  let styles = {
-    size: `${size}%`,
-  };
-  $: cssVarStyles = Object.entries(styles)
-    .map(([key, value]) => `--${key}:${value}`)
-    .join(";");
+  export let width = 1;
+  export let onclick = () => {};
+  let cssVarStyles = `--width:${width}%`;
+  function click(event) {
+    onclick(event);
+  }
 </script>
 
-<button {...$$props} style={cssVarStyles}><slot /></button>
+<button {...$$restProps} style={cssVarStyles} on:click={click}><slot /></button>
 
 <style>
-  input {
-    width: var(--size);
+  button {
+    width: var(--width);
   }
 </style>

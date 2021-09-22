@@ -3,8 +3,11 @@
   import Label from "./Label.svelte";
   import Button from "./Button.svelte";
   import TextArea from "./TextArea.svelte";
+  import Avatar from "./Avatar.svelte";
+  import { get, set } from "lodash";
 
   export let url: string = "";
+  export let params: object;
   let data = {} as any;
 
   function compile(code: string) {
@@ -22,8 +25,8 @@
       const cells = row.match(/\[[^\[\]]+\]|[^\[\]]+/g);
       const rowResult = [];
       cells.forEach((cell) => {
-        const size = (cell.length / maxRowLength) * 100;
-        const props = { size };
+        const width = (cell.length / maxRowLength) * 100;
+        const props = { width };
         if (cell.startsWith("[")) {
           const id = cell.substr(1, cell.length - 2).trim();
           const def = { type: Input as any, props };
@@ -55,13 +58,11 @@
       [{ id: string; type: string; props: {}; text: Function }]
     ];
   }
-  function loadScreen(url: string) {
-    return fetch(url)
-      .then((response) => response.text())
-      .then((source) => compile(source))
-      .then((compiled) => {
-        return compiled;
-      });
+  async function loadScreen(url: string) {
+    const response = await fetch(url);
+    const source = await response.text();
+    const compiled = compile(source);
+    return compiled;
   }
   function parseTemplate(tpl) {
     if (!window.Handlebars) {
@@ -69,6 +70,16 @@
     }
     return window.Handlebars.compile(tpl);
   }
+  const dataRef = new Proxy(data, {
+    get(target, prop) {
+      return get(target, prop);
+    },
+    set(target, prop, value) {
+      set(target, prop, value);
+      data = data;
+      return true;
+    },
+  });
 </script>
 
 <div class="screen">
@@ -80,8 +91,9 @@
             <svelte:component
               this={item.type}
               {...item.props}
-              bind:value={data[item.id]}
+              bind:value={dataRef[item.id]}
             >
+              <!-- svelte-ignore missing-declaration -->
               {#if item.text}{@html item.text instanceof Function
                   ? item.text(data)
                   : item.text}{/if}

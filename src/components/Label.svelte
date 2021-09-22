@@ -1,17 +1,12 @@
 <script>
-  export let size = 1;
-  let styles = {
-    size: `${size}%`,
-  };
-  $: cssVarStyles = Object.entries(styles)
-    .map(([key, value]) => `--${key}:${value}`)
-    .join(";");
+  export let width = 1;
+  $: cssVarStyles = `--width:${width}%`;
 </script>
 
 <div {...$$props} style={cssVarStyles}><slot /></div>
 
 <style>
   div {
-    width: var(--size);
+    width: var(--width);
   }
 </style>

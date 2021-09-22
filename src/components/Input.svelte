@@ -1,19 +1,14 @@
 <script>
-  export let size = 1;
+  export let width = 1;
   export let value;
-  let styles = {
-    size: `${size}%`,
-  };
-  $: cssVarStyles = Object.entries(styles)
-    .map(([key, value]) => `--${key}:${value}`)
-    .join(";");
+  $: cssVarStyles = `--width:${width}%`;
 </script>
 
-<input {...$$props} style={cssVarStyles} bind:value={value} />
+<input {...$$restProps} style={cssVarStyles} bind:value={value} />
 <slot />
 
 <style>
   input {
-    width: var(--size);
+    width: var(--width);
   }
 </style>

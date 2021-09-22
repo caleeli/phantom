@@ -1,5 +1,5 @@
 <screen>
-<h2>Agregar tarea</h2>                    
+<h2>{{titulo}}</h2>                    
 Tarea:        [tarea                     ]
 [            ]{{tarea}}
 Fecha límite: [fecha                     ]
@@ -10,9 +10,15 @@ Notas:
 </screen>
 
 <script>
+    data.titulo = `Tarea ${params.id}`;
     $fecha.props.type = "date";
     $comentario.type = TextArea;
     $comentario.props.placeholder = "Escribe una nota o comentario";
     $guardar.type = Button;
     $guardar.text = "Guardar";
+    $guardar.props.onclick = function(e) {
+        console.log('hola mundo', e);
+    };
+    $a.type = Avatar;
+    $a.props.align = "right";
 </script>
