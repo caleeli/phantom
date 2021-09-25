@@ -4,10 +4,11 @@ import (
 	"fmt"
 
 	"github.com/caleeli/phantom/backend/repository"
+	"github.com/google/uuid"
 )
 
 type Task struct {
-	ID   string `bson:"_id" json:"id,omitempty"`
+	Id   string `bson:"_id" json:"id,omitempty"`
 	Name string
 }
 
@@ -26,9 +27,15 @@ func main() {
 	}
 	fmt.Println(tasks)
 
-	err = repository.Get("tasks", tasks[0].ID, &task)
+	err = repository.Get("tasks", tasks[0].Id, &task)
 	if err != nil {
 		fmt.Println(err)
 	}
 	fmt.Println(task)
+
+	id := uuid.New().String()
+	err = repository.Post("tasks", &Task{Id: id, Name: "uno"})
+	if err != nil {
+		fmt.Println(err)
+	}
 }

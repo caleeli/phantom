@@ -86,3 +86,12 @@ func (table *tTable) Index(filter map[string]string, out interface{}) error {
 	}
 	return nil
 }
+
+func (table *tTable) Post(record interface{}) error {
+	collection := table.db.database.Collection(*table.TableName)
+	_, err := collection.InsertOne(table.db.ctx, record)
+	if err != nil {
+		return err
+	}
+	return nil
+}

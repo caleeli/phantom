@@ -6,7 +6,7 @@ import (
 	"github.com/caleeli/phantom/backend/storage"
 )
 
-const repositoryDriver = "mongodb"
+const repositoryDriver = "dynamodb"
 
 func connect() (repository storage.Repository, err error) {
 	if repositoryDriver == "dynamodb" {
@@ -41,4 +41,16 @@ func Index(name string, filter map[string]string, out interface{}) error {
 		return err
 	}
 	return resource.Index(filter, out)
+}
+
+func Post(name string, record interface{}) error {
+	repository, err := connect()
+	if err != nil {
+		return err
+	}
+	resource, err := repository.GetResource(name)
+	if err != nil {
+		return err
+	}
+	return resource.Post(record)
 }

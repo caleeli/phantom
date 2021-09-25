@@ -115,3 +115,16 @@ func (table *tTable) Index(filter map[string]string, out interface{}) error {
 	resultsVal.Elem().Set(sliceVal)
 	return nil
 }
+
+func (table *tTable) Post(record interface{}) error {
+	item, err := attributevalue.MarshalMap(record)
+	if err != nil {
+		return err
+	}
+	input := &dynamodb.PutItemInput{
+		Item:      item,
+		TableName: table.TableName,
+	}
+	_, err = table.db.svc.PutItem(*table.db.ctx, input)
+	return err
+}
