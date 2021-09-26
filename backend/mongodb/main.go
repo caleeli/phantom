@@ -6,9 +6,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/caleeli/phantom/backend/storage"
+	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -57,13 +57,22 @@ func (connection *tConnection) GetResource(tableName string) (storage.Resource, 
 	}, nil
 }
 
-func (table *tTable) Get(key string, out interface{}) error {
-	collection := table.db.database.Collection(*table.TableName)
-	id, err := primitive.ObjectIDFromHex(key)
+func ConvertToID(suuid string) interface{} {
+	id := uuid.MustParse(suuid)
+	objectID, err := id.MarshalBinary()
 	if err != nil {
-		return err
+		panic(err)
 	}
-	filter := bson.D{{Key: "_id", Value: id}}
+	return objectID
+}
+
+func GenerateID() interface{} {
+	return ConvertToID(uuid.New().String())
+}
+
+func (table *tTable) Get(key interface{}, out interface{}) (err error) {
+	collection := table.db.database.Collection(*table.TableName)
+	filter := bson.D{{Key: "_id", Value: key}}
 	err = collection.FindOne(table.db.ctx, filter).Decode(out)
 	if err != nil {
 		return err
@@ -90,6 +99,27 @@ func (table *tTable) Index(filter map[string]string, out interface{}) error {
 func (table *tTable) Post(record interface{}) error {
 	collection := table.db.database.Collection(*table.TableName)
 	_, err := collection.InsertOne(table.db.ctx, record)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (table *tTable) Put(key interface{}, record interface{}) (err error) {
+	collection := table.db.database.Collection(*table.TableName)
+	filter := bson.D{{Key: "_id", Value: key}}
+	update := bson.D{{Key: "$set", Value: record}}
+	_, err = collection.UpdateOne(table.db.ctx, filter, update)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (table *tTable) Delete(key interface{}) (err error) {
+	collection := table.db.database.Collection(*table.TableName)
+	filter := bson.D{{Key: "_id", Value: key}}
+	_, err = collection.DeleteOne(table.db.ctx, filter)
 	if err != nil {
 		return err
 	}

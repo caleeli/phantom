@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/caleeli/phantom/backend/storage"
+	"github.com/google/uuid"
 	"github.com/pkg/errors"
 )
 
@@ -55,11 +56,19 @@ func (connection *tConnection) GetResource(tableName string) (storage.Resource, 
 	}, nil
 }
 
-func (table *tTable) Get(key string, out interface{}) error {
+func ConvertToID(uuid string) interface{} {
+	return uuid
+}
+
+func GenerateID() interface{} {
+	return ConvertToID(uuid.New().String())
+}
+
+func (table *tTable) Get(key interface{}, out interface{}) error {
 	keyMap, err := attributevalue.MarshalMap(struct {
 		Id string
 	}{
-		Id: key,
+		Id: key.(string),
 	})
 	if err != nil {
 		return err
@@ -127,4 +136,59 @@ func (table *tTable) Post(record interface{}) error {
 	}
 	_, err = table.db.svc.PutItem(*table.db.ctx, input)
 	return err
+}
+
+func (table *tTable) Put(key interface{}, record interface{}) error {
+	keyMap, err := attributevalue.MarshalMap(struct {
+		Id string
+	}{
+		Id: key.(string),
+	})
+	if err != nil {
+		return err
+	}
+	input := &dynamodb.UpdateItemInput{
+		Key:       keyMap,
+		TableName: table.TableName,
+	}
+	builder := expression.NewBuilder()
+	v := reflect.Indirect(reflect.ValueOf(record))
+	typeOfS := v.Type()
+	for i := 0; i < v.NumField(); i++ {
+		key := typeOfS.Field(i).Name
+		value := v.Field(i).Interface()
+		builder = builder.WithUpdate(expression.Set(expression.Name(key), expression.Value(value)))
+	}
+	expr, err := builder.Build()
+	if err != nil {
+		return err
+	}
+	input.ExpressionAttributeNames = expr.Names()
+	input.ExpressionAttributeValues = expr.Values()
+	input.UpdateExpression = expr.Update()
+	_, err = table.db.svc.UpdateItem(*table.db.ctx, input)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (table *tTable) Delete(key interface{}) error {
+	keyMap, err := attributevalue.MarshalMap(struct {
+		Id string
+	}{
+		Id: key.(string),
+	})
+	if err != nil {
+		return err
+	}
+	input := &dynamodb.DeleteItemInput{
+		Key:       keyMap,
+		TableName: table.TableName,
+	}
+	_, err = table.db.svc.DeleteItem(*table.db.ctx, input)
+	if err != nil {
+		return err
+	}
+	return nil
 }

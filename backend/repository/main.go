@@ -19,7 +19,17 @@ func connect() (repository storage.Repository, err error) {
 	}
 	return
 }
-func Get(name string, id string, out interface{}) error {
+
+func GenerateID() interface{} {
+	if repositoryDriver == "dynamodb" {
+		return dynamodb.GenerateID()
+	} else if repositoryDriver == "mongodb" {
+		return mongodb.GenerateID()
+	}
+	return ""
+}
+
+func Get(name string, id interface{}, out interface{}) error {
 	repository, err := connect()
 	if err != nil {
 		return err
@@ -53,4 +63,28 @@ func Post(name string, record interface{}) error {
 		return err
 	}
 	return resource.Post(record)
+}
+
+func Put(name string, id interface{}, record interface{}) error {
+	repository, err := connect()
+	if err != nil {
+		return err
+	}
+	resource, err := repository.GetResource(name)
+	if err != nil {
+		return err
+	}
+	return resource.Put(id, record)
+}
+
+func Delete(name string, id interface{}) error {
+	repository, err := connect()
+	if err != nil {
+		return err
+	}
+	resource, err := repository.GetResource(name)
+	if err != nil {
+		return err
+	}
+	return resource.Delete(id)
 }
