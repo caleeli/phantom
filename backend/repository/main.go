@@ -1,12 +1,22 @@
 package repository
 
 import (
+	"os"
+
 	"github.com/caleeli/phantom/backend/dynamodb"
 	"github.com/caleeli/phantom/backend/mongodb"
 	"github.com/caleeli/phantom/backend/storage"
 )
 
-const repositoryDriver = "dynamodb"
+var repositoryDriver = getDefaultRepository()
+
+func getDefaultRepository() string {
+	driver := os.Getenv("REPOSITORY_DRIVER")
+	if driver == "" {
+		driver = "mongodb"
+	}
+	return driver
+}
 
 func connect() (repository storage.Repository, err error) {
 	if repositoryDriver == "dynamodb" {
