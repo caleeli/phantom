@@ -10,11 +10,7 @@ Notas:
 </screen>
 
 <script>
-    data.id = params.id;
-    data.tarea = '';
-    data.fecha = new Date().toISOString().substring(0, 10);
-    data.entregables = params.entregables;
-    data.comentario = params.comentario;
+    api.tasks.get(params.id).then(task => data = Object.assign(data, task.attributes));
 
     $fecha.props.type = "date";
     $comentario.type = TextArea;
@@ -22,7 +18,7 @@ Notas:
     $guardar.type = Button;
     $guardar.text = "Guardar";
     $guardar.props.onclick = function(e) {
-        api['tasks'].patch({
+        api.tasks.patch({
             id: data.id,
             attributes: data
         });

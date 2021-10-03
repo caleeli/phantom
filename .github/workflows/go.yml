@@ -33,11 +33,11 @@ jobs:
           cd cli/aws/index
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main main.go
           zip deployment.zip main
-          aws lambda update-function-code --function-name=IndexModel --zip-file=fileb://deployment.zip
+          aws lambda update-function-code --function-name=IndexModel --environment "Variables={REPOSITORY_DRIVER=dynamodb}" --zip-file=fileb://deployment.zip 
 
       - name: Build and delpoy uService GET
         run: |
           cd cli/aws/get
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main main.go
           zip deployment.zip main
-          aws lambda update-function-code --function-name=GetModel --zip-file=fileb://deployment.zip
+          aws lambda update-function-code --function-name=GetModel --environment "Variables={REPOSITORY_DRIVER=dynamodb}" --zip-file=fileb://deployment.zip

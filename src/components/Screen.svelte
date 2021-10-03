@@ -1,6 +1,7 @@
 <script type="ts">
   import { get, set } from "lodash";
   import { tick } from "svelte";
+  import api from "../api";
   import Input from "./Input.svelte";
   import Label from "./Label.svelte";
   import Button from "./Button.svelte";
