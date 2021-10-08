@@ -1,6 +1,7 @@
 /node_modules/
 /public/build/
 
+.env
 .DS_Store
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
