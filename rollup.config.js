@@ -1,11 +1,15 @@
-import svelte from 'rollup-plugin-svelte';
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import commonjs from '@rollup/plugin-commonjs';
+import copy from 'rollup-plugin-copy';
+import css from 'rollup-plugin-css-only';
+import livereload from 'rollup-plugin-livereload';
+import replace from '@rollup/plugin-replace';
+import resolve from '@rollup/plugin-node-resolve';
+import svelte from 'rollup-plugin-svelte';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
-import css from 'rollup-plugin-css-only';
+
+require('dotenv').config()
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -75,7 +79,24 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		production && terser()
+		production && terser(),
+
+		copy({
+			targets: [
+				{ src: 'node_modules/aws-amplify/dist/aws-amplify.min.js', dest: 'public/build' },
+				{ src: 'node_modules/aws-amplify/dist/aws-amplify.min.js.map', dest: 'public/build' },
+			]
+		}),
+
+		replace({
+			preventAssignment: true,
+			'process.env': JSON.stringify({
+				cognito_domain: process.env.cognito_domain,
+				cognito_client_id: process.env.cognito_client_id,
+				cognito_pools_id: process.env.cognito_pools_id,
+				cognito_region: process.env.cognito_region,
+			}),
+		}),
 	],
 	watch: {
 		clearScreen: false

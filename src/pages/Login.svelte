@@ -2,22 +2,27 @@
     import { push } from "svelte-spa-router";
 	import { onMount } from 'svelte';
 
+	let username;
+	let password;
+
     onMount(() => {
         setTimeout(() => {
             document.querySelector('input[name="username"]').focus();
         }, 1);
 	});
-    function login() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve();
-            }, 1);
-        });
-    }
-    function onSubmit() {
-		login().then(() => {
-			push("#/test");
-		});
+
+	function onSubmit() {
+		try {
+			aws_amplify.Amplify.Auth.signIn(username, password)
+			.then((user) => {
+				console.log(user);
+				push("#/test");
+			}).catch((error) => {
+				alert(error.message);
+			});
+		} catch (error) {
+			console.error(error);
+		}
     }
 </script>
 
@@ -25,8 +30,8 @@
     <form on:submit|preventDefault={onSubmit}>
         <h3>LOGIN</h3>
         <p>Please login into your account</p>
-        <input type="text" name="username" placeholder="Username" />
-        <input type="password" name="password" placeholder="Password" />
+        <input bind:value={username} type="text" name="username" placeholder="Username" />
+        <input bind:value={password} type="password" name="password" placeholder="Password" />
         <button type="submit">Login</button>
     </form>
 </main>
