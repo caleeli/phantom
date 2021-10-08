@@ -9,7 +9,7 @@
   import Avatar from "./Avatar.svelte";
 
   export let url: string = "";
-  export let params: object;
+  export const params: object = {};
   let data = {} as any;
 
   function compile(code: string) {
