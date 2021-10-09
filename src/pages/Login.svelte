@@ -5,8 +5,6 @@
 
 	let username;
 	let password;
-    let dialog;
-    let dialogMessage = '';
 
     onMount(() => {
         setTimeout(() => {
@@ -21,11 +19,9 @@
 				user.update(() => response);
 				push("#/test");
 			}).catch((error) => {
-                console.log(error);
                 window.alert(error.message);
 			});
 		} catch (error) {
-            console.log(error);
             window.alert(error.message);
 		}
     }
