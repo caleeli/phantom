@@ -1,18 +1,22 @@
 <script lang="ts">
-	let dialog;
-	let dialogMessage;
-	window.alert = function(message) {
+	let dialog: any;
+	let dialogMessage:string="";
+	window.alert = function (message) {
 		dialogMessage = message;
-		dialog.showModal();
+		if (dialog.showModal) {
+			dialog.showModal();
+		}
 	};
     function closeDialog() {
-        dialog.close();
+		if (dialog.close) {
+        	dialog.close();
+		}
     }
 </script>
 
 <dialog bind:this={ dialog }>
-	{ dialogMessage }
-	<div style="text-align: right;margin-top:1rem;">
+	<p>{ dialogMessage }</p>
+	<p style="text-align: right;">
 		<button on:click={closeDialog}>Close</button>
-	</div>
+	</p>
 </dialog>
