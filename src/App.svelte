@@ -5,6 +5,7 @@
 	import Home from "./pages/Home.svelte";
 	import Test from "./pages/Test.svelte";
 	import Task from "./pages/Task.svelte";
+	import Alert from "./components/Alert.svelte";
 	const routes = {
 		"/": Login,
 		"/home": Home,
@@ -13,4 +14,5 @@
 	};
 </script>
 
+<Alert />
 <Router {routes}/>

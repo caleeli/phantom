@@ -1,6 +1,7 @@
 <script>
-    import { push } from "svelte-spa-router";
+	import { user } from '../store';
 	import { onMount } from 'svelte';
+    import { push } from "svelte-spa-router";
 
 	let username;
 	let password;
@@ -16,30 +17,21 @@
 	function onSubmit() {
 		try {
 			aws_amplify.Amplify.Auth.signIn(username, password)
-			.then((user) => {
-				console.log(user);
+			.then((response) => {
+				user.update(() => response);
 				push("#/test");
 			}).catch((error) => {
-                dialogMessage = error.message;
-                dialog.showModal();
+                console.log(error);
+                window.alert(error.message);
 			});
 		} catch (error) {
-            dialogMessage = error.message;
-            dialog.showModal();
+            console.log(error);
+            window.alert(error.message);
 		}
-    }
-    function closeDialog() {
-        dialog.close();
     }
 </script>
 
 <main>
-    <dialog bind:this={ dialog }>
-        { dialogMessage }
-        <div style="text-align: right;margin-top:1rem;">
-            <button on:click={closeDialog}>Close</button>
-        </div>
-    </dialog>
     <form on:submit|preventDefault={onSubmit}>
         <h3>LOGIN</h3>
         <p>Please login into your account</p>

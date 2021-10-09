@@ -92,7 +92,7 @@ main fieldset {
 	border-radius: 4px;
 }
 /** Standar button **/
-main button {
+button {
 	border-radius: 0.5rem;
 	padding: 0.4rem 2rem;
 	cursor: pointer;
@@ -105,52 +105,52 @@ main button {
 	margin-top: var(--elevacion);
 	margin-left: var(--elevacion);
 }
-main button mark {
+button mark {
 	padding: 0 0.5rem;
 	border-radius: 0.5rem;
 	color: var(--button-mark-color);
 	background-color: var(--button-mark-bg);
 }
-main button:hover {
+button:hover {
 	box-shadow:  var(--elevacion) var(--elevacion) var(--elevacion) rgba(0, 0, 0, .5), 0 0 10px rgba(0, 0, 0, .2);
 	transform: translate(var(--_elevacion), var(--_elevacion));
 }
-main button:focus {
+button:focus {
 	box-shadow:  var(--elevacion) var(--elevacion) var(--elevacion) rgba(0, 0, 0, .5), 0 0 10px rgba(0, 0, 0, .5);
 	transform: translate(var(--_elevacion), var(--_elevacion));
 	outline: none;
 }
-main button:active {
+button:active {
 	box-shadow: 0px 0px 0px rgba(0, 0, 0, .5), 0 0 10px rgba(0, 0, 0, .2);
 	transform: translate(0px, 0px);
 }
 /** Reset button **/
-main button[type="reset"] {
+button[type="reset"] {
 	background-color: var(--button-reset-bg);
 	border-color: var(--button-reset-border);
 	color: var(--button-reset-color);
 }
 /** Submit button **/
-main button[type="submit"] {
+button[type="submit"] {
 	background-color: var(--button-submit-bg);
 	border-color: var(--button-submit-border);
 	color: var(--button-submit-color);
 }
 /** Submit button **/
-main button[type="button"] {
+button[type="button"] {
 	background-color: var(--button-button-bg);
 	border-color: var(--button-button-border);
 	color: var(--button-button-color);
 }
 /** Disabled button **/
-main button:disabled {
+button:disabled {
 	background-color: var(--button-disabled-bg);
 	border-color: var(--button-disabled-border);
 	color: var(--button-disabled-color);
 	box-shadow: none;
 	transform: translate(0px, 0px);
 }
-main button:disabled:hover {
+button:disabled:hover {
 	box-shadow: none;
 }
 
