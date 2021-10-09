@@ -4,6 +4,8 @@
 
 	let username;
 	let password;
+    let dialog;
+    let dialogMessage = '';
 
     onMount(() => {
         setTimeout(() => {
@@ -18,15 +20,25 @@
 				console.log(user);
 				push("#/test");
 			}).catch((error) => {
-				alert(error.message);
+                dialogMessage = error.message;
+                dialog.showModal();
 			});
 		} catch (error) {
 			console.error(error);
 		}
     }
+    function closeDialog() {
+        dialog.close();
+    }
 </script>
 
 <main>
+    <dialog bind:this={ dialog }>
+        { dialogMessage }
+        <div style="text-align: right;margin-top:1rem;">
+            <button on:click={closeDialog}>Close</button>
+        </div>
+    </dialog>
     <form on:submit|preventDefault={onSubmit}>
         <h3>LOGIN</h3>
         <p>Please login into your account</p>
