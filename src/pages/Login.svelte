@@ -24,7 +24,8 @@
                 dialog.showModal();
 			});
 		} catch (error) {
-			console.error(error);
+            dialogMessage = error.message;
+            dialog.showModal();
 		}
     }
     function closeDialog() {
