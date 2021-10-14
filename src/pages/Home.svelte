@@ -1,6 +1,8 @@
 <script>
 import Menu from "../components/Menu.svelte";
 import DropList from "../components/DropList.svelte";
+import {blur} from "svelte/transition";
+
 let tasks = [
     {
         name: "Pendientes",
@@ -58,7 +60,7 @@ function addComment(task) {
         <form>
             <leyend>{column.name}</leyend>
             <DropList class="abc" let:item bind:items={column.items}>
-                <div class="card">
+                <div class="card" >
                     <div class="user"><img class="avatar" alt ="avatar" src="images/user-regular.svg" onerror="this.onerror=null;this.src='images/user-regular.svg';"></div>
                     <div class="task">{item.name}</div>
                     <div class="bar">

@@ -3,14 +3,12 @@
 	let dialogMessage:string="";
 	window.alert = function (message) {
 		dialogMessage = message;
-		if (dialog.showModal) {
-			dialog.showModal();
-		}
+		const show = dialog.showModal || (() => null);
+		show();
 	};
     function closeDialog() {
-		if (dialog.close) {
-        	dialog.close();
-		}
+		const close = dialog.close || (() => null);
+		close();
     }
 </script>
 
