@@ -1,27 +1,26 @@
 <script>
-    import { push } from "svelte-spa-router";
+	import { user } from '../store';
 	import { onMount } from 'svelte';
+    import { push } from "svelte-spa-router";
+    import Auth from '../Auth';
 
 	let username;
 	let password;
 
-    onMount(() => {
-        setTimeout(() => {
-            document.querySelector('input[name="username"]').focus();
-        }, 1);
+    const auth = new Auth();
+
+    onMount(async () => {
+        // await new Promise(resolve => setTimeout(resolve, 1));
+        document.querySelector('input[name="username"]').focus();
 	});
 
-	function onSubmit() {
+	async function onSubmit() {
 		try {
-			aws_amplify.Amplify.Auth.signIn(username, password)
-			.then((user) => {
-				console.log(user);
-				push("#/test");
-			}).catch((error) => {
-				alert(error.message);
-			});
+			const response = await auth.signIn(username, password)
+            user.update(() => response);
+            push("#/dashboard");
 		} catch (error) {
-			console.error(error);
+            window.alert(error.message);
 		}
     }
 </script>
@@ -30,8 +29,8 @@
     <form on:submit|preventDefault={onSubmit}>
         <h3>LOGIN</h3>
         <p>Please login into your account</p>
-        <input bind:value={username} type="text" name="username" placeholder="Username" />
-        <input bind:value={password} type="password" name="password" placeholder="Password" />
+        <input bind:value={username} name="username" aria-label="username" placeholder="Username" type="text"/>
+        <input bind:value={password} name="password" aria-label="password" placeholder="Password" type="password"/>
         <button type="submit">Login</button>
     </form>
 </main>

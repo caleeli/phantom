@@ -7,7 +7,9 @@
   import Button from "./Button.svelte";
   import TextArea from "./TextArea.svelte";
   import Avatar from "./Avatar.svelte";
+  import Donut from "./Donut.svelte";
 
+  const types = { Input, Label, Button, TextArea, Avatar, Donut };
   export let url: string = "";
   export const params: object = {};
   let data = {} as any;
@@ -15,6 +17,14 @@
   function compile(code: string) {
     const parser = window.document.createElement("div");
     parser.innerHTML = code;
+    // Get <template> elements as [{id: template}...]
+    const templates = Array.from(parser.querySelectorAll("template")).reduce(
+      (templates, template) => {
+        templates[template.id] = template.innerHTML;
+        return templates;
+      },
+      {} as any
+    );
     const screen = parser.querySelector("screen") as HTMLInputElement;
     const rows = screen.innerHTML.trim().split("\n");
     const maxRowLength = rows.reduce(
@@ -30,14 +40,21 @@
         const width = (cell.length / maxRowLength) * 100;
         const props = { width };
         if (cell.startsWith("[")) {
-          const id = cell.substr(1, cell.length - 2).trim();
-          const def = { type: Input as any, props };
+          // parse cell as [id:type=value]
+          const [, id, type, value] = cell.match(/^\[([^:]+)(?::([^=\s]+)\s*)?(?:=(.*))?\]$/);
+          const def = { id: '', type: Input as any, props, text: '' as any };
           if (id) {
-            def["id"] = id;
-            data[id] = null;
+            def.id = id;
+            data[id] = value && value.trim() ? JSON.parse(value) : null;
             refs[`$${id}`] = def;
-          } else {
-            def.type = Label;
+          }
+          if (type && templates[type]) {
+            def.type = Label as any;
+            def.text = (data) => parseTemplate(templates[type])(data[id]);
+          } else if (type) {
+            def.type = types[type] as any;
+          } else if (!id) {
+            def.type = Label as any;
           }
           rowResult.push(def);
         } else {
@@ -51,9 +68,9 @@
     if (script) {
       const code = script.textContent
         .trim()
-        .replace(/\$\w+/g, (ref) => `refs[${JSON.stringify(ref)}]`);
+        .replace(/\$(\w+)/g, (ref) => `refs[${JSON.stringify(ref)}]`);
       if (code) {
-        eval(code);
+        (new Function('data', 'api', code))(data, api);
       }
     }
     return result as [

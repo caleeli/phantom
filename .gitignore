@@ -1,5 +1,6 @@
 /node_modules/
 /public/build/
+/coverage/
 
 .env
 .DS_Store

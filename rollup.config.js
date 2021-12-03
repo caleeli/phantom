@@ -42,6 +42,11 @@ export default {
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
+	onwarn(warning, warn) {
+		// suppress eval warnings
+		if (warning.code === 'EVAL') return
+		warn(warning)
+	},
 	plugins: [
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
@@ -75,7 +80,10 @@ export default {
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
-		!production && livereload('public'),
+		!production && livereload({
+			watch: 'public',
+			delay: 500,
+		}),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
@@ -95,6 +103,7 @@ export default {
 				cognito_client_id: process.env.cognito_client_id,
 				cognito_pools_id: process.env.cognito_pools_id,
 				cognito_region: process.env.cognito_region,
+				api_base: process.env.api_base,
 			}),
 		}),
 	],
