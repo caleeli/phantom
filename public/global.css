@@ -467,3 +467,11 @@ input:focus, select:focus, textarea:focus {
 	border: 2px solid var(--sidebar-username-border);
 	overflow: hidden;
 }
+.flex {
+	display: flex;
+	flex-wrap: wrap
+}
+
+.flex > * {
+	flex-grow: 1;
+}

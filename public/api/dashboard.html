@@ -1,0 +1,114 @@
+<screen>
+<h2>Dashboard</h2>
+[indicadorA:Indicador][indicadorB:Indicador][indicadorC:Indicador]
+[dona:Donut                     ][dona2:Donut                    ]
+</screen>
+
+
+[h2:Dashboard             ]
+[Indicador:indicadorA][Indicador:indicadorB][Indicador:indicadorC]
+[Donut:dona                     ][Donut:dona2                    ]
+
+[input:nombre                      ][button:Buscar    ]
+[input:numero                      ]
+[input:fec_inicio][input:fec_final ]
+[busqueda:resultado                                   ]
+
+
+
+<template id="Indicador">
+    <form style="color:{{ color }}">
+        <h2>{{ value }}</h2>
+        <small>{{ title }}</small>
+    </form>
+</template>
+
+<script>
+/*    resultado = {
+        columns: [
+            "#",
+            "Nombre",
+            "Fecha"
+        ],
+        data: [],
+    }
+    Buscar = {
+        text: "Buscar",
+        props: {
+            onclick = function (e) {
+                resultado.data = api.busqueda.getList({
+                    filter: {
+                        nombre: nombre,
+                    }
+                })
+            }
+        }
+    }*/
+    data.indicadorA = api("indicadores").getList(null, {
+        "title": "Requests/hour",
+        "value": 152,
+        "color": "black",
+    });
+
+    data.indicadorB = {
+        "title": "Scripts Usage",
+        "value": "150 %",
+        "color": "black",
+    };
+    data.indicadorC = {
+        "title": "Max time Inactive task",
+        "value": "4 days",
+        "color": "black",
+    };
+    data.dona = {
+        type: "doughnut",
+        data: {
+            labels: ["Approved", "Rejected", "Timeout"],
+            datasets: [
+                {
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                        "lightgreen",
+                        "lightblue",
+                        "salmon",
+                    ],
+                    hoverOffset: 4,
+                },
+            ],
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Document Approval",
+                },
+            },
+        },
+    }
+    data.dona2 = {
+        type: "doughnut",
+        data: {
+            labels: ["Request", "Review", "Approved", "Rejected"],
+            datasets: [
+                {
+                    data: [30, 50, 100, 5],
+                    backgroundColor: [
+                        "lightblue",
+                        "yellow",
+                        "lightgreen",
+                        "salmon"
+                    ],
+                    hoverOffset: 4,
+                },
+            ],
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Leave of Absence",
+                },
+            },
+        },
+    }
+</script>
