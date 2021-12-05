@@ -21,7 +21,7 @@
       <img src={avatar} alt="user">
       <figcaption>Juan Perez</figcaption>
     </figure>
-    <a class="logout" href="/logout">
+    <a class="logout" href="/">
       <i class="fas fa-sign-out-alt"></i>
       Logout
     </a>

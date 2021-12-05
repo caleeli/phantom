@@ -1,0 +1,62 @@
+<screen>
+[user:Card                    ][user:Permissions                                                        ]
+</screen>
+
+<template id="Avatar">
+    <figure class="avatar">
+        <img src="{{ attributes.avatar }}" alt="{{ attributes.name }}" />
+        <figcaption>
+            {{ attributes.name }}<br />
+        </figcaption>
+    </figure>
+</template>
+
+<screen id="Card" class="content">
+[$data:Avatar                                                                       ]
+[:Icon="sign-in-alt"][attributes.username                                           ]
+[:Icon="envelope"   ][attributes.email                                              ]
+[:Icon="phone"      ][attributes.phone                                              ]
+</screen>
+
+<screen id="Permissions" class="content">
+<i class="fas fa-lock"></i> Permissions                                             
+[relationships.permissions:Grid                                                    ]
+</screen>
+
+<script>
+data.user = {
+    id: 1,
+    attributes: {
+        name: "Juan Perez",
+        username: "juan",
+        avatar: "images/avatar/avatar-1.jpg",
+        email: "juan@example.com",
+        phone: "555-555-5555",
+        role_name: "admin",
+    },
+    relationships: {
+        permissions: {
+            data: [
+                {
+                    id: 1,
+                    type: "permission",
+                    attributes: {
+                        name: "Permiso 1",
+                        slug: "permission-1",
+                        description: "Permiso 1",
+                    },
+                },
+                {
+                    id: 2,
+                    type: "permission",
+                    attributes: {
+                        name: "Permiso 2",
+                        slug: "permission-2",
+                        description: "Permiso 2",
+                    },
+                },
+            ],
+        },
+    },
+}
+</script>

@@ -1,6 +1,7 @@
 <script lang="ts">
 import { onMount } from 'svelte';
 import Menu from '../components/Menu.svelte';
+import Topbar from '../components/Topbar.svelte';
 
 	onMount(() => {
 		// focus first visible input or select in main content
@@ -11,7 +12,7 @@ import Menu from '../components/Menu.svelte';
 	});
 </script>
 
-<header>Talento Humano</header>
+<Topbar>Talento Humano</Topbar>
 
 <Menu />
 

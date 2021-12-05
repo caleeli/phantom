@@ -555,19 +555,45 @@ input:focus, select:focus, textarea:focus {
 	outline: 1px dotted var(--button-default-color);
 }
 
+/** description list **/
+dl {
+	display: grid;
+	gap: 0rem;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+}
+dl dd {
+	margin-inline-start: 0.5rem;
+}
 /** misc **/
-.avatar {
+img.avatar {
 	border-radius: 2rem;
 	width: 2rem;
 	height: 2rem;
-	border: 2px solid var(--sidebar-username-border);
 	overflow: hidden;
+}
+figure.avatar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-block-start: 0em;
+	margin-block-end: 0em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
+}
+figure.avatar img {
+	border-radius: 50%;
+	width: 4rem;
+	height: 4rem;
+	overflow: hidden;
+}
+figure.avatar figcaption {
+	text-align: center;
 }
 .flex {
 	display: flex;
 	flex-wrap: wrap
 }
-
 .flex > * {
 	flex-grow: 1;
 }
