@@ -2,6 +2,7 @@
 import Menu from "../components/Menu.svelte";
 import DropList from "../components/DropList.svelte";
 import {blur} from "svelte/transition";
+import Topbar from "../components/Topbar.svelte";
 
 let tasks = [
     {
@@ -50,7 +51,7 @@ function addComment(task) {
 }
 </script>
 
-<header>Inicio</header>
+<Topbar>Inicio</Topbar>
 
 <Menu />
 

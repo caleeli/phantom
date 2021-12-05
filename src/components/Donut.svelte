@@ -12,7 +12,7 @@
   });
 </script>
 
-<div style={cssVarStyles} >
+<div class="content" style={cssVarStyles} >
     <canvas bind:this={canvas}/>
     <slot />
 </div>

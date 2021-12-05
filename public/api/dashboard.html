@@ -24,27 +24,27 @@
 </template>
 
 <script>
-/*    resultado = {
-        columns: [
-            "#",
-            "Nombre",
-            "Fecha"
-        ],
-        data: [],
-    }
-    Buscar = {
-        text: "Buscar",
-        props: {
-            onclick = function (e) {
-                resultado.data = api.busqueda.getList({
-                    filter: {
-                        nombre: nombre,
+    /*    resultado = {
+                        columns: [
+                            "#",
+                            "Nombre",
+                            "Fecha"
+                        ],
+                        data: [],
                     }
-                })
-            }
-        }
-    }*/
-    data.indicadorA = api("indicadores").getList(null, {
+                    Buscar = {
+                        text: "Buscar",
+                        props: {
+                            onclick = function (e) {
+                                resultado.data = api.busqueda.getList({
+                                    filter: {
+                                        nombre: nombre,
+                                    }
+                                })
+                            }
+                        }
+                    }*/
+    data.indicadorA = api("indicadores").getRow(null, {
         "title": "Requests/hour",
         "value": 152,
         "color": "black",
@@ -64,17 +64,15 @@
         type: "doughnut",
         data: {
             labels: ["Approved", "Rejected", "Timeout"],
-            datasets: [
-                {
-                    data: [300, 50, 100],
-                    backgroundColor: [
-                        "lightgreen",
-                        "lightblue",
-                        "salmon",
-                    ],
-                    hoverOffset: 4,
-                },
-            ],
+            datasets: [{
+                data: [300, 50, 100],
+                backgroundColor: [
+                    "lightgreen",
+                    "lightblue",
+                    "salmon",
+                ],
+                hoverOffset: 4,
+            }, ],
         },
         options: {
             plugins: {
@@ -89,18 +87,16 @@
         type: "doughnut",
         data: {
             labels: ["Request", "Review", "Approved", "Rejected"],
-            datasets: [
-                {
-                    data: [30, 50, 100, 5],
-                    backgroundColor: [
-                        "lightblue",
-                        "yellow",
-                        "lightgreen",
-                        "salmon"
-                    ],
-                    hoverOffset: 4,
-                },
-            ],
+            datasets: [{
+                data: [30, 50, 100, 5],
+                backgroundColor: [
+                    "lightblue",
+                    "yellow",
+                    "lightgreen",
+                    "salmon"
+                ],
+                hoverOffset: 4,
+            }, ],
         },
         options: {
             plugins: {
@@ -111,4 +107,13 @@
             },
         },
     }
+</script> title: { display: true, text: "Leave of Absence", }, }, }, }
+</script>
+</script>           text: "Leave of Absence",
+                },
+            },
+        },
+    }
+</script> title: { display: true, text: "Leave of Absence", }, }, }, }
+</script>
 </script>

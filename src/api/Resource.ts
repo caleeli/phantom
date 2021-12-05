@@ -21,13 +21,13 @@ class Resource {
 
     // get resource as Row object
     public getRow(id: string, row = {}): any {
-        this.get(id).then(({data}) => Object.assign(row, data))
+        this.get(id).then(({ data }) => Object.assign(row, data)).catch(err => console.error(err))
         return row;
     }
 
     // get resource as Row object
-    public getList(row = {}): any {
-        this.get(null).then(({data}) => Object.assign(row, data))
+    public getList(row = []): any {
+        this.get(null).then(({ data }) => row.splice(0, row.length, ...data)).catch(err => console.error(err))
         return row;
     }
 

@@ -10,29 +10,29 @@
 	--blanco: #FFFFFF;
 	--plomo: #D8D8D8;
     --success: #D5E8D4;
-
+	--dark: #2d353c;
+	
 	--elevacion: 2px;
 	--_elevacion: -2px;
 	--speed: 200ms;
-
+	
 	--font: 'Montserrat', sans-serif;
-
+	
 	--body-color: var(--negro);
-	--body-bg: var(--blanco);
-
+	--body-bg: var(--plomo);
+	
 	--header-color: var(--negro);
-	--header-bg: var(--plomo);
-
-	--sidebar-color: var(--negro);
-	--sidebar-bg: var(--secondary);
-	--sidebar-username-color: var(--negro);
-    --sidebar-username-bg: url("images/banner_gray.jpg");
+	--header-bg: var(--blanco);
+	
+	--sidebar-color: var(--blanco);
+	--sidebar-bg: var(--dark);
+	--sidebar-username-color: var(--blanco);
+    --sidebar-username-bg: url("images/cover-sidebar-user.jpg");
 	--sidebar-username-border: var(--negro);
+	--sidebar-active-color: var(--blanco);
+	--sidebar-active-bg: var(--text);
 
-	--sidebar-active-color: var(--text);
-	--sidebar-active-bg: inherit;
-
-	--main-bg: var(--blanco);
+	--main-bg: var(--plomo);
 
 	--main-content-color: var(--negro);
 	--main-content-bg: var(--blanco);
