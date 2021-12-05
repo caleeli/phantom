@@ -1,0 +1,20 @@
+{
+    "name": "caleeli/phantom",
+    "authors": [
+        {
+            "name": "David Callizaya",
+            "email": "davidcallizaya@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "files": [
+            "app/Helper/helper.php"
+        ],
+        "psr-4": {
+            "App\\": [
+                "app/"
+            ]
+        }
+    }
+}
