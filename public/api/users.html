@@ -1,5 +1,5 @@
 <screen>
-[user:Card                    ][user:Permissions                                                        ]
+[user:Card                    ][$data:Permissions                                                        ]
 </screen>
 
 <template id="Avatar">
@@ -19,8 +19,10 @@
 </screen>
 
 <screen id="Permissions" class="content">
-<i class="fas fa-lock"></i> Permissions                                             
-[relationships.permissions:Grid                                                    ]
+<h3>Roles</h3>
+[roles:Grid                                                    ]
+<h3>Permisos</h3>
+[user.relationships.permissions.data:Grid                                                    ]
 </screen>
 
 <script>
@@ -41,22 +43,102 @@ data.user = {
                     id: 1,
                     type: "permission",
                     attributes: {
-                        name: "Permiso 1",
-                        slug: "permission-1",
-                        description: "Permiso 1",
+                        name: "Ingresar al sistema",
+                        enabled: true,
                     },
                 },
                 {
                     id: 2,
                     type: "permission",
                     attributes: {
-                        name: "Permiso 2",
-                        slug: "permission-2",
-                        description: "Permiso 2",
+                        name: "Administrar usuarios",
+                        enabled: false,
+                    },
+                },
+                {
+                    id: 3,
+                    type: "permission",
+                    attributes: {
+                        name: "Administrar Roles",
+                        enabled: false,
+                    },
+                },
+                {
+                    id: 4,
+                    type: "permission",
+                    attributes: {
+                        name: "Administrar parámetros",
+                        enabled: true,
+                    },
+                },
+                {
+                    id: 5,
+                    type: "permission",
+                    attributes: {
+                        name: "Monitorizar usuarios dependientes",
+                        enabled: true,
+                    },
+                },
+                {
+                    id: 6,
+                    type: "permission",
+                    attributes: {
+                        name: "Backups de datos",
+                        enabled: false,
+                    },
+                },
+                {
+                    id: 7,
+                    type: "permission",
+                    attributes: {
+                        name: "Búsquedas avanzadas",
+                        enabled: true,
                     },
                 },
             ],
         },
     },
-}
+};
+data.roles = [
+    {
+        id: 1,
+        type: "permission",
+        attributes: {
+            name: "Administrador del sistema",
+            enabled: false,
+        },
+    },
+    {
+        id: 2,
+        type: "permission",
+        attributes: {
+            name: "Director",
+            enabled: true,
+        },
+    },
+    {
+        id: 3,
+        type: "permission",
+        attributes: {
+            name: "Jefe de Area",
+            enabled: false,
+        },
+    },
+    {
+        id: 4,
+        type: "permission",
+        attributes: {
+            name: "Auditor",
+            enabled: false,
+        },
+    },
+    {
+        id: 5,
+        type: "permission",
+        attributes: {
+            name: "Cajero",
+            enabled: false,
+        },
+    },
+];
 </script>
