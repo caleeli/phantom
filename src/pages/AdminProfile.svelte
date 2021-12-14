@@ -21,6 +21,7 @@
 			B: {
 				value: "attributes.enabled",
 				control: "checkbox",
+				align: "right",
 			},
 		},
 	};
@@ -31,23 +32,25 @@
 
 <main>
 	<GridTemplate>
-		<Api path="users/1" let:response={user}>
-			<form>
-				<Avatar value={user.attributes.avatar} size="4">
-					{user.attributes.name}
-				</Avatar>
-				<dl>
-					<dt><i class="fas fa-sign-in-alt" /></dt>
-					<dd><input value={user.attributes.username} /></dd>
-					<dt><i class="fas fa-envelope" /></dt>
-					<dd><input value={user.attributes.email} /></dd>
-					<dt><i class="fas fa-phone" /></dt>
-					<dd><input value={user.attributes.phone} /></dd>
-				</dl>
-			</form>
+		<Api path="users/1?include=permissions,roles" let:response={user}>
+			<div>
+				<form>
+					<Avatar value={user.attributes.avatar} size="4">
+						{user.attributes.name}
+					</Avatar>
+					<dl>
+						<dt><i class="fas fa-sign-in-alt" /></dt>
+						<dd><input value={user.attributes.username} /></dd>
+						<dt><i class="fas fa-envelope" /></dt>
+						<dd><input value={user.attributes.email} /></dd>
+						<dt><i class="fas fa-phone" /></dt>
+						<dd><input value={user.attributes.phone} /></dd>
+					</dl>
+				</form>
+			</div>
 			<form style="grid-column: span 2">
 				<h3>Roles</h3>
-				<Grid value={user.relationships.permissions.data} {config} />
+				<Grid value={user.relationships.roles.data} {config} />
 				<h3>Permisos</h3>
 				<Grid value={user.relationships.permissions.data} {config} />
 			</form>

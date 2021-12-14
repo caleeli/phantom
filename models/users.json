@@ -1,0 +1,46 @@
+{
+	"class": "JsonApi",
+	"url": "users",
+	"table": "users",
+	"id": "id",
+	"attributes": {
+		"name": "name",
+		"username": "username",
+		"avatar": "'images/avatar/avatar-1.jpg'",
+		"email": "email",
+		"phone": "phone"
+	},
+	"where": [
+		"and status='ACTIVE'"
+	],
+	"filters": {},
+	"create": {
+		"name": ":name",
+		"email": ":email",
+		"phone": ":phone",
+		"password": "{{md5(password)}}"
+	},
+	"update": {
+		"name": ":name",
+		"email": ":email",
+		"phone": ":phone",
+		"password": "{{md5(password)}}"
+	},
+	"delete": {
+		"status": "'DELETED'"
+	},
+	"relationships": {
+		"roles": {
+			"model": "user_roles",
+			"params": {
+				"user_id": "$id"
+			}
+		},
+		"permissions": {
+			"model": "user_permissions",
+			"params": {
+				"user_id": "$id"
+			}
+		}
+	}
+}

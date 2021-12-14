@@ -1,0 +1,17 @@
+{
+	"class": "JsonApi",
+	"url": "users/:user_id/permissions",
+	"table": "permissions",
+	"join": "left join role_permissions on (permissions.id = role_permissions.permission_id and role_permissions.role_id in (select role_id from user_roles where user_id = :user_id))",
+	"id": "role_permissions.id",
+	"attributes": {
+		"permission_id": "permissions.id",
+		"name": "permissions.name",
+		"enabled": "role_permissions.id"
+	},
+	"where": [],
+	"filters": {},
+	"create": null,
+	"update": null,
+	"delete": null
+}

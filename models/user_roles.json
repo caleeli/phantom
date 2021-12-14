@@ -1,0 +1,23 @@
+{
+	"class": "JsonApi",
+	"url": "user_roles",
+	"table": "roles",
+	"join": "left join user_roles on (roles.id = user_roles.role_id and user_roles.user_id = :user_id)",
+	"id": "user_roles.id",
+	"attributes": {
+		"role_id": "roles.id",
+		"name": "roles.name",
+		"enabled": "user_roles.id"
+	},
+	"where": [],
+	"filters": {},
+	"create": {
+		"role_id": ":role_id",
+		"user_id": ":user_id"
+	},
+	"update": {
+		"role_id": ":role_id",
+		"user_id": ":user_id"
+	},
+	"delete": {}
+}
