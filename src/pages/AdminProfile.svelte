@@ -25,6 +25,7 @@
 			},
 		},
 	};
+	let user = {};
 </script>
 
 <Topbar>Perfil</Topbar>
@@ -32,7 +33,7 @@
 
 <main>
 	<GridTemplate>
-		<Api path="users/1?include=permissions,roles" let:response={user}>
+		<Api path="users/1?include=permissions,roles" bind:value={user}>
 			<div>
 				<form>
 					<Avatar value={user.attributes.avatar} size="4">
@@ -40,7 +41,7 @@
 					</Avatar>
 					<dl>
 						<dt><i class="fas fa-sign-in-alt" /></dt>
-						<dd><input value={user.attributes.username} /></dd>
+						<dd><input bind:value={user.attributes.username} /></dd>
 						<dt><i class="fas fa-envelope" /></dt>
 						<dd><input value={user.attributes.email} /></dd>
 						<dt><i class="fas fa-phone" /></dt>
