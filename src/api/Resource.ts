@@ -16,18 +16,19 @@ class Resource {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
+        }).then(response => response.json())
+        .then(({data}) => data)
     }
 
     // get resource as Row object
-    public getRow(id: string, row = {}): any {
-        this.get(id).then(({ data }) => Object.assign(row, data)).catch(err => console.error(err))
+    public getRow(id: string = null, row = {}): any {
+        this.get(id).then((data) => { Object.assign(row, data); row = row; }).catch(err => console.error(err))
         return row;
     }
 
     // get resource as Row object
     public getList(row = []): any {
-        this.get(null).then(({ data }) => row.splice(0, row.length, ...data)).catch(err => console.error(err))
+        this.get(null).then((data) => row.splice(0, row.length, ...data)).catch(err => console.error(err))
         return row;
     }
 

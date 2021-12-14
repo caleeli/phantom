@@ -2,12 +2,10 @@
 	import Sheet from "../api/Sheet";
 
 	export let value = [];
-	export let width = 1;
-	export let size = 2;
-	export let align = "center";
-	let style = `--width:${width}%;--align:${align};--size:${size}rem;`;
+	export let width = 100;
+	let style = `--width:${width}%;`;
 
-	let config = {
+	export let config = {
 		headers: [
 			{
 				label: "",
@@ -29,7 +27,6 @@
 		},
 	};
 	const sheet = new Sheet(config, value);
-	window.aaa = value;
 </script>
 
 <table {style}>
@@ -57,6 +54,5 @@
 <style>
 	table {
 		width: var(--width);
-		text-align: var(--align);
 	}
 </style>

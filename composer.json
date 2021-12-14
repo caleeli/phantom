@@ -6,7 +6,9 @@
             "email": "davidcallizaya@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "mark-php/mark": "^1.1"
+    },
     "autoload": {
         "files": [
             "app/helpers/helper.php"

@@ -9,7 +9,7 @@ const apiBase = env.api_base;
     }
 })*/
 
-function api(url: string) {
+function api(url: string): Resource {
     return new Resource(url, apiBase);
 }
 

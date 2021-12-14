@@ -1,5 +1,5 @@
 <script>
-  export let width = 1;
+  export let width = 100;
   export let size = 2;
   export let value = "";
   export let align = "center";
@@ -7,7 +7,7 @@
 </script>
 
 <figure {style}>
-  <img src="images/user-regular.svg" alt={value} />
+  <img src={value} alt={value} /><br />
   <slot />
 </figure>
 
@@ -22,7 +22,6 @@
     height: var(--size);
     margin-left: 0.5rem;
     margin-right: 0.5rem;
-    border: 1px solid var(--sidebar-username-border);
     overflow: hidden;
   }
 </style>

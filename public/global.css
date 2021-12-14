@@ -597,3 +597,6 @@ figure.avatar figcaption {
 .flex > * {
 	flex-grow: 1;
 }
+.w-100 {
+	width: 100%;
+}

@@ -1,16 +1,24 @@
 <script type="ts">
-import { location } from 'svelte-spa-router'
+	import { location } from "svelte-spa-router";
 	// expandido por defecto
-	let aside=isMobile() ? "collapsed" : "expanded";
+	let aside = isMobile() ? "collapsed" : "expanded";
 	// avatar aleatorio
-	let avatar="images/avatar/avatar-1.jpg";
+	let avatar = "images/avatar/avatar-1.jpg";
+	let options = [
+		{ href: "/home", label: "Inicio", icon: "home" },
+		{ href: "/dashboard", label: "Dashboard", icon: "tachometer-alt" },
+		{ href: "/admin/profile", label: "Perfil", icon: "user" },
+		{ href: "/page/users", label: "Usuarios", icon: "users" },
+		{ href: "/about", label: "About", icon: "question-circle" },
+		{ href: "/edit/Test", label: "Edit page", icon: "pen" },
+	];
 	// colapsa el menu lateral
 	function collapseSidebar() {
-		aside="collapsed";
+		aside = "collapsed";
 	}
 	// expande el menu lateral
 	function expandSidebar() {
-		aside="expanded";
+		aside = "expanded";
 	}
 	// check if is a mobile device
 	function isMobile() {
@@ -19,23 +27,27 @@ import { location } from 'svelte-spa-router'
 </script>
 
 <aside class={aside}>
-    <button id="hide-sidebar" on:click={collapseSidebar}><i class="fas fa-chevron-circle-left"></i></button>
-    <button id="show-sidebar" on:click={expandSidebar}><i class="fas fa-chevron-circle-right"></i></button>
+	<button id="hide-sidebar" on:click={collapseSidebar}>
+		<i class="fas fa-chevron-circle-left" />
+	</button>
+	<button id="show-sidebar" on:click={expandSidebar}>
+		<i class="fas fa-chevron-circle-right" />
+	</button>
 	<div class="figure-bg">
 		<figure>
-			<img src={avatar} alt="user">
-			<figcaption>
-				@juan
-			</figcaption>
+			<img src={avatar} alt="user" />
+			<figcaption>@juan</figcaption>
 		</figure>
 	</div>
-    <a class={$location=='/home' ? 'active' : ''} href="#/home"><i class="fas fa-home"></i> <span>Inicio</span></a>
-    <a class={$location=='/dashboard' ? 'active' : ''} href="#/dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a>
-    <a href="#/page/users"><i class="fas fa-users"></i> <span>Users</span></a>
-    <a href="#/about"><i class="fas fa-question-circle"></i> <span>About</span></a>
-    <footer>
-        <span>© 2021 coredump</span>
-    </footer>
+	{#each options as option}
+		<a class={$location == option.href ? "active" : ""} href={`#${option.href}`}>
+			<i class={`fas fa-${option.icon}`} />
+			<span>{ option.label }</span>
+		</a>
+	{/each}
+	<footer>
+		<span>© 2021 coredump</span>
+	</footer>
 </aside>
 
 <style>
