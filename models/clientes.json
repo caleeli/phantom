@@ -1,0 +1,28 @@
+{
+    "class": "JsonApi",
+    "url": "clientes",
+    "table": "clientes",
+    "id": "id",
+    "attributes": {
+        "nombre": "nombre",
+        "direccion": "direccion",
+        "telefono": "telefono",
+        "fecha": "fecha"
+    },
+    "where": [],
+    "filters": {},
+    "create": {
+        "nombre": ":nombre",
+        "direccion": ":direccion",
+        "telefono": ":telefono",
+        "fecha": ":fecha"
+    },
+    "update": {
+        "nombre": ":nombre",
+        "direccion": ":direccion",
+        "telefono": ":telefono",
+        "fecha": ":fecha"
+    },
+    "delete": {},
+    "relationships": {}
+}

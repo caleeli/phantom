@@ -9,6 +9,11 @@ const apiBase = env.api_base;
     }
 })*/
 
+/**
+ * @class Api
+ * 
+ * @returns {Resource}
+ */
 function api(url: string): Resource {
     return new Resource(url, apiBase);
 }

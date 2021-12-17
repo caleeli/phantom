@@ -44,9 +44,22 @@ class Resource {
     }
 
     // patch resource
-    public patch(data: any): Promise<any> {
-        return fetch(this.url, {
+    public patch(id: string = null, data: any): Promise<any> {
+        const url = id ? `${this.url}/${id}` : this.url;
+        return fetch(url, {
             method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+    }
+
+    // patch resource
+    public put(id: string = null, data: any): Promise<any> {
+        const url = id ? `${this.url}/${id}` : this.url;
+        return fetch(url, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },

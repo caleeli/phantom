@@ -113,6 +113,11 @@ main form leyend {
 	background: var(--form-leyend);
 	display: block;
 }
+form footer {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
 /*
 @media only screen and (max-width: 767px){
 	main {
@@ -368,6 +373,10 @@ main nav > label{
 	grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
 }
 
+main a {
+	color: var(--primary-text)
+}
+
 /** SIDEBAR **/
 aside {
 	display: flex;
@@ -590,6 +599,12 @@ figure.avatar img {
 figure.avatar figcaption {
 	text-align: center;
 }
+
+/** dialog **/
+dialog {
+	overflow: visible;
+}
+
 .flex {
 	display: flex;
 	flex-wrap: wrap
@@ -599,4 +614,28 @@ figure.avatar figcaption {
 }
 .w-100 {
 	width: 100%;
+}
+
+/** print utils **/
+.to-print {
+	display: none;
+}
+@media print {
+    .to-print {
+		display: block;
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+    }
+	#hide-sidebar {
+		display: none;
+	}
+	#show-sidebar {
+		display: none;
+	}
 }

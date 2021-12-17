@@ -1,0 +1,67 @@
+{
+    "class": "JsonApi",
+    "url": "creditos",
+    "table": "creditos",
+    "id": "id",
+    "attributes": {
+        "nombre": "nombre",
+        "fecha": "fecha",
+        "monto": "monto",
+        "saldo": "saldo",
+        "fecha_ultimo_movimiento": "fecha_ultimo_movimiento"
+    },
+    "where": [],
+    "filters": {},
+    "create": {
+        "nombre": ":nombre",
+        "fecha": ":fecha",
+        "monto": ":monto",
+        "saldo": ":saldo",
+        "fecha_ultimo_movimiento": ":fecha_ultimo_movimiento"
+    },
+    "update": {
+        "nombre": ":nombre",
+        "fecha": ":fecha",
+        "monto": ":monto",
+        "saldo": ":saldo",
+        "fecha_ultimo_movimiento": ":fecha_ultimo_movimiento"
+    },
+    "delete": {},
+    "relationships": {},
+    "labels": {
+        "_model": "Crédito",
+        "_models": "Créditos",
+        "nombre": "Nombre",
+        "fecha": "Fecha",
+        "monto": "Monto desembolsado",
+        "saldo": "Saldo actual",
+        "fecha_ultimo_movimiento": "Fecha de ult. movimiento"
+    },
+    "ui": {
+        "fecha": {
+            "type": "date"
+        },
+        "monto": {
+            "type": "number",
+            "align": "right",
+            "format": "Bs. ${currency(value)}"
+        },
+        "saldo": {
+            "type": "number",
+            "align": "right",
+            "format": "Bs. ${currency(value)}"
+        },
+        "fecha_ultimo_movimiento": {
+            "type": "date"
+        },
+        "_actions": {
+            "value": "attributes.id",
+            "actions": [
+                "edit",
+                "view",
+                "print"
+            ],
+            "control": "actions"
+        }
+    }
+}

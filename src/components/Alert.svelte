@@ -3,11 +3,11 @@
 	let dialogMessage:string="";
 	window.alert = function (message) {
 		dialogMessage = message;
-		const show = dialog.showModal || (() => null);
+		const show = () => { dialog.showModal && dialog.showModal(); };
 		show();
 	};
     function closeDialog() {
-		const close = dialog.close || (() => null);
+		const close = () => { dialog.close && dialog.close(); };
 		close();
     }
 </script>

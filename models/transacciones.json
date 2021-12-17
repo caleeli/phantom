@@ -1,0 +1,31 @@
+{
+	"class": "JsonApi",
+	"url": "transacciones",
+	"table": "transacciones",
+	"id": "id",
+	"attributes": {
+		"fecha": "fecha",
+		"nombre": "nombre",
+		"cuenta": "cuenta",
+		"ingreso": "ingreso",
+		"egreso": "egreso"
+	},
+	"where": [],
+	"filters": {},
+	"create": {
+		"fecha": ":fecha",
+		"nombre": ":nombre",
+		"cuenta": ":cuenta",
+		"ingreso": ":ingreso",
+		"egreso": "egreso"
+	},
+	"update": {
+		"fecha": ":fecha",
+		"nombre": ":nombre",
+		"cuenta": ":cuenta",
+		"ingreso": ":ingreso",
+		"egreso": "egreso"
+	},
+	"delete": {},
+	"relationships": {}
+}

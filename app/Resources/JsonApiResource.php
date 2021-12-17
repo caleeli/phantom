@@ -30,10 +30,39 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
 
     public function store(array $data)
     {
+        $columns = [];
+        $values = [];
+        foreach ($this->definition['create'] as $name => $value) {
+            $columns[] = $name;
+            $values[] = $value;
+        }
+        $columns = implode(',', $columns);
+        $values = implode(',', $values);
+        $sql = "INSERT INTO `{$this->definition['table']}` ({$columns}) VALUES ({$values})";
+        $statement = $this->connection->prepare($sql);
+        error_log($sql);
+        var_dump($data['data']['attributes']);
+        $success = $statement->execute($data['data']['attributes']);
+        return [
+            'success' => $success,
+        ];
     }
 
     public function update($id, array $data)
     {
+        $set = [];
+        foreach ($this->definition['update'] as $name => $value) {
+            $set[] = "$name = $value";
+        }
+        $set = implode(',', $set);
+        $sql = "UPDATE `{$this->definition['table']}` SET {$set} WHERE {$this->definition['id']} = :id";
+        error_log($sql);
+        var_dump($data['data']['attributes']);
+        $statement = $this->connection->prepare($sql);
+        $success = $statement->execute($data['data']['attributes']);
+        return [
+            'success' => $success,
+        ];
     }
 
     public function destroy($id)
@@ -68,8 +97,8 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
         // Prepare the statement
         error_log("SELECT $select FROM $from");
         $statement = $this->connection->prepare("SELECT $select FROM $from WHERE $where");
-        $params = $options['params'];
-        var_dump($options['params']);
+        $params = $options['params'] ?? [];
+        var_dump($params);
         $statement->execute($params);
         return $statement;
     }

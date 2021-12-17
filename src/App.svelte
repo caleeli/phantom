@@ -9,6 +9,9 @@
 	import Dashboard from "./pages/Dashboard.svelte";
 	import Page from "./pages/Page.svelte";
 	import AdminProfile from "./pages/AdminProfile.svelte";
+	import Cajas from "./pages/Cajas.svelte";
+	import Creditos from "./pages/Creditos.svelte";
+	import Clientes from "./pages/Clientes.svelte";
 	const routes = {
 		"/": Login,
 		"/home": Home,
@@ -17,6 +20,9 @@
 		"/dashboard": Dashboard,
 		"/page/:name": Page,
 		"/admin/profile": AdminProfile,
+		"/cajas": Cajas,
+		"/creditos": Creditos,
+		"/clientes": Clientes,
 	};
 </script>
 

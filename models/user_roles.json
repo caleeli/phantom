@@ -11,13 +11,7 @@
 	},
 	"where": [],
 	"filters": {},
-	"create": {
-		"role_id": ":role_id",
-		"user_id": ":user_id"
-	},
-	"update": {
-		"role_id": ":role_id",
-		"user_id": ":user_id"
-	},
-	"delete": {}
+	"create": null,
+	"update": null,
+	"delete": null
 }

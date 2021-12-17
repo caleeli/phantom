@@ -5,8 +5,10 @@ class Sheet {
 	public cell = [];
 	private data: any[];
 	public ref: any[];
+	public format: any[];
 	// Constructor
 	constructor(config = { headers: [], cells: {} }, data: Array<any>) {
+		const self = this;
 		this.config = config;
 		this.data = data;
 		const cell = [];
@@ -15,7 +17,7 @@ class Sheet {
 			config.headers.forEach((header, col) => {
 				const def = {
 					value: null,
-					align: '',
+					align: 'left',
 					control: 'text',
 				};
 				this.applyConfig(row, col, def);
@@ -26,7 +28,7 @@ class Sheet {
 		this.ref = new Proxy(data, {
 			get(target, prop: string) {
 				if (prop === 'map') {
-					return ()=>([]);
+					return () => ([]);
 				}
 				const p = prop.split(',');
 				const row = Number(p[0]);
@@ -41,6 +43,20 @@ class Sheet {
 				data = data;
 				return true;
 			},
+		});
+
+		this.format = new Proxy(data, {
+			get(target, prop: string) {
+				if (prop === 'map') {
+					return () => ([]);
+				}
+				const p = prop.split(',');
+				const row = Number(p[0]);
+				const col = Number(p[1]);
+				const value = get(target[row], cell[row][col].value);
+				const format = cell[row][col].format || '${value}';
+				return (new Function('value', 'currency', 'icon', 'return `' + format + '`'))(value, currency, icon);
+			}
 		});
 	}
 	// Apply config
@@ -90,6 +106,26 @@ class Sheet {
 	public getValue(col: number, row: number): any {
 		return get(this.data[row], this.cell[row][col].value);
 	}
+}
+
+function currency(number) {
+	return new Intl.NumberFormat('es-BO', {
+		minimumFractionDigits: 2
+	}).format(number);
+}
+
+function icon(icon) {
+	return `<i class="fas fa-${icon}"></i>`;
+}
+
+// Ex. 0=A, 27=AA, 702=AAA
+export const indexToCol = function (index) {
+	let col = '';
+	do {
+		col = String.fromCharCode(96 + (index % 26)) + col;
+		index = Math.floor(index / 26) - 1;
+	} while (index >= 0);
+	return col.toUpperCase();
 }
 
 export default Sheet;

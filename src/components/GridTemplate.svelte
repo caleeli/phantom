@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let min_width = "20rem";
-	export let min_height = "5rem";
+	export let min_height = "1rem";
 	let style = `--min-width: ${min_width}; --min-height: ${min_height};`;
 </script>
 

@@ -2,6 +2,7 @@ import { terser } from 'rollup-plugin-terser';
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy';
 import css from 'rollup-plugin-css-only';
+import json from '@rollup/plugin-json'
 import livereload from 'rollup-plugin-livereload';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
@@ -73,7 +74,10 @@ export default {
 			sourceMap: !production,
 			inlineSources: !production
 		}),
-
+		json({
+			compact: true
+		}),
+		
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(),
@@ -104,6 +108,7 @@ export default {
 				cognito_pools_id: process.env.cognito_pools_id,
 				cognito_region: process.env.cognito_region,
 				api_base: process.env.api_base,
+				language: process.env.language,
 			}),
 		}),
 	],

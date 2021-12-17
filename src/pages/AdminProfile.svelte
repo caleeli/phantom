@@ -51,9 +51,9 @@
 			</div>
 			<form style="grid-column: span 2">
 				<h3>Roles</h3>
-				<Grid value={user.relationships.roles.data} {config} />
+				<Grid bind:value={user.relationships.roles.data} {config} />
 				<h3>Permisos</h3>
-				<Grid value={user.relationships.permissions.data} {config} />
+				<Grid bind:value={user.relationships.permissions.data} {config} />
 			</form>
 		</Api>
 	</GridTemplate>
