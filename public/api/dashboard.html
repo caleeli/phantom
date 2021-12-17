@@ -1,20 +1,9 @@
 <screen>
-<h2>Dashboard</h2>
-[indicadorA:Indicador][indicadorB:Indicador][indicadorC:Indicador]
-[dona:Donut                     ][dona2:Donut                    ]
+<h2>Cuadro de mando</h2>
+    [indicadorA:Indicador][indicadorB:Indicador][indicadorC:Indicador][indicadorD:Indicador]    
+    [dona:Donut                                ][dona2:Donut                               ]    
+    [dona3:Donut                                                                        ]       
 </screen>
-
-
-[h2:Dashboard             ]
-[Indicador:indicadorA][Indicador:indicadorB][Indicador:indicadorC]
-[Donut:dona                     ][Donut:dona2                    ]
-
-[input:nombre                      ][button:Buscar    ]
-[input:numero                      ]
-[input:fec_inicio][input:fec_final ]
-[busqueda:resultado                                   ]
-
-
 
 <template id="Indicador">
     <form style="color:{{ color }}">
@@ -24,46 +13,31 @@
 </template>
 
 <script>
-    /*    resultado = {
-                        columns: [
-                            "#",
-                            "Nombre",
-                            "Fecha"
-                        ],
-                        data: [],
-                    }
-                    Buscar = {
-                        text: "Buscar",
-                        props: {
-                            onclick = function (e) {
-                                resultado.data = api.busqueda.getList({
-                                    filter: {
-                                        nombre: nombre,
-                                    }
-                                })
-                            }
-                        }
-                    }*/
     data.indicadorA = api("indicadores").getRow(null, {
-        "title": "Requests/hour",
+        "title": "Nro de clientes",
         "value": 152,
         "color": "black",
     });
 
     data.indicadorB = {
-        "title": "Scripts Usage",
-        "value": "150 %",
+        "title": "Cartera actual",
+        "value": "Bs. 150.230.000,00",
         "color": "black",
     };
     data.indicadorC = {
-        "title": "Max time Inactive task",
-        "value": "4 days",
+        "title": "Monto en mora",
+        "value": "Bs. 1.500.000,00",
+        "color": "black",
+    };
+    data.indicadorD = {
+        "title": "Porcentaje de mora",
+        "value": "1.01%",
         "color": "black",
     };
     data.dona = {
         type: "doughnut",
         data: {
-            labels: ["Approved", "Rejected", "Timeout"],
+            labels: ["AAA", "BBB"],
             datasets: [{
                 data: [300, 50, 100],
                 backgroundColor: [
@@ -78,7 +52,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: "Document Approval",
+                    text: "Distribución de la cartera",
                 },
             },
         },
@@ -102,18 +76,39 @@
             plugins: {
                 title: {
                     display: true,
-                    text: "Leave of Absence",
+                    text: "Distribución de la mora",
                 },
             },
         },
     }
-</script> title: { display: true, text: "Leave of Absence", }, }, }, }
-</script>
-</script>           text: "Leave of Absence",
+    data.dona3 = {
+        type: "line",
+        data: {
+            labels: ["Request", "Review", "Approved", "Rejected"],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: true,
+                borderColor: '#ffc1d0',
+                backgroundColor: '#ffc1d080',
+                tension: 0.1
+            },
+            {
+                label: 'My Second Dataset',
+                data: [35, 79, 40, 91, 46, 55, 70],
+                fill: true,
+                borderColor: '#99d1f8',
+                backgroundColor: '#99d1f880',
+                tension: 0.1
+            }]
+        },
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: "Distribución de la mora",
                 },
             },
         },
     }
-</script> title: { display: true, text: "Leave of Absence", }, }, }, }
-</script>
 </script>
