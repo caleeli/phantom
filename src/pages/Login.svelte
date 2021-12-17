@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
     import { push } from "svelte-spa-router";
     import Auth from '../Auth';
+    import { _ } from '../helpers';
 
 	let username;
 	let password;
@@ -27,11 +28,11 @@
 
 <main>
     <form on:submit|preventDefault={onSubmit}>
-        <h3>LOGIN</h3>
-        <p>Please login into your account</p>
-        <input bind:value={username} name="username" aria-label="username" placeholder="Username" type="text"/>
-        <input bind:value={password} name="password" aria-label="password" placeholder="Password" type="password"/>
-        <button type="submit">Login</button>
+        <h3>{_("Login")}</h3>
+        <p>{_("Por favor ingrese sus datos")}</p>
+        <input bind:value={username} name="username" aria-label="username" placeholder={_("Username")} type="text"/>
+        <input bind:value={password} name="password" aria-label="password" placeholder={_("Password")} type="password"/>
+        <button type="submit">{_("Login")}</button>
     </form>
 </main>
 

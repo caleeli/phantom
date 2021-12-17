@@ -1,3 +1,7 @@
 {
-    "_actions": ""
+    "_actions": "",
+    "Login": "Ingresar",
+    "Please enter your account": "Por favor ingrese su cuenta",
+    "Username": "Nombre de usuario",
+    "Password": "Contraseña"
 }
