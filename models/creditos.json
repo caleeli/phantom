@@ -38,6 +38,9 @@
         "fecha_ultimo_movimiento": "Fecha de ult. movimiento"
     },
     "ui": {
+        "nombre": {
+            "type": "text"
+        },
         "fecha": {
             "type": "date"
         },

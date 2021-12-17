@@ -27,5 +27,66 @@
 		"egreso": "egreso"
 	},
 	"delete": {},
-	"relationships": {}
+	"relationships": {},
+	"labels": {
+		"_model": "Transacción",
+		"_models": "Caja",
+		"id": "Nro de transacción",
+		"fecha": "Fecha de transacción",
+		"nombre": "Cliente",
+		"cuenta": "Cuenta",
+		"ingreso": "Ingreso",
+		"egreso": "Egreso"
+	},
+	"ui": {
+		"id": {},
+		"fecha": {
+			"type": "date"
+		},
+		"nombre": {
+			"type": "text"
+		},
+		"cuenta": {
+			"type": "number"
+		},
+		"ingreso": {
+			"type": "number",
+			"format": "Bs. ${currency(value)}"
+		},
+		"egreso": {
+			"type": "number",
+			"format": "Bs. ${currency(value)}"
+		},
+		"_actions": {
+			"value": "attributes.id",
+			"actions": [
+				"print"
+			],
+			"control": "actions"
+		}
+	},
+	"create_buttons": {
+		"ingreso": {
+			"icon": "plus",
+			"type": "submit",
+			"attributes": {
+				"fecha": "",
+				"nombre": "",
+				"cuenta": "",
+				"ingreso": "1000",
+				"egreso": ""
+			}
+		},
+		"egreso": {
+			"icon": "minus",
+			"type": "reset",
+			"attributes": {
+				"fecha": "",
+				"nombre": "",
+				"cuenta": "",
+				"ingreso": "",
+				"egreso": "1000"
+			}
+		}
+	}
 }

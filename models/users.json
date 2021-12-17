@@ -23,8 +23,7 @@
 	"update": {
 		"name": ":name",
 		"email": ":email",
-		"phone": ":phone",
-		"password": "{{md5(password)}}"
+		"phone": ":phone"
 	},
 	"delete": {
 		"status": "'DELETED'"
@@ -41,6 +40,33 @@
 			"params": {
 				"user_id": "$id"
 			}
+		}
+	},
+	"labels": {
+		"_model": "Usuario",
+		"_models": "Usuarios",
+		"id": "ID",
+		"name": "Nombre",
+		"email": "E-mail",
+		"phone": "Teléfono",
+		"password": "Contraseña"
+	},
+	"ui": {
+		"id": {},
+		"name": {},
+		"email": {
+			"type": "email"
+		},
+		"phone": {
+			"type": "tel"
+		},
+		"_actions": {
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"view"
+			],
+			"control": "actions"
 		}
 	}
 }

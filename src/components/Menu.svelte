@@ -8,7 +8,7 @@
 		// { href: "/home", label: "Inicio", icon: "home" },
 		{ href: "/dashboard", label: "Dashboard", icon: "tachometer-alt" },
 		{ href: "/admin/profile", label: "Perfil", icon: "user" },
-		{ href: "/page/users", label: "Usuarios", icon: "users" },
+		{ href: "/admin/users", label: "Usuarios", icon: "users" },
 		// { href: "/about", label: "About", icon: "question-circle" },
 		// { href: "/edit/Test", label: "Edit page", icon: "pen" },
 		{ href: "/cajas", label: "Cajas", icon: "cash-register" },

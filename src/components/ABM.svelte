@@ -19,50 +19,60 @@
 
 	_.setLabels(config.labels);
 
-	tableConfig.headers = Object.keys(config.attributes).map((key) => {
-		return {
-			label: _(key),
-			align: config.ui[key]?.align || "left",
-		};
-	});
-	tableConfig.cells = Object.keys(config.attributes).reduce(
-		(acc, key, index) => {
-			const col = indexToCol(index + 1);
-			console.log(col);
-			acc[col] = {
-				value: `attributes.${key}`,
-				format: config.ui[key]?.format,
+	tableConfig.headers = Object.keys(config.ui).reduce((headers, key) => {
+		const visible = !config.ui[key].hideColumn;
+		if (visible) {
+			headers.push({
+				label: _(key),
 				align: config.ui[key]?.align || "left",
-			};
-			return acc;
-		},
-		{}
-	);
-	// Add actions
-	if (config.ui._actions) {
-		tableConfig.headers.push({
-			label: "",
-		});
-		const col = indexToCol(tableConfig.headers.length);
-		tableConfig.cells[col] = config.ui._actions;
-	}
+			});
+		}
+		return headers;
+	}, []);
+	let colIndex = 1;
+	tableConfig.cells = Object.keys(config.ui).reduce((cells, key) => {
+		const visible = !config.ui[key].hideColumn;
+		if (visible) {
+			const col = indexToCol(colIndex);
+			cells[col] = Object.assign(
+				{
+					value: `attributes.${key}`,
+					format: config.ui[key]?.format,
+					align: config.ui[key]?.align || "left",
+				},
+				config.ui[key]
+			);
+			colIndex++;
+		}
+		return cells;
+	}, {});
 
+	let create_buttons = config.create_buttons || {
+		_model: {
+			icon: "plus",
+			type: "submit",
+		},
+	};
 	let tableData = {},
 		list;
 	let edit, view, create;
 	let registro = null;
-	async function crear() {
+	function defaultValues(configAttributes, template = {}) {
+		return Object.keys(configAttributes).reduce((acc, key) => {
+			acc[key] = template[key] || config.ui[key]?.default || "";
+			return acc;
+		}, {});
+	}
+	async function crear(template = {}) {
 		registro = {
-			attributes: Object.keys(config.create).reduce((acc, key) => {
-				acc[key] = config.ui[key]?.default || "";
-				return acc;
-			}, {}),
+			attributes: defaultValues(config.create, template),
 		};
 		await tick();
 		create.showModal();
 	}
 	async function editar(event) {
 		registro = event.detail;
+		// registro.attributes = Object.assign(defaultValues(config.update), registro.attributes);
 		await tick();
 		edit.showModal();
 	}
@@ -105,10 +115,15 @@
 			<form>
 				<GridTemplate>
 					<div>
-						<button type="submit" on:click={crear}>
-							<i class="fas fa-plus" />
-							{_("_model")}
-						</button>
+						{#each Object.entries(create_buttons) as [name, button]}
+							<button
+								type={button.type}
+								on:click={() => crear(button.attributes)}
+							>
+								<i class={`fas fa-${button.icon}`} />
+								{_(name)}
+							</button>
+						{/each}
 					</div>
 					<div>
 						<input class="search" placeholder={_("_model")} />
@@ -195,7 +210,7 @@
 	<form style="min-width:50vw" class="to-print">
 		<dl>
 			{#each Object.entries(config.create) as [key, value]}
-			<dt>{_(key)}</dt>
+				<dt>{_(key)}</dt>
 				<dd>{registro.attributes[key]}</dd>
 			{/each}
 		</dl>

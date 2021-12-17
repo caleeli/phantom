@@ -12,6 +12,7 @@
 	import Cajas from "./pages/Cajas.svelte";
 	import Creditos from "./pages/Creditos.svelte";
 	import Clientes from "./pages/Clientes.svelte";
+	import AdminUsers from "./pages/AdminUsers.svelte";
 	const routes = {
 		"/": Login,
 		"/home": Home,
@@ -20,6 +21,7 @@
 		"/dashboard": Dashboard,
 		"/page/:name": Page,
 		"/admin/profile": AdminProfile,
+		"/admin/users": AdminUsers,
 		"/cajas": Cajas,
 		"/creditos": Creditos,
 		"/clientes": Clientes,

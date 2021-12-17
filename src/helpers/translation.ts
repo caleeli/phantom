@@ -7,7 +7,7 @@ function translation(language: string) {
 	const func = function (textOrName, data = {}) {
 		const text = labels[textOrName] || textOrName;
 		const translation = translations[language][text];
-		if (!translation) {
+		if (translation === undefined) {
 			return text;
 		}
 		// replace :placeholders
