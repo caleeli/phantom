@@ -1,4 +1,4 @@
-import * as es from '../translations/es.json';
+import es from '../translations/es.json';
 
 const translations = { es };
 
@@ -10,6 +10,7 @@ function translation(language: string) {
 		if (translation === undefined) {
 			return text;
 		}
+
 		// replace :placeholders
 		return translation.replace(/:([a-zA-Z0-9_]+)/g, (match: any, placeholder: string) => {
 			return data[placeholder] || match;

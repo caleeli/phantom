@@ -1,0 +1,24 @@
+{
+    "class": "Endpoint",
+    "url": "indicadores",
+    "queries": {
+        "{clientes}": "select count(*) as clientes from clientes",
+        "{cartera}": "select sum(monto) as cartera from creditos",
+        "{mora,porcentaje_mora}": [
+            "SELECT ",
+            "sum(saldo) as mora, ",
+            "sum(saldo) / :cartera as porcentaje_mora ",
+            "FROM creditos ",
+            "WHERE ",
+            "fecha_ultimo_movimiento < ${today('-P1M')} "
+        ]
+    },
+    "return": {
+        "data": {
+            "clientes": "$clientes",
+            "cartera": "$cartera",
+            "mora": "$mora",
+            "porcentaje_mora": "round($porcentaje_mora, 2)"
+        }
+    }
+}

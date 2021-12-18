@@ -2,6 +2,7 @@
   import { get, set } from "lodash";
   import { tick } from "svelte";
   import api from "../api";
+  import { currency } from "../api/Sheet";
   import Input from "./Input.svelte";
   import Label from "./Label.svelte";
   import Button from "./Button.svelte";
@@ -23,7 +24,8 @@
   let className = '';
   let style = `--width:${width}%;`;
 
-  function compile(code: string) {
+  const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
+  async function compile(code: string) {
     const parser = window.document.createElement("div");
     parser.innerHTML = code;
     // Get <template> elements as [{id: template}...]
@@ -99,7 +101,7 @@
         .trim()
         .replace(/\$(\w+)/g, (ref) => `refs[${JSON.stringify(ref)}]`);
       if (code) {
-        (new Function('data', 'api', code))(data, api);
+        await (new AsyncFunction('data', 'api', 'currency', code))(data, api, currency);
       }
     }
     return result as [
@@ -109,7 +111,7 @@
   async function loadScreen(url: string, code: string) {
     const response = !code && url && await fetch(url);
     const source = code || await response.text();
-    const compiled = compile(source);
+    const compiled = await compile(source);
     setTimeout(() => {
       tick().then(() => {
         const input = document.querySelector(

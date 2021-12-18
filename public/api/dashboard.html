@@ -13,25 +13,26 @@
 </template>
 
 <script>
+    const indicadores = await api('indicadores').get();
     data.indicadorA = api("indicadores").getRow(null, {
         "title": "Nro de clientes",
-        "value": 152,
+        "value": indicadores.clientes,
         "color": "black",
     });
 
     data.indicadorB = {
         "title": "Cartera actual",
-        "value": "Bs. 150.230.000,00",
+        "value": "Bs. " + currency(indicadores.cartera),
         "color": "black",
     };
     data.indicadorC = {
         "title": "Monto en mora",
-        "value": "Bs. 1.500.000,00",
+        "value": "Bs. " + currency(indicadores.mora),
         "color": "black",
     };
     data.indicadorD = {
         "title": "Porcentaje de mora",
-        "value": "1.01%",
+        "value": currency(indicadores.porcentaje_mora) + "%",
         "color": "black",
     };
     data.dona = {

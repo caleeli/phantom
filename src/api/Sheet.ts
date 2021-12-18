@@ -108,7 +108,7 @@ class Sheet {
 	}
 }
 
-function currency(number) {
+export function currency(number) {
 	return new Intl.NumberFormat('es-BO', {
 		minimumFractionDigits: 2
 	}).format(number);

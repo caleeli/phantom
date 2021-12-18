@@ -29,8 +29,8 @@
 <main>
     <form on:submit|preventDefault={onSubmit}>
         <h3>{_("Login")}</h3>
-        <p>{_("Por favor ingrese sus datos")}</p>
-        <input bind:value={username} name="username" aria-label="username" placeholder={_("Username")} type="text"/>
+        <p>{_("Please enter your account")}</p>
+         <input bind:value={username} name="username" aria-label="username" placeholder={_("Username")} type="text"/>
         <input bind:value={password} name="password" aria-label="password" placeholder={_("Password")} type="password"/>
         <button type="submit">{_("Login")}</button>
     </form>
