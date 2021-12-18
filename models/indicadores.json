@@ -10,15 +10,19 @@
             "sum(saldo) / :cartera as porcentaje_mora ",
             "FROM creditos ",
             "WHERE ",
-            "fecha_ultimo_movimiento < ${today('-P1M')} "
-        ]
+            "fecha_ultimo_movimiento < ${today('-P1M')}"
+        ],
+        "dist_cartera": "select producto, sum(monto) as monto from creditos group by producto",
+        "dist_mora": "select producto, sum(saldo) as monto from creditos where fecha_ultimo_movimiento < ${today('-P1M')} group by producto"
     },
     "return": {
         "data": {
             "clientes": "$clientes",
             "cartera": "$cartera",
             "mora": "$mora",
-            "porcentaje_mora": "round($porcentaje_mora, 2)"
+            "porcentaje_mora": "round($porcentaje_mora, 2)",
+            "dist_cartera": "$dist_cartera",
+            "dist_mora": "$dist_mora"
         }
     }
 }

@@ -13,12 +13,14 @@
 </template>
 
 <script>
-    const indicadores = await api('indicadores').get();
-    data.indicadorA = api("indicadores").getRow(null, {
+    let indicadores = api('indicadores').get();
+    indicadores = await indicadores;
+
+    data.indicadorA = {
         "title": "Nro de clientes",
         "value": indicadores.clientes,
         "color": "black",
-    });
+    };
 
     data.indicadorB = {
         "title": "Cartera actual",
@@ -38,16 +40,17 @@
     data.dona = {
         type: "doughnut",
         data: {
-            labels: ["AAA", "BBB"],
+            labels: indicadores.dist_cartera.map(row => row.producto),
             datasets: [{
-                data: [300, 50, 100],
+                data: indicadores.dist_cartera.map(row => row.monto),
                 backgroundColor: [
-                    "lightgreen",
                     "lightblue",
-                    "salmon",
+                    "yellow",
+                    "lightgreen",
+                    "salmon"
                 ],
                 hoverOffset: 4,
-            }, ],
+            }],
         },
         options: {
             plugins: {
@@ -61,9 +64,9 @@
     data.dona2 = {
         type: "doughnut",
         data: {
-            labels: ["Request", "Review", "Approved", "Rejected"],
+            labels: indicadores.dist_mora.map(row => row.producto),
             datasets: [{
-                data: [30, 50, 100, 5],
+                data: indicadores.dist_mora.map(row => row.monto),
                 backgroundColor: [
                     "lightblue",
                     "yellow",
