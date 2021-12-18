@@ -102,6 +102,11 @@ mockTabla($connection, 'creditos', [
         'faker' => 'datetime()->format("Y-m-d")',
     ],
     [
+        'name' => "producto",
+        'type' => 'TEXT',
+        'faker' => 'randomElement(["Casa", "Automovil", "Hipoteca", "Otro"])',
+    ],
+    [
         'name' => "monto",
         'type' => 'NUMERIC',
         'faker' => 'randomFloat(2, 10000, 50000)',
