@@ -13,16 +13,22 @@
             "fecha_ultimo_movimiento < ${today('-P1M')}"
         ],
         "dist_cartera": "select producto, sum(monto) as monto from creditos group by producto",
-        "dist_mora": "select producto, sum(saldo) as monto from creditos where fecha_ultimo_movimiento < ${today('-P1M')} group by producto"
+        "dist_mora": "select producto, sum(saldo) as monto from creditos where fecha_ultimo_movimiento < ${today('-P1M')} group by producto",
+        "saldo_monto_creditos": "select producto, sum(saldo) as saldo, sum(monto) as monto from creditos group by producto"
     },
     "return": {
         "data": {
-            "clientes": "$clientes",
-            "cartera": "$cartera",
-            "mora": "$mora",
-            "porcentaje_mora": "round($porcentaje_mora, 2)",
-            "dist_cartera": "$dist_cartera",
-            "dist_mora": "$dist_mora"
+            "indicadores": {
+                "clientes": "$clientes",
+                "cartera": "currency($cartera)",
+                "mora": "currency($mora)",
+                "porcentaje_mora": "percentage($porcentaje_mora)"
+            },
+            "graficos": [
+                "donut($dist_cartera, 'Distribución de la cartera', 'producto', 'monto')",
+                "donut($dist_mora, 'Distribución de la mora', 'producto', 'monto')",
+                "line($saldo_monto_creditos, 'Saldo vs Monto', 'producto', ['saldo', 'monto'])"
+            ]
         }
     }
 }

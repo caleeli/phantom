@@ -12,7 +12,6 @@
     <slot />
   </span>
   <div>
-    <input placeholder="search" class="search">
     <div class="notifications">
       <i class="fas fa-bell"></i>
       <mark>5</mark>

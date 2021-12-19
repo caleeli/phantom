@@ -1,24 +1,36 @@
 <script>
   import { onMount } from "svelte";
-  export let width = 1;
+  import { _ } from "../helpers";
+  export let width = "auto";
   export let value;
-  $: cssVarStyles = `--width:${width}%`;
+  $: cssVarStyles = `--width:${isNaN(width) ? width : width + "%"}`;
   const config = value;
   // === include 'setup' then 'config' above ===
   let canvas;
   let chart;
   onMount(() => {
+    config.data.datasets.forEach((dataset) => {
+      if (dataset.label) {
+        dataset.label = _(dataset.label);
+      }
+    });
+    config.data.labels.forEach((label, index) => {
+      config.data.labels[index] = _(label);
+    });
+    if (config.options && config.options.plugins && config.options.plugins.title) {
+      config.options.plugins.title.text = _(config.options.plugins.title.text);
+    }
     chart = new Chart(canvas, config);
   });
 </script>
 
-<div class="content" style={cssVarStyles} >
-    <canvas bind:this={canvas}/>
-    <slot />
+<div class="content" style={cssVarStyles}>
+  <canvas bind:this={canvas} />
+  <slot />
 </div>
 
 <style>
-    div {
-      width: var(--width);
-    }
+  div {
+    width: var(--width);
+  }
 </style>

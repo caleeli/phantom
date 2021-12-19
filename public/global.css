@@ -134,7 +134,6 @@ form footer {
 */
 main {
 	padding: 1rem;
-	height: calc(100% - 5rem);
 }
 main h2 {
 	margin: 0.5rem auto;
@@ -472,48 +471,48 @@ aside figure figcaption {
 #show-sidebar {
 	outline: none;
 }
-aside.collapsed #hide-sidebar {
-	display: none;
-}
-aside.expanded #show-sidebar {
-	display: none;
-}
-aside.collapsed {
-	width: 3.5rem;
-}
-aside.collapsed figcaption {
-	display: none;
-}
-aside.collapsed span {
-	display: none;
-}
-/*
-@media only screen and (max-width: 767px){
-	aside.collapsed {
-		height: 3rem;
-		overflow: hidden;
+/** if portrait aside bar goes to bottom**/
+@media screen and (orientation: portrait) {
+	main {
+		grid-column: span 2;
+		grid-row-end: 3;
 	}
-	aside.expanded {
-		height: calc(100% - 3rem);
-	}
-	aside.collapsed #show-sidebar {
-		bottom: 0;
-		transform: rotate(90deg) translate(0.7rem, 0.1rem);
-		background: transparent;
-		border: none;
-		color: var(--sidebar-username-color);
-	}
-}
-@media only screen and (min-width: 768px){
 	aside {
-		height: calc(100% - 3rem);
+		grid-column: span 2;
+		flex-direction: row;
 	}
-	aside.collapsed #show-sidebar {
-		top: 50%;
+	aside a {
+		padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+		text-align: center;
+	}
+	aside #hide-sidebar {
+		display: none;
+	}
+	aside #show-sidebar {
+		display: none;
+	}
+	.figure-bg {
+		display: none;
 	}
 }
-*/
-
+/** if landscape aside bar goes to left side**/
+@media screen and (orientation: landscape) {
+	aside.collapsed #hide-sidebar {
+		display: none;
+	}
+	aside.expanded #show-sidebar {
+		display: none;
+	}
+	aside.collapsed {
+		width: 3.5rem;
+	}
+	aside.collapsed figcaption {
+		display: none;
+	}
+	aside.collapsed span {
+		display: none;
+	}
+}
 
 a:hover {
 	text-decoration: underline;

@@ -18,41 +18,51 @@
 	}
 </script>
 
-<table {style}>
-	<tr>
-		{#each config.headers as header}
-			<th align={header.align || "left"}>{header.label}</th>
-		{/each}
-	</tr>
-	{#each value as data, row}
+<div {style}>
+	<table>
 		<tr>
-			{#each config.headers as header, col}
-				<td align={sheet.cell[row][col].align}>
-					{#if sheet.cell[row][col].control === "checkbox"}
-						<input
-							type="checkbox"
-							bind:checked={sheet.ref[`${row},${col}`]}
-						/>
-					{:else if sheet.cell[row][col].control === "actions"}
-						{#each sheet.cell[row][col].actions as action}
-							<!-- svelte-ignore a11y-invalid-attribute -->
-							<a class="action" on:click={dispatch(action, data)} href="javascript:void(0)">
-								<i class="fa fa-{iconAlias(action)}" />
-							</a>
-						{/each}
-					{:else}
-						{@html sheet.format[`${row},${col}`]}
-					{/if}
-				</td>
+			{#each config.headers as header}
+				<th align={header.align || "left"}>{header.label}</th>
 			{/each}
 		</tr>
-	{/each}
-</table>
-<slot />
+		{#each value as data, row}
+			<tr>
+				{#each config.headers as header, col}
+					<td align={sheet.cell[row][col].align}>
+						{#if sheet.cell[row][col].control === "checkbox"}
+							<input
+								type="checkbox"
+								bind:checked={sheet.ref[`${row},${col}`]}
+							/>
+						{:else if sheet.cell[row][col].control === "actions"}
+							{#each sheet.cell[row][col].actions as action}
+								<!-- svelte-ignore a11y-invalid-attribute -->
+								<a
+									class="action"
+									on:click={dispatch(action, data)}
+									href="javascript:void(0)"
+								>
+									<i class="fa fa-{iconAlias(action)}" />
+								</a>
+							{/each}
+						{:else}
+							{@html sheet.format[`${row},${col}`]}
+						{/if}
+					</td>
+				{/each}
+			</tr>
+		{/each}
+	</table>
+	<slot />
+</div>
 
 <style>
-	table {
+	div {
 		width: var(--width);
+		overflow: auto;
+	}
+	table {
+		min-width: 100%;
 		border-collapse: collapse;
 	}
 	table th {
