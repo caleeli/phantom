@@ -127,7 +127,7 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
                 return $this->parseExpressionsInQuery($expression, $params);
             }
         }
-        throw new Exception('Filter not found: ' . $filter));
+        throw new Exception('Filter not found: ' . $filter);
     }
 
     private function explodeFilter(string $filter)
