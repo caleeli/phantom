@@ -2,6 +2,7 @@
 
 namespace App\Resources;
 
+use Exception;
 use PDO;
 
 class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
@@ -71,6 +72,8 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
 
     private function prepareQuery(array $options, $byId = false)
     {
+        // params
+        $params = $options['params'] ?? [];
         // Prepare the $from of the query
         $from = $this->definition['table'];
         if (isset($this->definition['join'])) {
@@ -91,16 +94,55 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
             $where = [
                 '1=1',
             ];
-            array_push($where, ...$this->definition['where']);
+            foreach ($this->definition['where'] as $whereClause) {
+                $where[] = $this->parseExpressionsInQuery($whereClause, $params);
+            }
+            if (isset($options['filter'])) {
+                foreach ($options['filter'] as $filter) {
+                    $where[] = $this->parseFilter($filter, $params);
+                }
+            }
             $where = implode(' ', $where);
         }
         // Prepare the statement
-        error_log("SELECT $select FROM $from");
-        $statement = $this->connection->prepare("SELECT $select FROM $from WHERE $where");
-        $params = $options['params'] ?? [];
-        var_dump($params);
-        $statement->execute($params);
+        $query = "SELECT $select FROM $from WHERE $where";
+        $statement = $this->query($query, $params);
         return $statement;
+    }
+
+    private function parseFilter(string $filter, array &$params)
+    {
+        list($filterName, $filterParamValues) = $this->explodeFilter($filter);
+        foreach ($this->definition['filters'] as $defName => $expression) {
+            list($name, $paramNames) = $this->explodeFilter($defName);
+            if ($name === $filterName) {
+                $paramValues = json_decode('[' . $filterParamValues . ']');
+                $paramNames = explode(',', $paramNames);
+                // prefix with filterName
+                foreach ($paramNames as $i => $paramName) {
+                    $paramNames[$i] = $filterName . '_' . $paramName;
+                }
+                $filterParam = array_combine($paramNames, $paramValues);
+                $params = array_merge($params, $filterParam);
+                return $this->parseExpressionsInQuery($expression, $params);
+            }
+        }
+        throw new Exception('Filter not found: ' . $filter));
+    }
+
+    private function explodeFilter(string $filter)
+    {
+        $hasParams = substr($filter, -1) === ')';
+        $firstParenthesis = strpos($filter, '(');
+        if ($hasParams && !$firstParenthesis) {
+            throw new Exception('Invalid filter: ' . $filter);
+        }
+        $filterName = $hasParams ? substr($filter, 0, $firstParenthesis) : $filter;
+        $filterParams = '';
+        if ($hasParams) {
+            $filterParams = substr($filter, $firstParenthesis + 1, -1);
+        }
+        return [$filterName, $filterParams];
     }
 
     private function formatRow(array $row, array $options)

@@ -28,11 +28,11 @@
 </header>
 
 <style>
-  .search {
+  /*.search {
     margin-top: 0px;
     margin-bottom: 0px;
     margin-right: 1rem;
-  }
+  }*/
   .notifications {
     position: relative;
     width: 3rem;

@@ -30,6 +30,7 @@
 		return headers;
 	}, []);
 	let colIndex = 1;
+	let textToFind = '';
 	tableConfig.cells = Object.keys(config.ui).reduce((cells, key) => {
 		const visible = !config.ui[key].hideColumn;
 		if (visible) {
@@ -104,6 +105,9 @@
 				edit.close();
 			});
 	}
+	function findText() {
+		list.find(textToFind);
+	}
 </script>
 
 <Topbar>{_("_models")}</Topbar>
@@ -113,6 +117,7 @@
 	<GridTemplate>
 		<Api bind:this={list} path={config.url} bind:value={tableData}>
 			<form>
+				<button type="submit" on:click={findText} style="display:none">{_('Buscar')}</button>
 				<GridTemplate>
 					<div>
 						{#each Object.entries(create_buttons) as [name, button]}
@@ -126,7 +131,7 @@
 						{/each}
 					</div>
 					<div>
-						<input class="search" placeholder={_("_model")} />
+						<input class="search" bind:value={textToFind} placeholder={_("_model")} />
 					</div>
 				</GridTemplate>
 				<Grid

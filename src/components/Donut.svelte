@@ -2,8 +2,9 @@
   import { onMount } from "svelte";
   import { _ } from "../helpers";
   export let width = "auto";
+  export let colspan = "1";
   export let value;
-  $: cssVarStyles = `--width:${isNaN(width) ? width : width + "%"}`;
+  $: cssVarStyles = `--width:${isNaN(width) ? width : width + "%"};--colspan:${colspan};`;
   const config = value;
   // === include 'setup' then 'config' above ===
   let canvas;
@@ -32,5 +33,6 @@
 <style>
   div {
     width: var(--width);
+    grid-column: span var(--colspan);
   }
 </style>

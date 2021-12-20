@@ -13,7 +13,9 @@
 	"where": [
 		"and status='ACTIVE'"
 	],
-	"filters": {},
+	"filters": {
+		"findText(text)": "and (name like ${contains(text)} or username like ${contains(text)} or email like ${contains(text)} or phone like ${contains(text)})"
+	},
 	"create": {
 		"name": ":name",
 		"email": ":email",

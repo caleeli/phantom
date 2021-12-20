@@ -61,6 +61,20 @@ function percentage($number)
     return number_format($number * 100, 2) . '%';
 }
 
+/**
+ * Convert text to sql like pattern
+ *
+ * @param string $text
+ *
+ * @return string
+ */
+function contains($text)
+{
+    $text = preg_replace('/\s+/', '%', $text);
+    $text = preg_replace('/[^\s\w%]/', '_', $text);
+    return '%' . $text . '%';
+}
+
 const CHART_COLORS = [
     '#add8e6',
     '#90ee90',
@@ -68,7 +82,7 @@ const CHART_COLORS = [
     '#ffff00',
 ];
 
-function donut($data, $title, $labelCol, $valueCol)
+function donut($data, $title, $labelCol, $valueCol, $tplOptions = [])
 {
     return [
         'type' => "doughnut",
@@ -92,6 +106,7 @@ function donut($data, $title, $labelCol, $valueCol)
                 ],
             ],
         ],
+        'tplOptions' => (object) $tplOptions,
     ];
 }
 
@@ -101,7 +116,7 @@ function doughnut(...$params)
 }
 
 
-function line($data, $title, $labelCol, array $valueCols)
+function line($data, $title, $labelCol, array $valueCols, $tplOptions = [])
 {
     return [
         'type' => "line",
@@ -130,5 +145,21 @@ function line($data, $title, $labelCol, array $valueCols)
                 ],
             ],
         ],
+        'tplOptions' => (object) $tplOptions,
     ];
 }
+
+// /**
+//  * Replace :variables in text string
+//  *
+//  * @param array $text
+//  * @param string $params
+//  *
+//  * @return string
+//  */
+// function _($text, $params)
+// {
+//     return preg_replace_callback('/:([a-zA-Z0-9_]+)/', function ($matches) use ($params) {
+//         return $params[$matches[1]];
+//     }, $text);
+// }
