@@ -10,7 +10,9 @@
         "fecha": "fecha"
     },
     "where": [],
-    "filters": {},
+    "filters": {
+        "findText(text)": "and (nombre like ${contains($text)} or direccion like ${contains($text)} or telefono like ${contains($text)})"
+    },
     "create": {
         "nombre": ":nombre",
         "direccion": ":direccion",
@@ -24,5 +26,36 @@
         "fecha": ":fecha"
     },
     "delete": {},
-    "relationships": {}
+    "relationships": {},
+    "labels": {
+		"_model": "Cliente",
+		"_models": "Clientes",
+        "nombre": "Nombre",
+        "direccion": "Dirección",
+        "telefono": "Telefono",
+        "fecha": "Fecha de registro"
+    },
+    "ui": {
+        "nombre": {
+            "type": "text"
+        },
+        "direccion": {
+            "type": "text"
+        },
+        "telefono": {
+            "type": "text"
+        },
+        "fecha": {
+            "type": "date"
+        },
+        "_actions": {
+            "value": "attributes.id",
+            "actions": [
+                "edit",
+                "view",
+                "print"
+            ],
+            "control": "actions"
+        }
+    }
 }
