@@ -11,7 +11,9 @@
         "fecha_ultimo_movimiento": "fecha_ultimo_movimiento"
     },
     "where": [],
-    "filters": {},
+    "filters": {
+        "findText(text)": "and (nombre like ${contains($text)})"
+    },
     "create": {
         "nombre": ":nombre",
         "fecha": ":fecha",
