@@ -121,6 +121,8 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
                 // prefix with filterName
                 foreach ($paramNames as $i => $paramName) {
                     $paramNames[$i] = $filterName . '_' . $paramName;
+                    $escapedVar = preg_quote($paramName, '/');
+                    $expression = preg_replace('/\$' . $escapedVar . '\b/', '$' . $paramNames[$i], $expression);
                 }
                 $filterParam = array_combine($paramNames, $paramValues);
                 $params = array_merge($params, $filterParam);

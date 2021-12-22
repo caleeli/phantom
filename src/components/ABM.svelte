@@ -30,7 +30,7 @@
 		return headers;
 	}, []);
 	let colIndex = 1;
-	let textToFind = '';
+	let textToFind = "";
 	tableConfig.cells = Object.keys(config.ui).reduce((cells, key) => {
 		const visible = !config.ui[key].hideColumn;
 		if (visible) {
@@ -55,7 +55,10 @@
 		},
 	};
 	let tableData = {},
-		list;
+		list,
+		params = {
+			filter: [],
+		};
 	let edit, view, create;
 	let registro = null;
 	function defaultValues(configAttributes, template = {}) {
@@ -106,7 +109,8 @@
 			});
 	}
 	function findText() {
-		list.find(textToFind);
+		params.filter = [`findText(${JSON.stringify(textToFind)})`];
+		list.refresh();
 	}
 </script>
 
@@ -115,9 +119,20 @@
 
 <main>
 	<GridTemplate>
-		<Api bind:this={list} path={config.url} bind:value={tableData}>
-			<form>
-				<button type="submit" on:click={findText} style="display:none">{_('Buscar')}</button>
+		<Api
+			bind:this={list}
+			path={config.url}
+			bind:value={tableData}
+			bind:params
+		>
+			<form
+				on:submit|preventDefault={() => {
+					return false;
+				}}
+			>
+				<button type="submit" on:click|preventDefault={findText} style="display:none">
+					{_("Buscar")}
+				</button>
 				<GridTemplate>
 					<div>
 						{#each Object.entries(create_buttons) as [name, button]}
@@ -131,7 +146,11 @@
 						{/each}
 					</div>
 					<div>
-						<input class="search" bind:value={textToFind} placeholder={_("_model")} />
+						<input
+							class="search"
+							bind:value={textToFind}
+							placeholder={_("_model")}
+						/>
 					</div>
 				</GridTemplate>
 				<Grid

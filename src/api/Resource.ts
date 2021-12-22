@@ -9,15 +9,24 @@ class Resource {
     }
 
     // get resource
-    public get(id: string): Promise<any> {
-        const url = id ? `${this.url}/${id}` : this.url;
-        return fetch(url, {
+    public get(id: string, params = {}): Promise<any> {
+        const url = new URL(id ? `${this.url}/${id}` : this.url);
+        // add params to url
+        Object.keys(params).forEach(key => {
+            if (Array.isArray(params[key])) {
+                // if value is array, add multiple params
+                params[key].forEach(value => url.searchParams.append(key + '[]', value));
+            } else {
+                url.searchParams.append(key, params[key]);
+            }
+        });
+        return fetch(url.toString(), {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(response => response.json())
-        .then(({data}) => data)
+            .then(({ data }) => data)
     }
 
     // get resource as Row object

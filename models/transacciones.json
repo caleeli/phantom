@@ -51,10 +51,12 @@
 		},
 		"ingreso": {
 			"type": "number",
+			"align": "right",
 			"format": "Bs. ${currency(value)}"
 		},
 		"egreso": {
 			"type": "number",
+			"align": "right",
 			"format": "Bs. ${currency(value)}"
 		},
 		"_actions": {

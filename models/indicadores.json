@@ -27,7 +27,7 @@
             "graficos": [
                 "donut($dist_cartera, 'Distribución de la cartera', 'producto', 'monto')",
                 "donut($dist_mora, 'Distribución de la mora', 'producto', 'monto')",
-                "line($saldo_monto_creditos, 'Saldo vs Monto', 'producto', ['saldo', 'monto'], ['colspan' => 2])"
+                "line($saldo_monto_creditos, 'Saldo vs Monto', 'producto', ['saldo', 'monto'])"
             ]
         }
     }

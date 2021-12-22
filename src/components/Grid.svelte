@@ -69,12 +69,12 @@
 		background-color: #e4e4e4;
 		border: 1px solid #ababab;
 		border-bottom-width: 2px;
-		padding: 1px 8px;
+		padding: 0.3rem 0.5rem;
 		cursor: pointer;
 	}
 	table td {
 		border: 1px solid #d9d9d9;
-		padding: 1px 8px;
+		padding: 0.2rem 0.5rem;
 		cursor: cell;
 	}
 
