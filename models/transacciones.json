@@ -11,7 +11,9 @@
 		"egreso": "egreso"
 	},
 	"where": [],
-	"filters": {},
+	"filters": {
+		"findText(text)": "and (nombre like ${contains($text)} or cuenta like ${contains($text)} or id=:text)"
+	},
 	"create": {
 		"fecha": ":fecha",
 		"nombre": ":nombre",

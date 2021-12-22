@@ -5,6 +5,8 @@
 	import Menu from "../components/Menu.svelte";
 	import Topbar from "../components/Topbar.svelte";
 	import { _ } from "../helpers";
+	import * as config from "../../models/indicadores.json";
+	_.setLabels(config['labels']);
 	let indicadores = {
 		indicadores: {},
 		graficos: [],
@@ -21,7 +23,7 @@
 			{#each Object.entries(indicadores.indicadores) as [nombre, valor]}
 				<form>
 					<h2>{valor}</h2>
-					<span>{nombre}</span>
+					<span>{_(nombre)}</span>
 				</form>
 			{/each}
 		</GridTemplate>

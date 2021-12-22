@@ -43,10 +43,10 @@ abstract class ResourceBase
         $params = array_filter($params, function ($key) use ($variables) {
             return in_array($key, $variables);
         }, ARRAY_FILTER_USE_KEY);
-        $statement = $this->connection->prepare($query);
-        $statement->execute($params);
         error_log($query);
         error_log(print_r($params, true));
+        $statement = $this->connection->prepare($query);
+        $statement->execute($params);
         return $statement;
     }
 
