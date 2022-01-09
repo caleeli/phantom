@@ -1,4 +1,5 @@
 <script>
+	import "../helpers/dialog.ts";
 	import { tick } from "svelte";
 	import api from "../api";
 	import { indexToCol } from "../api/Sheet";
@@ -10,6 +11,7 @@
 	import { _ } from "../helpers";
 	export let config = {
 		attributes: {},
+		ui: {},
 	};
 
 	let tableConfig = {
@@ -19,8 +21,13 @@
 
 	_.setLabels(config.labels);
 
+	let colIndex = 1;
+	let textToFind = "";
+	if (!config.ui) {
+		throw "No config.ui defined";
+	}
 	tableConfig.headers = Object.keys(config.ui).reduce((headers, key) => {
-		const visible = !config.ui[key].hideColumn;
+		const visible = !config.ui[key].hidden;
 		if (visible) {
 			headers.push({
 				label: _(key),
@@ -29,10 +36,8 @@
 		}
 		return headers;
 	}, []);
-	let colIndex = 1;
-	let textToFind = "";
 	tableConfig.cells = Object.keys(config.ui).reduce((cells, key) => {
-		const visible = !config.ui[key].hideColumn;
+		const visible = !config.ui[key].hidden;
 		if (visible) {
 			const col = indexToCol(colIndex);
 			cells[col] = Object.assign(
@@ -54,14 +59,14 @@
 			type: "submit",
 		},
 	};
-	let tableData = {},
+	let tableData = [],
 		list,
 		params = {
 			filter: [],
 		};
 	let edit, view, create;
 	let registro = null;
-	function defaultValues(configAttributes, template = {}) {
+	function defaultValues(configAttributes, template) {
 		return Object.keys(configAttributes).reduce((acc, key) => {
 			acc[key] = template[key] || config.ui[key]?.default || "";
 			return acc;
@@ -76,7 +81,6 @@
 	}
 	async function editar(event) {
 		registro = event.detail;
-		// registro.attributes = Object.assign(defaultValues(config.update), registro.attributes);
 		await tick();
 		edit.showModal();
 	}
@@ -130,13 +134,19 @@
 					return false;
 				}}
 			>
-				<button type="submit" on:click|preventDefault={findText} style="display:none">
+				<button
+					data-testid="filter-submit"
+					type="submit"
+					on:click|preventDefault={findText}
+					style="display:none;"
+				>
 					{_("Buscar")}
 				</button>
 				<GridTemplate>
 					<div>
 						{#each Object.entries(create_buttons) as [name, button]}
 							<button
+								data-testid={name}
 								type={button.type}
 								on:click={() => crear(button.attributes)}
 							>
@@ -148,6 +158,7 @@
 					<div>
 						<input
 							class="search"
+							data-testid="filter"
 							bind:value={textToFind}
 							placeholder={_("_model")}
 						/>
@@ -166,13 +177,14 @@
 </main>
 
 <dialog bind:this={create}>
-	{#if registro}
+	{#if registro && config.create}
 		<form style="min-width:50vw">
 			<dl>
 				{#each Object.entries(config.create) as [key, value]}
 					<dt>{_(key)}</dt>
 					<dd>
 						<input
+							data-testid={`create-${key}`}
 							type={config.ui[key]?.type || "text"}
 							value={registro.attributes[key]}
 							on:input={(event) => {
@@ -183,21 +195,33 @@
 				{/each}
 			</dl>
 			<footer>
-				<button type="submit" on:click={postRecord}>Crear</button>
-				<button on:click={() => create.close()}>Cancelar</button>
+				<button
+					type="submit"
+					on:click|preventDefault={postRecord}
+					data-testid="create-submit"
+				>
+					{_("Crear")}
+				</button>
+				<button
+					on:click|preventDefault={() => create.close()}
+					data-testid="create-cancel"
+				>
+					{_("Cancelar")}
+				</button>
 			</footer>
 		</form>
 	{/if}
 </dialog>
 
 <dialog bind:this={edit}>
-	{#if registro}
+	{#if registro && config.update}
 		<form style="min-width:50vw">
 			<dl>
 				{#each Object.entries(config.update) as [key, value]}
 					<dt>{_(key)}</dt>
 					<dd>
 						<input
+							data-testid={`edit-${key}`}
 							type={config.ui[key]?.type || "text"}
 							value={registro.attributes[key]}
 							on:input={(event) => {
@@ -208,34 +232,54 @@
 				{/each}
 			</dl>
 			<footer>
-				<button type="submit" on:click={putRecord}>Actualizar</button>
-				<button on:click={() => edit.close()}>Cancelar</button>
+				<button
+					type="submit"
+					on:click|preventDefault={putRecord}
+					data-testid="edit-submit"
+				>
+					{_("Actualizar")}
+				</button>
+				<button
+					on:click|preventDefault={() => edit.close()}
+					data-testid="edit-cancel"
+				>
+					{_("Cancelar")}
+				</button>
 			</footer>
 		</form>
 	{/if}
 </dialog>
 
 <dialog bind:this={view}>
-	{#if registro}
+	{#if registro && config.create}
 		<form style="min-width:50vw">
 			<dl>
 				{#each Object.entries(config.create) as [key, value]}
 					<dt>{_(key)}</dt>
-					<dd>{registro.attributes[key]}</dd>
+					<dd data-testid={`view-${key}`}>
+						{registro.attributes[key]}
+					</dd>
 				{/each}
 			</dl>
 			<footer>
-				<button on:click={() => view.close()}>Cerrar</button>
+				<button
+					on:click|preventDefault={() => view.close()}
+					data-testid="view-close"
+				>
+					{_("Cerrar")}
+				</button>
 			</footer>
 		</form>
 	{/if}
 </dialog>
-{#if registro}
+{#if registro && config.create}
 	<form style="min-width:50vw" class="to-print">
 		<dl>
 			{#each Object.entries(config.create) as [key, value]}
 				<dt>{_(key)}</dt>
-				<dd>{registro.attributes[key]}</dd>
+				<dd data-testid={`print-${key}`}>
+					{registro.attributes[key]}
+				</dd>
 			{/each}
 		</dl>
 	</form>

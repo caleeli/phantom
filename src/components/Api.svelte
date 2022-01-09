@@ -17,7 +17,12 @@
 </script>
 
 {#await endpoint}
-	<i class="fas fa-spinner fa-spin" />
+	<i
+		role="progressbar"
+		class="fas fa-spinner fa-spin"
+		aria-valuetext="..."
+		aria-busy="true"
+	/>
 {:then response}
 	<slot {response} />
 {/await}

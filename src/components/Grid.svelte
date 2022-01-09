@@ -19,7 +19,7 @@
 </script>
 
 <div {style}>
-	<table>
+	<table role="table">
 		<tr>
 			{#each config.headers as header}
 				<th align={header.align || "left"}>{header.label}</th>
@@ -35,16 +35,19 @@
 								bind:checked={sheet.ref[`${row},${col}`]}
 							/>
 						{:else if sheet.cell[row][col].control === "actions"}
-							{#each sheet.cell[row][col].actions as action}
-								<!-- svelte-ignore a11y-invalid-attribute -->
-								<a
-									class="action"
-									on:click={dispatch(action, data)}
-									href="javascript:void(0)"
-								>
-									<i class="fa fa-{iconAlias(action)}" />
-								</a>
-							{/each}
+							<div class="no-wrap">
+								{#each sheet.cell[row][col].actions as action}
+									<!-- svelte-ignore a11y-invalid-attribute -->
+									<a
+										class="action"
+										on:click={dispatch(action, data)}
+										href="javascript:void(0)"
+										data-testid={`action-${action}`}
+									>
+										<i class="fa fa-{iconAlias(action)}" />
+									</a>
+								{/each}
+							</div>
 						{:else}
 							{@html sheet.format[`${row},${col}`]}
 						{/if}

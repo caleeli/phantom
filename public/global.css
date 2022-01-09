@@ -598,6 +598,9 @@ figure.avatar img {
 figure.avatar figcaption {
 	text-align: center;
 }
+.no-wrap {
+	white-space: nowrap;
+}
 
 /** dialog **/
 dialog {

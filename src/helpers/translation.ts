@@ -6,7 +6,7 @@ function translation(language: string) {
 	let labels = {};
 	const func = function (textOrName, data = {}) {
 		const text = labels[textOrName] || textOrName;
-		const translation = translations[language][text];
+		const translation = translations[language]?.[text];
 		if (translation === undefined) {
 			return text;
 		}

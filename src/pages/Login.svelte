@@ -17,8 +17,8 @@
 
 	async function onSubmit() {
 		try {
-			// const response = await auth.signIn(username, password)
-            // user.update(() => response);
+			const response = await auth.signIn(username, password)
+            user.update(() => response);
             push("#/dashboard");
 		} catch (error) {
             window.alert(error.message);

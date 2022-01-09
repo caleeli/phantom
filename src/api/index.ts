@@ -1,13 +1,7 @@
 import Resource from "./Resource";
 // load from env api_base
 const env = process.env;
-const apiBase = env.api_base;
-
-/*const api = new Proxy({}, {
-    get: (target, prop: string) => {
-        return new Resource(prop, apiBase)
-    }
-})*/
+const apiBase = env.api_base || 'http://localhost/';
 
 /**
  * @class Api

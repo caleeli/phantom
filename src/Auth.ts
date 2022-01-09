@@ -5,11 +5,11 @@ class Auth {
     // constructor
     constructor() {
         aws_amplify.init();
-        this.driver = aws_amplify.Auth
+        // this.driver = aws_amplify.Auth
     }
 
     signIn(username, password) {
-        return this.driver.signIn(username, password)
+        return this.driver && this.driver.signIn(username, password)
     }
 }
 
