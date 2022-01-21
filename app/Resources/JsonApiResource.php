@@ -40,9 +40,9 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
         $columns = implode(',', $columns);
         $values = implode(',', $values);
         $sql = "INSERT INTO `{$this->definition['table']}` ({$columns}) VALUES ({$values})";
-        $statement = $this->connection->prepare($sql);
         error_log($sql);
         var_dump($data['data']['attributes']);
+        $statement = $this->connection->prepare($sql);
         $success = $statement->execute($data['data']['attributes']);
         return [
             'success' => $success,
@@ -117,6 +117,9 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
             list($name, $paramNames) = $this->explodeFilter($defName);
             if ($name === $filterName) {
                 $paramValues = json_decode('[' . $filterParamValues . ']');
+                if (!is_array($paramValues)) {
+                    throw new Exception('Invalid filter parameters: ' . $filterParamValues);
+                }
                 $paramNames = explode(',', $paramNames);
                 // prefix with filterName
                 foreach ($paramNames as $i => $paramName) {

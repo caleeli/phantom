@@ -66,6 +66,9 @@
 		};
 	let edit, view, create;
 	let registro = null;
+	function refreshList() {
+		params = params;
+	}
 	function defaultValues(configAttributes, template) {
 		return Object.keys(configAttributes).reduce((acc, key) => {
 			acc[key] = template[key] || config.ui[key]?.default || "";
@@ -98,7 +101,7 @@
 		api(config.url)
 			.post({ data: registro })
 			.then(async () => {
-				list.refresh();
+				refreshList();
 				await tick();
 				create.close();
 			});
@@ -107,14 +110,45 @@
 		api(config.url)
 			.put(registro.id, { data: registro })
 			.then(async () => {
-				list.refresh();
+				refreshList();
 				await tick();
 				edit.close();
 			});
 	}
 	function findText() {
 		params.filter = [`findText(${JSON.stringify(textToFind)})`];
-		list.refresh();
+	}
+	function prepareListParams(config, value) {
+		const params = { ...config.params };
+		params.filter = params.filter.map((filter) =>
+			new Function("value", "return `" + filter + "`")(
+				JSON.stringify(value)
+			)
+		);
+		return params;
+	}
+	function onChangeDataList(value, dataListId, config) {
+		if (!config || !config["on:select"]) {
+			return;
+		}
+		const options = window.document.getElementById(dataListId).options;
+		for (let i = 0; i < options.length; i++) {
+			if (options[i].value === value) {
+				const row = JSON.parse(options[i].getAttribute("row"));
+				const map = row.attributes;
+				const keys = Object.keys(map);
+				const values = keys.map((key) => JSON.stringify(map[key]));
+				config["on:select"].forEach((callback) => {
+					callback = new Function(
+						...keys,
+						"return `" + callback + "`"
+					)(...values);
+					new Function("set", ...keys, callback)((key, value) => {
+						registro.attributes[key] = value;
+					}, ...keys);
+				});
+			}
+		}
 	}
 </script>
 
@@ -190,7 +224,42 @@
 							on:input={(event) => {
 								registro.attributes[key] = event.target.value;
 							}}
+							on:change={(event) => {
+								onChangeDataList(
+									event.target.value,
+									`list-${key}`,
+									config.ui[key].list
+								);
+							}}
+							list={config.ui[key].list
+								? `list-${key}`
+								: undefined}
 						/>
+						{#if config.ui[key].list}
+							<datalist id={`list-${key}`}>
+								<Api
+									path={config.ui[key].list.model}
+									params={prepareListParams(
+										config.ui[key].list,
+										registro.attributes[key]
+									)}
+									let:response={options}
+								>
+									{#each options as option}
+										<option
+											value={option.attributes[
+												config.ui[key].list.value
+											]}
+											row={JSON.stringify(option)}
+										>
+											{option.attributes[
+												config.ui[key].list.text
+											]}
+										</option>
+									{/each}
+								</Api>
+							</datalist>
+						{/if}
 					</dd>
 				{/each}
 			</dl>

@@ -5,16 +5,19 @@
     "id": "id",
     "attributes": {
         "nombre": "nombre",
+        "cuenta": "cuenta",
         "direccion": "direccion",
         "telefono": "telefono",
         "fecha": "fecha"
     },
     "where": [],
     "filters": {
-        "findText(text)": "and (nombre like ${contains($text)} or direccion like ${contains($text)} or telefono like ${contains($text)})"
+        "findText(text)": "and (cuenta like ${contains($text)} or nombre like ${contains($text)} or direccion like ${contains($text)} or telefono like ${contains($text)})",
+        "findCuenta(text)": "and cuenta like ${startsWith($text)}"
     },
     "create": {
         "nombre": ":nombre",
+        "cuenta": ":cuenta",
         "direccion": ":direccion",
         "telefono": ":telefono",
         "fecha": ":fecha"
@@ -31,12 +34,16 @@
 		"_model": "Cliente",
 		"_models": "Clientes",
         "nombre": "Nombre",
+        "cuenta": "Cuenta",
         "direccion": "Dirección",
         "telefono": "Telefono",
         "fecha": "Fecha de registro"
     },
     "ui": {
         "nombre": {
+            "type": "text"
+        },
+        "cuenta": {
             "type": "text"
         },
         "direccion": {

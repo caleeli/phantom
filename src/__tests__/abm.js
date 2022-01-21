@@ -44,7 +44,6 @@ describe('ABM component', () => {
 		window.fetch = jest.fn((url) => {
 			const parsed = new URL(url)
 			const filter = parsed.searchParams.get("filter[]")
-			console.log(filter)
 			if (filter === 'findText("no result")') {
 				console.log("return empty")
 				return Promise.resolve({

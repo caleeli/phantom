@@ -75,6 +75,13 @@ function contains($text)
     return '%' . $text . '%';
 }
 
+function startsWith($text)
+{
+    $text = preg_replace('/\s+/', '%', $text);
+    $text = preg_replace('/[^\s\w%]/', '_', $text);
+    return $text . '%';
+}
+
 const CHART_COLORS = [
     '#add8e6',
     '#90ee90',

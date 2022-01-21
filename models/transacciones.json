@@ -16,10 +16,10 @@
 	},
 	"create": {
 		"fecha": ":fecha",
-		"nombre": ":nombre",
 		"cuenta": ":cuenta",
+		"nombre": ":nombre",
 		"ingreso": ":ingreso",
-		"egreso": "egreso"
+		"egreso": ":egreso"
 	},
 	"update": {
 		"fecha": ":fecha",
@@ -45,11 +45,24 @@
 		"fecha": {
 			"type": "date"
 		},
+		"cuenta": {
+			"type": "number",
+			"list": {
+				"model": "clientes",
+				"params": {
+					"filter": [
+						"findCuenta(${value})"
+					]
+				},
+				"value": "cuenta",
+				"text": "nombre",
+				"on:select": [
+					"set(nombre, ${nombre})"
+				]
+			}
+		},
 		"nombre": {
 			"type": "text"
-		},
-		"cuenta": {
-			"type": "number"
 		},
 		"ingreso": {
 			"type": "number",

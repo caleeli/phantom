@@ -132,6 +132,11 @@ mockTabla($connection, 'clientes', [
         'faker' => 'name',
     ],
     [
+        'name' => "cuenta",
+        'type' => 'TEXT',
+        'faker' => 'bankAccountNumber',
+    ],
+    [
         'name' => "direccion",
         'type' => 'TEXT',
         'faker' => 'address',

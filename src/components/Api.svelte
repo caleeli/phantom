@@ -1,11 +1,12 @@
 <script>
 	import api from "../api";
+	import { debounce } from "lodash";
 	export let path = "";
 	export let method = "get";
 	export let params = {};
-	export let value;
+	export let value = null;
 	let endpoint;
-	export function refresh() {
+	function refreshInstance() {
 		endpoint = api(path)
 			[method.toLowerCase()](null, params)
 			.then((data) => {
@@ -13,7 +14,14 @@
 				return data;
 			});
 	}
-	refresh();
+	export let refresh = 1;
+	// export let refresh = debounce(refreshInstance, 1000);
+	let refreshI = debounce(refreshInstance, 1000);
+	refreshInstance();
+	// on params change, refresh
+	$: if (refresh && params) {
+		refreshI();
+	}
 </script>
 
 {#await endpoint}
