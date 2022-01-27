@@ -90,6 +90,7 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
         // Prepare the $where of the query
         if ($byId) {
             $where = $this->definition['id'] . ' = :id';
+            $order = '';
         } else {
             $where = [
                 '1=1',
@@ -103,9 +104,15 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
                 }
             }
             $where = implode(' ', $where);
+            if (isset($options['sort']) && $options['sort']) {
+                var_dump($options['sort']);
+                $order = 'ORDER BY ' . $this->parseSort($options['sort']);
+            } else {
+                $order = '';
+            }
         }
         // Prepare the statement
-        $query = "SELECT $select FROM $from WHERE $where";
+        $query = "SELECT $select FROM $from WHERE $where $order";
         $statement = $this->query($query, $params);
         return $statement;
     }
@@ -134,6 +141,26 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
             }
         }
         throw new Exception('Filter not found: ' . $filter);
+    }
+
+    /**
+     * Parse JSON Api sort expressions into SQL
+     * 
+     * sort=+field_1,-field_2
+     * @param array $sort
+     * @return string
+     */
+    private function parseSort(array $sort)
+    {
+        $sql = '';
+        foreach ($sort as $sortItem) {
+            // Parse (+/-)?field
+            preg_match('/^([+-]?)(.*)$/', $sortItem, $matches);
+            $direction = $matches[1] === '-' ? 'DESC' : 'ASC';
+            $field = $matches[2];
+            $sql .= $field . ' ' . $direction;
+        }
+        return $sql;
     }
 
     private function explodeFilter(string $filter)

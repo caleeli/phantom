@@ -16,7 +16,7 @@ class Resource {
             if (Array.isArray(params[key])) {
                 // if value is array, add multiple params
                 params[key].forEach(value => url.searchParams.append(key + '[]', value));
-            } else {
+            } else if (params[key] !== undefined) {
                 url.searchParams.append(key, params[key]);
             }
         });

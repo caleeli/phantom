@@ -63,6 +63,7 @@
 		list,
 		params = {
 			filter: [],
+			sort: config.sort?.join(","),
 		};
 	let edit, view, create;
 	let registro = null;

@@ -190,6 +190,9 @@ $api->get('/api/{model}', function (Request $request, $model) use ($connection) 
         $options['include'] = $include;
         $filter = $request->get('filter', []);
         $options['filter'] = $filter;
+        $sort = $request->get('sort', '');
+        $sort = $sort ? explode(',', $sort) : [];
+        $options['sort'] = $sort;
         return new Response(200, base_headers, json_encode($resource->index($options)));
     } catch (Exception $e) {
         return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));

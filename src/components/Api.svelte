@@ -6,7 +6,7 @@
 	export let params = {};
 	export let value = null;
 	let endpoint;
-	function refreshInstance() {
+	function refreshApi() {
 		endpoint = api(path)
 			[method.toLowerCase()](null, params)
 			.then((data) => {
@@ -15,12 +15,10 @@
 			});
 	}
 	export let refresh = 1;
-	// export let refresh = debounce(refreshInstance, 1000);
-	let refreshI = debounce(refreshInstance, 1000);
-	refreshInstance();
+	let delayedRefreshApi = debounce(refreshApi, 100);
 	// on params change, refresh
 	$: if (refresh && params) {
-		refreshI();
+		delayedRefreshApi();
 	}
 </script>
 

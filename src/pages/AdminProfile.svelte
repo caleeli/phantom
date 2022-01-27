@@ -34,6 +34,7 @@
 <main>
 	<GridTemplate>
 		<Api path="users/1?include=permissions,roles" bind:value={user}>
+			{#if user.attributes}
 			<div>
 				<form>
 					<Avatar value={user.attributes.avatar} size="4">
@@ -55,6 +56,7 @@
 				<h3>Permisos</h3>
 				<Grid bind:value={user.relationships.permissions.data} {config} />
 			</form>
+			{/if}
 		</Api>
 	</GridTemplate>
 </main>
