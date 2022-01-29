@@ -108,5 +108,8 @@
 				"egreso": "1000"
 			}
 		}
+	},
+	"pagination": {
+		"per_page": 10
 	}
 }

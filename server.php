@@ -67,7 +67,7 @@ $connection->exec('INSERT INTO tasks (task_id, title, body, task_usr_id, created
 $faker = Faker\Factory::create();
 $n=rand(1000000, 10000000);
 $date = new DateTime();
-for ($i=0;$i<10;$i++) {
+for ($i=0;$i<50;$i++) {
     $fecha = $date->format('Y-m-d');
     $nombre = $faker->name;
     $cuenta = $faker->bankAccountNumber;
@@ -193,6 +193,8 @@ $api->get('/api/{model}', function (Request $request, $model) use ($connection) 
         $sort = $request->get('sort', '');
         $sort = $sort ? explode(',', $sort) : [];
         $options['sort'] = $sort;
+        $options['per_page'] = intval($request->get('per_page', '10'));
+        $options['page'] = intval($request->get('page', '1'));
         return new Response(200, base_headers, json_encode($resource->index($options)));
     } catch (Exception $e) {
         return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));

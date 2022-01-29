@@ -601,7 +601,9 @@ figure.avatar figcaption {
 .no-wrap {
 	white-space: nowrap;
 }
-
+.center {
+	text-align: center;
+}
 /** dialog **/
 dialog {
 	overflow: visible;

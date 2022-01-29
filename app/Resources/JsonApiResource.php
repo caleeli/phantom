@@ -105,14 +105,23 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
             }
             $where = implode(' ', $where);
             if (isset($options['sort']) && $options['sort']) {
-                var_dump($options['sort']);
                 $order = 'ORDER BY ' . $this->parseSort($options['sort']);
             } else {
                 $order = '';
             }
+            if (isset($options['per_page'])) {
+                $limit = 'LIMIT ' . $options['per_page'];
+            } else {
+                $limit = '';
+            }
+            if (isset($options['page'])) {
+                $offset = 'OFFSET ' . ($options['page'] - 1) * $options['per_page'];
+            } else {
+                $offset = '';
+            }
         }
         // Prepare the statement
-        $query = "SELECT $select FROM $from WHERE $where $order";
+        $query = "SELECT $select FROM $from WHERE $where $order $limit $offset";
         $statement = $this->query($query, $params);
         return $statement;
     }

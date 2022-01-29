@@ -1,7 +1,9 @@
 {
     "_actions": "",
+    "Load more": "Cargar más",
     "Login": "Ingresar",
+    "Password": "Contraseña",
     "Please enter your account": "Por favor ingrese su cuenta",
-    "Username": "Nombre de usuario",
-    "Password": "Contraseña"
+    "Search": "Buscar",
+    "Username": "Nombre de usuario"
 }

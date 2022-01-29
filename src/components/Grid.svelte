@@ -25,36 +25,49 @@
 				<th align={header.align || "left"}>{header.label}</th>
 			{/each}
 		</tr>
-		{#each value as data, row}
-			<tr>
-				{#each config.headers as header, col}
-					<td align={sheet.cell[row][col].align}>
-						{#if sheet.cell[row][col].control === "checkbox"}
-							<input
-								type="checkbox"
-								bind:checked={sheet.ref[`${row},${col}`]}
-							/>
-						{:else if sheet.cell[row][col].control === "actions"}
-							<div class="no-wrap">
-								{#each sheet.cell[row][col].actions as action}
-									<!-- svelte-ignore a11y-invalid-attribute -->
-									<a
-										class="action"
-										on:click={dispatch(action, data)}
-										href="javascript:void(0)"
-										data-testid={`action-${action}`}
-									>
-										<i class="fa fa-{iconAlias(action)}" />
-									</a>
-								{/each}
-							</div>
-						{:else}
-							{@html sheet.format[`${row},${col}`]}
+		{#if value}
+			{#each value as data, row}
+				<tr>
+					{#each config.headers as header, col}
+						{#if sheet.cell[row]}
+							<td align={sheet.cell[row][col].align}>
+								{#if sheet.cell[row][col].control === "checkbox"}
+									<input
+										type="checkbox"
+										bind:checked={sheet.ref[
+											`${row},${col}`
+										]}
+									/>
+								{:else if sheet.cell[row][col].control === "actions"}
+									<div class="no-wrap">
+										{#each sheet.cell[row][col].actions as action}
+											<!-- svelte-ignore a11y-invalid-attribute -->
+											<a
+												class="action"
+												on:click={dispatch(
+													action,
+													data
+												)}
+												href="javascript:void(0)"
+												data-testid={`action-${action}`}
+											>
+												<i
+													class="fa fa-{iconAlias(
+														action
+													)}"
+												/>
+											</a>
+										{/each}
+									</div>
+								{:else}
+									{@html sheet.format[`${row},${col}`]}
+								{/if}
+							</td>
 						{/if}
-					</td>
-				{/each}
-			</tr>
-		{/each}
+					{/each}
+				</tr>
+			{/each}
+		{/if}
 	</table>
 	<slot />
 </div>
