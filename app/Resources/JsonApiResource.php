@@ -91,6 +91,8 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
         if ($byId) {
             $where = $this->definition['id'] . ' = :id';
             $order = '';
+            $limit = '';
+            $offset = '';
         } else {
             $where = [
                 '1=1',
