@@ -27,7 +27,7 @@
 		throw "No config.ui defined";
 	}
 	tableConfig.headers = Object.keys(config.ui).reduce((headers, key) => {
-		const visible = !config.ui[key].hidden;
+		const visible = !config.ui[key].hideInList;
 		if (visible) {
 			headers.push({
 				label: _(key),
@@ -37,7 +37,7 @@
 		return headers;
 	}, []);
 	tableConfig.cells = Object.keys(config.ui).reduce((cells, key) => {
-		const visible = !config.ui[key].hidden;
+		const visible = !config.ui[key].hideInList;
 		if (visible) {
 			const col = indexToCol(colIndex);
 			cells[col] = Object.assign(
@@ -253,52 +253,54 @@
 		<form style="min-width:50vw">
 			<dl>
 				{#each Object.entries(config.create) as [key, value]}
-					<dt>{_(key)}</dt>
-					<dd>
-						<input
-							data-testid={`create-${key}`}
-							type={config.ui[key]?.type || "text"}
-							value={registro.attributes[key]}
-							on:input={(event) => {
-								registro.attributes[key] = event.target.value;
-							}}
-							on:change={(event) => {
-								onChangeDataList(
-									event.target.value,
-									`list-${key}`,
-									config.ui[key].list
-								);
-							}}
-							list={config.ui[key].list
-								? `list-${key}`
-								: undefined}
-						/>
-						{#if config.ui[key].list}
-							<datalist id={`list-${key}`}>
-								<Api
-									path={config.ui[key].list.model}
-									params={prepareListParams(
-										config.ui[key].list,
-										registro.attributes[key]
-									)}
-									let:response={options}
-								>
-									{#each options as option}
-										<option
-											value={option.attributes[
-												config.ui[key].list.value
-											]}
-											row={JSON.stringify(option)}
-										>
-											{option.attributes[
-												config.ui[key].list.text
-											]}
-										</option>
-									{/each}
-								</Api>
-							</datalist>
-						{/if}
-					</dd>
+					{#if !config.ui[key]?.hideInCreate}
+						<dt>{_(key)}</dt>
+						<dd>
+							<input
+								data-testid={`create-${key}`}
+								type={config.ui[key]?.type || "text"}
+								value={registro.attributes[key]}
+								on:input={(event) => {
+									registro.attributes[key] = event.target.value;
+								}}
+								on:change={(event) => {
+									onChangeDataList(
+										event.target.value,
+										`list-${key}`,
+										config.ui[key].list
+									);
+								}}
+								list={config.ui[key]?.list
+									? `list-${key}`
+									: undefined}
+							/>
+							{#if config.ui[key]?.list}
+								<datalist id={`list-${key}`}>
+									<Api
+										path={config.ui[key].list.model}
+										params={prepareListParams(
+											config.ui[key].list,
+											registro.attributes[key]
+										)}
+										let:response={options}
+									>
+										{#each options as option}
+											<option
+												value={option.attributes[
+													config.ui[key].list.value
+												]}
+												row={JSON.stringify(option)}
+											>
+												{option.attributes[
+													config.ui[key].list.text
+												]}
+											</option>
+										{/each}
+									</Api>
+								</datalist>
+							{/if}
+						</dd>
+					{/if}
 				{/each}
 			</dl>
 			<footer>

@@ -8,20 +8,24 @@
 		"username": "username",
 		"avatar": "'images/avatar/avatar-1.jpg'",
 		"email": "email",
-		"phone": "phone"
+		"phone": "phone",
+		"status": "status"
 	},
 	"where": [
-		"and status='ACTIVE'"
 	],
 	"filters": {
 		"findText(text)": "and (name like ${contains($text)} or username like ${contains($text)} or email like ${contains($text)} or phone like ${contains($text)})"
 	},
+    "sort": [
+        "-id"
+    ],
 	"create": {
 		"name": ":name",
 		"email": ":email",
 		"phone": ":phone",
-		"password": "{{md5(password)}}"
-	},
+		"password": "${md5($password)}",
+		"status": "'ACTIVE'"
+		},
 	"update": {
 		"name": ":name",
 		"email": ":email",
@@ -51,7 +55,8 @@
 		"name": "Nombre",
 		"email": "E-mail",
 		"phone": "Teléfono",
-		"password": "Contraseña"
+		"password": "Contraseña",
+		"status": "Estado"
 	},
 	"ui": {
 		"id": {},
@@ -61,6 +66,13 @@
 		},
 		"phone": {
 			"type": "tel"
+		},
+		"password": {
+			"type": "password",
+			"hideInList": true
+		},
+		"status": {
+			"hideInCreate": true
 		},
 		"_actions": {
 			"value": "attributes.id",

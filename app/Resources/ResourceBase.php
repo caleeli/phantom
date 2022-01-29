@@ -26,7 +26,9 @@ abstract class ResourceBase
     }
 
     /**
-     * Get a resource endpoint
+     * Execute a query, and return the statement
+     * 
+     * Also removes the unused parameters from the $params array
      *
      * @param string $query
      * @param array $options
@@ -46,7 +48,7 @@ abstract class ResourceBase
         error_log($query);
         error_log(print_r($params, true));
         $statement = $this->connection->prepare($query);
-        $statement->execute($params);
+        $result = $statement->execute($params);
         return $statement;
     }
 

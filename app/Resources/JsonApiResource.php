@@ -33,19 +33,17 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
     {
         $columns = [];
         $values = [];
+        $params = $data['data']['attributes'];
         foreach ($this->definition['create'] as $name => $value) {
             $columns[] = $name;
-            $values[] = $value;
+            $values[] = $this->parseExpressionsInQuery($value, $params);
         }
         $columns = implode(',', $columns);
         $values = implode(',', $values);
         $sql = "INSERT INTO `{$this->definition['table']}` ({$columns}) VALUES ({$values})";
-        error_log($sql);
-        var_dump($data['data']['attributes']);
-        $statement = $this->connection->prepare($sql);
-        $success = $statement->execute($data['data']['attributes']);
+        $this->query($sql, $params);
         return [
-            'success' => $success,
+            'success' => true,
         ];
     }
 
