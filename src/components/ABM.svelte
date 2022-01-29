@@ -63,6 +63,7 @@
 		list,
 		params = {
 			page: 1,
+			per_page: config.pagination?.per_page || 10,
 			filter: [],
 			sort: config.sort?.join(","),
 		};

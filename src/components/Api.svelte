@@ -6,7 +6,7 @@
 	export let params = {};
 	export let attachPages = false;
 	export let value = null;
-	let endpoint;
+	let endpoint = new Promise(()=>{});
 	function refreshApi() {
 		const isFirstPage = !(params.page > 1);
 		endpoint = api(path)
