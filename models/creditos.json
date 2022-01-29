@@ -14,6 +14,9 @@
     "filters": {
         "findText(text)": "and (nombre like ${contains($text)})"
     },
+    "sort": [
+        "-id"
+    ],
     "create": {
         "nombre": ":nombre",
         "fecha": ":fecha",

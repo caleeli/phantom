@@ -15,6 +15,9 @@
         "findText(text)": "and (cuenta like ${contains($text)} or nombre like ${contains($text)} or direccion like ${contains($text)} or telefono like ${contains($text)})",
         "findCuenta(text)": "and cuenta like ${startsWith($text)}"
     },
+    "sort": [
+        "-id"
+    ],
     "create": {
         "nombre": ":nombre",
         "cuenta": ":cuenta",
