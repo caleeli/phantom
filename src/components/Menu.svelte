@@ -5,15 +5,12 @@
 	// avatar aleatorio
 	let avatar = "images/avatar/avatar-1.jpg";
 	let options = [
-		// { href: "/home", label: "Inicio", icon: "home" },
 		{ href: "/dashboard", label: "Cuadro de Mando", icon: "tachometer-alt" },
 		{ href: "/cajas", label: "Cajas", icon: "cash-register" },
 		{ href: "/clientes", label: "Clientes", icon: "user-tie" },
 		{ href: "/creditos", label: "Creditos", icon: "credit-card" },
 		{ href: "/admin/users", label: "Usuarios", icon: "users" },
 		{ href: "/admin/profile", label: "Perfil", icon: "user" },
-		// { href: "/about", label: "About", icon: "question-circle" },
-		// { href: "/edit/Test", label: "Edit page", icon: "pen" },
 	];
 	// colapsa el menu lateral
 	function collapseSidebar() {
@@ -49,7 +46,7 @@
 		</a>
 	{/each}
 	<footer>
-		<span>© 2021 coredump</span>
+		<span>© 2022 coredump</span>
 	</footer>
 </aside>
 

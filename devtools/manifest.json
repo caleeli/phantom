@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Phantom Dev Tools",
+  "version": "0.1",
+  "description": "Frontend Developer Tools for Phantom",
+  "author": "Coredump",
+  "devtools_page": "html/devtools.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "css": [],
+      "js": [
+        "/js/content-script.js",
+        "/js/jquery-3.6.0.min.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

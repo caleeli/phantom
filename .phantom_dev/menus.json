@@ -1,0 +1,65 @@
+{
+    "name": "menus",
+    "table": "menus",
+    "url": "menus",
+    "id": "id",
+    "fields": [
+        {
+            "name": "name",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "name",
+            "create": ":name",
+            "update": ":name",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Name"
+        },
+        {
+            "name": "permission",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "permission",
+            "create": ":permission",
+            "update": ":permission",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Permission"
+        },
+        {
+            "name": "icon",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "icon",
+            "create": ":icon",
+            "update": ":icon",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Icon"
+        }
+    ],
+    "where": "",
+    "sort": "id",
+    "filters": [
+        {
+            "declaration": "findById(user_id)",
+            "expression": "and permission in ${user_permissions()}"
+        }
+    ],
+    "data": [
+        {
+            "name": "Cuadro de Mando",
+            "permission": "cuadro de mando",
+            "icon": "tachometer-alt"
+        },
+        {
+            "name": "Cajas",
+            "permission": "cajas",
+            "icon": "cash-register"
+        }
+    ],
+    "actions": "edit,view,print"
+}

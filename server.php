@@ -1,6 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 
+use App\DevTools\DevTools;
 use Mark\App;
 use Workerman\Protocols\Http\Request;
 use Workerman\Protocols\Http\Response;
@@ -89,6 +90,10 @@ $connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso
 $connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-07 00:00:00", "Juan Perez", "1910692122", 700)');
 $connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-08 00:00:00", "Ana Acosta", "1310632140", 800)');
 */
+
+foreach(glob('migrations/*.php') as $file) {
+    require_once $file;
+}
 
 mockTabla($connection, 'creditos', [
     [
@@ -224,6 +229,19 @@ $api->put('/api/{model}/{id}', function (Request $request, $model, $id) use ($co
     try {
         $data = $request->post();
         return new Response(200, base_headers, json_encode($resource->update($id, $data)));
+    } catch (Exception $e) {
+        return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+    }
+});
+
+$api->options('/api/dev/{model}', function (Request $request) {
+    return new Response(201, base_headers, '');
+});
+$api->post('/api/dev/resource', function (Request $request) use ($connection) {
+    try {
+        $data = $request->post();
+        $resource = new DevTools($connection, []);
+        return new Response(200, base_headers, json_encode($resource->store($data)));
     } catch (Exception $e) {
         return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
     }

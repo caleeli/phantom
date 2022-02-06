@@ -1,0 +1,17 @@
+.pm4-tools-blink {
+  animation: blink 0.1s linear 9;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+body {
+  background-color: aqua;
+}

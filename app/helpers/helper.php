@@ -156,6 +156,11 @@ function line($data, $title, $labelCol, array $valueCols, $tplOptions = [])
     ];
 }
 
+function user_permissions()
+{
+    return auth()->user()->permissions;
+}
+
 // /**
 //  * Replace :variables in text string
 //  *

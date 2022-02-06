@@ -1,0 +1,59 @@
+{
+    "class": "JsonApi",
+    "url": "menus",
+    "table": "menus",
+    "id": "id",
+    "attributes": {
+        "name": "name",
+        "permission": "permission",
+        "icon": "icon"
+    },
+    "where": [
+        ""
+    ],
+    "filters": {
+        "findById(user_id)": "and permission in ${user_permissions()}"
+    },
+    "sort": [
+        "id"
+    ],
+    "create": {
+        "name": ":name",
+        "permission": ":permission",
+        "icon": ":icon"
+    },
+    "update": {
+        "name": ":name",
+        "permission": ":permission",
+        "icon": ":icon"
+    },
+    "delete": [],
+    "relationships": [],
+    "labels": {
+        "_model": "Menus",
+        "_models": "Menus",
+        "name": "Name",
+        "permission": "Permission",
+        "icon": "Icon"
+    },
+    "ui": {
+        "name": {
+            "type": "text"
+        },
+        "permission": {
+            "type": "text"
+        },
+        "icon": {
+            "type": "text"
+        },
+        "_actions": {
+            "control": "actions",
+            "value": "attributes.id",
+            "actions": [
+                "edit",
+                "view",
+                "print"
+            ]
+        }
+    }
+}

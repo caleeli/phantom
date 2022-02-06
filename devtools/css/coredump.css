@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+:root {
+	--negro: #000000;
+	--text: #101010;
+	--secondary: #F7F7F7;
+	--primary: #DAE8FC;
+	--primary-text: #3a79c6;
+	--azafran: #F3BE26;
+	--danger: #F8CECC;
+	--blanco: #FFFFFF;
+	--plomo: #D8D8D8;
+    --success: #D5E8D4;
+	--dark: #2d353c;
+	
+	--elevacion: 2px;
+	--_elevacion: -2px;
+	--speed: 200ms;
+	
+	font-family: 'Roboto', sans-serif;
+
+	--body-color: var(--negro);
+	--body-bg: var(--plomo);
+	
+	--header-color: var(--negro);
+	--header-bg: var(--blanco);
+	
+	--sidebar-color: var(--blanco);
+	--sidebar-bg: var(--dark);
+	--sidebar-username-color: var(--blanco);
+    --sidebar-username-bg: url("images/cover-sidebar-user.jpg");
+	--sidebar-username-border: var(--negro);
+	--sidebar-active-color: var(--blanco);
+	--sidebar-active-bg: var(--text);
+
+	--main-bg: var(--plomo);
+
+	--main-content-color: var(--negro);
+	--main-content-bg: var(--blanco);
+
+	--button-default-color: var(--negro);
+	--button-default-bg: var(--primary);
+	--button-default-border: var(--primary);
+
+	--button-button-color: var(--negro);
+	--button-button-bg: var(--secondary);
+	--button-button-border: var(--secondary);
+
+	--button-reset-color: var(--text);
+	--button-reset-bg: var(--danger);
+	--button-reset-border: var(--danger);
+
+	--button-submit-color: var(--negro);
+	--button-submit-bg: var(--success);
+	--button-submit-border: var(--success);
+
+	--button-disabled-color: var(--blanco);
+	--button-disabled-bg: var(--plomo);
+	--button-disabled-border: var(--plomo);
+
+	--button-mark-color: inherit;
+	--button-mark-bg: var(--azafran);
+
+	--checkbox-color: var(--blanco);
+	--checkbox-bg: var(--blanco);
+	--checkbox-checked-color: var(--text);
+	--checkbox-checked-bg: var(--blanco);
+	--checkbox-border: var(--text);
+
+	--link-color: var(--secondary);
+
+	--input-color: var(--negro);
+	--input-bg: var(--blanco);
+	--input-border: var(--plomo);
+	--input-focus-color: var(--text);
+	--input-disable-color: var(--plomo);
+	--input-disable-bg: var(--blanco);
+
+	--form-leyend: var(--secondary);
+}
+.icon {
+	color: #3a79c6
+}
