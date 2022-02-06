@@ -13,3 +13,27 @@ $statement->execute(array (
   'permission' => 'cajas',
   'icon' => 'cash-register',
 ));
+$statement = $connection->prepare('INSERT INTO menus (name, permission, icon) VALUES (:name, :permission, :icon)');
+$statement->execute(array (
+  'name' => 'Clientes',
+  'permission' => 'clientes',
+  'icon' => 'user-tie',
+));
+$statement = $connection->prepare('INSERT INTO menus (name, permission, icon) VALUES (:name, :permission, :icon)');
+$statement->execute(array (
+  'name' => 'Créditos',
+  'permission' => 'creditos',
+  'icon' => 'credit-card',
+));
+$statement = $connection->prepare('INSERT INTO menus (name, permission, icon) VALUES (:name, :permission, :icon)');
+$statement->execute(array (
+  'name' => 'Usuarios',
+  'permission' => 'usuarios',
+  'icon' => 'users',
+));
+$statement = $connection->prepare('INSERT INTO menus (name, permission, icon) VALUES (:name, :permission, :icon)');
+$statement->execute(array (
+  'name' => 'Perfil',
+  'permission' => 'perfil',
+  'icon' => 'user',
+));

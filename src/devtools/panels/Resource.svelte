@@ -2,7 +2,9 @@
     import api from "../../api";
 
     const env = process.env;
-    const apiBase = env.api_base || "http://localhost/";
+    const apiBase = env.dev_api_base || "http://localhost/";
+
+    export let params = {id: null};
 
     let model = {
         name: "",
@@ -28,10 +30,18 @@
     };
     let changed = {};
     let response = "";
-    window['capitalize'] = function (word) {
+    window["capitalize"] = function (word) {
         const lower = word.toLowerCase();
         return word.charAt(0).toUpperCase() + lower.slice(1);
     };
+    if (params.id) {
+        loadModel(params.id);
+    }
+    function loadModel(id) {
+        api(apiBase + "resource").get(id).then(resource => {
+            model = resource.attributes;
+        });
+    }
     function inputField(event, model1, defaults) {
         const name = event.target["name"];
         const value = event.target["value"];
@@ -72,7 +82,7 @@
         model = model;
     }
     function createResource() {
-        api(apiBase + "dev/resource")
+        api(apiBase + "resource")
             .post({
                 data: {
                     attributes: model,
@@ -262,7 +272,11 @@ Fields <button on:click={addField}>+</button><br />
 
 <label>
     Enabled actions:
-    <input name="actions" bind:value={model.actions} placeholder="e.g.: edit,view,print" />
+    <input
+        name="actions"
+        bind:value={model.actions}
+        placeholder="e.g.: edit,view,print"
+    />
 </label>
 <br />
 
@@ -296,14 +310,14 @@ Available filters:<button on:click={addFilter}>+</button><br />
 Initial Data:<button on:click={addData}>+</button><br />
 <table>
     <tr>
-        <th></th>
+        <th />
         {#each model.fields as field}
             <th>{field.label}</th>
         {/each}
     </tr>
     {#each model.data as row}
         <tr>
-            <td><button on:click={removeData(row)}>-</button></td>
+            <td><button on:click={() => removeData(row)}>-</button></td>
             {#each model.fields as field}
                 <td><input bind:value={row[field.name]} /></td>
             {/each}
@@ -312,7 +326,6 @@ Initial Data:<button on:click={addData}>+</button><br />
 </table>
 <hr />
 <button on:click={createResource}>CREATE</button>
-{response}
 
 <style>
     label {

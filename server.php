@@ -44,21 +44,19 @@ $connection->exec('INSERT INTO user_roles (user_id, role_id) VALUES (2, 1)');
 $connection->exec('INSERT INTO user_roles (user_id, role_id) VALUES (3, 1)');
 $connection->exec('INSERT INTO user_roles (user_id, role_id) VALUES (4, 1)');
 // insert permissions
-$connection->exec('INSERT INTO permissions (id, name) VALUES (1, "Ingresar al sistema	")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (2, "Administrar usuarios	")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (3, "Administrar Roles	")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (4, "Administrar parámetros	")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (5, "Monitorizar usuarios dependientes	")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (6, "Backups de datos	")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (7, "Búsquedas avanzadas")');
+$connection->exec('INSERT INTO permissions (id, name) VALUES (1, "cuadro de mando")');
+$connection->exec('INSERT INTO permissions (id, name) VALUES (2, "cajas")');
+$connection->exec('INSERT INTO permissions (id, name) VALUES (3, "clientes")');
+$connection->exec('INSERT INTO permissions (id, name) VALUES (4, "creditos")');
+$connection->exec('INSERT INTO permissions (id, name) VALUES (5, "usuarios")');
+$connection->exec('INSERT INTO permissions (id, name) VALUES (6, "perfil")');
 // insert role permissions
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 1)');
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 2)');
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 3)');
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 4)');
-//$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 5)');
+$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 5)');
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 6)');
-$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 7)');
 // insert sample tasks
 $connection->exec('INSERT INTO tasks (task_id, title, body, task_usr_id, created_at, updated_at) VALUES (1, "Task 1", "Task 1 body", 1, "2020-01-01 00:00:00", "2020-01-01 00:00:00")');
 $connection->exec('INSERT INTO tasks (task_id, title, body, task_usr_id, created_at, updated_at) VALUES (2, "Task 2", "Task 2 body", 1, "2020-01-02 00:00:00", "2020-01-02 00:00:00")');
@@ -234,10 +232,32 @@ $api->put('/api/{model}/{id}', function (Request $request, $model, $id) use ($co
     }
 });
 
-$api->options('/api/dev/{model}', function (Request $request) {
+$api->options('/dev/{model}', function () {
     return new Response(201, base_headers, '');
 });
-$api->post('/api/dev/resource', function (Request $request) use ($connection) {
+$api->options('/dev/{model}/{id}', function () {
+    return new Response(201, base_headers, '');
+});
+
+$api->get('/dev/resource', function () use ($connection) {
+    try {
+        $resource = new DevTools($connection, []);
+        return new Response(200, base_headers, json_encode($resource->index([])));
+    } catch (Exception $e) {
+        return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+    }
+});
+
+$api->get('/dev/resource/{id}', function (Request $request, $id) use ($connection) {
+    try {
+        $resource = new DevTools($connection, []);
+        return new Response(200, base_headers, json_encode($resource->show($id)));
+    } catch (Exception $e) {
+        return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+    }
+});
+
+$api->post('/dev/resource', function (Request $request) use ($connection) {
     try {
         $data = $request->post();
         $resource = new DevTools($connection, []);

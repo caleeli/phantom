@@ -8,7 +8,7 @@ use App\Resources\ResourceBase;
 class DevTools extends ResourceBase implements EndpointResourceInterface
 {
     /**
-     * Run the endpoint
+     * Get the list of resources
      */
     public function index(array $options = [])
     {
@@ -19,7 +19,20 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
                 'attributes' => json_decode(file_get_contents($file), true),
             ];
         }
-        return $list;
+        return [
+            'data' => $list
+        ];
+    }
+
+    public function show($id)
+    {
+        $file = '.phantom_dev/' . $id . '.json';
+        return [
+            'data' => [
+                'id' => $id,
+                'attributes' => json_decode(file_get_contents($file), true),
+            ]
+        ];
     }
 
     public function store(array $data)

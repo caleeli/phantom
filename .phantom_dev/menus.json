@@ -59,6 +59,26 @@
             "name": "Cajas",
             "permission": "cajas",
             "icon": "cash-register"
+        },
+        {
+            "name": "Clientes",
+            "permission": "clientes",
+            "icon": "user-tie"
+        },
+        {
+            "name": "Cr\u00e9ditos",
+            "permission": "creditos",
+            "icon": "credit-card"
+        },
+        {
+            "name": "Usuarios",
+            "permission": "usuarios",
+            "icon": "users"
+        },
+        {
+            "name": "Perfil",
+            "permission": "perfil",
+            "icon": "user"
         }
     ],
     "actions": "edit,view,print"

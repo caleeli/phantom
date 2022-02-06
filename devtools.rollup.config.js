@@ -105,7 +105,7 @@ export default {
 		replace({
 			preventAssignment: true,
 			'process.env': JSON.stringify({
-				api_base: process.env.api_base,
+				dev_api_base: process.env.dev_api_base,
 				language: process.env.language,
 			}),
 		}),

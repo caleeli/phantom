@@ -9,7 +9,7 @@ class Resource {
     }
 
     // get resource
-    public get(id: string, params = {}): Promise<any> {
+    public get(id: string = null, params = {}): Promise<any> {
         const url = new URL(id ? `${this.url}/${id}` : this.url);
         // add params to url
         Object.keys(params).forEach(key => {
