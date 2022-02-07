@@ -103,6 +103,7 @@ export default {
 		replace({
 			preventAssignment: true,
 			'process.env': JSON.stringify({
+				auth_driver: process.env.auth_driver,
 				cognito_domain: process.env.cognito_domain,
 				cognito_client_id: process.env.cognito_client_id,
 				cognito_pools_id: process.env.cognito_pools_id,

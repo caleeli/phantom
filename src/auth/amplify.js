@@ -34,6 +34,8 @@ export default {
                     aws_cognito_verification_mechanisms: ["EMAIL"],
                 });
                 this.Auth = aws_amplify.Amplify.Auth;
+            } else {
+                console.error('aws_amplify not loaded');
             }
         } catch (error) {
             console.error(error);

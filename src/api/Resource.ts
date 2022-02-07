@@ -25,7 +25,7 @@ class Resource {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(response => response.json())
+        }).then(response => this.processResponse(response))
             .then(({ data }) => data)
     }
 
@@ -49,7 +49,7 @@ class Resource {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        })
+        }).then(response => this.processResponse(response))
     }
 
     // patch resource
@@ -74,6 +74,11 @@ class Resource {
             },
             body: JSON.stringify(data)
         })
+    }
+
+    private async processResponse(response) {
+        if (!response.ok) throw await response.json();
+        return response.json();
     }
 }
 

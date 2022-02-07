@@ -22,6 +22,7 @@ const base_headers = [
 $connection = new PDO('sqlite::memory:');
 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $connection->exec('CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, username TEXT, email TEXT, phone TEXT, password TEXT, status TEXT)');
+$connection->exec('CREATE TABLE sessions (id INTEGER PRIMARY KEY, user_id INTEGER, username TEXT, token TEXT, created_at DATETIME)');
 $connection->exec('CREATE TABLE roles (id INTEGER PRIMARY KEY, name TEXT)');
 $connection->exec('CREATE TABLE user_roles (id INTEGER PRIMARY KEY, user_id INTEGER, role_id INTEGER)');
 $connection->exec('CREATE TABLE permissions (id INTEGER PRIMARY KEY, name TEXT)');
@@ -214,6 +215,11 @@ $api->post('/api/{model}', function (Request $request, $model) use ($connection)
         $data = $request->post();
         return new Response(200, base_headers, json_encode($resource->store($data)));
     } catch (Exception $e) {
+        error_log($e->getMessage());
+        error_log($e->getTraceAsString());
+        if ($e->getCode()) {
+            return new Response($e->getCode(), base_headers, json_encode(['error' => $e->getMessage()]));
+        }
         return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
     }
 });

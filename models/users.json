@@ -14,7 +14,8 @@
 	"where": [
 	],
 	"filters": {
-		"findText(text)": "and (name like ${contains($text)} or username like ${contains($text)} or email like ${contains($text)} or phone like ${contains($text)})"
+		"findText(text)": "and (name like ${contains($text)} or username like ${contains($text)} or email like ${contains($text)} or phone like ${contains($text)})",
+		"login(username,password)": "and status='ACTIVE' and username=:username and password=${md5($password)}"
 	},
     "sort": [
         "-id"

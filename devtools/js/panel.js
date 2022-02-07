@@ -1770,7 +1770,7 @@ var app = (function () {
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then(response => response.json())
+            }).then(response => this.processResponse(response))
                 .then(({ data }) => data);
         }
         // get resource as Row object
@@ -1791,7 +1791,7 @@ var app = (function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
-            });
+            }).then(response => this.processResponse(response));
         }
         // patch resource
         patch(id = null, data) {
@@ -1814,6 +1814,11 @@ var app = (function () {
                 },
                 body: JSON.stringify(data)
             });
+        }
+        async processResponse(response) {
+            if (!response.ok)
+                throw await response.json();
+            return response.json();
         }
     }
 

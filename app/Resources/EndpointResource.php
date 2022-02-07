@@ -11,7 +11,6 @@ class EndpointResource extends ResourceBase implements EndpointResourceInterface
      */
     public function index(array $options = [])
     {
-        $response = [];
         foreach ($this->definition['queries'] as $assignment => $query) {
             $statement = $this->prepareQuery($options, $query);
             $oneRow = substr($assignment, 0, 1) === '{';

@@ -1,0 +1,23 @@
+{
+    "class": "JsonApi",
+    "url": "",
+    "table": "sessions",
+    "id": "id",
+    "attributes": {
+        "user_id": "user_id",
+        "username": "username",
+        "created_at": "created_at"
+    },
+    "where": [],
+    "filters": {},
+    "sort": [],
+    "create": {
+        "user_id": ":user_id",
+        "username": ":username",
+        "token": ":token",
+        "created_at": ":created_at"
+    },
+    "update": {},
+    "delete": [],
+    "relationships": []
+}
