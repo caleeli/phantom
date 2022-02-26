@@ -24,6 +24,9 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
         $options['params']['id'] = $id;
         $statement = $this->prepareQuery($options, true);
         $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($row === false) {
+            throw new Exception('Not found', 404);
+        }
         return [
             'data' => $this->formatRow($row, $options),
         ];
@@ -136,7 +139,7 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
                 if (!is_array($paramValues)) {
                     throw new Exception('Invalid filter parameters: ' . $filterParamValues);
                 }
-                $paramNames = explode(',', $paramNames);
+                $paramNames = $paramNames ? explode(',', $paramNames) : [];
                 // prefix with filterName
                 foreach ($paramNames as $i => $paramName) {
                     $paramNames[$i] = $filterName . '_' . $paramName;
@@ -214,7 +217,7 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
                 }
             }
         }
-        $model = model($relationship['model'], $this->connection);
+        $model = $this->model($relationship['model']);
         return $model->index($relationship);
     }
 }

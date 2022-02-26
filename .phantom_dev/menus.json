@@ -39,46 +39,64 @@
             "showInCreate": true,
             "showInUpdate": true,
             "label": "Icon"
+        },
+        {
+            "name": "href",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "href",
+            "create": ":href",
+            "update": ":href",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "href"
         }
     ],
     "where": "",
     "sort": "id",
     "filters": [
         {
-            "declaration": "findById(user_id)",
-            "expression": "and permission in ${user_permissions()}"
+            "declaration": "fromLoggedUser()",
+            "expression": "and permission in (select name from permissions join role_permissions on (permissions.id = role_permissions.permission_id and role_permissions.role_id in (select role_id from user_roles where user_id = ${session($_request)->user_id})))"
         }
     ],
     "data": [
         {
             "name": "Cuadro de Mando",
             "permission": "cuadro de mando",
-            "icon": "tachometer-alt"
+            "icon": "tachometer-alt",
+            "href": "\/dashboard"
         },
         {
             "name": "Cajas",
             "permission": "cajas",
-            "icon": "cash-register"
+            "icon": "cash-register",
+            "href": "\/cajas"
         },
         {
             "name": "Clientes",
             "permission": "clientes",
-            "icon": "user-tie"
+            "icon": "user-tie",
+            "href": "\/clientes"
         },
         {
             "name": "Cr\u00e9ditos",
             "permission": "creditos",
-            "icon": "credit-card"
+            "icon": "credit-card",
+            "href": "\/creditos"
         },
         {
             "name": "Usuarios",
             "permission": "usuarios",
-            "icon": "users"
+            "icon": "users",
+            "href": "\/admin\/users"
         },
         {
             "name": "Perfil",
             "permission": "perfil",
-            "icon": "user"
+            "icon": "user",
+            "href": "\/admin\/profile"
         }
     ],
     "actions": "edit,view,print"

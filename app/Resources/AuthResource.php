@@ -23,7 +23,7 @@ class AuthResource extends ResourceBase implements JsonApiResourceInterface
     public function store(array $data)
     {
         $login = $data['data']['attributes'];
-        $model = model('users', $this->connection);
+        $model = $this->model('users');
         $username = $login['username'];
         $password = $login['password'];
         $params = json_encode($username) . ',' . json_encode($password);
@@ -56,7 +56,7 @@ class AuthResource extends ResourceBase implements JsonApiResourceInterface
     {
         $bytes = openssl_random_pseudo_bytes(64);
         $token   = bin2hex($bytes);
-        $model = model('sessions', $this->connection);
+        $model = $this->model('sessions');
         $session = [
             'data' => [
                 'attributes' => [

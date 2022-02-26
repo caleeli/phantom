@@ -1,11 +1,22 @@
+import { user } from '../store';
 
 class Resource {
     private url: string;
+    public headers: any;
     constructor(
         private name: string,
         private apiBase: string
     ) {
         this.url = new URL(name, apiBase).toString();
+        this.headers = {
+            'Content-Type': 'application/json',
+        };
+        user.subscribe(session => {
+            if (session && session.token) {
+                const token = session.token;
+                this.headers['Authorization'] = `Bearer ${token}`;
+            }
+        });
     }
 
     // get resource
@@ -22,9 +33,7 @@ class Resource {
         });
         return fetch(url.toString(), {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: this.headers,
         }).then(response => this.processResponse(response))
             .then(({ data }) => data)
     }
@@ -45,11 +54,10 @@ class Resource {
     public post(data: any): Promise<any> {
         return fetch(this.url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: this.headers,
             body: JSON.stringify(data)
         }).then(response => this.processResponse(response))
+            .then(({ data }) => data)
     }
 
     // patch resource
@@ -57,9 +65,7 @@ class Resource {
         const url = id ? `${this.url}/${id}` : this.url;
         return fetch(url, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: this.headers,
             body: JSON.stringify(data)
         })
     }
@@ -69,9 +75,7 @@ class Resource {
         const url = id ? `${this.url}/${id}` : this.url;
         return fetch(url, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: this.headers,
             body: JSON.stringify(data)
         })
     }

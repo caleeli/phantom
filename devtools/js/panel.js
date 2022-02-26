@@ -1746,11 +1746,26 @@ var app = (function () {
     const env = {"dev_api_base":"http://localhost:5050/dev/","language":"es"};
     const _ = translation(env.language );
 
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const user = writable(storedUser);
+    user.subscribe(value => {
+        localStorage.setItem('user', JSON.stringify(value));
+    });
+
     class Resource$1 {
         constructor(name, apiBase) {
             this.name = name;
             this.apiBase = apiBase;
             this.url = new URL(name, apiBase).toString();
+            this.headers = {
+                'Content-Type': 'application/json',
+            };
+            user.subscribe(session => {
+                if (session && session.token) {
+                    const token = session.token;
+                    this.headers['Authorization'] = `Bearer ${token}`;
+                }
+            });
         }
         // get resource
         get(id = null, params = {}) {
@@ -1767,9 +1782,7 @@ var app = (function () {
             });
             return fetch(url.toString(), {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: this.headers,
             }).then(response => this.processResponse(response))
                 .then(({ data }) => data);
         }
@@ -1787,20 +1800,17 @@ var app = (function () {
         post(data) {
             return fetch(this.url, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: this.headers,
                 body: JSON.stringify(data)
-            }).then(response => this.processResponse(response));
+            }).then(response => this.processResponse(response))
+                .then(({ data }) => data);
         }
         // patch resource
         patch(id = null, data) {
             const url = id ? `${this.url}/${id}` : this.url;
             return fetch(url, {
                 method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: this.headers,
                 body: JSON.stringify(data)
             });
         }
@@ -1809,9 +1819,7 @@ var app = (function () {
             const url = id ? `${this.url}/${id}` : this.url;
             return fetch(url, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: this.headers,
                 body: JSON.stringify(data)
             });
         }
@@ -3033,7 +3041,7 @@ var app = (function () {
     			hr2 = element("hr");
     			t33 = space();
     			button3 = element("button");
-    			button3.textContent = "CREATE";
+    			button3.textContent = "SAVE";
     			attr_dev(input0, "name", "name");
     			add_location(input0, file$1, 111, 4, 2574);
     			attr_dev(label0, "class", "svelte-17c38a3");

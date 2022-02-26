@@ -325,7 +325,7 @@ Initial Data:<button on:click={addData}>+</button><br />
     {/each}
 </table>
 <hr />
-<button on:click={createResource}>CREATE</button>
+<button on:click={createResource}>SAVE</button>
 
 <style>
     label {

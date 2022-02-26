@@ -2,7 +2,7 @@
     "class": "JsonApi",
     "url": "",
     "table": "sessions",
-    "id": "id",
+    "id": "token",
     "attributes": {
         "user_id": "user_id",
         "username": "username",
@@ -12,9 +12,9 @@
     "filters": {},
     "sort": [],
     "create": {
+        "token": ":token",
         "user_id": ":user_id",
         "username": ":username",
-        "token": ":token",
         "created_at": ":created_at"
     },
     "update": {},

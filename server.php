@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 
 use App\DevTools\DevTools;
+use App\Exceptions\AuthorizationException;
 use Mark\App;
 use Workerman\Protocols\Http\Request;
 use Workerman\Protocols\Http\Response;
@@ -19,17 +20,27 @@ const base_headers = [
     'Server' => 'Phantom',
 ];
 
-$connection = new PDO('sqlite::memory:');
+$connection = new PDO($env['dns'], $env['user'], $env['password']);
 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$connection->exec('DROP TABLE IF EXISTS users');
+$connection->exec('DROP TABLE IF EXISTS sessions');
+$connection->exec('DROP TABLE IF EXISTS roles');
+$connection->exec('DROP TABLE IF EXISTS user_roles');
+$connection->exec('DROP TABLE IF EXISTS permissions');
+$connection->exec('DROP TABLE IF EXISTS role_permissions');
+$connection->exec('DROP TABLE IF EXISTS tasks');
+$connection->exec('DROP TABLE IF EXISTS transacciones');
+
 $connection->exec('CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, username TEXT, email TEXT, phone TEXT, password TEXT, status TEXT)');
-$connection->exec('CREATE TABLE sessions (id INTEGER PRIMARY KEY, user_id INTEGER, username TEXT, token TEXT, created_at DATETIME)');
+$connection->exec('CREATE TABLE sessions (token CHAR(128) PRIMARY KEY, user_id INTEGER, username TEXT, created_at DATETIME)');
 $connection->exec('CREATE TABLE roles (id INTEGER PRIMARY KEY, name TEXT)');
 $connection->exec('CREATE TABLE user_roles (id INTEGER PRIMARY KEY, user_id INTEGER, role_id INTEGER)');
 $connection->exec('CREATE TABLE permissions (id INTEGER PRIMARY KEY, name TEXT)');
 $connection->exec('CREATE TABLE role_permissions (id INTEGER PRIMARY KEY, role_id INTEGER, permission_id INTEGER)');
 $connection->exec('CREATE TABLE tasks (task_id INTEGER PRIMARY KEY, title TEXT, body TEXT, task_usr_id INTEGER, status TEXT, created_at DATETIME, updated_at DATETIME)');
-
 $connection->exec('CREATE TABLE transacciones (id INTEGER PRIMARY KEY, fecha DATETIME, nombre TEXT, cuenta TEXT, ingreso NUMERIC, egreso NUMERIC)');
+
 // insert sample users
 $connection->exec('INSERT INTO users (id, name, username, email, phone, password, status) VALUES (1, "Juan Perez", "juan", "juan@example.com", "555-555-55", "5f4dcc3b5aa765d61d8327deb882cf99", "ACTIVE")');
 $connection->exec('INSERT INTO users (id, name, username, email, phone, password, status) VALUES (2, "Maria Gonzales", "maria", "maria@example.com", "555-555-55", "5f4dcc3b5aa765d61d8327deb882cf99", "ACTIVE")');
@@ -90,9 +101,7 @@ $connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso
 $connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-08 00:00:00", "Ana Acosta", "1310632140", 800)');
 */
 
-foreach(glob('migrations/*.php') as $file) {
-    require_once $file;
-}
+run_migrations();
 
 mockTabla($connection, 'creditos', [
     [
@@ -166,7 +175,7 @@ $api->options('/api/{model}', function (Request $request) {
 
 $api->get('/api/{model}/{id}', function (Request $request, $model, $id) use ($connection) {
     try {
-        $resource = model($model, $connection);
+        $resource = model($model, $connection, $request);
     } catch (Exception $e) {
         return new Response(404, base_headers, json_encode(['error' => $e->getMessage()]));
     }
@@ -183,7 +192,10 @@ $api->get('/api/{model}/{id}', function (Request $request, $model, $id) use ($co
 
 $api->get('/api/{model}', function (Request $request, $model) use ($connection) {
     try {
-        $resource = model($model, $connection);
+        login($request);
+        $resource = model($model, $connection, $request);
+    } catch (AuthorizationException $e) {
+        return new Response(401, base_headers, json_encode(['error' => $e->getMessage()]));
     } catch (Exception $e) {
         return new Response(404, base_headers, json_encode(['error' => $e->getMessage()]));
     }
@@ -201,13 +213,17 @@ $api->get('/api/{model}', function (Request $request, $model) use ($connection) 
         $options['page'] = intval($request->get('page', '1'));
         return new Response(200, base_headers, json_encode($resource->index($options)));
     } catch (Exception $e) {
-        return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+        error_log(get_class($e));
+        error_log($e->getMessage());
+        error_log($e->getCode());
+        error_log($e->getTraceAsString());
+        return new Response($e->getCode() ?: 501, base_headers, json_encode(['error' => $e->getMessage()]));
     }
 });
 
 $api->post('/api/{model}', function (Request $request, $model) use ($connection) {
     try {
-        $resource = model($model, $connection);
+        $resource = model($model, $connection, $request);
     } catch (Exception $e) {
         return new Response(404, base_headers, json_encode(['error' => $e->getMessage()]));
     }
@@ -226,7 +242,7 @@ $api->post('/api/{model}', function (Request $request, $model) use ($connection)
 
 $api->put('/api/{model}/{id}', function (Request $request, $model, $id) use ($connection) {
     try {
-        $resource = model($model, $connection);
+        $resource = model($model, $connection, $request);
     } catch (Exception $e) {
         return new Response(404, base_headers, json_encode(['error' => $e->getMessage()]));
     }
@@ -245,35 +261,42 @@ $api->options('/dev/{model}/{id}', function () {
     return new Response(201, base_headers, '');
 });
 
-$api->get('/dev/resource', function () use ($connection) {
+$api->get('/dev/resource', function (Request $request) use ($connection) {
     try {
-        $resource = new DevTools($connection, []);
+        $resource = new DevTools($connection, [], $request);
         return new Response(200, base_headers, json_encode($resource->index([])));
     } catch (Exception $e) {
-        return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+        return new Response($e->getCode() ?: 500, base_headers, json_encode(['error' => $e->getMessage()]));
     }
 });
 
 $api->get('/dev/resource/{id}', function (Request $request, $id) use ($connection) {
     try {
-        $resource = new DevTools($connection, []);
+        $resource = new DevTools($connection, [], $request);
         return new Response(200, base_headers, json_encode($resource->show($id)));
     } catch (Exception $e) {
-        return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+        return new Response($e->getCode() ?: 500, base_headers, json_encode(['error' => $e->getMessage()]));
     }
 });
 
 $api->post('/dev/resource', function (Request $request) use ($connection) {
     try {
         $data = $request->post();
-        $resource = new DevTools($connection, []);
+        $resource = new DevTools($connection, [], $request);
         return new Response(200, base_headers, json_encode($resource->store($data)));
     } catch (Exception $e) {
-        return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+        return new Response($e->getCode() ?: 500, base_headers, json_encode(['error' => $e->getMessage()]));
     }
 });
 
 $api->start();
+$workers = \Workerman\Worker::getAllWorkers();
+foreach($workers as $worker) {
+    $worker->onWorkerStart = function($worker)
+    {
+        echo "Worker starting...\n";
+    };
+}
 
 function mockTabla($connection, $name, $fields, $n, $id = 1)
 {
@@ -282,6 +305,7 @@ function mockTabla($connection, $name, $fields, $n, $id = 1)
         $columns[] = $field['name'].' '.$field['type'];
     }
     $columns = implode(', ', $columns);
+    $connection->exec("DROP TABLE IF EXISTS $name");
     $connection->exec("CREATE TABLE $name (id INTEGER PRIMARY KEY, $columns)");
     $faker = Faker\Factory::create();
     for ($i=0; $i<$n; $i++) {

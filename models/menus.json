@@ -6,11 +6,12 @@
     "attributes": {
         "name": "name",
         "permission": "permission",
-        "icon": "icon"
+        "icon": "icon",
+        "href": "href"
     },
     "where": [],
     "filters": {
-        "findById(user_id)": "and permission in ${user_permissions()}"
+        "fromLoggedUser()": "and permission in (select name from permissions join role_permissions on (permissions.id = role_permissions.permission_id and role_permissions.role_id in (select role_id from user_roles where user_id = ${session($_request)->user_id})))"
     },
     "sort": [
         "id"
@@ -18,12 +19,14 @@
     "create": {
         "name": ":name",
         "permission": ":permission",
-        "icon": ":icon"
+        "icon": ":icon",
+        "href": ":href"
     },
     "update": {
         "name": ":name",
         "permission": ":permission",
-        "icon": ":icon"
+        "icon": ":icon",
+        "href": ":href"
     },
     "delete": [],
     "relationships": [],
@@ -32,7 +35,8 @@
         "_models": "Menus",
         "name": "Name",
         "permission": "Permission",
-        "icon": "Icon"
+        "icon": "Icon",
+        "href": "href"
     },
     "ui": {
         "name": {
@@ -42,6 +46,9 @@
             "type": "text"
         },
         "icon": {
+            "type": "text"
+        },
+        "href": {
             "type": "text"
         },
         "_actions": {

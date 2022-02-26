@@ -4,14 +4,17 @@ namespace App\Expressions;
 
 use Exception;
 use Throwable;
+use Workerman\Protocols\Http\Request;
 
 final class Expression implements ExpressionInterface
 {
     private $expression;
+    private $request;
 
-    public function __construct(string $expression)
+    public function __construct(string $expression, Request $request)
     {
         $this->expression = $expression;
+        $this->request = $request;
     }
 
     public function evaluate(array $variables = [])
@@ -21,9 +24,10 @@ final class Expression implements ExpressionInterface
         });
         try {
             extract($variables);
+            $_request = $this->request;
             return eval('return ' . $this->expression . ';');
         } catch (Throwable $err) {
-            throw new Exception($err->getMessage() .' in ' . $this->expression);
+            throw new Exception($err->getMessage() .' in ' . $this->expression, $err->getCode(), $err);
         }
         restore_error_handler();
     }

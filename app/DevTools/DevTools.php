@@ -40,6 +40,7 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         $config = $data['data']['attributes'];
         // create migration
         $this->createResource($config);
+        run_migrations($config['name']);
     }
 
     /**
@@ -66,6 +67,7 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         $fieldBindsSql = implode(', ', $fieldBinds);
         $migration = <<<EOF
         <?php
+        \n\$connection->exec('DROP TABLE IF EXISTS {$table}');\n
         \n\$connection->exec('CREATE TABLE {$table} ({$id} INTEGER PRIMARY KEY, {$fields})');\n
         EOF;
         $data = $config['data'];
@@ -74,6 +76,7 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             $migration .= <<<EOF
             \$statement = \$connection->prepare('INSERT INTO {$table} ({$fieldNamesSql}) VALUES ({$fieldBindsSql})');
             \$statement->execute({$params});\n
+            var_dump({$params});\n
             EOF;
         }
         $migrationFilename = 'migrations/' . $table . '.php';

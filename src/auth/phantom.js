@@ -12,7 +12,10 @@ class PhantomAuth {
                     password: password
                 },
             },
-        }).catch(error => { throw { message: error.error } });
+        }).catch(error => { throw { message: error.error } })
+            .then(response => {
+                return { ...response, token: response.signInUserSession.token }
+            });
     }
 }
 

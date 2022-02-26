@@ -1,7 +1,9 @@
 <?php
 
+use App\Exceptions\AuthorizationException;
 use App\Resources\EndpointResource;
 use App\Resources\JsonApiResource;
+use Workerman\Protocols\Http\Request;
 
 /**
  * Get a resource model
@@ -11,11 +13,12 @@ use App\Resources\JsonApiResource;
  *
  * @return JsonApiResource|EndpointResource
  */
-function model($model, $connection)
+function model($model, $connection = null, Request $request)
 {
+    $connection = $connection ?: $GLOBALS['connection'];
     $class = 'App\Resources\\' . ucwords($model) . 'Resource';
     if (class_exists($class)) {
-        return new $class($connection, []);
+        return new $class($connection, [], $request);
     }
     $filename = __DIR__ . '/../../models/' . $model . '.json';
     if (!file_exists($filename)) {
@@ -23,7 +26,7 @@ function model($model, $connection)
     }
     $definition = json_decode(file_get_contents($filename), true);
     $class = 'App\Resources\\' . $definition['class'] . 'Resource';
-    return new $class($connection, $definition);
+    return new $class($connection, $definition, $request);
 }
 
 function dateTimeInterval(string $interval): DateTime
@@ -160,9 +163,63 @@ function line($data, $title, $labelCol, array $valueCols, $tplOptions = [])
     ];
 }
 
-function user_permissions()
+/**
+ * Login from request
+ *
+ * @param Request $request
+ */
+function login(Request $request)
 {
-    return auth()->user()->permissions;
+    $authorization = $request->header('Authorization');
+    // starts with 'Bearer '
+    if (strlen($authorization) > 7 && substr($authorization, 0, 7) === 'Bearer ') {
+        session($request, substr($authorization, 7));
+    }
+}
+
+/**
+ * Get session from request
+ */
+function session(Request $request, $token = null)
+{
+    global $connection;
+    if ($token) {
+        try {
+            $session = model('sessions', $connection, $request)->show($token)['data'];
+            $request->session = (object) $session['attributes'];
+            $request->user_id = $request->session->user_id;
+        } catch (Exception $e) {
+            throw new AuthorizationException($e);
+        }
+    }
+    if (!$request->session) {
+        throw new AuthorizationException();
+    }
+    return $request->session;
+}
+
+function logged_permissions(Request $request)
+{
+    global $connection;
+    $model = model('user_permissions', $connection, $request);
+    $permissions = $model->index(['id' => session($request)->id]);
+    $permissions = array_map(function ($permission) {
+        return $permission['attributes']['name'];
+    }, $permissions['data']);
+    return $permissions;
+}
+
+function run_migrations($name = '')
+{
+    global $connection;
+    foreach (glob('migrations/*.php') as $file) {
+        if (empty($name) || basename($file, '.php') === $name) {
+            error_log("MIGRATE: $name");
+            // reset file stat
+            clearstatcache(true, $file);
+            require $file;
+        }
+    }
 }
 
 // /**

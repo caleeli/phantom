@@ -3,6 +3,7 @@
 namespace App\Expressions;
 
 use Exception;
+use Workerman\Protocols\Http\Request;
 
 final class QueryExpression implements QueryExpressionInterface
 {
@@ -12,7 +13,7 @@ final class QueryExpression implements QueryExpressionInterface
      **/
     private $expressions = [];
 
-    public function __construct(string $expression)
+    public function __construct(string $expression, Request $request)
     {
         $expressions = [];
         $tag = self::OPEN_TAG;
@@ -27,7 +28,7 @@ final class QueryExpression implements QueryExpressionInterface
             }
             $tagContent = substr($expression, $tagPos + $tagLength, $tagEndPos - $tagPos - $tagLength);
             $newVariable = uniqid('var_');
-            $expressions[$newVariable] = new Expression($tagContent);
+            $expressions[$newVariable] = new Expression($tagContent, $request);
             $expression = substr_replace($expression, ':' . $newVariable, $tagPos, $tagEndPos + $tagEndLength - $tagPos);
             $tagPos = strpos($expression, $tag);
         }
