@@ -23,7 +23,6 @@ const base_headers = [
 $connection = new PDO($env['dns'], $env['user'], $env['password']);
 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$connection->exec('DROP TABLE IF EXISTS users');
 $connection->exec('DROP TABLE IF EXISTS sessions');
 $connection->exec('DROP TABLE IF EXISTS roles');
 $connection->exec('DROP TABLE IF EXISTS user_roles');
@@ -32,7 +31,6 @@ $connection->exec('DROP TABLE IF EXISTS role_permissions');
 $connection->exec('DROP TABLE IF EXISTS tasks');
 $connection->exec('DROP TABLE IF EXISTS transacciones');
 
-$connection->exec('CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, username TEXT, email TEXT, phone TEXT, password TEXT, status TEXT)');
 $connection->exec('CREATE TABLE sessions (token CHAR(128) PRIMARY KEY, user_id INTEGER, username TEXT, created_at DATETIME)');
 $connection->exec('CREATE TABLE roles (id INTEGER PRIMARY KEY, name TEXT)');
 $connection->exec('CREATE TABLE user_roles (id INTEGER PRIMARY KEY, user_id INTEGER, role_id INTEGER)');
@@ -41,10 +39,6 @@ $connection->exec('CREATE TABLE role_permissions (id INTEGER PRIMARY KEY, role_i
 $connection->exec('CREATE TABLE tasks (task_id INTEGER PRIMARY KEY, title TEXT, body TEXT, task_usr_id INTEGER, status TEXT, created_at DATETIME, updated_at DATETIME)');
 $connection->exec('CREATE TABLE transacciones (id INTEGER PRIMARY KEY, fecha DATETIME, nombre TEXT, cuenta TEXT, ingreso NUMERIC, egreso NUMERIC)');
 
-// insert sample users
-$connection->exec('INSERT INTO users (id, name, username, email, phone, password, status) VALUES (1, "Juan Perez", "juan", "juan@example.com", "555-555-55", "5f4dcc3b5aa765d61d8327deb882cf99", "ACTIVE")');
-$connection->exec('INSERT INTO users (id, name, username, email, phone, password, status) VALUES (2, "Maria Gonzales", "maria", "maria@example.com", "555-555-55", "5f4dcc3b5aa765d61d8327deb882cf99", "ACTIVE")');
-$connection->exec('INSERT INTO users (id, name, username, email, phone, password, status) VALUES (3, "Cesar Ferine", "cesar", "cesar@example.com", "555-555-55", "5f4dcc3b5aa765d61d8327deb882cf99", "INACTIVE")');
 // insert roles
 $connection->exec('INSERT INTO roles (id, name) VALUES (1, "Administrador del sistema")');
 $connection->exec('INSERT INTO roles (id, name) VALUES (2, "Director")');

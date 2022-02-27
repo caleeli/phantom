@@ -6,35 +6,38 @@
 	"attributes": {
 		"name": "name",
 		"username": "username",
-		"avatar": "'images/avatar/avatar-1.jpg'",
+		"avatar": "avatar",
 		"email": "email",
 		"phone": "phone",
 		"status": "status"
 	},
-	"where": [
-	],
+	"where": [],
 	"filters": {
 		"findText(text)": "and (name like ${contains($text)} or username like ${contains($text)} or email like ${contains($text)} or phone like ${contains($text)})",
 		"login(username,password)": "and status='ACTIVE' and username=:username and password=${md5($password)}"
 	},
-    "sort": [
-        "-id"
-    ],
+	"sort": [
+		"-id"
+	],
 	"create": {
 		"name": ":name",
+		"username": ":username",
+		"avatar": ":avatar",
 		"email": ":email",
 		"phone": ":phone",
-		"password": "${md5($password)}",
-		"status": "'ACTIVE'"
-		},
+		"status": ":status",
+		"password": ":password"
+	},
 	"update": {
 		"name": ":name",
+		"username": ":username",
+		"avatar": ":avatar",
 		"email": ":email",
-		"phone": ":phone"
+		"phone": ":phone",
+		"status": ":status",
+		"password": ":password"
 	},
-	"delete": {
-		"status": "'DELETED'"
-	},
+	"delete": {},
 	"relationships": {
 		"roles": {
 			"model": "user_roles",
@@ -50,38 +53,41 @@
 		}
 	},
 	"labels": {
-		"_model": "Usuario",
-		"_models": "Usuarios",
-		"id": "ID",
-		"name": "Nombre",
-		"email": "E-mail",
-		"phone": "Teléfono",
-		"password": "Contraseña",
-		"status": "Estado"
+		"_model": "Users",
+		"_models": "Users",
+		"name": "Name",
+		"username": "Username",
+		"avatar": "Avatar",
+		"email": "Email",
+		"phone": "Phone",
+		"status": "Status"
 	},
 	"ui": {
-		"id": {},
-		"name": {},
+		"name": {
+			"type": "text"
+		},
+		"username": {
+			"type": "text"
+		},
+		"avatar": {
+			"type": "image"
+		},
 		"email": {
 			"type": "email"
 		},
 		"phone": {
 			"type": "tel"
 		},
-		"password": {
-			"type": "password",
-			"hideInList": true
-		},
 		"status": {
-			"hideInCreate": true
+			"type": "text"
 		},
 		"_actions": {
+			"control": "actions",
 			"value": "attributes.id",
 			"actions": [
 				"edit",
 				"view"
-			],
-			"control": "actions"
+			]
 		}
 	}
 }

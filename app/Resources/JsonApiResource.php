@@ -157,7 +157,7 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
 
     /**
      * Parse JSON Api sort expressions into SQL
-     * 
+     *
      * sort=+field_1,-field_2
      * @param array $sort
      * @return string
@@ -208,6 +208,9 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
 
     private function include(array $row, $include)
     {
+        if (!isset($this->definition['relationships'][$include])) {
+            throw new Exception('Relationship not found: ' . $include);
+        }
         $relationship = $this->definition['relationships'][$include];
         if (isset($relationship['params'])) {
             // replace $column by $row[column] value

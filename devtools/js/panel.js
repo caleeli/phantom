@@ -2128,44 +2128,60 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[50] = list[i];
-    	child_ctx[51] = list;
-    	child_ctx[52] = i;
+    	child_ctx[61] = list[i];
+    	child_ctx[62] = list;
+    	child_ctx[63] = i;
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[53] = list[i];
-    	child_ctx[54] = list;
-    	child_ctx[55] = i;
+    	child_ctx[64] = list[i];
+    	child_ctx[65] = list;
+    	child_ctx[66] = i;
     	return child_ctx;
     }
 
     function get_each_context_2(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[53] = list[i];
+    	child_ctx[64] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_3(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[58] = list[i];
-    	child_ctx[59] = list;
-    	child_ctx[60] = i;
+    	child_ctx[69] = list[i];
+    	child_ctx[70] = list;
+    	child_ctx[71] = i;
     	return child_ctx;
     }
 
     function get_each_context_4(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[53] = list[i];
-    	child_ctx[61] = list;
-    	child_ctx[62] = i;
+    	child_ctx[72] = list[i];
+    	child_ctx[73] = list;
+    	child_ctx[74] = i;
     	return child_ctx;
     }
 
-    // (160:0) {#each model.fields as field}
-    function create_each_block_4(ctx) {
+    function get_each_context_5(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[75] = list[i];
+    	child_ctx[76] = list;
+    	child_ctx[77] = i;
+    	return child_ctx;
+    }
+
+    function get_each_context_6(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[64] = list[i];
+    	child_ctx[78] = list;
+    	child_ctx[79] = i;
+    	return child_ctx;
+    }
+
+    // (187:0) {#each model.fields as field}
+    function create_each_block_6(ctx) {
     	let div;
     	let button;
     	let t1;
@@ -2200,89 +2216,87 @@ var app = (function () {
     	let label7;
     	let input7;
     	let t16;
-    	let t17_value = /*field*/ ctx[53].showInList + "";
     	let t17;
-    	let t18;
     	let label8;
     	let input8;
+    	let t18;
     	let t19;
-    	let t20;
     	let label9;
     	let input9;
-    	let t21;
+    	let t20;
     	let mounted;
     	let dispose;
 
     	function click_handler() {
-    		return /*click_handler*/ ctx[19](/*field*/ ctx[53]);
+    		return /*click_handler*/ ctx[23](/*field*/ ctx[64]);
     	}
 
     	function input0_input_handler_1() {
-    		/*input0_input_handler_1*/ ctx[20].call(input0, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input0_input_handler_1*/ ctx[24].call(input0, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input_handler_4(...args) {
-    		return /*input_handler_4*/ ctx[21](/*field*/ ctx[53], ...args);
+    		return /*input_handler_4*/ ctx[25](/*field*/ ctx[64], ...args);
     	}
 
     	function input1_input_handler_1() {
-    		/*input1_input_handler_1*/ ctx[22].call(input1, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input1_input_handler_1*/ ctx[26].call(input1, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input_handler_5(...args) {
-    		return /*input_handler_5*/ ctx[23](/*field*/ ctx[53], ...args);
+    		return /*input_handler_5*/ ctx[27](/*field*/ ctx[64], ...args);
     	}
 
     	function input2_input_handler_1() {
-    		/*input2_input_handler_1*/ ctx[24].call(input2, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input2_input_handler_1*/ ctx[28].call(input2, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input_handler_6(...args) {
-    		return /*input_handler_6*/ ctx[25](/*field*/ ctx[53], ...args);
+    		return /*input_handler_6*/ ctx[29](/*field*/ ctx[64], ...args);
     	}
 
     	function input3_input_handler_1() {
-    		/*input3_input_handler_1*/ ctx[26].call(input3, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input3_input_handler_1*/ ctx[30].call(input3, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input_handler_7(...args) {
-    		return /*input_handler_7*/ ctx[27](/*field*/ ctx[53], ...args);
+    		return /*input_handler_7*/ ctx[31](/*field*/ ctx[64], ...args);
     	}
 
     	function input4_input_handler() {
-    		/*input4_input_handler*/ ctx[28].call(input4, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input4_input_handler*/ ctx[32].call(input4, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input_handler_8(...args) {
-    		return /*input_handler_8*/ ctx[29](/*field*/ ctx[53], ...args);
+    		return /*input_handler_8*/ ctx[33](/*field*/ ctx[64], ...args);
     	}
 
     	function input5_input_handler() {
-    		/*input5_input_handler*/ ctx[30].call(input5, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input5_input_handler*/ ctx[34].call(input5, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input_handler_9(...args) {
-    		return /*input_handler_9*/ ctx[31](/*field*/ ctx[53], ...args);
+    		return /*input_handler_9*/ ctx[35](/*field*/ ctx[64], ...args);
     	}
 
     	function input6_input_handler() {
-    		/*input6_input_handler*/ ctx[32].call(input6, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input6_input_handler*/ ctx[36].call(input6, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input_handler_10(...args) {
-    		return /*input_handler_10*/ ctx[33](/*field*/ ctx[53], ...args);
+    		return /*input_handler_10*/ ctx[37](/*field*/ ctx[64], ...args);
     	}
 
     	function input7_change_handler() {
-    		/*input7_change_handler*/ ctx[34].call(input7, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input7_change_handler*/ ctx[38].call(input7, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input8_change_handler() {
-    		/*input8_change_handler*/ ctx[35].call(input8, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input8_change_handler*/ ctx[39].call(input8, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	function input9_change_handler() {
-    		/*input9_change_handler*/ ctx[36].call(input9, /*each_value_4*/ ctx[61], /*field_index_2*/ ctx[62]);
+    		/*input9_change_handler*/ ctx[40].call(input9, /*each_value_6*/ ctx[78], /*field_index_2*/ ctx[79]);
     	}
 
     	const block = {
@@ -2321,77 +2335,76 @@ var app = (function () {
     			t15 = space();
     			label7 = element("label");
     			input7 = element("input");
-    			t16 = text("\n            list ");
-    			t17 = text(t17_value);
-    			t18 = space();
+    			t16 = text("\n            list");
+    			t17 = space();
     			label8 = element("label");
     			input8 = element("input");
-    			t19 = text("\n            create");
-    			t20 = space();
+    			t18 = text("\n            create");
+    			t19 = space();
     			label9 = element("label");
     			input9 = element("input");
-    			t21 = text("\n            update");
-    			add_location(button, file$1, 161, 8, 3630);
+    			t20 = text("\n            update");
+    			add_location(button, file$1, 188, 8, 4307);
     			attr_dev(input0, "name", "name");
     			attr_dev(input0, "type", "text");
-    			attr_dev(input0, "class", "svelte-17c38a3");
-    			add_location(input0, file$1, 164, 12, 3732);
-    			attr_dev(label0, "class", "svelte-17c38a3");
-    			add_location(label0, file$1, 162, 8, 3693);
+    			attr_dev(input0, "class", "svelte-1rwfwyd");
+    			add_location(input0, file$1, 191, 12, 4409);
+    			attr_dev(label0, "class", "svelte-1rwfwyd");
+    			add_location(label0, file$1, 189, 8, 4370);
     			attr_dev(input1, "name", "label");
     			attr_dev(input1, "type", "text");
-    			attr_dev(input1, "class", "svelte-17c38a3");
-    			add_location(input1, file$1, 173, 12, 3992);
-    			attr_dev(label1, "class", "svelte-17c38a3");
-    			add_location(label1, file$1, 171, 8, 3953);
+    			attr_dev(input1, "class", "svelte-1rwfwyd");
+    			add_location(input1, file$1, 200, 12, 4669);
+    			attr_dev(label1, "class", "svelte-1rwfwyd");
+    			add_location(label1, file$1, 198, 8, 4630);
     			attr_dev(input2, "name", "typeDB");
     			attr_dev(input2, "type", "text");
-    			attr_dev(input2, "class", "svelte-17c38a3");
-    			add_location(input2, file$1, 182, 12, 4258);
-    			attr_dev(label2, "class", "svelte-17c38a3");
-    			add_location(label2, file$1, 180, 8, 4215);
+    			attr_dev(input2, "class", "svelte-1rwfwyd");
+    			add_location(input2, file$1, 209, 12, 4935);
+    			attr_dev(label2, "class", "svelte-1rwfwyd");
+    			add_location(label2, file$1, 207, 8, 4892);
     			attr_dev(input3, "name", "type");
     			attr_dev(input3, "type", "text");
     			attr_dev(input3, "list", "types");
-    			attr_dev(input3, "class", "svelte-17c38a3");
-    			add_location(input3, file$1, 191, 12, 4526);
-    			attr_dev(label3, "class", "svelte-17c38a3");
-    			add_location(label3, file$1, 189, 8, 4483);
+    			attr_dev(input3, "class", "svelte-1rwfwyd");
+    			add_location(input3, file$1, 218, 12, 5203);
+    			attr_dev(label3, "class", "svelte-1rwfwyd");
+    			add_location(label3, file$1, 216, 8, 5160);
     			attr_dev(input4, "name", "select");
     			attr_dev(input4, "type", "text");
-    			attr_dev(input4, "class", "svelte-17c38a3");
-    			add_location(input4, file$1, 201, 12, 4822);
-    			attr_dev(label4, "class", "svelte-17c38a3");
-    			add_location(label4, file$1, 199, 8, 4776);
+    			attr_dev(input4, "class", "svelte-1rwfwyd");
+    			add_location(input4, file$1, 228, 12, 5499);
+    			attr_dev(label4, "class", "svelte-1rwfwyd");
+    			add_location(label4, file$1, 226, 8, 5453);
     			attr_dev(input5, "name", "create");
     			attr_dev(input5, "type", "text");
-    			attr_dev(input5, "class", "svelte-17c38a3");
-    			add_location(input5, file$1, 210, 12, 5093);
-    			attr_dev(label5, "class", "svelte-17c38a3");
-    			add_location(label5, file$1, 208, 8, 5047);
+    			attr_dev(input5, "class", "svelte-1rwfwyd");
+    			add_location(input5, file$1, 237, 12, 5770);
+    			attr_dev(label5, "class", "svelte-1rwfwyd");
+    			add_location(label5, file$1, 235, 8, 5724);
     			attr_dev(input6, "name", "update");
     			attr_dev(input6, "type", "text");
-    			attr_dev(input6, "class", "svelte-17c38a3");
-    			add_location(input6, file$1, 219, 12, 5364);
-    			attr_dev(label6, "class", "svelte-17c38a3");
-    			add_location(label6, file$1, 217, 8, 5318);
+    			attr_dev(input6, "class", "svelte-1rwfwyd");
+    			add_location(input6, file$1, 246, 12, 6041);
+    			attr_dev(label6, "class", "svelte-1rwfwyd");
+    			add_location(label6, file$1, 244, 8, 5995);
     			attr_dev(input7, "name", "showInList");
     			attr_dev(input7, "type", "checkbox");
-    			add_location(input7, file$1, 227, 12, 5609);
-    			attr_dev(label7, "class", "svelte-17c38a3");
-    			add_location(label7, file$1, 226, 8, 5589);
+    			add_location(input7, file$1, 254, 12, 6286);
+    			attr_dev(label7, "class", "svelte-1rwfwyd");
+    			add_location(label7, file$1, 253, 8, 6266);
     			attr_dev(input8, "name", "showInCreate");
     			attr_dev(input8, "type", "checkbox");
-    			add_location(input8, file$1, 235, 12, 5826);
-    			attr_dev(label8, "class", "svelte-17c38a3");
-    			add_location(label8, file$1, 234, 8, 5806);
+    			add_location(input8, file$1, 262, 12, 6484);
+    			attr_dev(label8, "class", "svelte-1rwfwyd");
+    			add_location(label8, file$1, 261, 8, 6464);
     			attr_dev(input9, "name", "showInUpdate");
     			attr_dev(input9, "type", "checkbox");
-    			add_location(input9, file$1, 243, 12, 6030);
-    			attr_dev(label9, "class", "svelte-17c38a3");
-    			add_location(label9, file$1, 242, 8, 6010);
-    			attr_dev(div, "class", "flex svelte-17c38a3");
-    			add_location(div, file$1, 160, 4, 3603);
+    			add_location(input9, file$1, 270, 12, 6688);
+    			attr_dev(label9, "class", "svelte-1rwfwyd");
+    			add_location(label9, file$1, 269, 8, 6668);
+    			attr_dev(div, "class", "flex svelte-1rwfwyd");
+    			add_location(div, file$1, 187, 4, 4280);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2400,53 +2413,52 @@ var app = (function () {
     			append_dev(div, label0);
     			append_dev(label0, t2);
     			append_dev(label0, input0);
-    			set_input_value(input0, /*field*/ ctx[53].name);
+    			set_input_value(input0, /*field*/ ctx[64].name);
     			append_dev(div, t3);
     			append_dev(div, label1);
     			append_dev(label1, t4);
     			append_dev(label1, input1);
-    			set_input_value(input1, /*field*/ ctx[53].label);
+    			set_input_value(input1, /*field*/ ctx[64].label);
     			append_dev(div, t5);
     			append_dev(div, label2);
     			append_dev(label2, t6);
     			append_dev(label2, input2);
-    			set_input_value(input2, /*field*/ ctx[53].typeDB);
+    			set_input_value(input2, /*field*/ ctx[64].typeDB);
     			append_dev(div, t7);
     			append_dev(div, label3);
     			append_dev(label3, t8);
     			append_dev(label3, input3);
-    			set_input_value(input3, /*field*/ ctx[53].type);
+    			set_input_value(input3, /*field*/ ctx[64].type);
     			append_dev(div, t9);
     			append_dev(div, label4);
     			append_dev(label4, t10);
     			append_dev(label4, input4);
-    			set_input_value(input4, /*field*/ ctx[53].select);
+    			set_input_value(input4, /*field*/ ctx[64].select);
     			append_dev(div, t11);
     			append_dev(div, label5);
     			append_dev(label5, t12);
     			append_dev(label5, input5);
-    			set_input_value(input5, /*field*/ ctx[53].create);
+    			set_input_value(input5, /*field*/ ctx[64].create);
     			append_dev(div, t13);
     			append_dev(div, label6);
     			append_dev(label6, t14);
     			append_dev(label6, input6);
-    			set_input_value(input6, /*field*/ ctx[53].update);
+    			set_input_value(input6, /*field*/ ctx[64].update);
     			append_dev(div, t15);
     			append_dev(div, label7);
     			append_dev(label7, input7);
-    			input7.checked = /*field*/ ctx[53].showInList;
+    			input7.checked = /*field*/ ctx[64].showInList;
     			append_dev(label7, t16);
-    			append_dev(label7, t17);
-    			append_dev(div, t18);
+    			append_dev(div, t17);
     			append_dev(div, label8);
     			append_dev(label8, input8);
-    			input8.checked = /*field*/ ctx[53].showInCreate;
-    			append_dev(label8, t19);
-    			append_dev(div, t20);
+    			input8.checked = /*field*/ ctx[64].showInCreate;
+    			append_dev(label8, t18);
+    			append_dev(div, t19);
     			append_dev(div, label9);
     			append_dev(label9, input9);
-    			input9.checked = /*field*/ ctx[53].showInUpdate;
-    			append_dev(label9, t21);
+    			input9.checked = /*field*/ ctx[64].showInUpdate;
+    			append_dev(label9, t20);
 
     			if (!mounted) {
     				dispose = [
@@ -2476,46 +2488,44 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty[0] & /*model*/ 1 && input0.value !== /*field*/ ctx[53].name) {
-    				set_input_value(input0, /*field*/ ctx[53].name);
+    			if (dirty[0] & /*model*/ 1 && input0.value !== /*field*/ ctx[64].name) {
+    				set_input_value(input0, /*field*/ ctx[64].name);
     			}
 
-    			if (dirty[0] & /*model*/ 1 && input1.value !== /*field*/ ctx[53].label) {
-    				set_input_value(input1, /*field*/ ctx[53].label);
+    			if (dirty[0] & /*model*/ 1 && input1.value !== /*field*/ ctx[64].label) {
+    				set_input_value(input1, /*field*/ ctx[64].label);
     			}
 
-    			if (dirty[0] & /*model*/ 1 && input2.value !== /*field*/ ctx[53].typeDB) {
-    				set_input_value(input2, /*field*/ ctx[53].typeDB);
+    			if (dirty[0] & /*model*/ 1 && input2.value !== /*field*/ ctx[64].typeDB) {
+    				set_input_value(input2, /*field*/ ctx[64].typeDB);
     			}
 
-    			if (dirty[0] & /*model*/ 1 && input3.value !== /*field*/ ctx[53].type) {
-    				set_input_value(input3, /*field*/ ctx[53].type);
+    			if (dirty[0] & /*model*/ 1 && input3.value !== /*field*/ ctx[64].type) {
+    				set_input_value(input3, /*field*/ ctx[64].type);
     			}
 
-    			if (dirty[0] & /*model*/ 1 && input4.value !== /*field*/ ctx[53].select) {
-    				set_input_value(input4, /*field*/ ctx[53].select);
+    			if (dirty[0] & /*model*/ 1 && input4.value !== /*field*/ ctx[64].select) {
+    				set_input_value(input4, /*field*/ ctx[64].select);
     			}
 
-    			if (dirty[0] & /*model*/ 1 && input5.value !== /*field*/ ctx[53].create) {
-    				set_input_value(input5, /*field*/ ctx[53].create);
+    			if (dirty[0] & /*model*/ 1 && input5.value !== /*field*/ ctx[64].create) {
+    				set_input_value(input5, /*field*/ ctx[64].create);
     			}
 
-    			if (dirty[0] & /*model*/ 1 && input6.value !== /*field*/ ctx[53].update) {
-    				set_input_value(input6, /*field*/ ctx[53].update);
-    			}
-
-    			if (dirty[0] & /*model*/ 1) {
-    				input7.checked = /*field*/ ctx[53].showInList;
-    			}
-
-    			if (dirty[0] & /*model*/ 1 && t17_value !== (t17_value = /*field*/ ctx[53].showInList + "")) set_data_dev(t17, t17_value);
-
-    			if (dirty[0] & /*model*/ 1) {
-    				input8.checked = /*field*/ ctx[53].showInCreate;
+    			if (dirty[0] & /*model*/ 1 && input6.value !== /*field*/ ctx[64].update) {
+    				set_input_value(input6, /*field*/ ctx[64].update);
     			}
 
     			if (dirty[0] & /*model*/ 1) {
-    				input9.checked = /*field*/ ctx[53].showInUpdate;
+    				input7.checked = /*field*/ ctx[64].showInList;
+    			}
+
+    			if (dirty[0] & /*model*/ 1) {
+    				input8.checked = /*field*/ ctx[64].showInCreate;
+    			}
+
+    			if (dirty[0] & /*model*/ 1) {
+    				input9.checked = /*field*/ ctx[64].showInUpdate;
     			}
     		},
     		d: function destroy(detaching) {
@@ -2527,17 +2537,17 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_4.name,
+    		id: create_each_block_6.name,
     		type: "each",
-    		source: "(160:0) {#each model.fields as field}",
+    		source: "(187:0) {#each model.fields as field}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (278:0) {#each model.filters as filter}
-    function create_each_block_3(ctx) {
+    // (305:0) {#each model.filters as filter}
+    function create_each_block_5(ctx) {
     	let div;
     	let button;
     	let t1;
@@ -2552,15 +2562,15 @@ var app = (function () {
     	let dispose;
 
     	function click_handler_1() {
-    		return /*click_handler_1*/ ctx[40](/*filter*/ ctx[58]);
+    		return /*click_handler_1*/ ctx[44](/*filter*/ ctx[75]);
     	}
 
     	function input0_input_handler_2() {
-    		/*input0_input_handler_2*/ ctx[41].call(input0, /*each_value_3*/ ctx[59], /*filter_index*/ ctx[60]);
+    		/*input0_input_handler_2*/ ctx[45].call(input0, /*each_value_5*/ ctx[76], /*filter_index*/ ctx[77]);
     	}
 
     	function input1_input_handler_2() {
-    		/*input1_input_handler_2*/ ctx[42].call(input1, /*each_value_3*/ ctx[59], /*filter_index*/ ctx[60]);
+    		/*input1_input_handler_2*/ ctx[46].call(input1, /*each_value_5*/ ctx[76], /*filter_index*/ ctx[77]);
     	}
 
     	const block = {
@@ -2576,23 +2586,23 @@ var app = (function () {
     			label1 = element("label");
     			t4 = text("Expression:\n            ");
     			input1 = element("input");
-    			add_location(button, file$1, 279, 8, 6741);
+    			add_location(button, file$1, 306, 8, 7399);
     			attr_dev(input0, "name", "declaration");
     			attr_dev(input0, "type", "text");
     			attr_dev(input0, "placeholder", "e.g.: findByName(name)");
-    			attr_dev(input0, "class", "svelte-17c38a3");
-    			add_location(input0, file$1, 282, 12, 6850);
-    			attr_dev(label0, "class", "svelte-17c38a3");
-    			add_location(label0, file$1, 280, 8, 6805);
+    			attr_dev(input0, "class", "svelte-1rwfwyd");
+    			add_location(input0, file$1, 309, 12, 7508);
+    			attr_dev(label0, "class", "svelte-1rwfwyd");
+    			add_location(label0, file$1, 307, 8, 7463);
     			attr_dev(input1, "name", "expression");
     			attr_dev(input1, "type", "text");
     			attr_dev(input1, "placeholder", "e.g.: and name like ${contains($text)}");
-    			attr_dev(input1, "class", "svelte-17c38a3");
-    			add_location(input1, file$1, 291, 12, 7105);
-    			attr_dev(label1, "class", "svelte-17c38a3");
-    			add_location(label1, file$1, 289, 8, 7061);
-    			attr_dev(div, "class", "flex svelte-17c38a3");
-    			add_location(div, file$1, 278, 4, 6714);
+    			attr_dev(input1, "class", "svelte-1rwfwyd");
+    			add_location(input1, file$1, 318, 12, 7763);
+    			attr_dev(label1, "class", "svelte-1rwfwyd");
+    			add_location(label1, file$1, 316, 8, 7719);
+    			attr_dev(div, "class", "flex svelte-1rwfwyd");
+    			add_location(div, file$1, 305, 4, 7372);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2601,12 +2611,12 @@ var app = (function () {
     			append_dev(div, label0);
     			append_dev(label0, t2);
     			append_dev(label0, input0);
-    			set_input_value(input0, /*filter*/ ctx[58].declaration);
+    			set_input_value(input0, /*filter*/ ctx[75].declaration);
     			append_dev(div, t3);
     			append_dev(div, label1);
     			append_dev(label1, t4);
     			append_dev(label1, input1);
-    			set_input_value(input1, /*filter*/ ctx[58].expression);
+    			set_input_value(input1, /*filter*/ ctx[75].expression);
 
     			if (!mounted) {
     				dispose = [
@@ -2621,12 +2631,12 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty[0] & /*model*/ 1 && input0.value !== /*filter*/ ctx[58].declaration) {
-    				set_input_value(input0, /*filter*/ ctx[58].declaration);
+    			if (dirty[0] & /*model*/ 1 && input0.value !== /*filter*/ ctx[75].declaration) {
+    				set_input_value(input0, /*filter*/ ctx[75].declaration);
     			}
 
-    			if (dirty[0] & /*model*/ 1 && input1.value !== /*filter*/ ctx[58].expression) {
-    				set_input_value(input1, /*filter*/ ctx[58].expression);
+    			if (dirty[0] & /*model*/ 1 && input1.value !== /*filter*/ ctx[75].expression) {
+    				set_input_value(input1, /*filter*/ ctx[75].expression);
     			}
     		},
     		d: function destroy(detaching) {
@@ -2638,33 +2648,303 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_each_block_3.name,
+    		id: create_each_block_5.name,
     		type: "each",
-    		source: "(278:0) {#each model.filters as filter}",
+    		source: "(305:0) {#each model.filters as filter}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (307:8) {#each model.fields as field}
+    // (354:12) {#each relationship.params as param}
+    function create_each_block_4(ctx) {
+    	let div;
+    	let input0;
+    	let t0;
+    	let input1;
+    	let t1;
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	function input0_input_handler_4() {
+    		/*input0_input_handler_4*/ ctx[50].call(input0, /*each_value_4*/ ctx[73], /*param_index*/ ctx[74]);
+    	}
+
+    	function input1_input_handler_4() {
+    		/*input1_input_handler_4*/ ctx[51].call(input1, /*each_value_4*/ ctx[73], /*param_index*/ ctx[74]);
+    	}
+
+    	function click_handler_3() {
+    		return /*click_handler_3*/ ctx[52](/*relationship*/ ctx[69], /*param*/ ctx[72]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			input0 = element("input");
+    			t0 = text("=\n                    ");
+    			input1 = element("input");
+    			t1 = space();
+    			button = element("button");
+    			button.textContent = "x";
+    			attr_dev(input0, "name", "name");
+    			attr_dev(input0, "type", "text");
+    			attr_dev(input0, "placeholder", "e.g.: user_id");
+    			attr_dev(input0, "class", "svelte-1rwfwyd");
+    			add_location(input0, file$1, 355, 20, 8853);
+    			attr_dev(input1, "name", "value");
+    			attr_dev(input1, "type", "text");
+    			attr_dev(input1, "placeholder", "e.g.: $id");
+    			attr_dev(input1, "class", "svelte-1rwfwyd");
+    			add_location(input1, file$1, 361, 20, 9076);
+    			add_location(button, file$1, 367, 20, 9296);
+    			attr_dev(div, "class", "flex relationship-param svelte-1rwfwyd");
+    			add_location(div, file$1, 354, 16, 8795);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, input0);
+    			set_input_value(input0, /*param*/ ctx[72].name);
+    			append_dev(div, t0);
+    			append_dev(div, input1);
+    			set_input_value(input1, /*param*/ ctx[72].value);
+    			append_dev(div, t1);
+    			append_dev(div, button);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input0, "input", input0_input_handler_4),
+    					listen_dev(input1, "input", input1_input_handler_4),
+    					listen_dev(button, "click", click_handler_3, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty[0] & /*model*/ 1 && input0.value !== /*param*/ ctx[72].name) {
+    				set_input_value(input0, /*param*/ ctx[72].name);
+    			}
+
+    			if (dirty[0] & /*model*/ 1 && input1.value !== /*param*/ ctx[72].value) {
+    				set_input_value(input1, /*param*/ ctx[72].value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_4.name,
+    		type: "each",
+    		source: "(354:12) {#each relationship.params as param}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (331:0) {#each model.relationships as relationship}
+    function create_each_block_3(ctx) {
+    	let div1;
+    	let button0;
+    	let t1;
+    	let label0;
+    	let t2;
+    	let input0;
+    	let t3;
+    	let label1;
+    	let t4;
+    	let input1;
+    	let t5;
+    	let div0;
+    	let t6;
+    	let button1;
+    	let mounted;
+    	let dispose;
+
+    	function click_handler_2() {
+    		return /*click_handler_2*/ ctx[47](/*relationship*/ ctx[69]);
+    	}
+
+    	function input0_input_handler_3() {
+    		/*input0_input_handler_3*/ ctx[48].call(input0, /*each_value_3*/ ctx[70], /*relationship_index*/ ctx[71]);
+    	}
+
+    	function input1_input_handler_3() {
+    		/*input1_input_handler_3*/ ctx[49].call(input1, /*each_value_3*/ ctx[70], /*relationship_index*/ ctx[71]);
+    	}
+
+    	let each_value_4 = /*relationship*/ ctx[69].params;
+    	validate_each_argument(each_value_4);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value_4.length; i += 1) {
+    		each_blocks[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
+    	}
+
+    	function click_handler_4() {
+    		return /*click_handler_4*/ ctx[53](/*relationship*/ ctx[69]);
+    	}
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			button0 = element("button");
+    			button0.textContent = "-";
+    			t1 = space();
+    			label0 = element("label");
+    			t2 = text("Name:\n            ");
+    			input0 = element("input");
+    			t3 = space();
+    			label1 = element("label");
+    			t4 = text("Model:\n            ");
+    			input1 = element("input");
+    			t5 = text("\n        Params:\n        ");
+    			div0 = element("div");
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			t6 = space();
+    			button1 = element("button");
+    			button1.textContent = "+";
+    			add_location(button0, file$1, 332, 8, 8150);
+    			attr_dev(input0, "name", "name");
+    			attr_dev(input0, "type", "text");
+    			attr_dev(input0, "placeholder", "e.g.: roles");
+    			attr_dev(input0, "class", "svelte-1rwfwyd");
+    			add_location(input0, file$1, 335, 12, 8265);
+    			attr_dev(label0, "class", "svelte-1rwfwyd");
+    			add_location(label0, file$1, 333, 8, 8227);
+    			attr_dev(input1, "name", "model");
+    			attr_dev(input1, "type", "text");
+    			attr_dev(input1, "placeholder", "e.g.: user_roles");
+    			attr_dev(input1, "class", "svelte-1rwfwyd");
+    			add_location(input1, file$1, 344, 12, 8496);
+    			attr_dev(label1, "class", "svelte-1rwfwyd");
+    			add_location(label1, file$1, 342, 8, 8457);
+    			add_location(button1, file$1, 374, 12, 9530);
+    			attr_dev(div0, "class", "flex svelte-1rwfwyd");
+    			add_location(div0, file$1, 352, 8, 8711);
+    			attr_dev(div1, "class", "flex svelte-1rwfwyd");
+    			add_location(div1, file$1, 331, 4, 8123);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, button0);
+    			append_dev(div1, t1);
+    			append_dev(div1, label0);
+    			append_dev(label0, t2);
+    			append_dev(label0, input0);
+    			set_input_value(input0, /*relationship*/ ctx[69].name);
+    			append_dev(div1, t3);
+    			append_dev(div1, label1);
+    			append_dev(label1, t4);
+    			append_dev(label1, input1);
+    			set_input_value(input1, /*relationship*/ ctx[69].model);
+    			append_dev(div1, t5);
+    			append_dev(div1, div0);
+
+    			for (let i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div0, null);
+    			}
+
+    			append_dev(div0, t6);
+    			append_dev(div0, button1);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", click_handler_2, false, false, false),
+    					listen_dev(input0, "input", input0_input_handler_3),
+    					listen_dev(input1, "input", input1_input_handler_3),
+    					listen_dev(button1, "click", click_handler_4, false, false, false)
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
+
+    			if (dirty[0] & /*model*/ 1 && input0.value !== /*relationship*/ ctx[69].name) {
+    				set_input_value(input0, /*relationship*/ ctx[69].name);
+    			}
+
+    			if (dirty[0] & /*model*/ 1 && input1.value !== /*relationship*/ ctx[69].model) {
+    				set_input_value(input1, /*relationship*/ ctx[69].model);
+    			}
+
+    			if (dirty[0] & /*removeRelationshipParam, model*/ 4097) {
+    				each_value_4 = /*relationship*/ ctx[69].params;
+    				validate_each_argument(each_value_4);
+    				let i;
+
+    				for (i = 0; i < each_value_4.length; i += 1) {
+    					const child_ctx = get_each_context_4(ctx, each_value_4, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks[i] = create_each_block_4(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].m(div0, t6);
+    					}
+    				}
+
+    				for (; i < each_blocks.length; i += 1) {
+    					each_blocks[i].d(1);
+    				}
+
+    				each_blocks.length = each_value_4.length;
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    			destroy_each(each_blocks, detaching);
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_3.name,
+    		type: "each",
+    		source: "(331:0) {#each model.relationships as relationship}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (387:8) {#each model.fields as field}
     function create_each_block_2(ctx) {
     	let th;
-    	let t_value = /*field*/ ctx[53].label + "";
+    	let t_value = /*field*/ ctx[64].label + "";
     	let t;
 
     	const block = {
     		c: function create() {
     			th = element("th");
     			t = text(t_value);
-    			add_location(th, file$1, 307, 12, 7490);
+    			add_location(th, file$1, 387, 12, 9812);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, th, anchor);
     			append_dev(th, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*model*/ 1 && t_value !== (t_value = /*field*/ ctx[53].label + "")) set_data_dev(t, t_value);
+    			if (dirty[0] & /*model*/ 1 && t_value !== (t_value = /*field*/ ctx[64].label + "")) set_data_dev(t, t_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(th);
@@ -2675,14 +2955,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(307:8) {#each model.fields as field}",
+    		source: "(387:8) {#each model.fields as field}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (314:12) {#each model.fields as field}
+    // (394:12) {#each model.fields as field}
     function create_each_block_1(ctx) {
     	let td;
     	let input;
@@ -2690,20 +2970,20 @@ var app = (function () {
     	let dispose;
 
     	function input_input_handler() {
-    		/*input_input_handler*/ ctx[44].call(input, /*field*/ ctx[53], /*each_value*/ ctx[51], /*row_index*/ ctx[52]);
+    		/*input_input_handler*/ ctx[55].call(input, /*field*/ ctx[64], /*each_value*/ ctx[62], /*row_index*/ ctx[63]);
     	}
 
     	const block = {
     		c: function create() {
     			td = element("td");
     			input = element("input");
-    			add_location(input, file$1, 314, 20, 7717);
-    			add_location(td, file$1, 314, 16, 7713);
+    			add_location(input, file$1, 394, 20, 10039);
+    			add_location(td, file$1, 394, 16, 10035);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, td, anchor);
     			append_dev(td, input);
-    			set_input_value(input, /*row*/ ctx[50][/*field*/ ctx[53].name]);
+    			set_input_value(input, /*row*/ ctx[61][/*field*/ ctx[64].name]);
 
     			if (!mounted) {
     				dispose = listen_dev(input, "input", input_input_handler);
@@ -2713,8 +2993,8 @@ var app = (function () {
     		p: function update(new_ctx, dirty) {
     			ctx = new_ctx;
 
-    			if (dirty[0] & /*model*/ 1 && input.value !== /*row*/ ctx[50][/*field*/ ctx[53].name]) {
-    				set_input_value(input, /*row*/ ctx[50][/*field*/ ctx[53].name]);
+    			if (dirty[0] & /*model*/ 1 && input.value !== /*row*/ ctx[61][/*field*/ ctx[64].name]) {
+    				set_input_value(input, /*row*/ ctx[61][/*field*/ ctx[64].name]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -2728,14 +3008,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(314:12) {#each model.fields as field}",
+    		source: "(394:12) {#each model.fields as field}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (311:4) {#each model.data as row}
+    // (391:4) {#each model.data as row}
     function create_each_block$1(ctx) {
     	let tr;
     	let td;
@@ -2745,8 +3025,8 @@ var app = (function () {
     	let mounted;
     	let dispose;
 
-    	function click_handler_2() {
-    		return /*click_handler_2*/ ctx[43](/*row*/ ctx[50]);
+    	function click_handler_5() {
+    		return /*click_handler_5*/ ctx[54](/*row*/ ctx[61]);
     	}
 
     	let each_value_1 = /*model*/ ctx[0].fields;
@@ -2770,9 +3050,9 @@ var app = (function () {
     			}
 
     			t2 = space();
-    			add_location(button, file$1, 312, 16, 7598);
-    			add_location(td, file$1, 312, 12, 7594);
-    			add_location(tr, file$1, 311, 8, 7577);
+    			add_location(button, file$1, 392, 16, 9920);
+    			add_location(td, file$1, 392, 12, 9916);
+    			add_location(tr, file$1, 391, 8, 9899);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, tr, anchor);
@@ -2787,7 +3067,7 @@ var app = (function () {
     			append_dev(tr, t2);
 
     			if (!mounted) {
-    				dispose = listen_dev(button, "click", click_handler_2, false, false, false);
+    				dispose = listen_dev(button, "click", click_handler_5, false, false, false);
     				mounted = true;
     			}
     		},
@@ -2830,7 +3110,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(311:4) {#each model.data as row}",
+    		source: "(391:4) {#each model.data as row}",
     		ctx
     	});
 
@@ -2901,26 +3181,40 @@ var app = (function () {
     	let button2;
     	let br7;
     	let t29;
+    	let t30;
+    	let hr2;
+    	let t31;
+    	let button3;
+    	let br8;
+    	let t33;
     	let table;
     	let tr;
     	let th;
-    	let t30;
-    	let t31;
-    	let t32;
-    	let hr2;
-    	let t33;
-    	let button3;
+    	let t34;
+    	let t35;
+    	let t36;
+    	let hr3;
+    	let t37;
+    	let button4;
     	let mounted;
     	let dispose;
-    	let each_value_4 = /*model*/ ctx[0].fields;
-    	validate_each_argument(each_value_4);
-    	let each_blocks_3 = [];
+    	let each_value_6 = /*model*/ ctx[0].fields;
+    	validate_each_argument(each_value_6);
+    	let each_blocks_4 = [];
 
-    	for (let i = 0; i < each_value_4.length; i += 1) {
-    		each_blocks_3[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
+    	for (let i = 0; i < each_value_6.length; i += 1) {
+    		each_blocks_4[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
     	}
 
-    	let each_value_3 = /*model*/ ctx[0].filters;
+    	let each_value_5 = /*model*/ ctx[0].filters;
+    	validate_each_argument(each_value_5);
+    	let each_blocks_3 = [];
+
+    	for (let i = 0; i < each_value_5.length; i += 1) {
+    		each_blocks_3[i] = create_each_block_5(get_each_context_5(ctx, each_value_5, i));
+    	}
+
+    	let each_value_3 = /*model*/ ctx[0].relationships;
     	validate_each_argument(each_value_3);
     	let each_blocks_2 = [];
 
@@ -2981,8 +3275,8 @@ var app = (function () {
     			br2 = element("br");
     			t12 = space();
 
-    			for (let i = 0; i < each_blocks_3.length; i += 1) {
-    				each_blocks_3[i].c();
+    			for (let i = 0; i < each_blocks_4.length; i += 1) {
+    				each_blocks_4[i].c();
     			}
 
     			t13 = space();
@@ -3011,112 +3305,127 @@ var app = (function () {
     			br6 = element("br");
     			t25 = space();
 
-    			for (let i = 0; i < each_blocks_2.length; i += 1) {
-    				each_blocks_2[i].c();
+    			for (let i = 0; i < each_blocks_3.length; i += 1) {
+    				each_blocks_3[i].c();
     			}
 
     			t26 = space();
     			hr1 = element("hr");
-    			t27 = text("\nInitial Data:");
+    			t27 = text("\nRelationships:");
     			button2 = element("button");
     			button2.textContent = "+";
     			br7 = element("br");
     			t29 = space();
+
+    			for (let i = 0; i < each_blocks_2.length; i += 1) {
+    				each_blocks_2[i].c();
+    			}
+
+    			t30 = space();
+    			hr2 = element("hr");
+    			t31 = text("\nInitial Data:");
+    			button3 = element("button");
+    			button3.textContent = "+";
+    			br8 = element("br");
+    			t33 = space();
     			table = element("table");
     			tr = element("tr");
     			th = element("th");
-    			t30 = space();
+    			t34 = space();
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].c();
     			}
 
-    			t31 = space();
+    			t35 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t32 = space();
-    			hr2 = element("hr");
-    			t33 = space();
-    			button3 = element("button");
-    			button3.textContent = "SAVE";
+    			t36 = space();
+    			hr3 = element("hr");
+    			t37 = space();
+    			button4 = element("button");
+    			button4.textContent = "SAVE";
     			attr_dev(input0, "name", "name");
-    			add_location(input0, file$1, 111, 4, 2574);
-    			attr_dev(label0, "class", "svelte-17c38a3");
-    			add_location(label0, file$1, 109, 0, 2552);
+    			add_location(input0, file$1, 138, 4, 3251);
+    			attr_dev(label0, "class", "svelte-1rwfwyd");
+    			add_location(label0, file$1, 136, 0, 3229);
     			attr_dev(input1, "name", "table");
-    			add_location(input1, file$1, 120, 4, 2743);
-    			attr_dev(label1, "class", "svelte-17c38a3");
-    			add_location(label1, file$1, 118, 0, 2720);
+    			add_location(input1, file$1, 147, 4, 3420);
+    			attr_dev(label1, "class", "svelte-1rwfwyd");
+    			add_location(label1, file$1, 145, 0, 3397);
     			attr_dev(input2, "name", "url");
-    			add_location(input2, file$1, 129, 4, 2918);
-    			attr_dev(label2, "class", "svelte-17c38a3");
-    			add_location(label2, file$1, 127, 0, 2891);
-    			add_location(br0, file$1, 135, 0, 3061);
+    			add_location(input2, file$1, 156, 4, 3595);
+    			attr_dev(label2, "class", "svelte-1rwfwyd");
+    			add_location(label2, file$1, 154, 0, 3568);
+    			add_location(br0, file$1, 162, 0, 3738);
     			attr_dev(input3, "name", "id");
-    			add_location(input3, file$1, 139, 4, 3095);
-    			attr_dev(label3, "class", "svelte-17c38a3");
-    			add_location(label3, file$1, 137, 0, 3069);
-    			add_location(br1, file$1, 145, 0, 3236);
+    			add_location(input3, file$1, 166, 4, 3772);
+    			attr_dev(label3, "class", "svelte-1rwfwyd");
+    			add_location(label3, file$1, 164, 0, 3746);
+    			add_location(br1, file$1, 172, 0, 3913);
     			option0.__value = "text";
     			option0.value = option0.__value;
-    			add_location(option0, file$1, 148, 4, 3270);
+    			add_location(option0, file$1, 175, 4, 3947);
     			option1.__value = "email";
     			option1.value = option1.__value;
-    			add_location(option1, file$1, 149, 4, 3298);
+    			add_location(option1, file$1, 176, 4, 3975);
     			option2.__value = "password";
     			option2.value = option2.__value;
-    			add_location(option2, file$1, 150, 4, 3327);
+    			add_location(option2, file$1, 177, 4, 4004);
     			option3.__value = "number";
     			option3.value = option3.__value;
-    			add_location(option3, file$1, 151, 4, 3359);
+    			add_location(option3, file$1, 178, 4, 4036);
     			option4.__value = "tel";
     			option4.value = option4.__value;
-    			add_location(option4, file$1, 152, 4, 3389);
+    			add_location(option4, file$1, 179, 4, 4066);
     			option5.__value = "date";
     			option5.value = option5.__value;
-    			add_location(option5, file$1, 153, 4, 3416);
+    			add_location(option5, file$1, 180, 4, 4093);
     			option6.__value = "datetime";
     			option6.value = option6.__value;
-    			add_location(option6, file$1, 154, 4, 3444);
+    			add_location(option6, file$1, 181, 4, 4121);
     			option7.__value = "checkbox";
     			option7.value = option7.__value;
-    			add_location(option7, file$1, 155, 4, 3476);
+    			add_location(option7, file$1, 182, 4, 4153);
     			attr_dev(datalist, "id", "types");
-    			add_location(datalist, file$1, 147, 0, 3244);
-    			add_location(button0, file$1, 158, 7, 3524);
-    			add_location(br2, file$1, 158, 45, 3562);
+    			add_location(datalist, file$1, 174, 0, 3921);
+    			add_location(button0, file$1, 185, 7, 4201);
+    			add_location(br2, file$1, 185, 45, 4239);
     			attr_dev(textarea, "name", "where");
     			attr_dev(textarea, "cols", "80");
-    			add_location(textarea, file$1, 255, 4, 6249);
-    			attr_dev(label4, "class", "svelte-17c38a3");
-    			add_location(label4, file$1, 253, 0, 6226);
-    			add_location(br3, file$1, 257, 0, 6319);
+    			add_location(textarea, file$1, 282, 4, 6907);
+    			attr_dev(label4, "class", "svelte-1rwfwyd");
+    			add_location(label4, file$1, 280, 0, 6884);
+    			add_location(br3, file$1, 284, 0, 6977);
     			attr_dev(input4, "name", "sort");
     			attr_dev(input4, "placeholder", "e.g.: name,-id");
-    			add_location(input4, file$1, 261, 4, 6349);
-    			attr_dev(label5, "class", "svelte-17c38a3");
-    			add_location(label5, file$1, 259, 0, 6327);
-    			add_location(br4, file$1, 263, 0, 6433);
+    			add_location(input4, file$1, 288, 4, 7007);
+    			attr_dev(label5, "class", "svelte-1rwfwyd");
+    			add_location(label5, file$1, 286, 0, 6985);
+    			add_location(br4, file$1, 290, 0, 7091);
     			attr_dev(input5, "name", "actions");
     			attr_dev(input5, "placeholder", "e.g.: edit,view,print");
-    			add_location(input5, file$1, 267, 4, 6474);
-    			attr_dev(label6, "class", "svelte-17c38a3");
-    			add_location(label6, file$1, 265, 0, 6441);
-    			add_location(br5, file$1, 273, 0, 6599);
-    			add_location(hr0, file$1, 275, 0, 6607);
-    			add_location(button1, file$1, 276, 18, 6632);
-    			add_location(br6, file$1, 276, 57, 6671);
-    			add_location(hr1, file$1, 301, 0, 7344);
-    			add_location(button2, file$1, 302, 13, 7364);
-    			add_location(br7, file$1, 302, 50, 7401);
-    			add_location(th, file$1, 305, 8, 7433);
-    			add_location(tr, file$1, 304, 4, 7420);
-    			add_location(table, file$1, 303, 0, 7408);
-    			add_location(hr2, file$1, 319, 0, 7816);
-    			add_location(button3, file$1, 320, 0, 7823);
+    			add_location(input5, file$1, 294, 4, 7132);
+    			attr_dev(label6, "class", "svelte-1rwfwyd");
+    			add_location(label6, file$1, 292, 0, 7099);
+    			add_location(br5, file$1, 300, 0, 7257);
+    			add_location(hr0, file$1, 302, 0, 7265);
+    			add_location(button1, file$1, 303, 18, 7290);
+    			add_location(br6, file$1, 303, 57, 7329);
+    			add_location(hr1, file$1, 328, 0, 8002);
+    			add_location(button2, file$1, 329, 14, 8023);
+    			add_location(br7, file$1, 329, 59, 8068);
+    			add_location(hr2, file$1, 381, 0, 9666);
+    			add_location(button3, file$1, 382, 13, 9686);
+    			add_location(br8, file$1, 382, 50, 9723);
+    			add_location(th, file$1, 385, 8, 9755);
+    			add_location(tr, file$1, 384, 4, 9742);
+    			add_location(table, file$1, 383, 0, 9730);
+    			add_location(hr3, file$1, 399, 0, 10138);
+    			add_location(button4, file$1, 400, 0, 10145);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -3160,8 +3469,8 @@ var app = (function () {
     			insert_dev(target, br2, anchor);
     			insert_dev(target, t12, anchor);
 
-    			for (let i = 0; i < each_blocks_3.length; i += 1) {
-    				each_blocks_3[i].m(target, anchor);
+    			for (let i = 0; i < each_blocks_4.length; i += 1) {
+    				each_blocks_4[i].m(target, anchor);
     			}
 
     			insert_dev(target, t13, anchor);
@@ -3192,8 +3501,8 @@ var app = (function () {
     			insert_dev(target, br6, anchor);
     			insert_dev(target, t25, anchor);
 
-    			for (let i = 0; i < each_blocks_2.length; i += 1) {
-    				each_blocks_2[i].m(target, anchor);
+    			for (let i = 0; i < each_blocks_3.length; i += 1) {
+    				each_blocks_3[i].m(target, anchor);
     			}
 
     			insert_dev(target, t26, anchor);
@@ -3202,43 +3511,55 @@ var app = (function () {
     			insert_dev(target, button2, anchor);
     			insert_dev(target, br7, anchor);
     			insert_dev(target, t29, anchor);
+
+    			for (let i = 0; i < each_blocks_2.length; i += 1) {
+    				each_blocks_2[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, t30, anchor);
+    			insert_dev(target, hr2, anchor);
+    			insert_dev(target, t31, anchor);
+    			insert_dev(target, button3, anchor);
+    			insert_dev(target, br8, anchor);
+    			insert_dev(target, t33, anchor);
     			insert_dev(target, table, anchor);
     			append_dev(table, tr);
     			append_dev(tr, th);
-    			append_dev(tr, t30);
+    			append_dev(tr, t34);
 
     			for (let i = 0; i < each_blocks_1.length; i += 1) {
     				each_blocks_1[i].m(tr, null);
     			}
 
-    			append_dev(table, t31);
+    			append_dev(table, t35);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].m(table, null);
     			}
 
-    			insert_dev(target, t32, anchor);
-    			insert_dev(target, hr2, anchor);
-    			insert_dev(target, t33, anchor);
-    			insert_dev(target, button3, anchor);
+    			insert_dev(target, t36, anchor);
+    			insert_dev(target, hr3, anchor);
+    			insert_dev(target, t37, anchor);
+    			insert_dev(target, button4, anchor);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[11]),
-    					listen_dev(input0, "input", /*input_handler*/ ctx[12], false, false, false),
-    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[13]),
-    					listen_dev(input1, "input", /*input_handler_1*/ ctx[14], false, false, false),
-    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[15]),
-    					listen_dev(input2, "input", /*input_handler_2*/ ctx[16], false, false, false),
-    					listen_dev(input3, "input", /*input3_input_handler*/ ctx[17]),
-    					listen_dev(input3, "input", /*input_handler_3*/ ctx[18], false, false, false),
+    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[15]),
+    					listen_dev(input0, "input", /*input_handler*/ ctx[16], false, false, false),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[17]),
+    					listen_dev(input1, "input", /*input_handler_1*/ ctx[18], false, false, false),
+    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[19]),
+    					listen_dev(input2, "input", /*input_handler_2*/ ctx[20], false, false, false),
+    					listen_dev(input3, "input", /*input3_input_handler*/ ctx[21]),
+    					listen_dev(input3, "input", /*input_handler_3*/ ctx[22], false, false, false),
     					listen_dev(button0, "click", /*addField*/ ctx[4], false, false, false),
-    					listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[37]),
-    					listen_dev(input4, "input", /*input4_input_handler_1*/ ctx[38]),
-    					listen_dev(input5, "input", /*input5_input_handler_1*/ ctx[39]),
+    					listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[41]),
+    					listen_dev(input4, "input", /*input4_input_handler_1*/ ctx[42]),
+    					listen_dev(input5, "input", /*input5_input_handler_1*/ ctx[43]),
     					listen_dev(button1, "click", /*addFilter*/ ctx[9], false, false, false),
-    					listen_dev(button2, "click", /*addData*/ ctx[7], false, false, false),
-    					listen_dev(button3, "click", /*createResource*/ ctx[6], false, false, false)
+    					listen_dev(button2, "click", /*addRelationship*/ ctx[10], false, false, false),
+    					listen_dev(button3, "click", /*addData*/ ctx[7], false, false, false),
+    					listen_dev(button4, "click", /*createResource*/ ctx[6], false, false, false)
     				];
 
     				mounted = true;
@@ -3262,27 +3583,27 @@ var app = (function () {
     			}
 
     			if (dirty[0] & /*model, inputField, fieldDefaults, removeField*/ 45) {
-    				each_value_4 = /*model*/ ctx[0].fields;
-    				validate_each_argument(each_value_4);
+    				each_value_6 = /*model*/ ctx[0].fields;
+    				validate_each_argument(each_value_6);
     				let i;
 
-    				for (i = 0; i < each_value_4.length; i += 1) {
-    					const child_ctx = get_each_context_4(ctx, each_value_4, i);
+    				for (i = 0; i < each_value_6.length; i += 1) {
+    					const child_ctx = get_each_context_6(ctx, each_value_6, i);
 
-    					if (each_blocks_3[i]) {
-    						each_blocks_3[i].p(child_ctx, dirty);
+    					if (each_blocks_4[i]) {
+    						each_blocks_4[i].p(child_ctx, dirty);
     					} else {
-    						each_blocks_3[i] = create_each_block_4(child_ctx);
-    						each_blocks_3[i].c();
-    						each_blocks_3[i].m(t13.parentNode, t13);
+    						each_blocks_4[i] = create_each_block_6(child_ctx);
+    						each_blocks_4[i].c();
+    						each_blocks_4[i].m(t13.parentNode, t13);
     					}
     				}
 
-    				for (; i < each_blocks_3.length; i += 1) {
-    					each_blocks_3[i].d(1);
+    				for (; i < each_blocks_4.length; i += 1) {
+    					each_blocks_4[i].d(1);
     				}
 
-    				each_blocks_3.length = each_value_4.length;
+    				each_blocks_4.length = each_value_6.length;
     			}
 
     			if (dirty[0] & /*model*/ 1) {
@@ -3298,7 +3619,31 @@ var app = (function () {
     			}
 
     			if (dirty[0] & /*model, removeField*/ 33) {
-    				each_value_3 = /*model*/ ctx[0].filters;
+    				each_value_5 = /*model*/ ctx[0].filters;
+    				validate_each_argument(each_value_5);
+    				let i;
+
+    				for (i = 0; i < each_value_5.length; i += 1) {
+    					const child_ctx = get_each_context_5(ctx, each_value_5, i);
+
+    					if (each_blocks_3[i]) {
+    						each_blocks_3[i].p(child_ctx, dirty);
+    					} else {
+    						each_blocks_3[i] = create_each_block_5(child_ctx);
+    						each_blocks_3[i].c();
+    						each_blocks_3[i].m(t26.parentNode, t26);
+    					}
+    				}
+
+    				for (; i < each_blocks_3.length; i += 1) {
+    					each_blocks_3[i].d(1);
+    				}
+
+    				each_blocks_3.length = each_value_5.length;
+    			}
+
+    			if (dirty[0] & /*addRelationshipParam, model, removeRelationshipParam, removeRelationship*/ 14337) {
+    				each_value_3 = /*model*/ ctx[0].relationships;
     				validate_each_argument(each_value_3);
     				let i;
 
@@ -3310,7 +3655,7 @@ var app = (function () {
     					} else {
     						each_blocks_2[i] = create_each_block_3(child_ctx);
     						each_blocks_2[i].c();
-    						each_blocks_2[i].m(t26.parentNode, t26);
+    						each_blocks_2[i].m(t30.parentNode, t30);
     					}
     				}
 
@@ -3389,7 +3734,7 @@ var app = (function () {
     			if (detaching) detach_dev(button0);
     			if (detaching) detach_dev(br2);
     			if (detaching) detach_dev(t12);
-    			destroy_each(each_blocks_3, detaching);
+    			destroy_each(each_blocks_4, detaching);
     			if (detaching) detach_dev(t13);
     			if (detaching) detach_dev(label4);
     			if (detaching) detach_dev(t15);
@@ -3408,20 +3753,27 @@ var app = (function () {
     			if (detaching) detach_dev(button1);
     			if (detaching) detach_dev(br6);
     			if (detaching) detach_dev(t25);
-    			destroy_each(each_blocks_2, detaching);
+    			destroy_each(each_blocks_3, detaching);
     			if (detaching) detach_dev(t26);
     			if (detaching) detach_dev(hr1);
     			if (detaching) detach_dev(t27);
     			if (detaching) detach_dev(button2);
     			if (detaching) detach_dev(br7);
     			if (detaching) detach_dev(t29);
+    			destroy_each(each_blocks_2, detaching);
+    			if (detaching) detach_dev(t30);
+    			if (detaching) detach_dev(hr2);
+    			if (detaching) detach_dev(t31);
+    			if (detaching) detach_dev(button3);
+    			if (detaching) detach_dev(br8);
+    			if (detaching) detach_dev(t33);
     			if (detaching) detach_dev(table);
     			destroy_each(each_blocks_1, detaching);
     			destroy_each(each_blocks, detaching);
-    			if (detaching) detach_dev(t32);
-    			if (detaching) detach_dev(hr2);
-    			if (detaching) detach_dev(t33);
-    			if (detaching) detach_dev(button3);
+    			if (detaching) detach_dev(t36);
+    			if (detaching) detach_dev(hr3);
+    			if (detaching) detach_dev(t37);
+    			if (detaching) detach_dev(button4);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -3455,7 +3807,8 @@ var app = (function () {
     		sort: "",
     		filters: [],
     		data: [],
-    		actions: "edit,view,print"
+    		actions: "edit,view,print",
+    		relationships: []
     	};
 
     	let modelDefaults = { table: "${name}", url: "${name}" };
@@ -3493,7 +3846,7 @@ var app = (function () {
     			changed[model1] = {};
     		}
 
-    		changed[model1][name] = value != "";
+    		changed[model1][name] = value !== null;
 
     		Object.keys(defaults).forEach(key => {
     			const defaultValue = defaults[key]
@@ -3513,9 +3866,9 @@ var app = (function () {
     			name: "",
     			typeDB: "varchar(64)",
     			type: "text",
-    			select: "",
-    			create: "",
-    			update: "",
+    			select: null,
+    			create: null,
+    			update: null,
     			showInList: true,
     			showInCreate: true,
     			showInUpdate: true
@@ -3558,6 +3911,28 @@ var app = (function () {
     		$$invalidate(0, model);
     	}
 
+    	function addRelationship() {
+    		const relationship = { name: "", params: [] };
+    		model.relationships.push(relationship);
+    		$$invalidate(0, model);
+    	}
+
+    	function removeRelationship(relationship) {
+    		model.relationships.splice(model.relationships.indexOf(relationship), 1);
+    		$$invalidate(0, model);
+    	}
+
+    	function removeRelationshipParam(relationship, param) {
+    		relationship.params.splice(relationship.params.indexOf(param), 1);
+    		$$invalidate(0, model);
+    	}
+
+    	function addRelationshipParam(relationship) {
+    		const param = { name: "", value: "" };
+    		relationship.params.push(param);
+    		$$invalidate(0, model);
+    	}
+
     	const writable_props = ['params'];
 
     	Object_1.keys($$props).forEach(key => {
@@ -3593,67 +3968,67 @@ var app = (function () {
     	const input_handler_3 = event => inputField(event, model, modelDefaults);
     	const click_handler = field => removeField(field);
 
-    	function input0_input_handler_1(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].name = this.value;
+    	function input0_input_handler_1(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].name = this.value;
     		$$invalidate(0, model);
     	}
 
     	const input_handler_4 = (field, event) => inputField(event, field, fieldDefaults);
 
-    	function input1_input_handler_1(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].label = this.value;
+    	function input1_input_handler_1(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].label = this.value;
     		$$invalidate(0, model);
     	}
 
     	const input_handler_5 = (field, event) => inputField(event, field, fieldDefaults);
 
-    	function input2_input_handler_1(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].typeDB = this.value;
+    	function input2_input_handler_1(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].typeDB = this.value;
     		$$invalidate(0, model);
     	}
 
     	const input_handler_6 = (field, event) => inputField(event, field, fieldDefaults);
 
-    	function input3_input_handler_1(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].type = this.value;
+    	function input3_input_handler_1(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].type = this.value;
     		$$invalidate(0, model);
     	}
 
     	const input_handler_7 = (field, event) => inputField(event, field, fieldDefaults);
 
-    	function input4_input_handler(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].select = this.value;
+    	function input4_input_handler(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].select = this.value;
     		$$invalidate(0, model);
     	}
 
     	const input_handler_8 = (field, event) => inputField(event, field, fieldDefaults);
 
-    	function input5_input_handler(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].create = this.value;
+    	function input5_input_handler(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].create = this.value;
     		$$invalidate(0, model);
     	}
 
     	const input_handler_9 = (field, event) => inputField(event, field, fieldDefaults);
 
-    	function input6_input_handler(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].update = this.value;
+    	function input6_input_handler(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].update = this.value;
     		$$invalidate(0, model);
     	}
 
     	const input_handler_10 = (field, event) => inputField(event, field, fieldDefaults);
 
-    	function input7_change_handler(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].showInList = this.checked;
+    	function input7_change_handler(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].showInList = this.checked;
     		$$invalidate(0, model);
     	}
 
-    	function input8_change_handler(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].showInCreate = this.checked;
+    	function input8_change_handler(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].showInCreate = this.checked;
     		$$invalidate(0, model);
     	}
 
-    	function input9_change_handler(each_value_4, field_index_2) {
-    		each_value_4[field_index_2].showInUpdate = this.checked;
+    	function input9_change_handler(each_value_6, field_index_2) {
+    		each_value_6[field_index_2].showInUpdate = this.checked;
     		$$invalidate(0, model);
     	}
 
@@ -3674,17 +4049,41 @@ var app = (function () {
 
     	const click_handler_1 = filter => removeField(filter);
 
-    	function input0_input_handler_2(each_value_3, filter_index) {
-    		each_value_3[filter_index].declaration = this.value;
+    	function input0_input_handler_2(each_value_5, filter_index) {
+    		each_value_5[filter_index].declaration = this.value;
     		$$invalidate(0, model);
     	}
 
-    	function input1_input_handler_2(each_value_3, filter_index) {
-    		each_value_3[filter_index].expression = this.value;
+    	function input1_input_handler_2(each_value_5, filter_index) {
+    		each_value_5[filter_index].expression = this.value;
     		$$invalidate(0, model);
     	}
 
-    	const click_handler_2 = row => removeData(row);
+    	const click_handler_2 = relationship => removeRelationship(relationship);
+
+    	function input0_input_handler_3(each_value_3, relationship_index) {
+    		each_value_3[relationship_index].name = this.value;
+    		$$invalidate(0, model);
+    	}
+
+    	function input1_input_handler_3(each_value_3, relationship_index) {
+    		each_value_3[relationship_index].model = this.value;
+    		$$invalidate(0, model);
+    	}
+
+    	function input0_input_handler_4(each_value_4, param_index) {
+    		each_value_4[param_index].name = this.value;
+    		$$invalidate(0, model);
+    	}
+
+    	function input1_input_handler_4(each_value_4, param_index) {
+    		each_value_4[param_index].value = this.value;
+    		$$invalidate(0, model);
+    	}
+
+    	const click_handler_3 = (relationship, param) => removeRelationshipParam(relationship, param);
+    	const click_handler_4 = relationship => addRelationshipParam(relationship);
+    	const click_handler_5 = row => removeData(row);
 
     	function input_input_handler(field, each_value, row_index) {
     		each_value[row_index][field.name] = this.value;
@@ -3692,7 +4091,7 @@ var app = (function () {
     	}
 
     	$$self.$$set = $$props => {
-    		if ('params' in $$props) $$invalidate(10, params = $$props.params);
+    		if ('params' in $$props) $$invalidate(14, params = $$props.params);
     	};
 
     	$$self.$capture_state = () => ({
@@ -3712,11 +4111,15 @@ var app = (function () {
     		createResource,
     		addData,
     		removeData,
-    		addFilter
+    		addFilter,
+    		addRelationship,
+    		removeRelationship,
+    		removeRelationshipParam,
+    		addRelationshipParam
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('params' in $$props) $$invalidate(10, params = $$props.params);
+    		if ('params' in $$props) $$invalidate(14, params = $$props.params);
     		if ('model' in $$props) $$invalidate(0, model = $$props.model);
     		if ('modelDefaults' in $$props) $$invalidate(1, modelDefaults = $$props.modelDefaults);
     		if ('fieldDefaults' in $$props) $$invalidate(2, fieldDefaults = $$props.fieldDefaults);
@@ -3739,6 +4142,10 @@ var app = (function () {
     		addData,
     		removeData,
     		addFilter,
+    		addRelationship,
+    		removeRelationship,
+    		removeRelationshipParam,
+    		addRelationshipParam,
     		params,
     		input0_input_handler,
     		input_handler,
@@ -3773,6 +4180,13 @@ var app = (function () {
     		input0_input_handler_2,
     		input1_input_handler_2,
     		click_handler_2,
+    		input0_input_handler_3,
+    		input1_input_handler_3,
+    		input0_input_handler_4,
+    		input1_input_handler_4,
+    		click_handler_3,
+    		click_handler_4,
+    		click_handler_5,
     		input_input_handler
     	];
     }
@@ -3780,7 +4194,7 @@ var app = (function () {
     class Resource extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { params: 10 }, null, [-1, -1, -1]);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { params: 14 }, null, [-1, -1, -1]);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,

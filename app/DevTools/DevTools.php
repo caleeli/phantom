@@ -76,7 +76,6 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             $migration .= <<<EOF
             \$statement = \$connection->prepare('INSERT INTO {$table} ({$fieldNamesSql}) VALUES ({$fieldBindsSql})');
             \$statement->execute({$params});\n
-            var_dump({$params});\n
             EOF;
         }
         $migrationFilename = 'migrations/' . $table . '.php';
@@ -85,7 +84,9 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         // create model
         $attributes = [];
         foreach ($config['fields'] as $field) {
-            $attributes[$field['name']] = $field['select'];
+            if ($field['select']) {
+                $attributes[$field['name']] = $field['select'];
+            }
         }
         $where = $config['where'] ? explode("\n", $config['where']) : [];
         $filters = [];
@@ -107,12 +108,25 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         }
         $delete = [];
         $relationships = [];
+        foreach ($config['relationships'] as $relationship) {
+            $params = [];
+            foreach ($relationship['params'] as $param) {
+                $params[$param['name']] = $param['value'];
+            }
+            $relationships[$relationship['name']] = [
+                'model' => $relationship['model'],
+                'params' => $params,
+            ];
+        }
         $labels = [
             '_model' => ucwords($config['name'], "_ \t\r\n\f\v"),
             '_models' => ucwords($config['name'], "_ \t\r\n\f\v"),
         ];
         $ui = [];
         foreach ($config['fields'] as $field) {
+            if (empty($field['showInList'])) {
+                continue;
+            }
             if ($field['label']) {
                 $labels[$field['name']] = $field['label'];
             }
@@ -134,16 +148,16 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             'id' => $id,
             'attributes' => $attributes,
             'where' => $where,
-            'filters' => $filters,
+            'filters' => (object) $filters,
             'sort' => $sort,
-            'create' => $create,
-            'update' => $update,
-            'delete' => $delete,
-            'relationships' => $relationships,
+            'create' => (object) $create,
+            'update' => (object) $update,
+            'delete' => (object) $delete,
+            'relationships' => (object) $relationships,
             'labels' => $labels,
             'ui' => $ui,
         ];
         $modelFilename = 'models/' . $config['name'] . '.json';
-        \file_put_contents($modelFilename, \json_encode($model, JSON_PRETTY_PRINT));
+        file_put_contents($modelFilename, \str_replace('    ', "\t", json_encode($model, JSON_PRETTY_PRINT)));
     }
 }

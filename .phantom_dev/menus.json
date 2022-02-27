@@ -61,6 +61,7 @@
             "expression": "and permission in (select name from permissions join role_permissions on (permissions.id = role_permissions.permission_id and role_permissions.role_id in (select role_id from user_roles where user_id = ${session($_request)->user_id})))"
         }
     ],
+    "relationships": [],
     "data": [
         {
             "name": "Cuadro de Mando",

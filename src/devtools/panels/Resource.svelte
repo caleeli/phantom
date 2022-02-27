@@ -4,7 +4,7 @@
     const env = process.env;
     const apiBase = env.dev_api_base || "http://localhost/";
 
-    export let params = {id: null};
+    export let params = { id: null };
 
     let model = {
         name: "",
@@ -17,6 +17,7 @@
         filters: [],
         data: [],
         actions: "edit,view,print",
+        relationships: [],
     };
     let modelDefaults = {
         table: "${name}",
@@ -38,9 +39,11 @@
         loadModel(params.id);
     }
     function loadModel(id) {
-        api(apiBase + "resource").get(id).then(resource => {
-            model = resource.attributes;
-        });
+        api(apiBase + "resource")
+            .get(id)
+            .then((resource) => {
+                model = resource.attributes;
+            });
     }
     function inputField(event, model1, defaults) {
         const name = event.target["name"];
@@ -48,7 +51,7 @@
         if (!changed[model1]) {
             changed[model1] = {};
         }
-        changed[model1][name] = value != "";
+        changed[model1][name] = value !== null;
         Object.keys(defaults).forEach((key) => {
             const defaultValue = defaults[key]
                 ? new Function(
@@ -67,9 +70,9 @@
             name: "",
             typeDB: "varchar(64)",
             type: "text",
-            select: "",
-            create: "",
-            update: "",
+            select: null,
+            create: null,
+            update: null,
             showInList: true,
             showInCreate: true,
             showInUpdate: true,
@@ -110,6 +113,33 @@
             expression: "",
         };
         model.filters.push(filter);
+        model = model;
+    }
+    function addRelationship() {
+        const relationship = {
+            name: "",
+            params: [],
+        };
+        model.relationships.push(relationship);
+        model = model;
+    }
+    function removeRelationship(relationship) {
+        model.relationships.splice(
+            model.relationships.indexOf(relationship),
+            1
+        );
+        model = model;
+    }
+    function removeRelationshipParam(relationship, param) {
+        relationship.params.splice(relationship.params.indexOf(param), 1);
+        model = model;
+    }
+    function addRelationshipParam(relationship) {
+        const param = {
+            name: "",
+            value: "",
+        };
+        relationship.params.push(param);
         model = model;
     }
 </script>
@@ -237,7 +267,7 @@ Fields <button on:click={addField}>+</button><br />
                 type="checkbox"
                 bind:checked={field.showInList}
             />
-            list {field.showInList}
+            list
         </label>
         <label>
             <input
@@ -307,6 +337,59 @@ Available filters:<button on:click={addFilter}>+</button><br />
 {/each}
 
 <hr />
+Relationships:<button on:click={addRelationship}>+</button><br />
+{#each model.relationships as relationship}
+    <div class="flex">
+        <button on:click={() => removeRelationship(relationship)}>-</button>
+        <label>
+            Name:
+            <input
+                name="name"
+                type="text"
+                bind:value={relationship.name}
+                placeholder="e.g.: roles"
+            />
+        </label>
+        <label>
+            Model:
+            <input
+                name="model"
+                type="text"
+                bind:value={relationship.model}
+                placeholder="e.g.: user_roles"
+            />
+        </label>
+        Params:
+        <div class="flex">
+            {#each relationship.params as param}
+                <div class="flex relationship-param">
+                    <input
+                        name="name"
+                        type="text"
+                        bind:value={param.name}
+                        placeholder="e.g.: user_id"
+                    />=
+                    <input
+                        name="value"
+                        type="text"
+                        bind:value={param.value}
+                        placeholder="e.g.: $id"
+                    />
+                    <button
+                        on:click={() =>
+                            removeRelationshipParam(relationship, param)}
+                        >x</button
+                    >
+                </div>
+            {/each}
+            <button on:click={() => addRelationshipParam(relationship)}
+                >+</button
+            >
+        </div>
+    </div>
+{/each}
+
+<hr />
 Initial Data:<button on:click={addData}>+</button><br />
 <table>
     <tr>
@@ -342,5 +425,10 @@ Initial Data:<button on:click={addData}>+</button><br />
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-between;
+    }
+    .relationship-param {
+        align-items: center;
+        border: 1px solid gray;
+        padding: 4px;
     }
 </style>

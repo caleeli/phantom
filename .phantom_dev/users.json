@@ -1,0 +1,156 @@
+{
+    "name": "users",
+    "table": "users",
+    "url": "users",
+    "id": "id",
+    "fields": [
+        {
+            "name": "name",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "name",
+            "create": ":name",
+            "update": ":name",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Name"
+        },
+        {
+            "name": "username",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "username",
+            "create": ":username",
+            "update": ":username",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Username"
+        },
+        {
+            "name": "avatar",
+            "typeDB": "varchar(64)",
+            "type": "image",
+            "select": "avatar",
+            "create": ":avatar",
+            "update": ":avatar",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Avatar"
+        },
+        {
+            "name": "email",
+            "typeDB": "varchar(64)",
+            "type": "email",
+            "select": "email",
+            "create": ":email",
+            "update": ":email",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Email"
+        },
+        {
+            "name": "phone",
+            "typeDB": "varchar(64)",
+            "type": "tel",
+            "select": "phone",
+            "create": ":phone",
+            "update": ":phone",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Phone"
+        },
+        {
+            "name": "status",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "status",
+            "create": ":status",
+            "update": ":status",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Status"
+        },
+        {
+            "name": "password",
+            "typeDB": "varchar(64)",
+            "type": "password",
+            "select": "",
+            "create": ":password",
+            "update": ":password",
+            "showInList": false,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Password"
+        }
+    ],
+    "where": "",
+    "sort": "-id",
+    "filters": [
+        {
+            "declaration": "findText(text)",
+            "expression": "and (name like ${contains($text)} or username like ${contains($text)} or email like ${contains($text)} or phone like ${contains($text)})"
+        },
+        {
+            "declaration": "login(username,password)",
+            "expression": "and status='ACTIVE' and username=:username and password=${md5($password)}"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "roles",
+            "params": [
+                {
+                    "name": "user_id",
+                    "value": "$id"
+                }
+            ],
+            "model": "user_roles"
+        },
+        {
+            "name": "permissions",
+            "params": [
+                {
+                    "name": "user_id",
+                    "value": "$id"
+                }
+            ],
+            "model": "user_permissions"
+        }
+    ],
+    "data": [
+        {
+            "name": "Juan Perez",
+            "username": "juan",
+            "avatar": "images\/avatar\/avatar-1.jpg",
+            "email": "juan@example.com",
+            "phone": "555-555-55",
+            "status": "ACTIVE",
+            "password": "5f4dcc3b5aa765d61d8327deb882cf99"
+        },
+        {
+            "name": "Maria Gonzales",
+            "username": "maria",
+            "avatar": "images\/avatar\/avatar-1.jpg",
+            "email": "maria@example.com",
+            "phone": "555-555-55",
+            "status": "ACTIVE",
+            "password": "5f4dcc3b5aa765d61d8327deb882cf99"
+        },
+        {
+            "name": "Cesar Ferine",
+            "username": "cesar",
+            "avatar": "images\/avatar\/avatar-1.jpg",
+            "email": "cesar@example.com",
+            "phone": "555-555-55",
+            "status": "ACTIVE",
+            "password": "5f4dcc3b5aa765d61d8327deb882cf99"
+        }
+    ],
+    "actions": "edit,view"
+}
