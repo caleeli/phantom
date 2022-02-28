@@ -24,7 +24,7 @@ final class QueryExpression implements QueryExpressionInterface
         while ($tagPos !== false) {
             $tagEndPos = strpos($expression, $tagEnd, $tagPos + $tagLength);
             if ($tagEndPos === false) {
-                throw new Exception('Tag not closed');
+                throw new Exception('Tag not closed: ' . $expression);
             }
             $tagContent = substr($expression, $tagPos + $tagLength, $tagEndPos - $tagPos - $tagLength);
             $newVariable = uniqid('var_');
@@ -48,5 +48,15 @@ final class QueryExpression implements QueryExpressionInterface
     public function preparedExpression():string
     {
         return $this->expression;
+    }
+
+    public function hasRequiredParams(array $params):bool
+    {
+        foreach ($this->expressions as $name => $expression) {
+            if (!$expression->hasRequiredParams($params)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

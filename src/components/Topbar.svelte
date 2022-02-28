@@ -1,27 +1,31 @@
 <script>
+  import { user } from "../store";
   export let width = 1;
   $: cssVarStyles = `--width:${width}%`;
-	// avatar aleatorio
-	let avatar="images/avatar/avatar-1.jpg";
-  // let avatar="https://scutum-universal.tzdthemes.com/_nuxt/img/avatar_default_sm.3ea819b.png";
+  let avatar = "images/avatar/avatar-1.jpg";
+  let fullname = "...";
+  user.subscribe((user) => {
+    avatar = user.attributes.avatar || "images/avatar/avatar-1.jpg";
+    fullname = user.attributes.name || "...";
+  });
 </script>
 
 <header>
   <span>
-    <img class="logo" src="images/logo.svg" alt="logo">
+    <img class="logo" src="images/logo.svg" alt="logo" />
     <slot />
   </span>
   <div>
     <div class="notifications">
-      <i class="fas fa-bell"></i>
+      <i class="fas fa-bell" />
       <mark>5</mark>
     </div>
     <figure>
-      <img src={avatar} alt="user">
-      <figcaption>Juan Perez</figcaption>
+      <img src={avatar} alt="user" />
+      <figcaption>{fullname}</figcaption>
     </figure>
     <a class="logout" href="/">
-      <i class="fas fa-sign-out-alt"></i>
+      <i class="fas fa-sign-out-alt" />
       Logout
     </a>
   </div>

@@ -53,7 +53,7 @@ abstract class ResourceBase
         $params = array_filter($params, function ($key) use ($variables) {
             return in_array($key, $variables);
         }, ARRAY_FILTER_USE_KEY);
-        $this->log($query . ': ' . json_encode($params));
+        // $this->log($query . ': ' . json_encode($params));
         $statement = $this->connection->prepare($query);
         $success = $statement->execute($params);
         if (!$success) {
@@ -72,7 +72,7 @@ abstract class ResourceBase
     /**
      * Parse and replace the ${expressions} in the query
      *
-     * @param string $query ex. where cost = ${cost*100}
+     * @param string $query ex. where cost = ${$cost*100}
      * @param array $params ex. ['cost' => 100]
      *
      * @return string ex. where cost = :var_1234 and the value of $params['var_1234'] is 10000
@@ -101,6 +101,12 @@ abstract class ResourceBase
             }
         }
         return $sql;
+    }
+
+    protected function hasRequiredParams($string, array &$params)
+    {
+        $expression = new QueryExpression($string, $this->request);
+        return $expression->hasRequiredParams($params);
     }
 
     protected function model($model)

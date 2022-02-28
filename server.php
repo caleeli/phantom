@@ -244,6 +244,7 @@ $api->put('/api/{model}/{id}', function (Request $request, $model, $id) use ($co
         $data = $request->post();
         return new Response(200, base_headers, json_encode($resource->update($id, $data)));
     } catch (Exception $e) {
+        error_log($e->getTraceAsString());
         return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
     }
 });

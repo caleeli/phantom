@@ -17,21 +17,9 @@
             "label": "Name"
         },
         {
-            "name": "username",
-            "typeDB": "varchar(64)",
-            "type": "text",
-            "select": "username",
-            "create": ":username",
-            "update": ":username",
-            "showInList": true,
-            "showInCreate": true,
-            "showInUpdate": true,
-            "label": "Username"
-        },
-        {
             "name": "avatar",
             "typeDB": "varchar(64)",
-            "type": "image",
+            "type": "file",
             "select": "avatar",
             "create": ":avatar",
             "update": ":avatar",
@@ -77,12 +65,24 @@
             "label": "Status"
         },
         {
+            "name": "username",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "username",
+            "create": ":username",
+            "update": ":username",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Username"
+        },
+        {
             "name": "password",
             "typeDB": "varchar(64)",
             "type": "password",
             "select": "",
-            "create": ":password",
-            "update": ":password",
+            "create": "${md5($password)}",
+            "update": "${md5($password)}",
             "showInList": false,
             "showInCreate": true,
             "showInUpdate": true,

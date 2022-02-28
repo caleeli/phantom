@@ -3,8 +3,8 @@
 $connection->exec('DROP TABLE IF EXISTS users');
 
 
-$connection->exec('CREATE TABLE users (id INTEGER PRIMARY KEY, name varchar(64), username varchar(64), avatar varchar(64), email varchar(64), phone varchar(64), status varchar(64), password varchar(64))');
-$statement = $connection->prepare('INSERT INTO users (name, username, avatar, email, phone, status, password) VALUES (:name, :username, :avatar, :email, :phone, :status, :password)');
+$connection->exec('CREATE TABLE users (id INTEGER PRIMARY KEY, name varchar(64), avatar varchar(64), email varchar(64), phone varchar(64), status varchar(64), username varchar(64), password varchar(64))');
+$statement = $connection->prepare('INSERT INTO users (name, avatar, email, phone, status, username, password) VALUES (:name, :avatar, :email, :phone, :status, :username, :password)');
 $statement->execute(array (
   'name' => 'Juan Perez',
   'username' => 'juan',
@@ -14,7 +14,7 @@ $statement->execute(array (
   'status' => 'ACTIVE',
   'password' => '5f4dcc3b5aa765d61d8327deb882cf99',
 ));
-$statement = $connection->prepare('INSERT INTO users (name, username, avatar, email, phone, status, password) VALUES (:name, :username, :avatar, :email, :phone, :status, :password)');
+$statement = $connection->prepare('INSERT INTO users (name, avatar, email, phone, status, username, password) VALUES (:name, :avatar, :email, :phone, :status, :username, :password)');
 $statement->execute(array (
   'name' => 'Maria Gonzales',
   'username' => 'maria',
@@ -24,7 +24,7 @@ $statement->execute(array (
   'status' => 'ACTIVE',
   'password' => '5f4dcc3b5aa765d61d8327deb882cf99',
 ));
-$statement = $connection->prepare('INSERT INTO users (name, username, avatar, email, phone, status, password) VALUES (:name, :username, :avatar, :email, :phone, :status, :password)');
+$statement = $connection->prepare('INSERT INTO users (name, avatar, email, phone, status, username, password) VALUES (:name, :avatar, :email, :phone, :status, :username, :password)');
 $statement->execute(array (
   'name' => 'Cesar Ferine',
   'username' => 'cesar',

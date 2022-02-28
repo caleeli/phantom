@@ -35,6 +35,7 @@
         const lower = word.toLowerCase();
         return word.charAt(0).toUpperCase() + lower.slice(1);
     };
+    initInputFieldDefaults(model, modelDefaults);
     if (params.id) {
         loadModel(params.id);
     }
@@ -43,15 +44,31 @@
             .get(id)
             .then((resource) => {
                 model = resource.attributes;
+                initInputFieldDefaults(model, modelDefaults);
+                model.fields.forEach((field) => {
+                    initInputFieldDefaults(field, fieldDefaults);
+                });
             });
+    }
+    function initInputFieldDefaults(model1, defaults) {
+        changed[model1] = {};
+        Object.keys(defaults).forEach((key) => {
+            const defaultValue = defaults[key]
+                ? new Function(
+                        ...Object.keys(model1),
+                        "return `" + defaults[key] + "`"
+                    )(...Object.values(model1))
+                : undefined;
+            const ch = model1[key] !== defaultValue && model1[key] !== null;
+            console.log(model1[key], '!==', defaultValue, JSON.stringify(ch));
+            changed[model1][key] = ch;
+        });
+        //console.log(changed, defaults);
     }
     function inputField(event, model1, defaults) {
         const name = event.target["name"];
         const value = event.target["value"];
-        if (!changed[model1]) {
-            changed[model1] = {};
-        }
-        changed[model1][name] = value !== null;
+        changed[model1][name] = true; //value !== null;
         Object.keys(defaults).forEach((key) => {
             const defaultValue = defaults[key]
                 ? new Function(
@@ -78,6 +95,7 @@
             showInUpdate: true,
         };
         model.fields.push(field);
+        initInputFieldDefaults(field, fieldDefaults);
         model = model;
     }
     function removeField(field) {
@@ -241,7 +259,7 @@ Fields <button on:click={addField}>+</button><br />
                 type="text"
                 bind:value={field.select}
                 on:input={(event) => inputField(event, field, fieldDefaults)}
-            />
+            />{changed[field]["select"] && " *"}
         </label>
         <label>
             Create (SQL):

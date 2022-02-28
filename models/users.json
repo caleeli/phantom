@@ -5,11 +5,11 @@
 	"id": "id",
 	"attributes": {
 		"name": "name",
-		"username": "username",
 		"avatar": "avatar",
 		"email": "email",
 		"phone": "phone",
-		"status": "status"
+		"status": "status",
+		"username": "username"
 	},
 	"where": [],
 	"filters": {
@@ -21,21 +21,21 @@
 	],
 	"create": {
 		"name": ":name",
-		"username": ":username",
 		"avatar": ":avatar",
 		"email": ":email",
 		"phone": ":phone",
 		"status": ":status",
-		"password": ":password"
+		"username": ":username",
+		"password": "${md5($password)}"
 	},
 	"update": {
 		"name": ":name",
-		"username": ":username",
 		"avatar": ":avatar",
 		"email": ":email",
 		"phone": ":phone",
 		"status": ":status",
-		"password": ":password"
+		"username": ":username",
+		"password": "${md5($password)}"
 	},
 	"delete": {},
 	"relationships": {
@@ -56,30 +56,41 @@
 		"_model": "Users",
 		"_models": "Users",
 		"name": "Name",
-		"username": "Username",
 		"avatar": "Avatar",
 		"email": "Email",
 		"phone": "Phone",
-		"status": "Status"
+		"status": "Status",
+		"username": "Username",
+		"password": "Password"
 	},
 	"ui": {
 		"name": {
-			"type": "text"
-		},
-		"username": {
-			"type": "text"
+			"type": "text",
+			"showInList": true
 		},
 		"avatar": {
-			"type": "image"
+			"type": "file",
+			"showInList": true
 		},
 		"email": {
-			"type": "email"
+			"type": "email",
+			"showInList": true
 		},
 		"phone": {
-			"type": "tel"
+			"type": "tel",
+			"showInList": true
 		},
 		"status": {
-			"type": "text"
+			"type": "text",
+			"showInList": true
+		},
+		"username": {
+			"type": "text",
+			"showInList": true
+		},
+		"password": {
+			"type": "password",
+			"showInList": false
 		},
 		"_actions": {
 			"control": "actions",

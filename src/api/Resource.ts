@@ -52,10 +52,12 @@ class Resource {
 
     // post resource
     public post(data: any): Promise<any> {
+        const body = (data instanceof FormData) ? data : JSON.stringify(data);
+        const headers = (data instanceof FormData) ? undefined: this.headers;
         return fetch(this.url, {
             method: 'POST',
-            headers: this.headers,
-            body: JSON.stringify(data)
+            headers,
+            body
         }).then(response => this.processResponse(response))
             .then(({ data }) => data)
     }

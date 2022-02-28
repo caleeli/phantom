@@ -124,15 +124,13 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         ];
         $ui = [];
         foreach ($config['fields'] as $field) {
-            if (empty($field['showInList'])) {
-                continue;
-            }
             if ($field['label']) {
                 $labels[$field['name']] = $field['label'];
             }
             if ($field['type']) {
                 $ui[$field['name']] = [
                     'type' => $field['type'],
+                    'showInList' => $field['showInList'],
                 ];
             }
         }

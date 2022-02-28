@@ -31,4 +31,20 @@ final class Expression implements ExpressionInterface
         }
         restore_error_handler();
     }
+
+    public function hasRequiredParams(array $params):bool
+    {
+        // parse php tokens of $this->expression
+        $tokens = token_get_all('<?php ' . $this->expression);
+        // check if all $varaibles are in $params
+        foreach ($tokens as $token) {
+            if (is_array($token) && $token[0] === T_VARIABLE) {
+                $variable = substr($token[1], 1);
+                if (!isset($params[$variable])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

@@ -9,6 +9,7 @@
 	import Menu from "../components/Menu.svelte";
 	import Topbar from "../components/Topbar.svelte";
 	import { _ } from "../helpers";
+	import FormFields from "./FormFields.svelte";
 	export let config = {
 		attributes: {},
 		ui: {},
@@ -27,7 +28,9 @@
 		throw "No config.ui defined";
 	}
 	tableConfig.headers = Object.keys(config.ui).reduce((headers, key) => {
-		const visible = !config.ui[key].hideInList;
+		const visible =
+			config.ui[key].showInList === undefined ||
+			config.ui[key].showInList;
 		if (visible) {
 			headers.push({
 				label: _(key),
@@ -37,7 +40,9 @@
 		return headers;
 	}, []);
 	tableConfig.cells = Object.keys(config.ui).reduce((cells, key) => {
-		const visible = !config.ui[key].hideInList;
+		const visible =
+			config.ui[key].showInList === undefined ||
+			config.ui[key].showInList;
 		if (visible) {
 			const col = indexToCol(colIndex);
 			cells[col] = Object.assign(
@@ -122,38 +127,6 @@
 		params.page = 1;
 		params.filter = [`findText(${JSON.stringify(textToFind)})`];
 	}
-	function prepareListParams(config, value) {
-		const params = { ...config.params };
-		params.filter = params.filter.map((filter) =>
-			new Function("value", "return `" + filter + "`")(
-				JSON.stringify(value)
-			)
-		);
-		return params;
-	}
-	function onChangeDataList(value, dataListId, config) {
-		if (!config || !config["on:select"]) {
-			return;
-		}
-		const options = window.document.getElementById(dataListId).options;
-		for (let i = 0; i < options.length; i++) {
-			if (options[i].value === value) {
-				const row = JSON.parse(options[i].getAttribute("row"));
-				const map = row.attributes;
-				const keys = Object.keys(map);
-				const values = keys.map((key) => JSON.stringify(map[key]));
-				config["on:select"].forEach((callback) => {
-					callback = new Function(
-						...keys,
-						"return `" + callback + "`"
-					)(...values);
-					new Function("set", ...keys, callback)((key, value) => {
-						registro.attributes[key] = value;
-					}, ...keys);
-				});
-			}
-		}
-	}
 	function loadMore() {
 		params.page++;
 		refreshList();
@@ -170,7 +143,7 @@
 			path={config.url}
 			bind:value={tableData}
 			bind:params
-			let:running={running}
+			let:running
 			attachPages={true}
 		>
 			<form
@@ -201,7 +174,7 @@
 					</div>
 					<div>
 						<input
-							class="search"
+							class="search w-100"
 							data-testid="filter"
 							bind:value={textToFind}
 							placeholder={_("Search")}
@@ -216,28 +189,61 @@
 					on:print={imprimir}
 				/>
 				<div class="center">
-					<br>
+					<br />
 					<button
 						data-testid="load-more"
 						type="button"
 						on:click|preventDefault={loadMore}
 					>
-						<svg width="12" height="12" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<svg
+							width="12"
+							height="12"
+							viewBox="0 0 26 26"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<g>
 								{#if running}
-								<animateTransform attributeName="transform"
-									attributeType="XML"
-									type="rotate"
-									from="0 13 13"
-									to="360 13 13"
-									dur="1s"
-									repeatCount="indefinite"/>
+									<animateTransform
+										attributeName="transform"
+										attributeType="XML"
+										type="rotate"
+										from="0 13 13"
+										to="360 13 13"
+										dur="1s"
+										repeatCount="indefinite"
+									/>
 								{/if}
-								<circle cx="21.0"               cy="13.0" 				r="3" fill="#7BDD76"/>
-								<circle cx="15.47213595499958"  cy="20.60845213036123" 	r="3" fill="#69A7FF"/>
-								<circle cx="6.527864045000421"  cy="17.702282018339787" r="3" fill="#E373FF"/>
-								<circle cx="6.52786404500042"   cy="8.297717981660217" 	r="3" fill="#FFB961"/>
-								<circle cx="15.472135954999578" cy="5.391547869638771" 	r="3" fill="#FF625B"/>
+								<circle
+									cx="21.0"
+									cy="13.0"
+									r="3"
+									fill="#7BDD76"
+								/>
+								<circle
+									cx="15.47213595499958"
+									cy="20.60845213036123"
+									r="3"
+									fill="#69A7FF"
+								/>
+								<circle
+									cx="6.527864045000421"
+									cy="17.702282018339787"
+									r="3"
+									fill="#E373FF"
+								/>
+								<circle
+									cx="6.52786404500042"
+									cy="8.297717981660217"
+									r="3"
+									fill="#FFB961"
+								/>
+								<circle
+									cx="15.472135954999578"
+									cy="5.391547869638771"
+									r="3"
+									fill="#FF625B"
+								/>
 							</g>
 						</svg>
 						{_("Load more")}
@@ -251,58 +257,7 @@
 <dialog bind:this={create}>
 	{#if registro && config.create}
 		<form style="min-width:50vw">
-			<dl>
-				{#each Object.entries(config.create) as [key, value]}
-					{#if !config.ui[key]?.hideInCreate}
-						<dt>{_(key)}</dt>
-						<dd>
-							<input
-								data-testid={`create-${key}`}
-								type={config.ui[key]?.type || "text"}
-								value={registro.attributes[key]}
-								on:input={(event) => {
-									registro.attributes[key] = event.target.value;
-								}}
-								on:change={(event) => {
-									onChangeDataList(
-										event.target.value,
-										`list-${key}`,
-										config.ui[key].list
-									);
-								}}
-								list={config.ui[key]?.list
-									? `list-${key}`
-									: undefined}
-							/>
-							{#if config.ui[key]?.list}
-								<datalist id={`list-${key}`}>
-									<Api
-										path={config.ui[key].list.model}
-										params={prepareListParams(
-											config.ui[key].list,
-											registro.attributes[key]
-										)}
-										let:response={options}
-									>
-										{#each options as option}
-											<option
-												value={option.attributes[
-													config.ui[key].list.value
-												]}
-												row={JSON.stringify(option)}
-											>
-												{option.attributes[
-													config.ui[key].list.text
-												]}
-											</option>
-										{/each}
-									</Api>
-								</datalist>
-							{/if}
-						</dd>
-					{/if}
-				{/each}
-			</dl>
+			<FormFields {config} bind:registro dataTest="create" />
 			<footer>
 				<button
 					type="submit"
@@ -325,21 +280,7 @@
 <dialog bind:this={edit}>
 	{#if registro && config.update}
 		<form style="min-width:50vw">
-			<dl>
-				{#each Object.entries(config.update) as [key, value]}
-					<dt>{_(key)}</dt>
-					<dd>
-						<input
-							data-testid={`edit-${key}`}
-							type={config.ui[key]?.type || "text"}
-							value={registro.attributes[key]}
-							on:input={(event) => {
-								registro.attributes[key] = event.target.value;
-							}}
-						/>
-					</dd>
-				{/each}
-			</dl>
+			<FormFields {config} bind:registro dataTest="edit" />
 			<footer>
 				<button
 					type="submit"
@@ -393,9 +334,3 @@
 		</dl>
 	</form>
 {/if}
-
-<style>
-	input {
-		width: 100%;
-	}
-</style>

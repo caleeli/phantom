@@ -53,17 +53,18 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
     public function update($id, array $data)
     {
         $set = [];
+        $params = $data['data']['attributes'];
         foreach ($this->definition['update'] as $name => $value) {
-            $set[] = "$name = $value";
+            if (!$this->hasRequiredParams($value, $params)) {
+                continue;
+            }
+            $set[] = "$name = " . $this->parseExpressionsInQuery($value, $params);
         }
         $set = implode(',', $set);
         $sql = "UPDATE `{$this->definition['table']}` SET {$set} WHERE {$this->definition['id']} = :id";
-        error_log($sql);
-        var_dump($data['data']['attributes']);
-        $statement = $this->connection->prepare($sql);
-        $success = $statement->execute($data['data']['attributes']);
+        $this->query($sql, $params);
         return [
-            'success' => $success,
+            'success' => true,
         ];
     }
 
