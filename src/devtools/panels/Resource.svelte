@@ -39,6 +39,15 @@
     if (params.id) {
         loadModel(params.id);
     }
+    function keyOf(object) {
+        if (!window.listOfObjects) {
+            window.listOfObjects = [];
+        }
+        if (window.listOfObjects.indexOf(object) === -1) {
+            window.listOfObjects.push(object);
+        }
+        return window.listOfObjects.indexOf(object);
+    }
     function loadModel(id) {
         api(apiBase + "resource")
             .get(id)
@@ -51,7 +60,8 @@
             });
     }
     function initInputFieldDefaults(model1, defaults) {
-        changed[model1] = {};
+        const model1Key = keyOf(model1);
+        changed[model1Key] = {};
         Object.keys(defaults).forEach((key) => {
             const defaultValue = defaults[key]
                 ? new Function(
@@ -60,15 +70,14 @@
                     )(...Object.values(model1))
                 : undefined;
             const ch = model1[key] !== defaultValue && model1[key] !== null;
-            console.log(model1[key], '!==', defaultValue, JSON.stringify(ch));
-            changed[model1][key] = ch;
+            changed[model1Key][key] = ch;
         });
-        //console.log(changed, defaults);
     }
     function inputField(event, model1, defaults) {
         const name = event.target["name"];
         const value = event.target["value"];
-        changed[model1][name] = true; //value !== null;
+        const model1Key = keyOf(model1);
+        changed[model1Key][name] = true;
         Object.keys(defaults).forEach((key) => {
             const defaultValue = defaults[key]
                 ? new Function(
@@ -76,7 +85,7 @@
                       "return `" + defaults[key] + "`"
                   )(...Object.values(model1))
                 : undefined;
-            if (!changed[model1][key] && defaultValue !== undefined) {
+            if (!changed[model1Key][key] && defaultValue !== undefined) {
                 model1[key] = defaultValue;
             }
         });
@@ -259,7 +268,7 @@ Fields <button on:click={addField}>+</button><br />
                 type="text"
                 bind:value={field.select}
                 on:input={(event) => inputField(event, field, fieldDefaults)}
-            />{changed[field]["select"] && " *"}
+            />
         </label>
         <label>
             Create (SQL):
