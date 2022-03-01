@@ -31,22 +31,23 @@
     };
     let changed = {};
     let response = "";
+    let listOfObjects = [];
+    function keyOf(object) {
+        if (!listOfObjects) {
+            listOfObjects = [];
+        }
+        if (listOfObjects.indexOf(object) === -1) {
+            listOfObjects.push(object);
+        }
+        return listOfObjects.indexOf(object);
+    }
+    initInputFieldDefaults(model, modelDefaults);
     window["capitalize"] = function (word) {
         const lower = word.toLowerCase();
         return word.charAt(0).toUpperCase() + lower.slice(1);
     };
-    initInputFieldDefaults(model, modelDefaults);
     if (params.id) {
         loadModel(params.id);
-    }
-    function keyOf(object) {
-        if (!window.listOfObjects) {
-            window.listOfObjects = [];
-        }
-        if (window.listOfObjects.indexOf(object) === -1) {
-            window.listOfObjects.push(object);
-        }
-        return window.listOfObjects.indexOf(object);
     }
     function loadModel(id) {
         api(apiBase + "resource")
@@ -65,9 +66,9 @@
         Object.keys(defaults).forEach((key) => {
             const defaultValue = defaults[key]
                 ? new Function(
-                        ...Object.keys(model1),
-                        "return `" + defaults[key] + "`"
-                    )(...Object.values(model1))
+                      ...Object.keys(model1),
+                      "return `" + defaults[key] + "`"
+                  )(...Object.values(model1))
                 : undefined;
             const ch = model1[key] !== defaultValue && model1[key] !== null;
             changed[model1Key][key] = ch;
