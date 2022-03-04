@@ -2,6 +2,7 @@
 	import { _ } from "../helpers";
 	import Api from "./Api.svelte";
 	import api from "../api";
+	import InputFile from "./InputFile.svelte";
 
 	export let config;
 	export let registro;
@@ -15,6 +16,8 @@
 			.then((data) => {
 				target[key] = data.attributes.url;
 				registro = registro;
+				// clean select file
+				fileupload.value = "";
 			});
 	}
 	function prepareListParams(config, value) {
@@ -58,17 +61,14 @@
 			<dt>{_(key)}</dt>
 			<dd>
 				{#if config.ui[key]?.type === "file"}
-					{registro.attributes[key]}
-					<input
+					<InputFile
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}
 						type={config.ui[key]?.type || "text"}
-						placeholder={registro.attributes[key]}
+						value={registro.attributes[key]}
 						on:input={(event) => {
-							registro.attributes[key] = event.target.value;
-						}}
-						on:change={(event) => {
-							uploadFile(event.target, registro.attributes, key);
+							console.log(event);
+							registro.attributes[key] = (event.target || event.detail).value;
 						}}
 					/>
 				{:else}

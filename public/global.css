@@ -526,7 +526,7 @@ label {
 	display: block;
 }
 
-input, button, select, textarea {
+input, button, select, textarea, .input {
 	font-family: inherit;
 	font-size: inherit;
 	-webkit-padding: 0.4rem 0;
