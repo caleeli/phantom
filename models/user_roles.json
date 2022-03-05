@@ -1,8 +1,8 @@
 {
 	"class": "JsonApi",
 	"url": "user_roles",
-	"table": "roles",
-	"join": "left join user_roles on (roles.id = user_roles.role_id and user_roles.user_id = :user_id)",
+	"table": "",
+	"join": "roles left join user_roles on (roles.id = user_roles.role_id and user_roles.user_id = :user_id)",
 	"id": "user_roles.id",
 	"attributes": {
 		"role_id": "roles.id",
@@ -11,7 +11,39 @@
 	},
 	"where": [],
 	"filters": {},
-	"create": null,
-	"update": null,
-	"delete": null
+	"sort": [],
+	"create": {},
+	"update": {},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "User_Roles",
+		"_models": "User_Roles",
+		"role_id": "Role ID",
+		"name": "Name",
+		"enabled": "Enabled"
+	},
+	"ui": {
+		"role_id": {
+			"type": "text",
+			"showInList": true
+		},
+		"name": {
+			"type": "text",
+			"showInList": true
+		},
+		"enabled": {
+			"type": "text",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"view",
+				"print"
+			]
+		}
+	}
 }

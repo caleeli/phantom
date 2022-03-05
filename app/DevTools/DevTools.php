@@ -52,7 +52,6 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         $filename = '.phantom_dev/' . $config['name'] . '.json';
         file_put_contents($filename, json_encode($config, JSON_PRETTY_PRINT));
         // create migration
-        $table = $config['table'];
         $id = $config['id'];
         $fields = [];
         $fieldNames = [];
@@ -65,22 +64,24 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         $fields = implode(', ', $fields);
         $fieldNamesSql = implode(', ', $fieldNames);
         $fieldBindsSql = implode(', ', $fieldBinds);
-        $migration = <<<EOF
-        <?php
-        \n\$connection->exec('DROP TABLE IF EXISTS {$table}');\n
-        \n\$connection->exec('CREATE TABLE {$table} ({$id} INTEGER PRIMARY KEY, {$fields})');\n
-        EOF;
-        $data = $config['data'];
-        foreach ($data as $row) {
-            $params = \var_export($row, true);
-            $migration .= <<<EOF
-            \$statement = \$connection->prepare('INSERT INTO {$table} ({$fieldNamesSql}) VALUES ({$fieldBindsSql})');
-            \$statement->execute({$params});\n
+        $table = $config['table'] ?? '';
+        if ($table) {
+            $migration = <<<EOF
+            <?php
+            \n\$connection->exec('DROP TABLE IF EXISTS {$table}');\n
+            \n\$connection->exec('CREATE TABLE {$table} ({$id} INTEGER PRIMARY KEY, {$fields})');\n
             EOF;
+            $data = $config['data'];
+            foreach ($data as $row) {
+                $params = \var_export($row, true);
+                $migration .= <<<EOF
+                \$statement = \$connection->prepare('INSERT INTO {$table} ({$fieldNamesSql}) VALUES ({$fieldBindsSql})');
+                \$statement->execute({$params});\n
+                EOF;
+            }
+            $migrationFilename = 'migrations/' . $table . '.php';
+            file_put_contents($migrationFilename, $migration);
         }
-        $migrationFilename = 'migrations/' . $table . '.php';
-        file_put_contents($migrationFilename, $migration);
-
         // create model
         $attributes = [];
         foreach ($config['fields'] as $field) {
@@ -143,6 +144,7 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             'class' => 'JsonApi',
             'url' => $config['url'],
             'table' => $table,
+            'join' => $config['join'] ?? null,
             'id' => $id,
             'attributes' => $attributes,
             'where' => $where,
@@ -155,6 +157,9 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             'labels' => $labels,
             'ui' => $ui,
         ];
+        if (empty($model['join'])) {
+            unset($model['join']);
+        }
         $modelFilename = 'models/' . $config['name'] . '.json';
         file_put_contents($modelFilename, \str_replace('    ', "\t", json_encode($model, JSON_PRETTY_PRINT)));
     }

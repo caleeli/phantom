@@ -1,0 +1,51 @@
+{
+    "name": "user_roles",
+    "table": "",
+    "join": "roles left join user_roles on (roles.id = user_roles.role_id and user_roles.user_id = :user_id)",
+    "url": "user_roles",
+    "id": "user_roles.id",
+    "fields": [
+        {
+            "name": "role_id",
+            "typeDB": "",
+            "type": "text",
+            "select": "roles.id",
+            "create": "",
+            "update": "",
+            "showInList": true,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "label": "Role ID"
+        },
+        {
+            "name": "name",
+            "typeDB": "",
+            "type": "text",
+            "select": "roles.name",
+            "create": "",
+            "update": "",
+            "showInList": true,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "label": "Name"
+        },
+        {
+            "name": "enabled",
+            "typeDB": "",
+            "type": "text",
+            "select": "user_roles.id",
+            "create": "",
+            "update": "",
+            "showInList": true,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "label": "Enabled"
+        }
+    ],
+    "where": "",
+    "sort": "",
+    "filters": [],
+    "data": [],
+    "actions": "edit,view,print",
+    "relationships": []
+}

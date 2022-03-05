@@ -9,6 +9,7 @@
     let model = {
         name: "",
         table: "",
+        join: "",
         url: "",
         id: "id",
         fields: [],
@@ -186,6 +187,15 @@
     <input
         name="table"
         bind:value={model.table}
+        on:input={(event) => inputField(event, model, modelDefaults)}
+    />
+</label>
+
+<label>
+    Join:
+    <input
+        name="join"
+        bind:value={model.join}
         on:input={(event) => inputField(event, model, modelDefaults)}
     />
 </label>

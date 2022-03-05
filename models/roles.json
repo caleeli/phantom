@@ -1,0 +1,42 @@
+{
+	"class": "JsonApi",
+	"url": "roles",
+	"table": "roles",
+	"id": "id",
+	"attributes": {
+		"name": "name"
+	},
+	"where": [],
+	"filters": {},
+	"sort": [
+		"name"
+	],
+	"create": {
+		"name": ":name"
+	},
+	"update": {
+		"name": ":name"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Roles",
+		"_models": "Roles",
+		"name": "Name"
+	},
+	"ui": {
+		"name": {
+			"type": "text",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"view",
+				"print"
+			]
+		}
+	}
+}

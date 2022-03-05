@@ -1,0 +1,39 @@
+{
+    "name": "roles",
+    "table": "roles",
+    "url": "roles",
+    "id": "id",
+    "fields": [
+        {
+            "name": "name",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "name",
+            "create": ":name",
+            "update": ":name",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Name"
+        }
+    ],
+    "where": "",
+    "sort": "name",
+    "filters": [],
+    "data": [
+        {
+            "name": "Admin"
+        },
+        {
+            "name": "Director"
+        },
+        {
+            "name": "Auditor"
+        },
+        {
+            "name": "Cajero"
+        }
+    ],
+    "actions": "edit,view,print",
+    "relationships": []
+}
