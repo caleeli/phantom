@@ -106,6 +106,46 @@ class Sheet {
 	public getValue(col: number, row: number): any {
 		return get(this.data[row], this.cell[row][col].value);
 	}
+	// Check if cell is the first in a group or TRUE if not
+	public firstInGroup(row, col): boolean {
+		if (!this.cell[row][col].groupRows) {
+			return true;
+		}
+		if (row === 0) {
+			return true;
+		}
+		return this.ref[`${row},${col}`] !== this.ref[`${row - 1},${col}`];
+	}
+	// Calculate rowspan of cell
+	public rowspan(row, col): number {
+		if (!this.cell[row][col].groupRows) {
+			return 1;
+		}
+		const count = this.cell.length;
+		let rowspan = 0;
+		const value = get(this.data[row], this.cell[row][col].value);
+		for(;row<count; row++) {
+			if (get(this.data[row], this.cell[row][col].value) === value) {
+				rowspan++;
+			}
+		}
+		return rowspan;
+	}
+	// Calculate colspan of cell
+	public colspan(row, col): number {
+		if (!this.cell[row][col].groupCols) {
+			return 1;
+		}
+		const count = this.cell[row].length;
+		let colspan = 0;
+		const value = get(this.data[row], this.cell[row][col].value);
+		for(;col<count; col++) {
+			if (get(this.data[row], this.cell[row][col].value) === value) {
+				colspan++;
+			}
+		}
+		return colspan;
+	}
 }
 
 export function currency(number) {

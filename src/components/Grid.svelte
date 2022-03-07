@@ -29,8 +29,12 @@
 			{#each value as data, row}
 				<tr>
 					{#each config.headers as header, col}
-						{#if sheet.cell[row]}
-							<td align={sheet.cell[row][col].align}>
+						{#if sheet.cell[row] && sheet.firstInGroup(row, col)}
+							<td
+								align={sheet.cell[row][col].align}
+								rowspan={sheet.rowspan(row, col)}
+								colspan={sheet.colspan(row, col)}
+							>
 								{#if sheet.cell[row][col].control === "checkbox"}
 									<input
 										type="checkbox"
