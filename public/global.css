@@ -175,9 +175,8 @@ button:hover {
 	transform: translate(var(--_elevacion), var(--_elevacion));
 }
 button:focus {
-	box-shadow:  var(--elevacion) var(--elevacion) var(--elevacion) rgba(0, 0, 0, .5), 0 0 10px rgba(0, 0, 0, .5);
-	transform: translate(var(--_elevacion), var(--_elevacion));
-	outline: none;
+	box-shadow: 0px 0px 0px rgba(0, 0, 0, .5), 0 0 10px rgba(0, 0, 0, .2);
+	transform: translate(0px, 0px);
 }
 button:active {
 	box-shadow: 0px 0px 0px rgba(0, 0, 0, .5), 0 0 10px rgba(0, 0, 0, .2);
