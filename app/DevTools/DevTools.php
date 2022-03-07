@@ -132,7 +132,19 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
                 $ui[$field['name']] = [
                     'type' => $field['type'],
                     'showInList' => $field['showInList'],
+                    'showInCreate' => $field['showInCreate'],
+                    'showInUpdate' => $field['showInUpdate'],
+                    'groupRows' => $field['groupRows'],
                 ];
+                if (!$ui[$field['name']]['groupRows']) {
+                    unset($ui[$field['name']]['groupRows']);
+                }
+                if ($ui[$field['name']]['showInCreate']) {
+                    unset($ui[$field['name']]['showInCreate']);
+                }
+                if ($ui[$field['name']]['showInUpdate']) {
+                    unset($ui[$field['name']]['showInUpdate']);
+                }
             }
         }
         $ui['_actions'] = [

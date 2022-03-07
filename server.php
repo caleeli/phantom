@@ -56,6 +56,7 @@ $connection->exec('INSERT INTO permissions (id, name) VALUES (3, "clientes")');
 $connection->exec('INSERT INTO permissions (id, name) VALUES (4, "creditos")');
 $connection->exec('INSERT INTO permissions (id, name) VALUES (5, "usuarios")');
 $connection->exec('INSERT INTO permissions (id, name) VALUES (6, "perfil")');
+$connection->exec('INSERT INTO permissions (id, name) VALUES (7, "plan anual")');
 // insert role permissions
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 1)');
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 2)');
@@ -63,6 +64,7 @@ $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES 
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 4)');
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 5)');
 $connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 6)');
+$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 7)');
 // insert sample tasks
 $connection->exec('INSERT INTO tasks (task_id, title, body, task_usr_id, created_at, updated_at) VALUES (1, "Task 1", "Task 1 body", 1, "2020-01-01 00:00:00", "2020-01-01 00:00:00")');
 $connection->exec('INSERT INTO tasks (task_id, title, body, task_usr_id, created_at, updated_at) VALUES (2, "Task 2", "Task 2 body", 1, "2020-01-02 00:00:00", "2020-01-02 00:00:00")');

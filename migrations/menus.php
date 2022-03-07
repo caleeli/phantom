@@ -11,22 +11,8 @@ $statement->execute(array (
   'icon' => 'tachometer-alt',
   'href' => '/dashboard',
 ));
-
-var_dump(array (
-  'name' => 'Cuadro de Mando',
-  'permission' => 'cuadro de mando',
-  'icon' => 'tachometer-alt',
-  'href' => '/dashboard',
-));
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
-  'name' => 'Cajas',
-  'permission' => 'cajas',
-  'icon' => 'cash-register',
-  'href' => '/cajas',
-));
-
-var_dump(array (
   'name' => 'Cajas',
   'permission' => 'cajas',
   'icon' => 'cash-register',
@@ -39,22 +25,8 @@ $statement->execute(array (
   'icon' => 'user-tie',
   'href' => '/clientes',
 ));
-
-var_dump(array (
-  'name' => 'Clientes',
-  'permission' => 'clientes',
-  'icon' => 'user-tie',
-  'href' => '/clientes',
-));
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
-  'name' => 'Créditos',
-  'permission' => 'creditos',
-  'icon' => 'credit-card',
-  'href' => '/creditos',
-));
-
-var_dump(array (
   'name' => 'Créditos',
   'permission' => 'creditos',
   'icon' => 'credit-card',
@@ -67,13 +39,6 @@ $statement->execute(array (
   'icon' => 'users',
   'href' => '/admin/users',
 ));
-
-var_dump(array (
-  'name' => 'Usuarios',
-  'permission' => 'usuarios',
-  'icon' => 'users',
-  'href' => '/admin/users',
-));
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
   'name' => 'Perfil',
@@ -81,10 +46,10 @@ $statement->execute(array (
   'icon' => 'user',
   'href' => '/admin/profile',
 ));
-
-var_dump(array (
-  'name' => 'Perfil',
-  'permission' => 'perfil',
-  'icon' => 'user',
-  'href' => '/admin/profile',
+$statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
+$statement->execute(array (
+  'name' => 'Plan Anual',
+  'permission' => 'plan anual',
+  'icon' => 'calendar',
+  'href' => '/plan_anual',
 ));

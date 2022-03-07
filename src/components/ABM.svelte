@@ -43,6 +43,12 @@
 		const visible =
 			config.ui[key].showInList === undefined ||
 			config.ui[key].showInList;
+		const showInCreate =
+			config.ui[key].showInCreate === undefined ||
+			config.ui[key].showInCreate;
+		const showInUpdate =
+			config.ui[key].showInUpdate === undefined ||
+			config.ui[key].showInUpdate;
 		if (visible) {
 			const col = indexToCol(colIndex);
 			cells[col] = Object.assign(
@@ -50,6 +56,9 @@
 					value: `attributes.${key}`,
 					format: config.ui[key]?.format,
 					align: config.ui[key]?.align || "left",
+					showInCreate: showInCreate,
+					showInUpdate: showInUpdate,
+					groupRows: config.ui[key]?.groupRows,
 				},
 				config.ui[key]
 			);

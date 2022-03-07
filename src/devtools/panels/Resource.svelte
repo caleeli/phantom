@@ -104,6 +104,7 @@
             showInList: true,
             showInCreate: true,
             showInUpdate: true,
+            groupRows: false,
         };
         model.fields.push(field);
         initInputFieldDefaults(field, fieldDefaults);
@@ -322,6 +323,14 @@ Fields <button on:click={addField}>+</button><br />
                 bind:checked={field.showInUpdate}
             />
             update
+        </label>
+        <label>
+            <input
+                name="groupRows"
+                type="checkbox"
+                bind:checked={field.groupRows}
+            />
+            group rows
         </label>
     </div>
 {/each}

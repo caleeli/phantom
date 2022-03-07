@@ -1,0 +1,91 @@
+{
+    "name": "plan_anual",
+    "table": "plan_anual",
+    "join": "",
+    "url": "plan_anual",
+    "id": "id",
+    "fields": [
+        {
+            "name": "objetivo",
+            "typeDB": "text",
+            "type": "text",
+            "select": "objetivo",
+            "create": ":objetivo",
+            "update": ":objetivo",
+            "showInList": true,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "label": "Objetivo",
+            "groupRows": true
+        },
+        {
+            "name": "indicador",
+            "typeDB": "text",
+            "type": "text",
+            "select": "indicador",
+            "create": ":indicador",
+            "update": ":indicador",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Indicador"
+        },
+        {
+            "name": "meta",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "meta",
+            "create": ":meta",
+            "update": ":meta",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Meta"
+        },
+        {
+            "name": "actividad",
+            "typeDB": "text",
+            "type": "text",
+            "select": "actividad",
+            "create": ":actividad",
+            "update": ":actividad",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Actividad"
+        },
+        {
+            "name": "periodo",
+            "typeDB": "text",
+            "type": "text",
+            "select": "periodo",
+            "create": ":periodo",
+            "update": ":periodo",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Periodo"
+        }
+    ],
+    "where": "",
+    "sort": "",
+    "filters": [],
+    "data": [
+        {
+            "objetivo": "Objetivo 1",
+            "indicador": "porcentaje 1",
+            "meta": "100%",
+            "actividad": "Completar el porcentaje de uno",
+            "periodo": "enero,febrero"
+        },
+        {
+            "objetivo": "Objetivo 1",
+            "indicador": "valor 2",
+            "meta": "5.6",
+            "actividad": "Subir el valor de dos a 5.6",
+            "periodo": "febrero,marzo"
+        }
+    ],
+    "actions": "edit",
+    "relationships": []
+}

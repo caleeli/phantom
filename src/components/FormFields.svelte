@@ -57,7 +57,7 @@
 
 <dl>
 	{#each Object.entries(config.create) as [key, value]}
-		{#if !config.ui[key]?.hideInCreate}
+		{#if config.ui[key]?.showInCreate === undefined || config.ui[key]?.showInCreate}
 			<dt>{_(key)}</dt>
 			<dd>
 				{#if config.ui[key]?.type === "file"}

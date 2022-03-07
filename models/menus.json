@@ -1,64 +1,68 @@
 {
-    "class": "JsonApi",
-    "url": "menus",
-    "table": "menus",
-    "id": "id",
-    "attributes": {
-        "name": "name",
-        "permission": "permission",
-        "icon": "icon",
-        "href": "href"
-    },
-    "where": [],
-    "filters": {
-        "fromLoggedUser()": "and permission in (select name from permissions join role_permissions on (permissions.id = role_permissions.permission_id and role_permissions.role_id in (select role_id from user_roles where user_id = ${session($_request)->user_id})))"
-    },
-    "sort": [
-        "id"
-    ],
-    "create": {
-        "name": ":name",
-        "permission": ":permission",
-        "icon": ":icon",
-        "href": ":href"
-    },
-    "update": {
-        "name": ":name",
-        "permission": ":permission",
-        "icon": ":icon",
-        "href": ":href"
-    },
-    "delete": [],
-    "relationships": [],
-    "labels": {
-        "_model": "Menus",
-        "_models": "Menus",
-        "name": "Name",
-        "permission": "Permission",
-        "icon": "Icon",
-        "href": "href"
-    },
-    "ui": {
-        "name": {
-            "type": "text"
-        },
-        "permission": {
-            "type": "text"
-        },
-        "icon": {
-            "type": "text"
-        },
-        "href": {
-            "type": "text"
-        },
-        "_actions": {
-            "control": "actions",
-            "value": "attributes.id",
-            "actions": [
-                "edit",
-                "view",
-                "print"
-            ]
-        }
-    }
+	"class": "JsonApi",
+	"url": "menus",
+	"table": "menus",
+	"id": "id",
+	"attributes": {
+		"name": "name",
+		"permission": "permission",
+		"icon": "icon",
+		"href": "href"
+	},
+	"where": [],
+	"filters": {
+		"fromLoggedUser()": "and permission in (select name from permissions join role_permissions on (permissions.id = role_permissions.permission_id and role_permissions.role_id in (select role_id from user_roles where user_id = ${session($_request)->user_id})))"
+	},
+	"sort": [
+		"id"
+	],
+	"create": {
+		"name": ":name",
+		"permission": ":permission",
+		"icon": ":icon",
+		"href": ":href"
+	},
+	"update": {
+		"name": ":name",
+		"permission": ":permission",
+		"icon": ":icon",
+		"href": ":href"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Menus",
+		"_models": "Menus",
+		"name": "Name",
+		"permission": "Permission",
+		"icon": "Icon",
+		"href": "href"
+	},
+	"ui": {
+		"name": {
+			"type": "text",
+			"showInList": true
+		},
+		"permission": {
+			"type": "text",
+			"showInList": true
+		},
+		"icon": {
+			"type": "text",
+			"showInList": true
+		},
+		"href": {
+			"type": "text",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"view",
+				"print"
+			]
+		}
+	}
 }

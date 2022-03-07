@@ -1,0 +1,73 @@
+{
+	"class": "JsonApi",
+	"url": "plan_anual",
+	"table": "plan_anual",
+	"id": "id",
+	"attributes": {
+		"objetivo": "objetivo",
+		"indicador": "indicador",
+		"meta": "meta",
+		"actividad": "actividad",
+		"periodo": "periodo"
+	},
+	"where": [],
+	"filters": {},
+	"sort": [],
+	"create": {
+		"objetivo": ":objetivo",
+		"indicador": ":indicador",
+		"meta": ":meta",
+		"actividad": ":actividad",
+		"periodo": ":periodo"
+	},
+	"update": {
+		"objetivo": ":objetivo",
+		"indicador": ":indicador",
+		"meta": ":meta",
+		"actividad": ":actividad",
+		"periodo": ":periodo"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Plan_Anual",
+		"_models": "Plan_Anual",
+		"objetivo": "Objetivo",
+		"indicador": "Indicador",
+		"meta": "Meta",
+		"actividad": "Actividad",
+		"periodo": "Periodo"
+	},
+	"ui": {
+		"objetivo": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false,
+			"groupRows": true
+		},
+		"indicador": {
+			"type": "text",
+			"showInList": true
+		},
+		"meta": {
+			"type": "text",
+			"showInList": true
+		},
+		"actividad": {
+			"type": "text",
+			"showInList": true
+		},
+		"periodo": {
+			"type": "text",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit"
+			]
+		}
+	}
+}

@@ -98,6 +98,12 @@
             "permission": "perfil",
             "icon": "user",
             "href": "\/admin\/profile"
+        },
+        {
+            "name": "Plan Anual",
+            "permission": "plan anual",
+            "icon": "calendar",
+            "href": "\/plan_anual"
         }
     ],
     "actions": "edit,view,print"

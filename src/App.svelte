@@ -13,6 +13,7 @@
 	import Creditos from "./pages/Creditos.svelte";
 	import Clientes from "./pages/Clientes.svelte";
 	import AdminUsers from "./pages/AdminUsers.svelte";
+	import PlanAnual from "./pages/PlanAnual.svelte";
 	const routes = {
 		"/": Login,
 		"/home": Home,
@@ -25,6 +26,7 @@
 		"/cajas": Cajas,
 		"/creditos": Creditos,
 		"/clientes": Clientes,
+		"/plan_anual": PlanAnual,
 	};
 </script>
 
