@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { _ } from "../../helpers";
+	import { translations as _ } from "../../helpers";
 	import api from "../../api";
 
 	const env = process.env;

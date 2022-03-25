@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
     import { push } from "svelte-spa-router";
     import Auth from '../Auth';
-    import { _ } from '../helpers';
+    import { translations as _ } from '../helpers';
 
 	let username;
 	let password;

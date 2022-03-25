@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { _ } from "../helpers";
+  import { translations as _ } from "../helpers";
   export let width = "auto";
   export let colspan = "1";
   export let value;

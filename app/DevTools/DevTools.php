@@ -119,9 +119,10 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
                 'params' => $params,
             ];
         }
+        $plural = ucwords(str_replace('_', ' ', $config['name']), " \t\r\n\f\v");
         $labels = [
-            '_model' => ucwords($config['name'], "_ \t\r\n\f\v"),
-            '_models' => ucwords($config['name'], "_ \t\r\n\f\v"),
+            '_model' => $this->textToSingular($plural),
+            '_models' => $plural,
         ];
         $ui = [];
         foreach ($config['fields'] as $field) {
@@ -134,7 +135,7 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
                     'showInList' => $field['showInList'],
                     'showInCreate' => $field['showInCreate'],
                     'showInUpdate' => $field['showInUpdate'],
-                    'groupRows' => $field['groupRows'],
+                    'groupRows' => $field['groupRows'] ?? false,
                 ];
                 if (!$ui[$field['name']]['groupRows']) {
                     unset($ui[$field['name']]['groupRows']);
@@ -152,6 +153,17 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             'value' => 'attributes.id',
             'actions' => explode(',', $config['actions']),
         ];
+        $createButtons = $config['createButtons'] ?? [];
+        foreach($createButtons as $i => $button) {
+            $button_attributes = [];
+            foreach ($button['attributes'] as $key => $value) {
+                if ($value) {
+                    $button_attributes[$key] = json_decode($value);
+                }
+            }
+            $button['attributes'] = $button_attributes;
+            $createButtons[$i] = $button;
+        }
         $model = [
             'class' => 'JsonApi',
             'url' => $config['url'],
@@ -168,11 +180,24 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             'relationships' => (object) $relationships,
             'labels' => $labels,
             'ui' => $ui,
+            'createButtons' => $createButtons,
         ];
         if (empty($model['join'])) {
             unset($model['join']);
         }
+        if (empty($model['createButtons'])) {
+            unset($model['createButtons']);
+        }
         $modelFilename = 'models/' . $config['name'] . '.json';
         file_put_contents($modelFilename, \str_replace('    ', "\t", json_encode($model, JSON_PRETTY_PRINT)));
+    }
+
+    private function textToSingular($text)
+    {
+        if ($_ENV['language'] === 'en') {
+            $text = preg_replace('/ies$/', 'y', $text);
+        }
+        $text = preg_replace('/s$/', '', $text);
+        return $text;
     }
 }

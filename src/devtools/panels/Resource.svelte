@@ -19,6 +19,7 @@
         data: [],
         actions: "edit,view,print",
         relationships: [],
+        createButtons: [],
     };
     let modelDefaults = {
         table: "${name}",
@@ -170,6 +171,23 @@
             value: "",
         };
         relationship.params.push(param);
+        model = model;
+    }
+    function addCreateButton() {
+        if (!model.createButtons) {
+            model.createButtons = [];
+        }
+        const button = {
+            name: "",
+            icon: "plus",
+            type: "submit",
+            attributes: {},
+        };
+        model.createButtons.push(button);
+        model = model;
+    }
+    function removeCreateButton(button) {
+        model.createButtons.splice(model.createButtons.indexOf(button), 1);
         model = model;
     }
 </script>
@@ -454,6 +472,39 @@ Initial Data:<button on:click={addData}>+</button><br />
         </tr>
     {/each}
 </table>
+
+<hr />
+Custom Create Buttons:<button on:click={addCreateButton}>+</button><br />
+<table>
+    <tr>
+        <th />
+        <th>name</th>
+        <th>icon</th>
+        <th>type</th>
+        {#each model.fields as field}
+            <th>{field.label}</th>
+        {/each}
+    </tr>
+    {#each (model.createButtons || []) as row}
+        <tr>
+            <td><button on:click={() => removeCreateButton(row)}>-</button></td>
+            <td><input bind:value={row.name} /></td>
+            <td><input bind:value={row.icon} /></td>
+            <td>
+                <select bind:value={row.type}>
+                    <option value=""></option>
+                    <option value="button">button</option>
+                    <option value="reset">reset</option>
+                    <option value="submit">submit</option>
+                </select>
+            </td>
+            {#each model.fields as field}
+                <td><input bind:value={row.attributes[field.name]} /></td>
+            {/each}
+        </tr>
+    {/each}
+</table>
+
 <hr />
 <button on:click={createResource}>SAVE</button>
 

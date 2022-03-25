@@ -30,8 +30,8 @@
 	"delete": {},
 	"relationships": {},
 	"labels": {
-		"_model": "Plan_Anual",
-		"_models": "Plan_Anual",
+		"_model": "Plan Anual",
+		"_models": "Plan Anual",
 		"objetivo": "Objetivo",
 		"indicador": "Indicador",
 		"meta": "Meta",
@@ -40,7 +40,7 @@
 	},
 	"ui": {
 		"objetivo": {
-			"type": "text",
+			"type": "textarea",
 			"showInList": true,
 			"showInCreate": false,
 			"showInUpdate": false,
@@ -55,7 +55,7 @@
 			"showInList": true
 		},
 		"actividad": {
-			"type": "text",
+			"type": "textarea",
 			"showInList": true
 		},
 		"periodo": {
@@ -69,5 +69,15 @@
 				"edit"
 			]
 		}
-	}
+	},
+	"createButtons": [
+		{
+			"name": "Objetivo",
+			"icon": "plus",
+			"type": "submit",
+			"attributes": {
+				"objetivo": ""
+			}
+		}
+	]
 }

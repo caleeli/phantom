@@ -14,21 +14,21 @@ $statement->execute(array (
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
   'name' => 'Cajas',
-  'permission' => 'cajas',
+  'permission' => 'cajas1',
   'icon' => 'cash-register',
   'href' => '/cajas',
 ));
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
   'name' => 'Clientes',
-  'permission' => 'clientes',
+  'permission' => 'clientes1',
   'icon' => 'user-tie',
   'href' => '/clientes',
 ));
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
   'name' => 'Créditos',
-  'permission' => 'creditos',
+  'permission' => 'creditos1',
   'icon' => 'credit-card',
   'href' => '/creditos',
 ));
@@ -42,14 +42,28 @@ $statement->execute(array (
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
   'name' => 'Perfil',
-  'permission' => 'perfil',
+  'permission' => 'perfil1',
   'icon' => 'user',
   'href' => '/admin/profile',
 ));
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
   'name' => 'Plan Anual',
-  'permission' => 'plan anual',
+  'permission' => 'plan anual1',
   'icon' => 'calendar',
   'href' => '/plan_anual',
+));
+$statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
+$statement->execute(array (
+  'name' => 'Informes',
+  'permission' => 'clientes',
+  'icon' => 'file-contract',
+  'href' => '/informes',
+));
+$statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
+$statement->execute(array (
+  'name' => 'Movimientos',
+  'permission' => 'clientes',
+  'icon' => 'table',
+  'href' => '/movimientos',
 ));

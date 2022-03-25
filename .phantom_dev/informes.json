@@ -1,0 +1,85 @@
+{
+    "name": "informes",
+    "table": "informes",
+    "join": "",
+    "url": "informes",
+    "id": "id",
+    "fields": [
+        {
+            "name": "entidad",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "entidad",
+            "create": ":entidad",
+            "update": ":entidad",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Entidad"
+        },
+        {
+            "name": "elaborado_por",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "elaborado_por",
+            "create": ":elaborado_por",
+            "update": ":elaborado_por",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Elaborado por"
+        },
+        {
+            "name": "fecha",
+            "typeDB": "varchar(64)",
+            "type": "date",
+            "select": "fecha",
+            "create": ":fecha",
+            "update": ":fecha",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Fecha"
+        },
+        {
+            "name": "referencia",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "referencia",
+            "create": ":referencia",
+            "update": ":referencia",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Referencia"
+        }
+    ],
+    "where": "",
+    "sort": "",
+    "filters": [
+        {
+            "declaration": "findByText(text)",
+            "expression": "and (entidad like ${contains($text)} or id=:text)"
+        }
+    ],
+    "data": [],
+    "actions": "edit,print",
+    "relationships": [],
+    "createButtons": [
+        {
+            "name": "Informe",
+            "icon": "plus",
+            "type": "submit",
+            "attributes": {
+                "entidad": "\"\"",
+                "elaborado_por": "\"\"",
+                "fecha": "\"\"",
+                "referencia": "\"\""
+            }
+        }
+    ]
+}

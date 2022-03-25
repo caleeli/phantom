@@ -18,11 +18,12 @@
 				} else {
 					value = data;
 				}
+				console.log(value);
 				return value;
 			});
 	}
 	export let refresh = 1;
-	let delayedRefreshApi = debounce(refreshApi, 100);
+	let delayedRefreshApi = debounce(refreshApi, 500);
 	// on params change, refresh
 	$: if (refresh && params) {
 		delayedRefreshApi();

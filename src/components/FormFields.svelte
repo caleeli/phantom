@@ -1,5 +1,5 @@
 <script>
-	import { _ } from "../helpers";
+	import { translations } from "../helpers";
 	import Api from "./Api.svelte";
 	import api from "../api";
 	import InputFile from "./InputFile.svelte";
@@ -7,6 +7,7 @@
 	export let config;
 	export let registro;
 	export let dataTest;
+	const _ = translations.setLabels(config.labels);
 
 	async function uploadFile(fileupload, target, key) {
 		let formData = new FormData();
@@ -67,11 +68,20 @@
 						type={config.ui[key]?.type || "text"}
 						value={registro.attributes[key]}
 						on:input={(event) => {
-							console.log(event);
 							registro.attributes[key] = (event.target || event.detail).value;
 						}}
 					/>
-				{:else}
+				{:else if config.ui[key]?.type === "textarea"}
+					<textarea
+						class="w-100"
+						data-testid={`${dataTest}-${key}`}
+						type={config.ui[key]?.type || "text"}
+						value={registro.attributes[key]}
+						on:input={(event) => {
+							registro.attributes[key] = event.target.value;
+						}}
+					/>
+					{:else}
 					<input
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}

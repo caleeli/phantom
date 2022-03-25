@@ -8,7 +8,7 @@
         {
             "name": "objetivo",
             "typeDB": "text",
-            "type": "text",
+            "type": "textarea",
             "select": "objetivo",
             "create": ":objetivo",
             "update": ":objetivo",
@@ -45,7 +45,7 @@
         {
             "name": "actividad",
             "typeDB": "text",
-            "type": "text",
+            "type": "textarea",
             "select": "actividad",
             "create": ":actividad",
             "update": ":actividad",
@@ -87,5 +87,15 @@
         }
     ],
     "actions": "edit",
-    "relationships": []
+    "relationships": [],
+    "createButtons": [
+        {
+            "name": "Objetivo",
+            "icon": "plus",
+            "type": "submit",
+            "attributes": {
+                "objetivo": "\"\""
+            }
+        }
+    ]
 }

@@ -4,9 +4,10 @@
 	import GridTemplate from "../components/GridTemplate.svelte";
 	import Menu from "../components/Menu.svelte";
 	import Topbar from "../components/Topbar.svelte";
-	import { _ } from "../helpers";
+	import { translations } from "../helpers";
 	import * as config from "../../models/indicadores.json";
-	_.setLabels(config['labels']);
+
+	const _ = translations.setLabels(config['labels']);
 	let indicadores = {
 		indicadores: {},
 		graficos: [],

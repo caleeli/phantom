@@ -63,6 +63,20 @@
 											</a>
 										{/each}
 									</div>
+								{:else if sheet.cell[row][col].groupRows}
+									<div class="cell">
+										<span>{@html sheet.format[`${row},${col}`]}</span>
+										<!-- svelte-ignore a11y-invalid-attribute -->
+										<a
+											class="action"
+											on:click={dispatch(
+												"insertSubRow",
+												data
+											)}
+											href="javascript:void(0)"
+											data-testid="action-insertSubRow"
+										><i class="fas fa-plus-circle"/></a>
+									</div>
 								{:else}
 									{@html sheet.format[`${row},${col}`]}
 								{/if}
@@ -105,5 +119,11 @@
 	.action {
 		display: inline-block;
 		margin-left: 0.5rem;
+	}
+	.cell {
+		display: flex;
+	}
+	.cell span{
+		flex-grow: 1;
 	}
 </style>

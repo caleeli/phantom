@@ -8,6 +8,10 @@ use Workerman\Protocols\Http\Request;
 use Workerman\Protocols\Http\Response;
 
 $env = parse_ini_file('.env');
+// add to $_ENV
+foreach ($env as $key => $value) {
+    $_ENV[$key] = $value;
+}
 
 $api = new App($env['api_base']);
 

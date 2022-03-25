@@ -8,9 +8,13 @@
 	import GridTemplate from "../components/GridTemplate.svelte";
 	import Menu from "../components/Menu.svelte";
 	import Topbar from "../components/Topbar.svelte";
-	import { _ } from "../helpers";
+	import { translations } from "../helpers";
 	import FormFields from "./FormFields.svelte";
 	export let config = {
+		attributes: {},
+		ui: {},
+	};
+	export let configCreate = {
 		attributes: {},
 		ui: {},
 	};
@@ -20,7 +24,7 @@
 		cells: {},
 	};
 
-	_.setLabels(config.labels);
+	const _ = translations.setLabels(config.labels);
 
 	let colIndex = 1;
 	let textToFind = "";
@@ -67,12 +71,16 @@
 		return cells;
 	}, {});
 
-	let create_buttons = config.create_buttons || {
-		_model: {
-			icon: "plus",
-			type: "submit",
-		},
-	};
+	let create_buttons =
+		config.createButtons && config.createButtons.length
+			? config.createButtons
+			: [
+					{
+						name: "_model",
+						icon: "plus",
+						type: "submit",
+					},
+			  ];
 	let tableData = [],
 		list,
 		params = {
@@ -93,11 +101,29 @@
 		}, {});
 	}
 	async function crear(template = {}) {
+		// apply template settings
+		if (template && Object.keys(template).length > 0) {
+			// deep clone config into configCreate
+			configCreate = JSON.parse(JSON.stringify(config));
+			Object.keys(configCreate.ui).forEach((key) => {
+				configCreate.ui[key].showInCreate = false;
+			});
+			Object.keys(template).forEach((key) => {
+				configCreate.ui[key].showInCreate = true;
+			});
+			console.log(template);
+		}
+		// init default values
 		registro = {
 			attributes: defaultValues(config.create, template),
 		};
 		await tick();
 		create.showModal();
+	}
+	async function crearSubRow() {
+		// let subRow = {};
+		// await tick();
+		// create.showModal();
 	}
 	async function editar(event) {
 		registro = event.detail;
@@ -168,16 +194,17 @@
 				>
 					{_("Buscar")}
 				</button>
+				<slot name="header"></slot>
 				<GridTemplate>
 					<div>
-						{#each Object.entries(create_buttons) as [name, button]}
+						{#each create_buttons as button}
 							<button
-								data-testid={name}
+								data-testid={button.name}
 								type={button.type}
 								on:click={() => crear(button.attributes)}
 							>
 								<i class={`fas fa-${button.icon}`} />
-								{_(name)}
+								{_(button.name)}
 							</button>
 						{/each}
 					</div>
@@ -196,6 +223,7 @@
 					on:edit={editar}
 					on:view={visualizar}
 					on:print={imprimir}
+					on:insertSubRow={crearSubRow}
 				/>
 				<div class="center">
 					<br />

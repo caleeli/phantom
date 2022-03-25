@@ -1,0 +1,88 @@
+{
+	"class": "JsonApi",
+	"url": "movimientos",
+	"table": "movimientos",
+	"id": "id",
+	"attributes": {
+		"cuenta": "cuenta",
+		"documento": "documento",
+		"comprobante": "comprobante",
+		"fecha": "fecha",
+		"debito": "debito",
+		"credito": "credito",
+		"detalle": "detalle"
+	},
+	"where": [],
+	"filters": {},
+	"sort": [
+		"-id"
+	],
+	"create": {
+		"cuenta": ":cuenta",
+		"documento": ":documento",
+		"comprobante": ":comprobante",
+		"fecha": ":fecha",
+		"debito": ":debito",
+		"credito": ":credito",
+		"detalle": ":detalle"
+	},
+	"update": {
+		"cuenta": ":cuenta",
+		"documento": ":documento",
+		"comprobante": ":comprobante",
+		"fecha": ":fecha",
+		"debito": ":debito",
+		"credito": ":credito",
+		"detalle": ":detalle"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Movimiento",
+		"_models": "Movimientos",
+		"cuenta": "Cuenta",
+		"documento": "Documento",
+		"comprobante": "Comprobante",
+		"fecha": "Fecha",
+		"debito": "D\u00e9bito",
+		"credito": "Cr\u00e9dito",
+		"detalle": "Detalle"
+	},
+	"ui": {
+		"cuenta": {
+			"type": "text",
+			"showInList": true
+		},
+		"documento": {
+			"type": "text",
+			"showInList": true
+		},
+		"comprobante": {
+			"type": "text",
+			"showInList": true
+		},
+		"fecha": {
+			"type": "date",
+			"showInList": true
+		},
+		"debito": {
+			"type": "number",
+			"showInList": true
+		},
+		"credito": {
+			"type": "number",
+			"showInList": true
+		},
+		"detalle": {
+			"type": "textarea",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit"
+			]
+		}
+	}
+}

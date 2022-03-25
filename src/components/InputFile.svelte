@@ -1,7 +1,7 @@
 <script>
 	import { createEventDispatcher } from "svelte";
 	import api from "../api";
-	import { _ } from "../helpers";
+	import { translations as _ } from "../helpers";
 
 	export let value;
 	const dispatch = createEventDispatcher();

@@ -85,8 +85,9 @@
 			"control": "actions"
 		}
 	},
-	"create_buttons": {
-		"ingreso": {
+	"createButtons": [
+		{
+			"name": "ingreso",
 			"icon": "plus",
 			"type": "submit",
 			"attributes": {
@@ -97,7 +98,8 @@
 				"egreso": ""
 			}
 		},
-		"egreso": {
+		{
+			"name": "egreso",
 			"icon": "minus",
 			"type": "reset",
 			"attributes": {
@@ -108,7 +110,7 @@
 				"egreso": "1000"
 			}
 		}
-	},
+	],
 	"pagination": {
 		"per_page": 15
 	}

@@ -1,0 +1,78 @@
+{
+	"class": "JsonApi",
+	"url": "informes",
+	"table": "informes",
+	"id": "id",
+	"attributes": {
+		"entidad": "entidad",
+		"elaborado_por": "elaborado_por",
+		"fecha": "fecha",
+		"referencia": "referencia"
+	},
+	"where": [],
+	"filters": {
+		"findByText(text)": "and (entidad like ${contains($text)} or id=:text)"
+	},
+	"sort": [],
+	"create": {
+		"entidad": ":entidad",
+		"elaborado_por": ":elaborado_por",
+		"fecha": ":fecha",
+		"referencia": ":referencia"
+	},
+	"update": {
+		"entidad": ":entidad",
+		"elaborado_por": ":elaborado_por",
+		"fecha": ":fecha",
+		"referencia": ":referencia"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Informe",
+		"_models": "Informes",
+		"entidad": "Entidad",
+		"elaborado_por": "Elaborado por",
+		"fecha": "Fecha",
+		"referencia": "Referencia"
+	},
+	"ui": {
+		"entidad": {
+			"type": "text",
+			"showInList": true
+		},
+		"elaborado_por": {
+			"type": "text",
+			"showInList": true
+		},
+		"fecha": {
+			"type": "date",
+			"showInList": true
+		},
+		"referencia": {
+			"type": "text",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"print"
+			]
+		}
+	},
+	"createButtons": [
+		{
+			"name": "Informe",
+			"icon": "plus",
+			"type": "submit",
+			"attributes": {
+				"entidad": "",
+				"elaborado_por": "",
+				"fecha": "",
+				"referencia": ""
+			}
+		}
+	]
+}

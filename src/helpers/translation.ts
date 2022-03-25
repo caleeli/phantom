@@ -2,8 +2,7 @@ import es from '../translations/es.json';
 
 const translations = { es };
 
-function translation(language: string) {
-	let labels = {};
+function translation(language: string, labels={}) {
 	const func = function (textOrName, data = {}) {
 		const text = labels[textOrName] || textOrName;
 		const translation = translations[language]?.[text];
@@ -16,8 +15,8 @@ function translation(language: string) {
 			return data[placeholder] || match;
 		});
 	};
-	func.setLabels = (labelsO: any = {}) => {
-		labels = labelsO;
+	func.setLabels = (labels: any = {}) => {
+		return translation(language, labels);
 	}
 	return func;
 }
