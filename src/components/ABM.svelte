@@ -90,7 +90,8 @@
 			sort: config.sort?.join(","),
 		};
 	let edit, view, create;
-	let registro = null;
+	let editRecord = null;
+	let newRecord = null;
 	function refreshList() {
 		params = params;
 	}
@@ -111,10 +112,9 @@
 			Object.keys(template).forEach((key) => {
 				configCreate.ui[key].showInCreate = true;
 			});
-			console.log(template);
 		}
 		// init default values
-		registro = {
+		newRecord = {
 			attributes: defaultValues(config.create, template),
 		};
 		await tick();
@@ -126,23 +126,23 @@
 		// create.showModal();
 	}
 	async function editar(event) {
-		registro = event.detail;
+		editRecord = event.detail;
 		await tick();
 		edit.showModal();
 	}
 	async function visualizar(event) {
-		registro = event.detail;
+		editRecord = event.detail;
 		await tick();
 		view.showModal();
 	}
 	async function imprimir(event) {
-		registro = event.detail;
+		editRecord = event.detail;
 		await tick();
 		window.print();
 	}
 	async function postRecord() {
 		api(config.url)
-			.post({ data: registro })
+			.post({ data: editRecord })
 			.then(async () => {
 				refreshList();
 				await tick();
@@ -151,7 +151,7 @@
 	}
 	async function putRecord() {
 		api(config.url)
-			.put(registro.id, { data: registro })
+			.put(editRecord.id, { data: editRecord })
 			.then(async () => {
 				refreshList();
 				await tick();
@@ -292,9 +292,9 @@
 </main>
 
 <dialog bind:this={create}>
-	{#if registro && config.create}
+	{#if newRecord && config.create}
 		<form style="min-width:50vw">
-			<FormFields {config} bind:registro dataTest="create" />
+			<FormFields {config} bind:registro={newRecord} dataTest="create" />
 			<footer>
 				<button
 					type="submit"
@@ -315,9 +315,9 @@
 </dialog>
 
 <dialog bind:this={edit}>
-	{#if registro && config.update}
+	{#if editRecord && config.update}
 		<form style="min-width:50vw">
-			<FormFields {config} bind:registro dataTest="edit" />
+			<FormFields {config} bind:registro={editRecord} dataTest="edit" />
 			<footer>
 				<button
 					type="submit"
@@ -338,13 +338,13 @@
 </dialog>
 
 <dialog bind:this={view}>
-	{#if registro && config.create}
+	{#if editRecord && config.create}
 		<form style="min-width:50vw">
 			<dl>
 				{#each Object.entries(config.create) as [key, value]}
 					<dt>{_(key)}</dt>
 					<dd data-testid={`view-${key}`}>
-						{registro.attributes[key]}
+						{editRecord.attributes[key]}
 					</dd>
 				{/each}
 			</dl>
@@ -359,13 +359,13 @@
 		</form>
 	{/if}
 </dialog>
-{#if registro && config.create}
+{#if editRecord && config.create}
 	<form style="min-width:50vw" class="to-print">
 		<dl>
 			{#each Object.entries(config.create) as [key, value]}
 				<dt>{_(key)}</dt>
 				<dd data-testid={`print-${key}`}>
-					{registro.attributes[key]}
+					{editRecord.attributes[key]}
 				</dd>
 			{/each}
 		</dl>

@@ -137,6 +137,9 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
                     'showInUpdate' => $field['showInUpdate'],
                     'groupRows' => $field['groupRows'] ?? false,
                 ];
+                if (!empty($field['datalist'])) {
+                    $ui[$field['name']]['list'] = json_decode($field['datalist']);
+                }
                 if (!$ui[$field['name']]['groupRows']) {
                     unset($ui[$field['name']]['groupRows']);
                 }

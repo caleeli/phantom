@@ -49,7 +49,7 @@ $statement->execute(array (
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
   'name' => 'Plan Anual',
-  'permission' => 'plan anual1',
+  'permission' => 'plan anual',
   'icon' => 'calendar',
   'href' => '/plan_anual',
 ));

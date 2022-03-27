@@ -31,7 +31,7 @@
 	"delete": {},
 	"relationships": {},
 	"labels": {
-		"_model": "Menus",
+		"_model": "Menu",
 		"_models": "Menus",
 		"name": "Name",
 		"permission": "Permission",

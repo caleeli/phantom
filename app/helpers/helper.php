@@ -25,6 +25,7 @@ function model($model, $connection = null, Request $request)
         throw new Exception('Not Found');
     }
     $definition = json_decode(file_get_contents($filename), true);
+    $definition['name'] = $model;
     $class = 'App\Resources\\' . $definition['class'] . 'Resource';
     return new $class($connection, $definition, $request);
 }

@@ -5,26 +5,28 @@
 	"id": "id",
 	"attributes": {
 		"objetivo": "objetivo",
+		"actividad": "actividad",
 		"indicador": "indicador",
 		"meta": "meta",
-		"actividad": "actividad",
 		"periodo": "periodo"
 	},
 	"where": [],
 	"filters": {},
-	"sort": [],
+	"sort": [
+		"objetivo"
+	],
 	"create": {
 		"objetivo": ":objetivo",
+		"actividad": ":actividad",
 		"indicador": ":indicador",
 		"meta": ":meta",
-		"actividad": ":actividad",
 		"periodo": ":periodo"
 	},
 	"update": {
 		"objetivo": ":objetivo",
+		"actividad": ":actividad",
 		"indicador": ":indicador",
 		"meta": ":meta",
-		"actividad": ":actividad",
 		"periodo": ":periodo"
 	},
 	"delete": {},
@@ -33,28 +35,34 @@
 		"_model": "Plan Anual",
 		"_models": "Plan Anual",
 		"objetivo": "Objetivo",
+		"actividad": "Actividad",
 		"indicador": "Indicador",
 		"meta": "Meta",
-		"actividad": "Actividad",
 		"periodo": "Periodo"
 	},
 	"ui": {
 		"objetivo": {
-			"type": "textarea",
+			"type": "text",
 			"showInList": true,
-			"showInCreate": false,
-			"showInUpdate": false,
-			"groupRows": true
+			"groupRows": true,
+			"list": {
+				"model": "plan_anual",
+				"value": "${attributes.objetivo}",
+				"params": {
+					"distinct": 1,
+					"fields": "objetivo"
+				}
+			}
+		},
+		"actividad": {
+			"type": "text",
+			"showInList": true
 		},
 		"indicador": {
 			"type": "text",
 			"showInList": true
 		},
 		"meta": {
-			"type": "text",
-			"showInList": true
-		},
-		"actividad": {
 			"type": "textarea",
 			"showInList": true
 		},
@@ -72,7 +80,7 @@
 	},
 	"createButtons": [
 		{
-			"name": "Objetivo",
+			"name": "Actividad",
 			"icon": "plus",
 			"type": "submit",
 			"attributes": {

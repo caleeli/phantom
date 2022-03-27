@@ -76,17 +76,24 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
     {
         // params
         $params = $options['params'] ?? [];
+        $fields = $options['fields'] ?? [];
+        $fields = $fields[$this->definition['name']] ?? [];
+        $distinct = empty($options['distinct']) ? '': 'DISTINCT';
         // Prepare the $from of the query
         $from = $this->definition['table'];
         if (isset($this->definition['join'])) {
             $from .= ' ' . $this->definition['join'];
         }
         // Prepare the $select of the query
-        $select = [
-            $this->definition['id'] === 'id' ? 'id' : $this->definition['id'] . ' as id',
-        ];
+        if (!$fields || in_array('id', $fields)) {
+            $select = [
+                $this->definition['id'] === 'id' ? 'id' : $this->definition['id'] . ' as id',
+            ];
+        }
         foreach ($this->definition['attributes'] as $name => $column) {
-            $select[] = $column === $name ? $name : $column . ' AS ' . $name;
+            if (!$fields || in_array($name, $fields)) {
+                $select[] = $column === $name ? $name : $column . ' AS ' . $name;
+            }
         }
         $select = implode(',', $select);
         // Prepare the $where of the query
@@ -125,7 +132,7 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
             }
         }
         // Prepare the statement
-        $query = "SELECT $select FROM $from WHERE $where $order $limit $offset";
+        $query = "SELECT $distinct $select FROM $from WHERE $where $order $limit $offset";
         $statement = $this->query($query, $params);
         return $statement;
     }
@@ -194,7 +201,7 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
     private function formatRow(array $row, array $options)
     {
         $result = [
-            'id' => $row['id'],
+            'id' => $row['id'] ?? null,
             'type' => $this->definition['table'],
             'attributes' => $row,
             'relationships' => [],

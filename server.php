@@ -206,6 +206,18 @@ $api->get('/api/{model}', function (Request $request, $model) use ($connection) 
         $options['include'] = $include;
         $filter = $request->get('filter', []);
         $options['filter'] = $filter;
+        $options['distinct'] = intval($request->get('distinct', 0));
+        $fields = $request->get('fields', []);
+        if (!is_array($fields)) {
+            $fields = [$fields];
+        }
+        $options['fields'] = [];
+        foreach ($fields as $name => $field) {
+            if ($name === 0) {
+                $name = $model;
+            }
+            $options['fields'][$name] = explode(',', $field);
+        }
         $sort = $request->get('sort', '');
         $sort = $sort ? explode(',', $sort) : [];
         $options['sort'] = $sort;

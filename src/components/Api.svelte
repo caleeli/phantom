@@ -18,7 +18,6 @@
 				} else {
 					value = data;
 				}
-				console.log(value);
 				return value;
 			});
 	}

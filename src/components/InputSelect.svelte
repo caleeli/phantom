@@ -3,7 +3,7 @@
 
     export let value;
     export let config;
-    // is it a bug? let:response={options}
+    // workaround
     let options = [];
 
     function prepareListParams(config, value) {

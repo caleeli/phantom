@@ -101,7 +101,7 @@
         },
         {
             "name": "Plan Anual",
-            "permission": "plan anual1",
+            "permission": "plan anual",
             "icon": "calendar",
             "href": "\/plan_anual"
         },

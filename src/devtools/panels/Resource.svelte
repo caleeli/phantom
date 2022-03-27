@@ -102,6 +102,7 @@
             select: null,
             create: null,
             update: null,
+            datalist: null,
             showInList: true,
             showInCreate: true,
             showInUpdate: true,
@@ -316,6 +317,15 @@ Fields <button on:click={addField}>+</button><br />
                 type="text"
                 bind:value={field.update}
                 on:input={(event) => inputField(event, field, fieldDefaults)}
+            />
+        </label>
+        <label>
+            Datalist:
+            <input
+                name="datalist"
+                type="text"
+                bind:value={field.datalist}
+                placeholder="e.g. &lbrace;model:'clients', value:'id', text:'', params: &lbrace;&rbrace;&rbrace;"
             />
         </label>
         <label>

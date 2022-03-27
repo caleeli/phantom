@@ -8,19 +8,32 @@
         {
             "name": "objetivo",
             "typeDB": "text",
-            "type": "textarea",
+            "type": "text",
             "select": "objetivo",
             "create": ":objetivo",
             "update": ":objetivo",
             "showInList": true,
-            "showInCreate": false,
-            "showInUpdate": false,
+            "showInCreate": true,
+            "showInUpdate": true,
             "label": "Objetivo",
-            "groupRows": true
+            "groupRows": true,
+            "datalist": "{\"model\":\"plan_anual\",\"value\":\"${attributes.objetivo}\",\"params\":{\"distinct\":1,\"fields\":\"objetivo\"}}"
+        },
+        {
+            "name": "actividad",
+            "typeDB": "text",
+            "type": "text",
+            "select": "actividad",
+            "create": ":actividad",
+            "update": ":actividad",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Actividad"
         },
         {
             "name": "indicador",
-            "typeDB": "text",
+            "typeDB": "varchar(64)",
             "type": "text",
             "select": "indicador",
             "create": ":indicador",
@@ -32,8 +45,8 @@
         },
         {
             "name": "meta",
-            "typeDB": "varchar(64)",
-            "type": "text",
+            "typeDB": "text",
+            "type": "textarea",
             "select": "meta",
             "create": ":meta",
             "update": ":meta",
@@ -41,18 +54,6 @@
             "showInCreate": true,
             "showInUpdate": true,
             "label": "Meta"
-        },
-        {
-            "name": "actividad",
-            "typeDB": "text",
-            "type": "textarea",
-            "select": "actividad",
-            "create": ":actividad",
-            "update": ":actividad",
-            "showInList": true,
-            "showInCreate": true,
-            "showInUpdate": true,
-            "label": "Actividad"
         },
         {
             "name": "periodo",
@@ -68,7 +69,7 @@
         }
     ],
     "where": "",
-    "sort": "",
+    "sort": "objetivo",
     "filters": [],
     "data": [
         {
@@ -90,7 +91,7 @@
     "relationships": [],
     "createButtons": [
         {
-            "name": "Objetivo",
+            "name": "Actividad",
             "icon": "plus",
             "type": "submit",
             "attributes": {

@@ -32,14 +32,19 @@
 	}
 	function prepareListParams(config, value) {
 		const params = { ...config.params };
-		params.filter = params.filter.map((filter) =>
-			new Function("value", "return `" + filter + "`")(
-				JSON.stringify(value)
-			)
-		);
+		if (params.filter) {
+			params.filter = params.filter.map((filter) =>
+				new Function("value", "return `" + filter + "`")(
+					JSON.stringify(value)
+				)
+			);
+		}
 		return params;
 	}
 	function expression(text, object) {
+		if (!text) {
+			return "";
+		}
 		return new Function(...Object.keys(object), "return `" + text + "`")(
 			...Object.values(object)
 		);
@@ -53,6 +58,7 @@
 		onChangeDataList(event.target);
 	}}
 	list={`list-${key}`}
+	on:input
 />
 <datalist bind:this={datalist} id={`list-${key}`}>
 	<Api
