@@ -142,7 +142,7 @@
 	}
 	async function postRecord() {
 		api(config.url)
-			.post({ data: editRecord })
+			.post({ data: newRecord })
 			.then(async () => {
 				refreshList();
 				await tick();
