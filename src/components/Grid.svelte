@@ -91,8 +91,8 @@
 	}
 	table th {
 		background-color: #e4e4e4;
-		border: 1px solid #ababab;
-		border-bottom-width: 2px;
+		border: 1px double #ababab;
+		border-bottom-width: 3px;
 		padding: 0.3rem 0.5rem;
 		cursor: pointer;
 	}

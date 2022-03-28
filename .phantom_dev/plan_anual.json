@@ -66,6 +66,20 @@
             "showInCreate": true,
             "showInUpdate": true,
             "label": "Periodo"
+        },
+        {
+            "name": "responsable",
+            "typeDB": "varchar(64)",
+            "type": "select",
+            "select": "responsable",
+            "create": ":responsable",
+            "update": ":responsable",
+            "datalist": "{\"model\":\"users\",\"value\":\"${id}\",\"text\":\"${attributes.name}\",\"loadById\":true}",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Responsable"
         }
     ],
     "where": "",

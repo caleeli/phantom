@@ -8,7 +8,8 @@
 		"actividad": "actividad",
 		"indicador": "indicador",
 		"meta": "meta",
-		"periodo": "periodo"
+		"periodo": "periodo",
+		"responsable": "responsable"
 	},
 	"where": [],
 	"filters": {},
@@ -20,14 +21,16 @@
 		"actividad": ":actividad",
 		"indicador": ":indicador",
 		"meta": ":meta",
-		"periodo": ":periodo"
+		"periodo": ":periodo",
+		"responsable": ":responsable"
 	},
 	"update": {
 		"objetivo": ":objetivo",
 		"actividad": ":actividad",
 		"indicador": ":indicador",
 		"meta": ":meta",
-		"periodo": ":periodo"
+		"periodo": ":periodo",
+		"responsable": ":responsable"
 	},
 	"delete": {},
 	"relationships": {},
@@ -38,7 +41,8 @@
 		"actividad": "Actividad",
 		"indicador": "Indicador",
 		"meta": "Meta",
-		"periodo": "Periodo"
+		"periodo": "Periodo",
+		"responsable": "Responsable"
 	},
 	"ui": {
 		"objetivo": {
@@ -69,6 +73,16 @@
 		"periodo": {
 			"type": "text",
 			"showInList": true
+		},
+		"responsable": {
+			"type": "select",
+			"showInList": true,
+			"list": {
+				"model": "users",
+				"value": "${id}",
+				"text": "${attributes.name}",
+				"loadById": true
+			}
 		},
 		"_actions": {
 			"control": "actions",

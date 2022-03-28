@@ -3,6 +3,7 @@
 	import api from "../api";
 	import InputFile from "./InputFile.svelte";
 	import InputList from "./InputList.svelte";
+	import InputSelect from "./InputSelect.svelte";
 
 	export let config;
 	export let registro;
@@ -35,6 +36,17 @@
 							registro.attributes[key] = event.target.value;
 						}}
 					/>
+				{:else if config.ui[key]?.type === "select"}
+					<InputSelect
+						class="w-100"
+						data-testid={`${dataTest}-${key}`}
+						type={config.ui[key]?.type || "text"}
+						value={registro.attributes[key]}
+						config={config.ui[key]?.list}
+						on:input={(event) => {
+							registro.attributes[key] = (event.target || event.detail).value;
+						}}
+					/>
 				{:else if config.ui[key]?.list}
 					<InputList
 						class="w-100"
@@ -43,7 +55,7 @@
 						value={registro.attributes[key]}
 						config={config.ui[key]?.list}
 						on:input={(event) => {
-							registro.attributes[key] = event.target.value;
+							registro.attributes[key] = (event.target || event.detail).value;
 						}}
 					/>
 				{:else}

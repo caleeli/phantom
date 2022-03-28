@@ -126,7 +126,7 @@
 		// create.showModal();
 	}
 	async function editar(event) {
-		editRecord = event.detail;
+		editRecord = JSON.parse(JSON.stringify(event.detail));
 		await tick();
 		edit.showModal();
 	}

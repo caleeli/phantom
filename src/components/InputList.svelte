@@ -1,13 +1,20 @@
 <script>
+	import { tick } from "svelte";
+	import api from "../api";
 	import Api from "./Api.svelte";
+	import { onMount } from "svelte";
 
 	export let value;
 	export let config;
 	let datalist;
 	let key = new Date().getTime() + Math.random();
+	let focused = false;
+	let maskedValue = "";
+	let focusedInput;
 
 	function onChangeDataList(target) {
 		const value = target.value;
+		loadMasked(value);
 		if (!config || !config["on:select"]) {
 			return;
 		}
@@ -42,24 +49,55 @@
 		return params;
 	}
 	function expression(text, object) {
-		if (!text) {
+		if (!text || !object) {
 			return "";
 		}
 		return new Function(...Object.keys(object), "return `" + text + "`")(
 			...Object.values(object)
 		);
 	}
+	async function loadMasked(value) {
+		if (config.text) {
+			let row = await api(config.model).get(value);
+			if (row instanceof Array) {
+				maskedValue = value;
+			} else {
+				maskedValue = expression(config.text, row);
+			}
+		} else {
+			maskedValue = value;
+		}
+	}
+	async function onfocus() {
+		focused = true;
+		await tick();
+		if (focusedInput) {
+			focusedInput.focus();
+		}
+	}
+	function onblur() {
+		focused = false;
+	}
+	onMount(() => {
+		loadMasked(value);
+	});
 </script>
 
-<input
-	{...$$restProps}
-	bind:value
-	on:change={(event) => {
-		onChangeDataList(event.target);
-	}}
-	list={`list-${key}`}
-	on:input
-/>
+{#if focused}
+	<input
+		bind:this={focusedInput}
+		{...$$restProps}
+		bind:value
+		on:change={(event) => {
+			onChangeDataList(event.target);
+		}}
+		list={`list-${key}`}
+		on:blur={onblur}
+		on:input
+	/>
+{:else}
+	<input {...$$restProps} value={maskedValue} on:focus={onfocus} />
+{/if}
 <datalist bind:this={datalist} id={`list-${key}`}>
 	<Api
 		path={config.model}
