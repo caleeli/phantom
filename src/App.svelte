@@ -39,6 +39,7 @@
 	};
 	function routeLoaded(event) {
 		currentPage = event.detail.name;
+		console.log(currentPage);
 	}
 </script>
 
