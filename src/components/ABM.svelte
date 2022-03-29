@@ -144,6 +144,7 @@
 		api(config.url)
 			.post({ data: newRecord })
 			.then(async () => {
+				resetFilter();
 				refreshList();
 				await tick();
 				create.close();
@@ -165,6 +166,10 @@
 	function loadMore() {
 		params.page++;
 		refreshList();
+	}
+	function resetFilter() {
+		textToFind = "";
+		params.filter = [];
 	}
 </script>
 

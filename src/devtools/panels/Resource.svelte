@@ -102,7 +102,7 @@
             select: null,
             create: null,
             update: null,
-            datalist: null,
+            extra: null,
             showInList: true,
             showInCreate: true,
             showInUpdate: true,
@@ -320,12 +320,12 @@ Fields <button on:click={addField}>+</button><br />
             />
         </label>
         <label>
-            Datalist:
+            Extra:
             <input
-                name="datalist"
+                name="extra"
                 type="text"
-                bind:value={field.datalist}
-                placeholder="e.g. &lbrace;model:'clients', value:'id', text:'', params: &lbrace;&rbrace;&rbrace;"
+                bind:value={field.extra}
+                placeholder="e.g. &lbrace;list:&lbrace;model:'clients', value:'id', text:'', params: &lbrace;&rbrace;&rbrace;"
             />
         </label>
         <label>

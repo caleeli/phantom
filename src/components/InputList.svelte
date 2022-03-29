@@ -101,7 +101,7 @@
 <datalist bind:this={datalist} id={`list-${key}`}>
 	<Api
 		path={config.model}
-		params={prepareListParams(config, value)}
+		params={prepareListParams(config, "")}
 		let:response={options}
 	>
 		{#each options as option}

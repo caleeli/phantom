@@ -17,7 +17,7 @@
             "showInUpdate": true,
             "label": "Objetivo",
             "groupRows": true,
-            "datalist": "{\"model\":\"plan_anual\",\"value\":\"${attributes.objetivo}\",\"params\":{\"distinct\":1,\"fields\":\"objetivo\"}}"
+            "extra": "{\"list\":{\"model\":\"plan_anual\",\"value\":\"${attributes.objetivo}\",\"params\":{\"distinct\":1,\"fields\":\"objetivo\"}}}"
         },
         {
             "name": "actividad",
@@ -46,7 +46,7 @@
         {
             "name": "meta",
             "typeDB": "text",
-            "type": "textarea",
+            "type": "text",
             "select": "meta",
             "create": ":meta",
             "update": ":meta",
@@ -68,37 +68,60 @@
             "label": "Periodo"
         },
         {
-            "name": "responsable",
+            "name": "responsable_id",
             "typeDB": "varchar(64)",
             "type": "select",
+            "select": "responsable_id",
+            "create": ":responsable_id",
+            "update": ":responsable_id",
+            "extra": "{\"list\":{\"model\":\"users\",\"value\":\"${id}\",\"text\":\"${attributes.name}\",\"on:select\":[\"set('responsable',${name})\"]}}",
+            "showInList": false,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Responsable"
+        },
+        {
+            "name": "responsable",
+            "typeDB": "varchar(64)",
+            "type": "text",
             "select": "responsable",
             "create": ":responsable",
             "update": ":responsable",
-            "datalist": "{\"model\":\"users\",\"value\":\"${id}\",\"text\":\"${attributes.name}\",\"loadById\":true}",
+            "extra": null,
             "showInList": true,
-            "showInCreate": true,
-            "showInUpdate": true,
+            "showInCreate": false,
+            "showInUpdate": false,
             "groupRows": false,
             "label": "Responsable"
         }
     ],
     "where": "",
     "sort": "objetivo",
-    "filters": [],
+    "filters": [
+        {
+            "declaration": "findText(text)",
+            "expression": "and (objetivo like ${contains($text)} or actividad like ${contains($text)} or indicador like ${contains($text)} or meta like ${contains($text)} or periodo like ${contains($text)} or responsable like ${contains($text)})"
+        }
+    ],
     "data": [
         {
             "objetivo": "Objetivo 1",
             "indicador": "porcentaje 1",
             "meta": "100%",
             "actividad": "Completar el porcentaje de uno",
-            "periodo": "enero,febrero"
+            "periodo": "enero,febrero",
+            "responsable_id": "1",
+            "responsable": "Juan Perez"
         },
         {
             "objetivo": "Objetivo 1",
             "indicador": "valor 2",
             "meta": "5.6",
             "actividad": "Subir el valor de dos a 5.6",
-            "periodo": "febrero,marzo"
+            "periodo": "febrero,marzo",
+            "responsable_id": "2",
+            "responsable": "Maria Gonzales"
         }
     ],
     "actions": "edit",

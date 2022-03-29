@@ -9,10 +9,13 @@
 		"indicador": "indicador",
 		"meta": "meta",
 		"periodo": "periodo",
+		"responsable_id": "responsable_id",
 		"responsable": "responsable"
 	},
 	"where": [],
-	"filters": {},
+	"filters": {
+		"findText(text)": "and (objetivo like ${contains($text)} or actividad like ${contains($text)} or indicador like ${contains($text)} or meta like ${contains($text)} or periodo like ${contains($text)} or responsable like ${contains($text)})"
+	},
 	"sort": [
 		"objetivo"
 	],
@@ -22,6 +25,7 @@
 		"indicador": ":indicador",
 		"meta": ":meta",
 		"periodo": ":periodo",
+		"responsable_id": ":responsable_id",
 		"responsable": ":responsable"
 	},
 	"update": {
@@ -30,6 +34,7 @@
 		"indicador": ":indicador",
 		"meta": ":meta",
 		"periodo": ":periodo",
+		"responsable_id": ":responsable_id",
 		"responsable": ":responsable"
 	},
 	"delete": {},
@@ -42,6 +47,7 @@
 		"indicador": "Indicador",
 		"meta": "Meta",
 		"periodo": "Periodo",
+		"responsable_id": "Responsable",
 		"responsable": "Responsable"
 	},
 	"ui": {
@@ -67,22 +73,30 @@
 			"showInList": true
 		},
 		"meta": {
-			"type": "textarea",
+			"type": "text",
 			"showInList": true
 		},
 		"periodo": {
 			"type": "text",
 			"showInList": true
 		},
-		"responsable": {
+		"responsable_id": {
 			"type": "select",
-			"showInList": true,
+			"showInList": false,
 			"list": {
 				"model": "users",
 				"value": "${id}",
 				"text": "${attributes.name}",
-				"loadById": true
+				"on:select": [
+					"set('responsable',${name})"
+				]
 			}
+		},
+		"responsable": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
 		},
 		"_actions": {
 			"control": "actions",

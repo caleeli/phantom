@@ -43,6 +43,9 @@
 						type={config.ui[key]?.type || "text"}
 						value={registro.attributes[key]}
 						config={config.ui[key]?.list}
+						on:set={(event) => {
+							registro.attributes[event.detail.key] = event.detail.value;
+						}}
 						on:input={(event) => {
 							registro.attributes[key] = (event.target || event.detail).value;
 						}}
