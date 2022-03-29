@@ -7,6 +7,7 @@ use App\Expressions\QueryExpression;
 use Exception;
 use PDO;
 use PDOStatement;
+use Throwable;
 use Workerman\Protocols\Http\Request;
 
 abstract class ResourceBase
@@ -45,22 +46,27 @@ abstract class ResourceBase
      */
     protected function query($query, array $params = [])
     {
-        // Find :variable in $query
-        $matches = [];
-        preg_match_all('/:([a-zA-Z0-9_]+)/', $query, $matches);
-        $variables = $matches[1];
-        // Filter params by $variables
-        $params = array_filter($params, function ($key) use ($variables) {
-            return in_array($key, $variables);
-        }, ARRAY_FILTER_USE_KEY);
-        // $this->log($query . ': ' . json_encode($params));
-        $statement = $this->connection->prepare($query);
-        $success = $statement->execute($params);
-        if (!$success) {
-            $errorInfo = $statement->errorInfo();
-            throw new Exception($errorInfo[2], $errorInfo[0]);
+        try {
+            // Find :variable in $query
+            $matches = [];
+            preg_match_all('/:([a-zA-Z0-9_]+)/', $query, $matches);
+            $variables = $matches[1];
+            // Filter params by $variables
+            $params = array_filter($params, function ($key) use ($variables) {
+                return in_array($key, $variables);
+            }, ARRAY_FILTER_USE_KEY);
+            // $this->log($query . ': ' . json_encode($params));
+            $statement = $this->connection->prepare($query);
+            $success = $statement->execute($params);
+            if (!$success) {
+                $errorInfo = $statement->errorInfo();
+                throw new Exception($errorInfo[2], $errorInfo[0]);
+            }
+            return $statement;
+        } catch (Exception $e) {
+            $code = intval($e->getCode()) ?: 500;
+            throw new Exception($e->getMessage() . ' in ' . $query, $code, $e);
         }
-        return $statement;
     }
 
     protected function evaluate($expression, array $variables = [])

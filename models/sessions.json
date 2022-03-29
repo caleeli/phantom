@@ -12,7 +12,12 @@
 	"where": [],
 	"filters": {},
 	"sort": [],
-	"create": {},
+	"create": {
+		"token": ":token",
+		"user_id": ":user_id",
+		"username": ":username",
+		"created_at": ":created_at"
+	},
 	"update": {},
 	"delete": {},
 	"relationships": {},
