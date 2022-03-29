@@ -215,8 +215,7 @@ function run_migrations($name = '')
     global $connection;
     foreach (glob('migrations/*.php') as $file) {
         if (empty($name) || basename($file, '.php') === $name) {
-            $name = basename($file, '.php');
-            error_log("MIGRATE: $name");
+            error_log("MIGRATE: " . basename($file, '.php'));
             // reset file stat
             clearstatcache(true, $file);
             require $file;
