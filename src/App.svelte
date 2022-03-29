@@ -38,13 +38,12 @@
 		"/informes": Informes,
 	};
 	function routeLoaded(event) {
-		currentPage = event.detail.name;
-		console.log(currentPage);
+		currentPage = event.detail.location;
 	}
 </script>
 
 <Alert />
-{#if currentPage && currentPage!=="Login"}
+{#if currentPage && currentPage!=="/"}
 	<Topbar></Topbar>
 	<Menu />
 {/if}
