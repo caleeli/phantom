@@ -171,25 +171,3 @@ foreach($workers as $worker) {
         echo "Worker starting...\n";
     };
 }
-
-function mockTabla($connection, $name, $fields, $n, $id = 1)
-{
-    $columns = [];
-    foreach ($fields as $field) {
-        $columns[] = $field['name'].' '.$field['type'];
-    }
-    $columns = implode(', ', $columns);
-    $connection->exec("DROP TABLE IF EXISTS $name");
-    $connection->exec("CREATE TABLE $name (id INTEGER PRIMARY KEY, $columns)");
-    $faker = Faker\Factory::create();
-    for ($i=0; $i<$n; $i++) {
-        $values = [];
-        foreach ($fields as $field) {
-            $value = eval('return $faker->'.$field['faker'].';');
-            $values[] = is_numeric($value) ? $value : json_encode($value);
-        }
-        $values = implode(', ', $values);
-        $connection->exec("INSERT INTO $name VALUES ($id, $values)");
-        $id++;
-    }
-}
