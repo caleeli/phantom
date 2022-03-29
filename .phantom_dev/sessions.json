@@ -1,10 +1,24 @@
 {
-    "name": "user_roles",
-    "table": "",
-    "join": "roles left join user_roles on (roles.id = user_roles.role_id and user_roles.user_id = :user_id)",
-    "url": "user_roles",
-    "id": "user_roles.id",
+    "name": "sessions",
+    "table": "sessions",
+    "join": "",
+    "url": "sessions",
+    "id": "token",
     "fields": [
+        {
+            "name": "token",
+            "typeDB": "char(128) primary key",
+            "type": "text",
+            "select": "token",
+            "create": "",
+            "update": "",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "groupRows": false,
+            "label": "ID"
+        },
         {
             "name": "user_id",
             "typeDB": "integer",
@@ -20,22 +34,10 @@
             "label": "User ID"
         },
         {
-            "name": "role_id",
-            "typeDB": "integer",
+            "name": "username",
+            "typeDB": "text",
             "type": "text",
-            "select": "roles.id",
-            "create": "",
-            "update": "",
-            "showInList": true,
-            "showInCreate": false,
-            "showInUpdate": false,
-            "label": "Role ID"
-        },
-        {
-            "name": "name",
-            "typeDB": "",
-            "type": "text",
-            "select": "roles.name",
+            "select": "username",
             "create": "",
             "update": "",
             "extra": null,
@@ -43,13 +45,13 @@
             "showInCreate": false,
             "showInUpdate": false,
             "groupRows": false,
-            "label": "Role"
+            "label": "Username"
         },
         {
-            "name": "enabled",
-            "typeDB": "",
+            "name": "created_at",
+            "typeDB": "datetime",
             "type": "text",
-            "select": "user_roles.id",
+            "select": "created_at",
             "create": "",
             "update": "",
             "extra": null,
@@ -57,30 +59,17 @@
             "showInCreate": false,
             "showInUpdate": false,
             "groupRows": false,
-            "label": "Enabled"
+            "label": "Created at"
         }
     ],
     "where": "",
     "sort": "",
     "filters": [],
-    "data": [
-        {
-            "user_id": "1",
-            "role_id": "1"
-        },
-        {
-            "user_id": "2",
-            "role_id": "1"
-        },
-        {
-            "user_id": "3",
-            "role_id": "1"
-        },
-        {
-            "user_id": "4",
-            "role_id": "1"
-        }
-    ],
+    "data": [],
     "actions": "edit,view,print",
-    "relationships": []
+    "relationships": [],
+    "createButtons": [],
+    "rowActions": [],
+    "loadMore": false,
+    "extra": ""
 }

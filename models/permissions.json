@@ -1,16 +1,14 @@
 {
 	"class": "JsonApi",
-	"url": "roles",
-	"table": "roles",
+	"url": "permissions",
+	"table": "permissions",
 	"id": "id",
 	"attributes": {
 		"name": "name"
 	},
 	"where": [],
 	"filters": {},
-	"sort": [
-		"name"
-	],
+	"sort": [],
 	"create": {
 		"name": ":name"
 	},
@@ -20,8 +18,8 @@
 	"delete": {},
 	"relationships": {},
 	"labels": {
-		"_model": "Role",
-		"_models": "Roles",
+		"_model": "Permission",
+		"_models": "Permissions",
 		"name": "Name"
 	},
 	"ui": {

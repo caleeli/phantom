@@ -1,0 +1,51 @@
+{
+	"class": "JsonApi",
+	"url": "role_permissions",
+	"table": "role_permissions",
+	"id": "id",
+	"attributes": {
+		"role_id": "role_id",
+		"permission_id": "permission_id"
+	},
+	"where": [],
+	"filters": {},
+	"sort": [],
+	"create": {
+		"role_id": ":role_id",
+		"permission_id": ":permission_id"
+	},
+	"update": {
+		"role_id": ":role_id",
+		"permission_id": ":permission_id"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Role Permission",
+		"_models": "Role Permissions",
+		"role_id": "Role ID",
+		"permission_id": "Permission ID"
+	},
+	"ui": {
+		"role_id": {
+			"type": "text",
+			"showInList": true
+		},
+		"permission_id": {
+			"type": "text",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"view",
+				"print"
+			]
+		}
+	},
+	"list": {
+		"loadMore": false
+	}
+}

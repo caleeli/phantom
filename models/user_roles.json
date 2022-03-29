@@ -5,6 +5,7 @@
 	"join": "roles left join user_roles on (roles.id = user_roles.role_id and user_roles.user_id = :user_id)",
 	"id": "user_roles.id",
 	"attributes": {
+		"user_id": "user_id",
 		"role_id": "roles.id",
 		"name": "roles.name",
 		"enabled": "user_roles.id"
@@ -17,24 +18,37 @@
 	"delete": {},
 	"relationships": {},
 	"labels": {
-		"_model": "User_Roles",
-		"_models": "User_Roles",
+		"_model": "User Role",
+		"_models": "User Roles",
+		"user_id": "User ID",
 		"role_id": "Role ID",
-		"name": "Name",
+		"name": "Role",
 		"enabled": "Enabled"
 	},
 	"ui": {
+		"user_id": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
 		"role_id": {
 			"type": "text",
-			"showInList": true
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
 		},
 		"name": {
 			"type": "text",
-			"showInList": true
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
 		},
 		"enabled": {
 			"type": "text",
-			"showInList": true
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
 		},
 		"_actions": {
 			"control": "actions",
@@ -45,5 +59,8 @@
 				"print"
 			]
 		}
+	},
+	"list": {
+		"loadMore": false
 	}
 }

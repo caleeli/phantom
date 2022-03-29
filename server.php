@@ -27,52 +27,10 @@ const base_headers = [
 $connection = new PDO($env['dns'], $env['user'], $env['password']);
 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$connection->exec('DROP TABLE IF EXISTS sessions');
-$connection->exec('DROP TABLE IF EXISTS roles');
-$connection->exec('DROP TABLE IF EXISTS user_roles');
-$connection->exec('DROP TABLE IF EXISTS permissions');
-$connection->exec('DROP TABLE IF EXISTS role_permissions');
-$connection->exec('DROP TABLE IF EXISTS tasks');
 $connection->exec('DROP TABLE IF EXISTS transacciones');
 
-$connection->exec('CREATE TABLE sessions (token CHAR(128) PRIMARY KEY, user_id INTEGER, username TEXT, created_at DATETIME)');
-$connection->exec('CREATE TABLE roles (id INTEGER PRIMARY KEY, name TEXT)');
-$connection->exec('CREATE TABLE user_roles (id INTEGER PRIMARY KEY, user_id INTEGER, role_id INTEGER)');
-$connection->exec('CREATE TABLE permissions (id INTEGER PRIMARY KEY, name TEXT)');
-$connection->exec('CREATE TABLE role_permissions (id INTEGER PRIMARY KEY, role_id INTEGER, permission_id INTEGER)');
-$connection->exec('CREATE TABLE tasks (task_id INTEGER PRIMARY KEY, title TEXT, body TEXT, task_usr_id INTEGER, status TEXT, created_at DATETIME, updated_at DATETIME)');
 $connection->exec('CREATE TABLE transacciones (id INTEGER PRIMARY KEY, fecha DATETIME, nombre TEXT, cuenta TEXT, ingreso NUMERIC, egreso NUMERIC)');
 
-// insert roles
-$connection->exec('INSERT INTO roles (id, name) VALUES (1, "Administrador del sistema")');
-$connection->exec('INSERT INTO roles (id, name) VALUES (2, "Director")');
-$connection->exec('INSERT INTO roles (id, name) VALUES (3, "Auditor")');
-$connection->exec('INSERT INTO roles (id, name) VALUES (4, "Cajero")');
-// insert user_roles
-$connection->exec('INSERT INTO user_roles (user_id, role_id) VALUES (1, 1)');
-$connection->exec('INSERT INTO user_roles (user_id, role_id) VALUES (2, 1)');
-$connection->exec('INSERT INTO user_roles (user_id, role_id) VALUES (3, 1)');
-$connection->exec('INSERT INTO user_roles (user_id, role_id) VALUES (4, 1)');
-// insert permissions
-$connection->exec('INSERT INTO permissions (id, name) VALUES (1, "cuadro de mando")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (2, "cajas")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (3, "clientes")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (4, "creditos")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (5, "usuarios")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (6, "perfil")');
-$connection->exec('INSERT INTO permissions (id, name) VALUES (7, "plan anual")');
-// insert role permissions
-$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 1)');
-$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 2)');
-$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 3)');
-$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 4)');
-$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 5)');
-$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 6)');
-$connection->exec('INSERT INTO role_permissions (role_id, permission_id) VALUES (1, 7)');
-// insert sample tasks
-$connection->exec('INSERT INTO tasks (task_id, title, body, task_usr_id, created_at, updated_at) VALUES (1, "Task 1", "Task 1 body", 1, "2020-01-01 00:00:00", "2020-01-01 00:00:00")');
-$connection->exec('INSERT INTO tasks (task_id, title, body, task_usr_id, created_at, updated_at) VALUES (2, "Task 2", "Task 2 body", 1, "2020-01-02 00:00:00", "2020-01-02 00:00:00")');
-$connection->exec('INSERT INTO tasks (task_id, title, body, task_usr_id, created_at, updated_at) VALUES (3, "Task 3", "Task 3 body", 2, "2021-01-03 00:00:00", "2021-01-03 00:00:00")');
 
 // insert transacciones
 $faker = Faker\Factory::create();
@@ -92,14 +50,6 @@ for ($i=0;$i<50;$i++) {
     $connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "'.$fecha.'", "'.$nombre.'", "'.$cuenta.'", '.$ingreso.', '.$egreso.')');
     $date->modify('-'.rand(3600, 36000).' minute');
 }
-/*$connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-02 00:00:00", "Ana Acosta", "1210692772", 200)');
-$connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-03 00:00:00", "Marta Quenta", "2310692712", 300)');
-$connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-04 00:00:00", "Juan Perez", "4310692775", 400)');
-$connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-05 00:00:00", "Ana Acosta", "1110692784", 500)');
-$connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-06 00:00:00", "Marta Quenta", "1810592936", 600)');
-$connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-07 00:00:00", "Juan Perez", "1910692122", 700)');
-$connection->exec('INSERT INTO transacciones (id, fecha, nombre, cuenta, ingreso, egreso) VALUES ('.($n++).', "2020-01-08 00:00:00", "Ana Acosta", "1310632140", 800)');
-*/
 
 run_migrations();
 

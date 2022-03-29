@@ -53,10 +53,15 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         file_put_contents($filename, json_encode($config, JSON_PRETTY_PRINT));
         // create migration
         $id = $config['id'];
+        $idCreate = strpos($id, '.') === false ? $id : 'id';
+        $idCreateSql = "{$idCreate} INTEGER PRIMARY KEY,";
         $fields = [];
         $fieldNames = [];
         $fieldBinds = [];
         foreach ($config['fields'] as $field) {
+            if ($field['name'] === $idCreate) {
+                $idCreateSql = "";
+            }
             $fields[] = $field['name'] . ' ' . $field['typeDB'];
             $fieldNames[] = $field['name'];
             $fieldBinds[] = ':' . $field['name'];
@@ -64,12 +69,12 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         $fields = implode(', ', $fields);
         $fieldNamesSql = implode(', ', $fieldNames);
         $fieldBindsSql = implode(', ', $fieldBinds);
-        $table = $config['table'] ?? '';
+        $table = $config['table'] ?: $config['name'] ?: '';
         if ($table) {
             $migration = <<<EOF
             <?php
             \n\$connection->exec('DROP TABLE IF EXISTS {$table}');\n
-            \n\$connection->exec('CREATE TABLE {$table} ({$id} INTEGER PRIMARY KEY, {$fields})');\n
+            \n\$connection->exec('CREATE TABLE {$table} ({$idCreateSql} {$fields})');\n
             EOF;
             $data = $config['data'];
             foreach ($data as $row) {
@@ -171,7 +176,7 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         $model = [
             'class' => 'JsonApi',
             'url' => $config['url'],
-            'table' => $table,
+            'table' => $config['table'] ?? '',
             'join' => $config['join'] ?? null,
             'id' => $id,
             'attributes' => $attributes,

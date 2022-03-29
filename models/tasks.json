@@ -1,0 +1,83 @@
+{
+	"class": "JsonApi",
+	"url": "tasks",
+	"table": "tasks",
+	"id": "task_id",
+	"attributes": {
+		"title": "title",
+		"body": "body",
+		"task_usr_id": "task_usr_id",
+		"status": "status",
+		"created_at": "created_at",
+		"updated_at": "updated_at"
+	},
+	"where": [],
+	"filters": {},
+	"sort": [],
+	"create": {
+		"title": ":title",
+		"body": ":body",
+		"task_usr_id": ":task_usr_id",
+		"status": ":status",
+		"created_at": ":created_at",
+		"updated_at": ":updated_at"
+	},
+	"update": {
+		"title": ":title",
+		"body": ":body",
+		"task_usr_id": ":task_usr_id",
+		"status": ":status",
+		"created_at": ":created_at",
+		"updated_at": ":updated_at"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Task",
+		"_models": "Tasks",
+		"title": "Title",
+		"body": "Body",
+		"task_usr_id": "User ID",
+		"status": "Status",
+		"created_at": "Created at",
+		"updated_at": "Updated at"
+	},
+	"ui": {
+		"title": {
+			"type": "text",
+			"showInList": true
+		},
+		"body": {
+			"type": "text",
+			"showInList": true
+		},
+		"task_usr_id": {
+			"type": "text",
+			"showInList": true
+		},
+		"status": {
+			"type": "text",
+			"showInList": true
+		},
+		"created_at": {
+			"type": "text",
+			"showInList": true
+		},
+		"updated_at": {
+			"type": "text",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"view",
+				"print"
+			]
+		}
+	},
+	"list": {
+		"loadMore": false
+	}
+}

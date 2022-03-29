@@ -1,23 +1,65 @@
 {
-    "class": "JsonApi",
-    "url": "",
-    "table": "sessions",
-    "id": "token",
-    "attributes": {
-        "user_id": "user_id",
-        "username": "username",
-        "created_at": "created_at"
-    },
-    "where": [],
-    "filters": {},
-    "sort": [],
-    "create": {
-        "token": ":token",
-        "user_id": ":user_id",
-        "username": ":username",
-        "created_at": ":created_at"
-    },
-    "update": {},
-    "delete": [],
-    "relationships": []
+	"class": "JsonApi",
+	"url": "sessions",
+	"table": "sessions",
+	"id": "token",
+	"attributes": {
+		"token": "token",
+		"user_id": "user_id",
+		"username": "username",
+		"created_at": "created_at"
+	},
+	"where": [],
+	"filters": {},
+	"sort": [],
+	"create": {},
+	"update": {},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Session",
+		"_models": "Sessions",
+		"token": "ID",
+		"user_id": "User ID",
+		"username": "Username",
+		"created_at": "Created at"
+	},
+	"ui": {
+		"token": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"user_id": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"username": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"created_at": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"view",
+				"print"
+			]
+		}
+	},
+	"list": {
+		"loadMore": false
+	}
 }

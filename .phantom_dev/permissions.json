@@ -1,0 +1,55 @@
+{
+    "name": "permissions",
+    "table": "permissions",
+    "join": "",
+    "url": "permissions",
+    "id": "id",
+    "fields": [
+        {
+            "name": "name",
+            "typeDB": "text",
+            "type": "text",
+            "select": "name",
+            "create": ":name",
+            "update": ":name",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Name"
+        }
+    ],
+    "where": "",
+    "sort": "",
+    "filters": [],
+    "data": [
+        {
+            "name": "cuadro de mando"
+        },
+        {
+            "name": "cajas"
+        },
+        {
+            "name": "clientes"
+        },
+        {
+            "name": "creditos"
+        },
+        {
+            "name": "usuarios"
+        },
+        {
+            "name": "perfil"
+        },
+        {
+            "name": "plan anual"
+        }
+    ],
+    "actions": "edit,view,print",
+    "relationships": [],
+    "createButtons": [],
+    "rowActions": [],
+    "loadMore": false,
+    "extra": ""
+}
