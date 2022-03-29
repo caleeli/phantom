@@ -115,5 +115,8 @@
 				"objetivo": ""
 			}
 		}
-	]
+	],
+	"list": {
+		"loadMore": false
+	}
 }

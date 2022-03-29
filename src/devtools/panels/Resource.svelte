@@ -20,6 +20,8 @@
         actions: "edit,view,print",
         relationships: [],
         createButtons: [],
+        loadMore: false,
+        extra: "",
     };
     let modelDefaults = {
         table: "${name}",
@@ -516,6 +518,19 @@ Custom Create Buttons:<button on:click={addCreateButton}>+</button><br />
 </table>
 
 <hr />
+
+<label>
+    <input name="loadMore" bind:checked={model.loadMore} type="checkbox" />
+    Load more button
+</label>
+<br />
+
+<label>
+    Extra (JSON):
+    <textarea name="extra" bind:value={model.extra} cols="80"></textarea>
+</label>
+<br />
+
 <button on:click={createResource}>SAVE</button>
 
 <style>

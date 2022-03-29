@@ -199,7 +199,7 @@
 				>
 					{_("Buscar")}
 				</button>
-				<slot name="header"></slot>
+				<slot name="header" />
 				<GridTemplate>
 					<div>
 						{#each create_buttons as button}
@@ -230,67 +230,69 @@
 					on:print={imprimir}
 					on:insertSubRow={crearSubRow}
 				/>
-				<div class="center">
-					<br />
-					<button
-						data-testid="load-more"
-						type="button"
-						on:click|preventDefault={loadMore}
-					>
-						<svg
-							width="12"
-							height="12"
-							viewBox="0 0 26 26"
-							fill="none"
-							xmlns="http://www.w3.org/2000/svg"
+				{#if config?.list?.loadMore}
+					<div class="center">
+						<br />
+						<button
+							data-testid="load-more"
+							type="button"
+							on:click|preventDefault={loadMore}
 						>
-							<g>
-								{#if running}
-									<animateTransform
-										attributeName="transform"
-										attributeType="XML"
-										type="rotate"
-										from="0 13 13"
-										to="360 13 13"
-										dur="1s"
-										repeatCount="indefinite"
+							<svg
+								width="12"
+								height="12"
+								viewBox="0 0 26 26"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<g>
+									{#if running}
+										<animateTransform
+											attributeName="transform"
+											attributeType="XML"
+											type="rotate"
+											from="0 13 13"
+											to="360 13 13"
+											dur="1s"
+											repeatCount="indefinite"
+										/>
+									{/if}
+									<circle
+										cx="21.0"
+										cy="13.0"
+										r="3"
+										fill="#7BDD76"
 									/>
-								{/if}
-								<circle
-									cx="21.0"
-									cy="13.0"
-									r="3"
-									fill="#7BDD76"
-								/>
-								<circle
-									cx="15.47213595499958"
-									cy="20.60845213036123"
-									r="3"
-									fill="#69A7FF"
-								/>
-								<circle
-									cx="6.527864045000421"
-									cy="17.702282018339787"
-									r="3"
-									fill="#E373FF"
-								/>
-								<circle
-									cx="6.52786404500042"
-									cy="8.297717981660217"
-									r="3"
-									fill="#FFB961"
-								/>
-								<circle
-									cx="15.472135954999578"
-									cy="5.391547869638771"
-									r="3"
-									fill="#FF625B"
-								/>
-							</g>
-						</svg>
-						{_("Load more")}
-					</button>
-				</div>
+									<circle
+										cx="15.47213595499958"
+										cy="20.60845213036123"
+										r="3"
+										fill="#69A7FF"
+									/>
+									<circle
+										cx="6.527864045000421"
+										cy="17.702282018339787"
+										r="3"
+										fill="#E373FF"
+									/>
+									<circle
+										cx="6.52786404500042"
+										cy="8.297717981660217"
+										r="3"
+										fill="#FFB961"
+									/>
+									<circle
+										cx="15.472135954999578"
+										cy="5.391547869638771"
+										r="3"
+										fill="#FF625B"
+									/>
+								</g>
+							</svg>
+							{_("Load more")}
+						</button>
+					</div>
+				{/if}
 			</form>
 		</Api>
 	</GridTemplate>

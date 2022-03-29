@@ -185,12 +185,18 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             'labels' => $labels,
             'ui' => $ui,
             'createButtons' => $createButtons,
+            'list' => [
+                'loadMore' => boolval($config['loadMore'] ?? false),
+            ],
         ];
         if (empty($model['join'])) {
             unset($model['join']);
         }
         if (empty($model['createButtons'])) {
             unset($model['createButtons']);
+        }
+        if (!empty($config['extra'])) {
+            $model = array_merge_recursive($model, json_decode($config['extra'], true));
         }
         $modelFilename = 'models/' . $config['name'] . '.json';
         file_put_contents($modelFilename, \str_replace('    ', "\t", json_encode($model, JSON_PRETTY_PRINT)));
