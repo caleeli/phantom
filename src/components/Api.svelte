@@ -6,9 +6,10 @@
 	export let params = {};
 	export let attachPages = false;
 	export let value = null;
+	export let delay = 500;
 	let endpoint = new Promise(()=>{});
 	function refreshApi() {
-		const isFirstPage = !(params.page > 1);
+		const isFirstPage = !(params?.page > 1);
 		endpoint = api(path)
 			[method.toLowerCase()](null, params)
 			.then((data) => {
@@ -22,7 +23,7 @@
 			});
 	}
 	export let refresh = 1;
-	let delayedRefreshApi = debounce(refreshApi, 500);
+	let delayedRefreshApi = debounce(refreshApi, delay);
 	// on params change, refresh
 	$: if (refresh && params) {
 		delayedRefreshApi();

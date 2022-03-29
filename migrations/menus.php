@@ -63,7 +63,7 @@ $statement->execute(array (
 $statement = $connection->prepare('INSERT INTO menus (name, permission, icon, href) VALUES (:name, :permission, :icon, :href)');
 $statement->execute(array (
   'name' => 'Movimientos',
-  'permission' => 'clientes',
+  'permission' => 'clientes1',
   'icon' => 'table',
   'href' => '/movimientos',
 ));

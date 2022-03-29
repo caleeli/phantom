@@ -185,6 +185,7 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
             'labels' => $labels,
             'ui' => $ui,
             'createButtons' => $createButtons,
+            'rowActions' => $config['rowActions'] ?? [],
             'list' => [
                 'loadMore' => boolval($config['loadMore'] ?? false),
             ],
@@ -194,6 +195,9 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         }
         if (empty($model['createButtons'])) {
             unset($model['createButtons']);
+        }
+        if (empty($model['rowActions'])) {
+            unset($model['rowActions']);
         }
         if (!empty($config['extra'])) {
             $model = array_merge_recursive($model, json_decode($config['extra'], true));

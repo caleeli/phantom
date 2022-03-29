@@ -20,7 +20,7 @@ final class Expression implements ExpressionInterface
     public function evaluate(array $variables = [])
     {
         set_error_handler(function ($errno, $errstr) {
-            throw new Exception($errstr, $errno);
+            throw new Exception($errstr . ':' . $this->expression, $errno);
         });
         try {
             extract($variables);

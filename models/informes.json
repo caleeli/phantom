@@ -5,6 +5,7 @@
 	"id": "id",
 	"attributes": {
 		"entidad": "entidad",
+		"elaborado_por_id": "elaborado_por_id",
 		"elaborado_por": "elaborado_por",
 		"fecha": "fecha",
 		"referencia": "referencia"
@@ -16,12 +17,14 @@
 	"sort": [],
 	"create": {
 		"entidad": ":entidad",
+		"elaborado_por_id": ":elaborado_por_id",
 		"elaborado_por": ":elaborado_por",
 		"fecha": ":fecha",
 		"referencia": ":referencia"
 	},
 	"update": {
 		"entidad": ":entidad",
+		"elaborado_por_id": ":elaborado_por_id",
 		"elaborado_por": ":elaborado_por",
 		"fecha": ":fecha",
 		"referencia": ":referencia"
@@ -32,6 +35,7 @@
 		"_model": "Informe",
 		"_models": "Informes",
 		"entidad": "Entidad",
+		"elaborado_por_id": "Elaborado por",
 		"elaborado_por": "Elaborado por",
 		"fecha": "Fecha",
 		"referencia": "Referencia"
@@ -41,9 +45,23 @@
 			"type": "text",
 			"showInList": true
 		},
+		"elaborado_por_id": {
+			"type": "select",
+			"showInList": false,
+			"list": {
+				"model": "users",
+				"value": "${id}",
+				"text": "${attributes.name}",
+				"on:select": [
+					"set('elaborado_por',${name})"
+				]
+			}
+		},
 		"elaborado_por": {
 			"type": "text",
-			"showInList": true
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
 		},
 		"fecha": {
 			"type": "date",
@@ -58,6 +76,7 @@
 			"value": "attributes.id",
 			"actions": [
 				"edit",
+				"open",
 				"print"
 			]
 		}
@@ -74,5 +93,14 @@
 				"referencia": ""
 			}
 		}
-	]
+	],
+	"rowActions": [
+		{
+			"name": "open",
+			"action": "open('\/informe\/${id}\/movimientos')"
+		}
+	],
+	"list": {
+		"loadMore": false
+	}
 }

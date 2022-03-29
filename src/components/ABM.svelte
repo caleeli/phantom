@@ -1,4 +1,5 @@
 <script>
+	import {push, pop, replace} from 'svelte-spa-router'
 	import "../helpers/dialog.ts";
 	import { tick } from "svelte";
 	import api from "../api";
@@ -6,8 +7,6 @@
 	import Api from "../components/Api.svelte";
 	import Grid from "../components/Grid.svelte";
 	import GridTemplate from "../components/GridTemplate.svelte";
-	import Menu from "../components/Menu.svelte";
-	import Topbar from "../components/Topbar.svelte";
 	import { translations } from "../helpers";
 	import FormFields from "./FormFields.svelte";
 	export let config = {
@@ -135,6 +134,16 @@
 		await tick();
 		view.showModal();
 	}
+	async function openRow(event) {
+		const row = JSON.parse(JSON.stringify(event.detail));
+		if (config?.rowActions) {
+			const action = config.rowActions.find(action => action.name === "open");
+			if (!action) {
+				throw "No action open defined";
+			}
+			runActions(action.action, row);
+		}
+	}
 	async function imprimir(event) {
 		editRecord = event.detail;
 		await tick();
@@ -171,10 +180,16 @@
 		textToFind = "";
 		params.filter = [];
 	}
+	async function runActions(actions, data) {
+		const code = new Function(...Object.keys(data),"return `" +actions + "`")(...Object.values(data));
+		const functions = {
+			open: (dest) => {
+				push(dest);
+			},
+		};
+		return new Function(...Object.keys(functions), code)(...Object.values(functions));
+	}
 </script>
-
-<Topbar>{_("_models")}</Topbar>
-<Menu />
 
 <main>
 	<GridTemplate>
@@ -185,6 +200,7 @@
 			bind:params
 			let:running
 			attachPages={true}
+			delay={0}
 		>
 			<form
 				on:submit|preventDefault={() => {
@@ -228,6 +244,7 @@
 					on:edit={editar}
 					on:view={visualizar}
 					on:print={imprimir}
+					on:open={openRow}
 					on:insertSubRow={crearSubRow}
 				/>
 				{#if config?.list?.loadMore}

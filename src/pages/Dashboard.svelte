@@ -2,24 +2,18 @@
 	import Api from "../components/Api.svelte";
 	import Donut from "../components/Donut.svelte";
 	import GridTemplate from "../components/GridTemplate.svelte";
-	import Menu from "../components/Menu.svelte";
-	import Topbar from "../components/Topbar.svelte";
 	import { translations } from "../helpers";
 	import * as config from "../../models/indicadores.json";
 
-	const _ = translations.setLabels(config['labels']);
+	const _ = translations.setLabels(config["labels"]);
 	let indicadores = {
 		indicadores: {},
 		graficos: [],
 	};
 </script>
 
-<Topbar>Inicio</Topbar>
-<Menu />
-
 <main>
-	<h2>{_("Cuadro de mando")}</h2>
-	<Api path="indicadores" bind:value={indicadores}>
+	<Api path="indicadores" bind:value={indicadores} delay={0}>
 		<GridTemplate min_width="15rem">
 			{#each Object.entries(indicadores.indicadores) as [nombre, valor]}
 				<form>

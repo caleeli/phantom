@@ -19,6 +19,20 @@
             "label": "Entidad"
         },
         {
+            "name": "elaborado_por_id",
+            "typeDB": "integer",
+            "type": "select",
+            "select": "elaborado_por_id",
+            "create": ":elaborado_por_id",
+            "update": ":elaborado_por_id",
+            "extra": "{\"list\":{\"model\":\"users\",\"value\":\"${id}\",\"text\":\"${attributes.name}\",\"on:select\":[\"set('elaborado_por',${name})\"]}}",
+            "showInList": false,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Elaborado por"
+        },
+        {
             "name": "elaborado_por",
             "typeDB": "varchar(64)",
             "type": "text",
@@ -26,8 +40,8 @@
             "create": ":elaborado_por",
             "update": ":elaborado_por",
             "showInList": true,
-            "showInCreate": true,
-            "showInUpdate": true,
+            "showInCreate": false,
+            "showInUpdate": false,
             "groupRows": false,
             "label": "Elaborado por"
         },
@@ -67,7 +81,7 @@
         }
     ],
     "data": [],
-    "actions": "edit,print",
+    "actions": "edit,open,print",
     "relationships": [],
     "createButtons": [
         {
@@ -80,6 +94,12 @@
                 "fecha": "\"\"",
                 "referencia": "\"\""
             }
+        }
+    ],
+    "rowActions": [
+        {
+            "name": "open",
+            "action": "open('\/informe\/${id}\/movimientos')"
         }
     ]
 }

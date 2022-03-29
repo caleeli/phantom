@@ -16,23 +16,36 @@
 	import PlanAnual from "./pages/PlanAnual.svelte";
 	import Movimientos from "./pages/Movimientos.svelte";
 	import Informes from "./pages/Informes.svelte";
+	import Topbar from "./components/Topbar.svelte";
+	import Menu from "./components/Menu.svelte";
+
+	let currentPage = "";
+
 	const routes = {
 		"/": Login,
 		"/home": Home,
 		"/test": Test,
-		"/task/:id": Task,
+		// "/task/:id": Task,
 		"/dashboard": Dashboard,
-		"/page/:name": Page,
+		// "/page/:name": Page,
 		"/admin/profile": AdminProfile,
 		"/admin/users": AdminUsers,
 		"/cajas": Cajas,
 		"/creditos": Creditos,
 		"/clientes": Clientes,
 		"/plan_anual": PlanAnual,
-		"/movimientos": Movimientos,
+		"/informe/:id/movimientos": Movimientos,
 		"/informes": Informes,
 	};
+	function routeLoaded(event) {
+		currentPage = event.detail.name;
+	}
 </script>
 
 <Alert />
-<Router {routes} />
+{#if currentPage && currentPage!=="Login"}
+	<Topbar></Topbar>
+	<Menu />
+{/if}
+
+<Router {routes} on:routeLoaded={routeLoaded} />

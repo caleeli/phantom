@@ -20,6 +20,7 @@
         actions: "edit,view,print",
         relationships: [],
         createButtons: [],
+        rowActions: [],
         loadMore: false,
         extra: "",
     };
@@ -118,6 +119,11 @@
         model.fields.splice(model.fields.indexOf(field), 1);
         model = model;
     }
+    function insertBeforeField(field) {
+        addField();
+        const newField = model.fields.pop();
+        model.fields.splice(model.fields.indexOf(field), 0, newField);
+    }
     function createResource() {
         api(apiBase + "resource")
             .post({
@@ -193,6 +199,21 @@
         model.createButtons.splice(model.createButtons.indexOf(button), 1);
         model = model;
     }
+    function addRowAction() {
+        if (!model.rowActions) {
+            model.rowActions = [];
+        }
+        const button = {
+            name: "",
+            action: "",
+        };
+        model.rowActions.push(button);
+        model = model;
+    }
+    function removeRowAction(button) {
+        model.rowActions.splice(model.rowActions.indexOf(button), 1);
+        model = model;
+    }
 </script>
 
 <label>
@@ -257,6 +278,7 @@ Fields <button on:click={addField}>+</button><br />
 {#each model.fields as field}
     <div class="flex">
         <button on:click={() => removeField(field)}>-</button>
+        <button on:click={() => insertBeforeField(field)}>⮣</button>
         <label>
             Field:
             <input
@@ -513,6 +535,24 @@ Custom Create Buttons:<button on:click={addCreateButton}>+</button><br />
             {#each model.fields as field}
                 <td><input bind:value={row.attributes[field.name]} /></td>
             {/each}
+        </tr>
+    {/each}
+</table>
+<hr />
+Custom Row Actions:<button on:click={addRowAction}>+</button><br />
+<table>
+    <tr>
+        <th />
+        <th>name</th>
+        <th>action</th>
+    </tr>
+    {#each (model.rowActions || []) as row}
+        <tr>
+            <td><button on:click={() => removeRowAction(row)}>-</button></td>
+            <td><input bind:value={row.name} /></td>
+            <td>
+                <textarea bind:value={row.action} cols="40"></textarea>
+            </td>
         </tr>
     {/each}
 </table>

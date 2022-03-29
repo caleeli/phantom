@@ -12,6 +12,7 @@
 	const sheet = new Sheet(config, value);
 	const actionIcons = {
 		view: "eye",
+		open: "folder-open",
 	};
 	function iconAlias(icon) {
 		return actionIcons[icon] || icon;
