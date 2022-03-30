@@ -53,7 +53,7 @@
 		}
 	},
 	"labels": {
-		"_model": "Users",
+		"_model": "User",
 		"_models": "Users",
 		"name": "Name",
 		"avatar": "Avatar",
@@ -100,5 +100,8 @@
 				"view"
 			]
 		}
+	},
+	"list": {
+		"loadMore": false
 	}
 }
