@@ -17,11 +17,13 @@
 		attributes: {},
 		ui: {},
 	};
+	export let params = {};
 
 	let tableConfig = {
 		headers: [],
 		cells: {},
 	};
+	let printRecord;
 
 	const _ = translations.setLabels(config.labels);
 
@@ -80,23 +82,23 @@
 						type: "submit",
 					},
 			  ];
-	let tableData = [],
-		list,
-		params = {
+	let tableData = [];
+	let list;
+	let paramsList = Object.assign({
 			page: 1,
 			per_page: config.pagination?.per_page || 10,
 			filter: [],
 			sort: config.sort?.join(","),
-		};
+		}, params);
 	let edit, view, create;
 	let editRecord = null;
 	let newRecord = null;
 	function refreshList() {
-		params = params;
+		paramsList = paramsList;
 	}
 	function defaultValues(configAttributes, template) {
 		return Object.keys(configAttributes).reduce((acc, key) => {
-			acc[key] = template[key] || config.ui[key]?.default || "";
+			acc[key] = template[key] || config.ui[key]?.default || params?.params?.[key] || "";
 			return acc;
 		}, {});
 	}
@@ -119,11 +121,6 @@
 		await tick();
 		create.showModal();
 	}
-	async function crearSubRow() {
-		// let subRow = {};
-		// await tick();
-		// create.showModal();
-	}
 	async function editar(event) {
 		editRecord = JSON.parse(JSON.stringify(event.detail));
 		await tick();
@@ -145,7 +142,8 @@
 		}
 	}
 	async function imprimir(event) {
-		editRecord = event.detail;
+		printRecord = await api(`report/${config.url}`).get(event.detail.id);
+		printRecord = printRecord.content;
 		await tick();
 		window.print();
 	}
@@ -169,16 +167,16 @@
 			});
 	}
 	function findText() {
-		params.page = 1;
-		params.filter = [`findText(${JSON.stringify(textToFind)})`];
+		paramsList.page = 1;
+		paramsList.filter = [`findText(${JSON.stringify(textToFind)})`];
 	}
 	function loadMore() {
-		params.page++;
+		paramsList.page++;
 		refreshList();
 	}
 	function resetFilter() {
 		textToFind = "";
-		params.filter = [];
+		paramsList.filter = [];
 	}
 	async function runActions(actions, data) {
 		const code = new Function(...Object.keys(data),"return `" +actions + "`")(...Object.values(data));
@@ -197,7 +195,7 @@
 			bind:this={list}
 			path={config.url}
 			bind:value={tableData}
-			bind:params
+			bind:params={paramsList}
 			let:running
 			attachPages={true}
 			delay={0}
@@ -245,7 +243,6 @@
 					on:view={visualizar}
 					on:print={imprimir}
 					on:open={openRow}
-					on:insertSubRow={crearSubRow}
 				/>
 				{#if config?.list?.loadMore}
 					<div class="center">
@@ -383,15 +380,8 @@
 		</form>
 	{/if}
 </dialog>
-{#if editRecord && config.create}
-	<form style="min-width:50vw" class="to-print">
-		<dl>
-			{#each Object.entries(config.create) as [key, value]}
-				<dt>{_(key)}</dt>
-				<dd data-testid={`print-${key}`}>
-					{editRecord.attributes[key]}
-				</dd>
-			{/each}
-		</dl>
-	</form>
+{#if printRecord}
+	<div class="to-print">
+		{@html printRecord}
+	</div>
 {/if}

@@ -4,6 +4,7 @@
 	"table": "movimientos",
 	"id": "id",
 	"attributes": {
+		"informe_id": "informe_id",
 		"cuenta": "cuenta",
 		"documento": "documento",
 		"comprobante": "comprobante",
@@ -12,12 +13,15 @@
 		"credito": "credito",
 		"detalle": "detalle"
 	},
-	"where": [],
+	"where": [
+		"and informe_id=${$informe_id}"
+	],
 	"filters": {},
 	"sort": [
 		"-id"
 	],
 	"create": {
+		"informe_id": ":informe_id",
 		"cuenta": ":cuenta",
 		"documento": ":documento",
 		"comprobante": ":comprobante",
@@ -27,6 +31,7 @@
 		"detalle": ":detalle"
 	},
 	"update": {
+		"informe_id": ":informe_id",
 		"cuenta": ":cuenta",
 		"documento": ":documento",
 		"comprobante": ":comprobante",
@@ -40,6 +45,7 @@
 	"labels": {
 		"_model": "Movimiento",
 		"_models": "Movimientos",
+		"informe_id": "Informe ID",
 		"cuenta": "Cuenta",
 		"documento": "Documento",
 		"comprobante": "Comprobante",
@@ -49,6 +55,12 @@
 		"detalle": "Detalle"
 	},
 	"ui": {
+		"informe_id": {
+			"type": "text",
+			"showInList": false,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
 		"cuenta": {
 			"type": "text",
 			"showInList": true
@@ -84,5 +96,8 @@
 				"edit"
 			]
 		}
+	},
+	"list": {
+		"loadMore": false
 	}
 }

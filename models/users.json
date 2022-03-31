@@ -70,7 +70,8 @@
 		},
 		"avatar": {
 			"type": "file",
-			"showInList": true
+			"showInList": true,
+			"format": "${basename(value)}"
 		},
 		"email": {
 			"type": "email",
@@ -96,8 +97,7 @@
 			"control": "actions",
 			"value": "attributes.id",
 			"actions": [
-				"edit",
-				"view"
+				"edit"
 			]
 		}
 	},

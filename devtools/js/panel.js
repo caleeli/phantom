@@ -1756,6 +1756,10 @@ var app = (function () {
                     // if value is array, add multiple params
                     params[key].forEach(value => url.searchParams.append(key + '[]', value));
                 }
+                else if (params[key] instanceof Object) {
+                    // if value is object, add multiple params
+                    Object.keys(params[key]).forEach(value => url.searchParams.append(key + '[' + value + ']', params[key][value]));
+                }
                 else if (params[key] !== undefined) {
                     url.searchParams.append(key, params[key]);
                 }

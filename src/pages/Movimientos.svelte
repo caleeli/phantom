@@ -19,7 +19,7 @@
 		});
 </script>
 
-<Abm {config}>
+<Abm {config} params={{params:{informe_id: params.id}}}>
 	<div slot="header">
 		<FormFields
 			config={informeConfig}

@@ -64,12 +64,10 @@
 											</a>
 										{/each}
 									</div>
-								{:else if sheet.cell[row][col].groupRows}
-									<div class="cell">
-										<span>{@html sheet.format[`${row},${col}`]}</span>
-									</div>
+								{:else if sheet.cell[row][col].type === "file"}
+									<a href={sheet.ref[`${row},${col}`]} target="_blank">{sheet.format[`${row},${col}`]}</a>
 								{:else}
-									{@html sheet.format[`${row},${col}`]}
+									{sheet.format[`${row},${col}`]}
 								{/if}
 							</td>
 						{/if}

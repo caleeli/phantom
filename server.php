@@ -7,6 +7,11 @@ use Mark\App;
 use Workerman\Protocols\Http\Request;
 use Workerman\Protocols\Http\Response;
 
+// catch errors
+set_error_handler(function ($errno, $errstr, $errfile, $errline) {
+    throw new Exception($errstr, $errno);
+});
+
 $env = parse_ini_file('.env');
 // add to $_ENV
 foreach ($env as $key => $value) {
@@ -33,6 +38,9 @@ $api->options('/api/{model}/{id}', function (Request $request) {
 $api->options('/api/{model}', function (Request $request) {
     return new Response(201, base_headers, '');
 });
+$api->options('/api/report/{model}/{id}', function (Request $request) {
+    return new Response(201, base_headers, '');
+});
 
 $api->get('/api/{model}/{id}', function (Request $request, $model, $id) use ($connection) {
     try {
@@ -41,13 +49,32 @@ $api->get('/api/{model}/{id}', function (Request $request, $model, $id) use ($co
         return new Response(404, base_headers, json_encode(['error' => $e->getMessage()]));
     }
     try {
-        $options = [];
+        $options = $request->get(null, []);
         $include = $request->get('include', '');
         $include = $include ? explode(',', $include) : [];
         $options['include'] = $include;
         return new Response(200, base_headers, json_encode($resource->show($id, $options)));
     } catch (Exception $e) {
         return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+    }
+});
+
+$api->get('/api/report/{model}/{id}', function (Request $request, $model, $id) use ($connection) {
+    try {
+        $resource = model($model, $connection, $request);
+    } catch (Exception $e) {
+        return new Response(404, base_headers, json_encode(['error' => $e->getMessage()]));
+    }
+    try {
+        $options = $request->get(null, []);
+        $include = $request->get('include', '');
+        $include = $include ? explode(',', $include) : [];
+        $options['include'] = $include;
+        return new Response(200, base_headers, json_encode($resource->report($id, $options)));
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        error_log($e->getTraceAsString());
+        return new Response($e->getCode() ?: 501, base_headers, json_encode(['error' => $e->getMessage()]));
     }
 });
 
@@ -61,7 +88,7 @@ $api->get('/api/{model}', function (Request $request, $model) use ($connection) 
         return new Response(404, base_headers, json_encode(['error' => $e->getMessage()]));
     }
     try {
-        $options = [];
+        $options = $request->get(null, []);
         $include = $request->get('include', '');
         $include = $include ? explode(',', $include) : [];
         $options['include'] = $include;

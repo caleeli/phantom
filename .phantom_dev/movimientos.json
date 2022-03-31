@@ -6,6 +6,20 @@
     "id": "id",
     "fields": [
         {
+            "name": "informe_id",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "informe_id",
+            "create": ":informe_id",
+            "update": ":informe_id",
+            "extra": null,
+            "showInList": false,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "groupRows": false,
+            "label": "Informe ID"
+        },
+        {
             "name": "cuenta",
             "typeDB": "varchar(64)",
             "type": "text",
@@ -97,7 +111,7 @@
             "label": "Detalle"
         }
     ],
-    "where": "",
+    "where": "and informe_id=${$informe_id}",
     "sort": "-id",
     "filters": [],
     "data": [],

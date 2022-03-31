@@ -72,6 +72,28 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
     {
     }
 
+    public function report($id, array $options = [])
+    {
+        $report = __DIR__ . '/../../resources/reports/'.$this->definition['name'].'.php';
+        if (!file_exists($report)) {
+            throw new Exception('Report not found', 404);
+        }
+        $options['params']['id'] = $id;
+        $statement = $this->prepareQuery($options, true);
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($row === false) {
+            throw new Exception('Not found', 404);
+        }
+        ob_start();
+        include $report;
+        $content = ob_get_clean();
+        return [
+            'data' => [
+                'content' => $content,
+            ],
+        ];
+    }
+
     private function prepareQuery(array $options, $byId = false)
     {
         // params

@@ -1,0 +1,46 @@
+/** print utils **/
+.to-print {
+	display: none;
+}
+@media print {
+	header {
+		display: none;
+	}
+    .to-print {
+		display: block;
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+    }
+	#hide-sidebar {
+		display: none;
+	}
+	#show-sidebar {
+		display: none;
+	}
+
+	table {
+		width: 100%;
+	}
+	table th {
+		text-align: left;
+	}
+	table.no-border {
+		border: none !important;
+	}
+	table.border {
+		border: 1px solid #000 !important;
+		border-collapse: collapse;
+	}
+	table.border th {
+		border: 1px solid #000;
+	}
+	table.border td {
+		border: 1px solid #000;
+	}
+}

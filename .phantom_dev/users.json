@@ -26,7 +26,8 @@
             "showInList": true,
             "showInCreate": true,
             "showInUpdate": true,
-            "label": "Avatar"
+            "label": "Avatar",
+            "extra": "{\"format\":\"${basename(value)}\"}"
         },
         {
             "name": "email",
@@ -152,5 +153,5 @@
             "password": "5f4dcc3b5aa765d61d8327deb882cf99"
         }
     ],
-    "actions": "edit,view"
+    "actions": "edit"
 }

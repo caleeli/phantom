@@ -82,7 +82,18 @@
     ],
     "data": [],
     "actions": "edit,open,print",
-    "relationships": [],
+    "relationships": [
+        {
+            "name": "movimientos",
+            "params": [
+                {
+                    "name": "informe_id",
+                    "value": "$id"
+                }
+            ],
+            "model": "movimientos"
+        }
+    ],
     "createButtons": [
         {
             "name": "Informe",

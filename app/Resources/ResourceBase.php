@@ -120,6 +120,11 @@ abstract class ResourceBase
         return model($model, $this->connection, $this->request);
     }
 
+    public function getDefinition()
+    {
+        return $this->definition;
+    }
+
     private function log($msg)
     {
         $pid = getmypid();

@@ -30,7 +30,14 @@
 		"referencia": ":referencia"
 	},
 	"delete": {},
-	"relationships": {},
+	"relationships": {
+		"movimientos": {
+			"model": "movimientos",
+			"params": {
+				"informe_id": "$id"
+			}
+		}
+	},
 	"labels": {
 		"_model": "Informe",
 		"_models": "Informes",

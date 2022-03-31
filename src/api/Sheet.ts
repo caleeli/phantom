@@ -55,7 +55,7 @@ class Sheet {
 				const col = Number(p[1]);
 				const value = get(target[row], cell[row][col].value);
 				const format = cell[row][col].format || '${value}';
-				return (new Function('value', 'currency', 'icon', 'return `' + format + '`'))(value, currency, icon);
+				return (new Function('value', 'currency', 'icon', 'basename', 'return `' + format + '`'))(value, currency, icon, basename);
 			}
 		});
 	}
@@ -156,6 +156,10 @@ export function currency(number) {
 
 function icon(icon) {
 	return `<i class="fas fa-${icon}"></i>`;
+}
+
+function basename(url) {
+	return url.split('/').pop();
 }
 
 // Ex. 0=A, 27=AA, 702=AAA
