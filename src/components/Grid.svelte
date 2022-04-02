@@ -57,7 +57,7 @@
 												)}
 												href="javascript:void(0)"
 												data-testid={`action-${action}`}
-												title={_(action)}
+												tooltip={_(action)}
 											>
 												<i
 													class="fa fa-{iconAlias(
@@ -114,8 +114,5 @@
 	}
 	.cell {
 		display: flex;
-	}
-	.cell span{
-		flex-grow: 1;
 	}
 </style>

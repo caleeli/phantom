@@ -1,11 +1,13 @@
-<script>
+<script lang="ts">
 	import Abm from "../components/ABM.svelte";
 	import * as config from "../../models/movimientos.json";
 	import * as informeConfig from "../../models/informes.json";
 	import FormFields from "../components/FormFields.svelte";
 	import api from "../api";
 
-	export let params;
+	export let params = {
+		id: null,
+	};
 
 	let informe = {
 		attributes: JSON.parse(
@@ -19,7 +21,7 @@
 		});
 </script>
 
-<Abm {config} params={{params:{informe_id: params.id}}}>
+<Abm {config} params={{ params: { informe_id: params.id } }}>
 	<div slot="header">
 		<FormFields
 			config={informeConfig}

@@ -6,7 +6,9 @@
 	import api from "../api";
 	import { pop } from "svelte-spa-router";
 
-	export let params;
+	export let params = {
+		id: null,
+	};
 
 	// initialize plan_anual with empty values
 	const attrs = Object.keys(planAnualConfig.attributes);
@@ -33,13 +35,17 @@
 		}
 	}
 	function onpopup(event) {
-		goback = event.detail.action === 'close';
+		goback = event.detail.action === "close";
 	}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
 
-<Abm {config} params={{ params: { plan_anual_id: params.id } }} on:popup={onpopup}>
+<Abm
+	{config}
+	params={{ params: { plan_anual_id: params.id } }}
+	on:popup={onpopup}
+>
 	<div slot="header">
 		<FormFields
 			config={planAnualConfig}

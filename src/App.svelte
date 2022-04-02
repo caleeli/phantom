@@ -17,6 +17,7 @@
 	import Movimientos from "./pages/Movimientos.svelte";
 	import Topbar from "./components/Topbar.svelte";
 	import Menu from "./components/Menu.svelte";
+	import Tooltip from "./components/Tooltip.svelte";
 
 	let currentPage = "";
 
@@ -47,3 +48,4 @@
 {/if}
 
 <Router {routes} on:routeLoaded={routeLoaded} />
+<Tooltip />
