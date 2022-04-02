@@ -10,7 +10,6 @@
 	$: {
 		from = String(value).split(separator)[0] || '';
 		to = String(value).split(separator)[1] || '';
-		console.log(value);
 	}
 
 	function oninput() {
