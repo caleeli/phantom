@@ -56,19 +56,42 @@ foreach ($ui as $column => $def) {
             ?>
     </tr>
     <?php
-    foreach ($rows as $row) {
+    $previous = null;
+    $groupColumns = [
+        'objetivo'
+    ];
+    foreach ($rows as $index => $row) {
         ?>
     <tr>
         <?php
             foreach ($columns as $column) {
-                ?>
-        <td>
-            <?= htmlentities($row['attributes'][$column['name']]) ?>
-        </td>
-        <?php
+                $rowspan = 1;
+                $groupColumn = in_array($column['name'], $groupColumns);
+                $isEqualToPrevious = $previous &&  $previous['attributes'][$column['name']] === $row['attributes'][$column['name']];
+                if ($groupColumn && !$isEqualToPrevious) {
+                    // calculate rowspan
+                    $rowspan = 1;
+                    $current = $row['attributes'][$column['name']];
+                    foreach ($rows as $index2 => $row2) {
+                        if ($index2 <= $index) {
+                            continue;
+                        }
+                        if ($row2['attributes'][$column['name']] === $current) {
+                            $rowspan++;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                if (!$groupColumn || !$isEqualToPrevious) {
+                    echo '<td ' . ($rowspan > 1 ? 'rowspan="' . $rowspan . '"' : '') . '>';
+                    echo htmlentities($row['attributes'][$column['name']]);
+                    echo '</td>';
+                }
             } ?>
     </tr>
     <?php
+        $previous = $row;
     }
     ?>
 </table>
