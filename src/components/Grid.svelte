@@ -58,6 +58,7 @@
 												href="javascript:void(0)"
 												data-testid={`action-${action}`}
 												tooltip={_(action)}
+												aria-label="{_(action)}"
 											>
 												<i
 													class="fa fa-{iconAlias(
