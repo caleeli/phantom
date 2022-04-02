@@ -2,7 +2,6 @@
 	import { tick } from "svelte";
 	import api from "../api";
 	import Api from "./Api.svelte";
-	import { onMount } from "svelte";
 
 	export let value;
 	export let config;
@@ -91,9 +90,9 @@
 	function onblur() {
 		focused = false;
 	}
-	onMount(() => {
+	$:{
 		loadMasked(value);
-	});
+	}
 </script>
 
 {#if focused}
