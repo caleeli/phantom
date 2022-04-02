@@ -73,7 +73,7 @@
         {
             "name": "periodo",
             "typeDB": "text",
-            "type": "text",
+            "type": "daterange",
             "select": "periodo",
             "create": ":periodo",
             "update": ":periodo",

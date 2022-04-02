@@ -103,7 +103,7 @@
 			"showInList": true
 		},
 		"periodo": {
-			"type": "text",
+			"type": "daterange",
 			"showInList": true
 		},
 		"responsable_id": {

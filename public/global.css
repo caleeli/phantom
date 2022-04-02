@@ -618,3 +618,9 @@ dialog {
 .w-100 {
 	width: 100%;
 }
+.date-range {
+	display: flex;
+}
+.date-range input:last-child{
+	margin-right: 0px;
+}

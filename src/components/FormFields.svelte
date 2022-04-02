@@ -4,6 +4,7 @@
 	import InputFile from "./InputFile.svelte";
 	import InputList from "./InputList.svelte";
 	import InputSelect from "./InputSelect.svelte";
+	import InputDateRange from "./InputDateRange.svelte";
 
 	export let config;
 	export let registro;
@@ -47,6 +48,17 @@
 						on:set={(event) => {
 							registro.attributes[event.detail.key] = event.detail.value;
 						}}
+						on:input={(event) => {
+							registro.attributes[key] = (event.target || event.detail).value;
+						}}
+					/>
+				{:else if config.ui[key]?.type === "daterange"}
+					<InputDateRange
+						class="w-100"
+						data-testid={`${dataTest}-${key}`}
+						value={registro.attributes[key]}
+						separator={config.ui[key]?.separator || ' 🠖 '}
+						context={registro}
 						on:input={(event) => {
 							registro.attributes[key] = (event.target || event.detail).value;
 						}}
