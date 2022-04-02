@@ -14,7 +14,7 @@
 		"responsable": "responsable"
 	},
 	"where": [
-		"and plan_anual_id=${$plan_anual_id}"
+		"and (${$plan_anual_id}=\"*\" or plan_anual_id=${$plan_anual_id})"
 	],
 	"filters": {
 		"findText(text)": "and (objetivo like ${contains($text)} or actividad like ${contains($text)} or indicador like ${contains($text)} or meta like ${contains($text)} or periodo like ${contains($text)} or responsable like ${contains($text)})"
@@ -85,7 +85,18 @@
 		},
 		"indicador": {
 			"type": "text",
-			"showInList": true
+			"showInList": true,
+			"list": {
+				"model": "actividades",
+				"value": "${attributes.indicador}",
+				"params": {
+					"distinct": 1,
+					"fields": "indicador",
+					"params": {
+						"plan_anual_id": "*"
+					}
+				}
+			}
 		},
 		"meta": {
 			"type": "text",

@@ -40,7 +40,13 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         $config = $data['data']['attributes'];
         // create migration
         $this->createResource($config);
-        run_migrations($config['name']);
+        if (file_exists(__DIR__ . '/../../migrations.json')) {
+            $skip = json_decode(file_get_contents(__DIR__ . '/../../migrations.json'), true);
+        } else {
+            $skip = [];
+        }
+        run_migrations($config['name'], $skip);
+        file_put_contents('migrations.json', json_encode($skip));
     }
 
     /**

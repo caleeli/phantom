@@ -210,14 +210,20 @@ function logged_permissions(Request $request)
     return $permissions;
 }
 
-function run_migrations($name = '')
+function run_migrations($name = '', array &$skip=[])
 {
     global $connection;
     foreach (glob('migrations/*.php') as $file) {
         if (empty($name) || basename($file, '.php') === $name) {
-            error_log("MIGRATE: " . basename($file, '.php'));
             // reset file stat
             clearstatcache(true, $file);
+            $hash = md5_file($file);
+            if (in_array($hash, $skip)) {
+                error_log("SKIP: " . basename($file, '.php'));
+                continue;
+            }
+            error_log("MIGRATE: " . basename($file, '.php'));
+            $skip[basename($file, '.php')] = $hash;
             require $file;
         }
     }

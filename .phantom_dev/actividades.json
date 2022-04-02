@@ -55,7 +55,8 @@
             "showInList": true,
             "showInCreate": true,
             "showInUpdate": true,
-            "label": "Indicador"
+            "label": "Indicador",
+            "extra": "{\"list\":{\"model\":\"actividades\",\"value\":\"${attributes.indicador}\",\"params\":{\"distinct\":1,\"fields\":\"indicador\",\"params\":{\"plan_anual_id\":\"*\"}}}}"
         },
         {
             "name": "meta",
@@ -110,7 +111,7 @@
             "label": "Responsable"
         }
     ],
-    "where": "and plan_anual_id=${$plan_anual_id}",
+    "where": "and (${$plan_anual_id}=\"*\" or plan_anual_id=${$plan_anual_id})",
     "sort": "objetivo",
     "filters": [
         {

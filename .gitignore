@@ -28,3 +28,4 @@ amplifytools.xcconfig
 amplify/
 /vendor/
 composer.lock
+migrations.json

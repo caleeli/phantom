@@ -33,7 +33,6 @@
 		}
 	}
 	function onpopup(event) {
-		console.log("popup", event.detail.action);
 		goback = event.detail.action === 'close';
 	}
 </script>
