@@ -21,28 +21,28 @@ foreach ($ui as $column => $def) {
 }
 
 ?>
-<div>
-    Ref: <?= htmlentities($header['referencia']) ?>
+<div style="display:flex;">
+    <h3 style="flex-grow: 1;">
+        <?= htmlentities($header['titulo']) ?><br>
+        <small><?= htmlentities($header['periodo']) ?></small>
+    </h3>
+    <h3>
+        Ref: <?= htmlentities($header['referencia']) ?>
+    </h3>
 </div>
-<h2>
-    <?= htmlentities($header['titulo']) ?>
-</h2>
-<div><?= htmlentities($header['periodo']) ?></div>
+
 <table class="no-border">
     <tr>
         <td>
-            Elaborado por
+            <b>Elaborado por:</b>
             <?= htmlentities($header['elaborado_por']) ?>
         </td>
-        <th>
-            Fecha
-        </th>
-        <td>
+        <td align="right">
+            <b>Fecha:</b>
             <?= htmlentities($header['fecha']) ?>
         </td>
     </tr>
 </table>
-<br />
 <table class="border">
     <tr>
         <?php
