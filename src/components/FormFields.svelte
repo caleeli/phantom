@@ -42,6 +42,7 @@
 						data-testid={`${dataTest}-${key}`}
 						type={config.ui[key]?.type || "text"}
 						value={registro.attributes[key]}
+						context={registro}
 						config={config.ui[key]?.list}
 						on:set={(event) => {
 							registro.attributes[event.detail.key] = event.detail.value;
@@ -56,6 +57,7 @@
 						data-testid={`${dataTest}-${key}`}
 						type={config.ui[key]?.type || "text"}
 						value={registro.attributes[key]}
+						context={registro}
 						config={config.ui[key]?.list}
 						on:input={(event) => {
 							registro.attributes[key] = (event.target || event.detail).value;

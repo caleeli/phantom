@@ -9,6 +9,8 @@
 	import GridTemplate from "../components/GridTemplate.svelte";
 	import { translations } from "../helpers";
 	import FormFields from "./FormFields.svelte";
+	import { createEventDispatcher } from 'svelte';
+
 	export let config = {
 		attributes: {},
 		ui: {},
@@ -22,10 +24,12 @@
 	let tableConfig = {
 		headers: [],
 		cells: {},
+		labels: config.labels,
 	};
 	let printRecord;
 
 	const _ = translations.setLabels(config.labels);
+	const dispatch = createEventDispatcher();
 
 	let colIndex = 1;
 	let textToFind = "";
@@ -103,6 +107,7 @@
 		}, {});
 	}
 	async function crear(template = {}) {
+		dispatch("popup", {action:"create"});
 		// apply template settings
 		if (template && Object.keys(template).length > 0) {
 			// deep clone config into configCreate
@@ -122,14 +127,19 @@
 		create.showModal();
 	}
 	async function editar(event) {
+		dispatch("popup", {action:"edit"});
 		editRecord = JSON.parse(JSON.stringify(event.detail));
 		await tick();
 		edit.showModal();
 	}
 	async function visualizar(event) {
+		dispatch("popup", {action:"view"});
 		editRecord = event.detail;
 		await tick();
 		view.showModal();
+	}
+	function closepopup() {
+		dispatch("popup", {action:"close"});
 	}
 	async function openRow(event) {
 		const row = JSON.parse(JSON.stringify(event.detail));
@@ -312,7 +322,7 @@
 	</GridTemplate>
 </main>
 
-<dialog bind:this={create}>
+<dialog bind:this={create} on:close={closepopup}>
 	{#if newRecord && config.create}
 		<form style="min-width:50vw">
 			<FormFields {config} bind:registro={newRecord} dataTest="create" />
@@ -335,7 +345,7 @@
 	{/if}
 </dialog>
 
-<dialog bind:this={edit}>
+<dialog bind:this={edit} on:close={closepopup}>
 	{#if editRecord && config.update}
 		<form style="min-width:50vw">
 			<FormFields {config} bind:registro={editRecord} dataTest="edit" />
@@ -358,7 +368,7 @@
 	{/if}
 </dialog>
 
-<dialog bind:this={view}>
+<dialog bind:this={view} on:close={closepopup}>
 	{#if editRecord && config.create}
 		<form style="min-width:50vw">
 			<dl>

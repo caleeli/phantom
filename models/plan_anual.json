@@ -4,75 +4,58 @@
 	"table": "plan_anual",
 	"id": "id",
 	"attributes": {
-		"objetivo": "objetivo",
-		"actividad": "actividad",
-		"indicador": "indicador",
-		"meta": "meta",
+		"titulo": "titulo",
 		"periodo": "periodo",
-		"responsable_id": "responsable_id",
-		"responsable": "responsable"
+		"elaborado_por_id": "elaborado_por_id",
+		"elaborado_por": "elaborado_por",
+		"fecha": "fecha",
+		"referencia": "referencia"
 	},
 	"where": [],
 	"filters": {
-		"findText(text)": "and (objetivo like ${contains($text)} or actividad like ${contains($text)} or indicador like ${contains($text)} or meta like ${contains($text)} or periodo like ${contains($text)} or responsable like ${contains($text)})"
+		"findByText(text)": "and (entidad like ${contains($text)} or id=:text)"
 	},
-	"sort": [
-		"objetivo"
-	],
+	"sort": [],
 	"create": {
-		"objetivo": ":objetivo",
-		"actividad": ":actividad",
-		"indicador": ":indicador",
-		"meta": ":meta",
+		"titulo": ":titulo",
 		"periodo": ":periodo",
-		"responsable_id": ":responsable_id",
-		"responsable": ":responsable"
+		"elaborado_por_id": ":elaborado_por_id",
+		"elaborado_por": ":elaborado_por",
+		"fecha": ":fecha",
+		"referencia": ":referencia"
 	},
 	"update": {
-		"objetivo": ":objetivo",
-		"actividad": ":actividad",
-		"indicador": ":indicador",
-		"meta": ":meta",
+		"titulo": ":titulo",
 		"periodo": ":periodo",
-		"responsable_id": ":responsable_id",
-		"responsable": ":responsable"
+		"elaborado_por_id": ":elaborado_por_id",
+		"elaborado_por": ":elaborado_por",
+		"fecha": ":fecha",
+		"referencia": ":referencia"
 	},
 	"delete": {},
-	"relationships": {},
+	"relationships": {
+		"movimientos": {
+			"model": "movimientos",
+			"params": {
+				"informe_id": "$id"
+			}
+		}
+	},
 	"labels": {
 		"_model": "Plan Anual",
 		"_models": "Plan Anual",
-		"objetivo": "Objetivo",
-		"actividad": "Actividad",
-		"indicador": "Indicador",
-		"meta": "Meta",
+		"titulo": "Titulo",
 		"periodo": "Periodo",
-		"responsable_id": "Responsable",
-		"responsable": "Responsable"
+		"elaborado_por_id": "Elaborado por",
+		"elaborado_por": "Elaborado por",
+		"fecha": "Fecha",
+		"referencia": "Referencia",
+		"edit": "Modificar t\u00edtulo",
+		"open": "Llenar actividades",
+		"print": "Imprimir plan"
 	},
 	"ui": {
-		"objetivo": {
-			"type": "text",
-			"showInList": true,
-			"groupRows": true,
-			"list": {
-				"model": "plan_anual",
-				"value": "${attributes.objetivo}",
-				"params": {
-					"distinct": 1,
-					"fields": "objetivo"
-				}
-			}
-		},
-		"actividad": {
-			"type": "text",
-			"showInList": true
-		},
-		"indicador": {
-			"type": "text",
-			"showInList": true
-		},
-		"meta": {
+		"titulo": {
 			"type": "text",
 			"showInList": true
 		},
@@ -80,7 +63,7 @@
 			"type": "text",
 			"showInList": true
 		},
-		"responsable_id": {
+		"elaborado_por_id": {
 			"type": "select",
 			"showInList": false,
 			"list": {
@@ -88,32 +71,38 @@
 				"value": "${id}",
 				"text": "${attributes.name}",
 				"on:select": [
-					"set('responsable',${name})"
+					"set('elaborado_por',${name})"
 				]
 			}
 		},
-		"responsable": {
+		"elaborado_por": {
 			"type": "text",
 			"showInList": true,
 			"showInCreate": false,
 			"showInUpdate": false
 		},
+		"fecha": {
+			"type": "date",
+			"showInList": true
+		},
+		"referencia": {
+			"type": "text",
+			"showInList": true
+		},
 		"_actions": {
 			"control": "actions",
 			"value": "attributes.id",
 			"actions": [
-				"edit"
+				"edit",
+				"open",
+				"print"
 			]
 		}
 	},
-	"createButtons": [
+	"rowActions": [
 		{
-			"name": "Actividad",
-			"icon": "plus",
-			"type": "submit",
-			"attributes": {
-				"objetivo": ""
-			}
+			"name": "open",
+			"action": "open('\/plan_anual\/${id}\/actividades')"
 		}
 	],
 	"list": {

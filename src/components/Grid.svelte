@@ -1,14 +1,16 @@
 <script>
 	import Sheet from "../api/Sheet";
 	import { createEventDispatcher } from "svelte";
+	import { translations } from "../helpers";
 
 	const dispatch = createEventDispatcher();
 
 	export let value = [];
 	export let width = 100;
-	let style = `--width:${width}%;`;
-
 	export let config;
+
+	const _ = translations.setLabels(config.labels);
+	let style = `--width:${width}%;`;
 	const sheet = new Sheet(config, value);
 	const actionIcons = {
 		view: "eye",
@@ -55,6 +57,7 @@
 												)}
 												href="javascript:void(0)"
 												data-testid={`action-${action}`}
+												title={_(action)}
 											>
 												<i
 													class="fa fa-{iconAlias(

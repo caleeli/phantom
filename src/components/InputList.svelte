@@ -6,6 +6,8 @@
 
 	export let value;
 	export let config;
+	export let context = {};
+
 	let datalist;
 	let key = new Date().getTime() + Math.random();
 	let focused = false;
@@ -41,10 +43,21 @@
 		const params = { ...config.params };
 		if (params.filter) {
 			params.filter = params.filter.map((filter) =>
-				new Function("value", "return `" + filter + "`")(
-					JSON.stringify(value)
+				new Function("value", "context", "return `" + filter + "`")(
+					JSON.stringify(value),
+					context
 				)
 			);
+		}
+		if (params.params) {
+			params.params = Object.keys(params.params).reduce((res, key) => {
+				res[key] = new Function(
+					"value",
+					"context",
+					"return `" + params.params[key] + "`"
+				)(JSON.stringify(value), context);
+				return res;
+			}, {});
 		}
 		return params;
 	}

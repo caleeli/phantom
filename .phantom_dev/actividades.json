@@ -1,0 +1,157 @@
+{
+    "name": "actividades",
+    "table": "actividades",
+    "join": "",
+    "url": "actividades",
+    "id": "id",
+    "fields": [
+        {
+            "name": "plan_anual_id",
+            "typeDB": "integer",
+            "type": "text",
+            "select": "plan_anual_id",
+            "create": ":plan_anual_id",
+            "update": ":plan_anual_id",
+            "extra": null,
+            "showInList": false,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "groupRows": false,
+            "label": "Plan Anual ID"
+        },
+        {
+            "name": "objetivo",
+            "typeDB": "text",
+            "type": "text",
+            "select": "objetivo",
+            "create": ":objetivo",
+            "update": ":objetivo",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Objetivo",
+            "groupRows": true,
+            "extra": "{\"list\":{\"model\":\"actividades\",\"value\":\"${attributes.objetivo}\",\"params\":{\"distinct\":1,\"fields\":\"objetivo\",\"params\":{\"plan_anual_id\":\"${context.attributes.plan_anual_id}\"}}}}"
+        },
+        {
+            "name": "actividad",
+            "typeDB": "text",
+            "type": "text",
+            "select": "actividad",
+            "create": ":actividad",
+            "update": ":actividad",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Actividad"
+        },
+        {
+            "name": "indicador",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "indicador",
+            "create": ":indicador",
+            "update": ":indicador",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Indicador"
+        },
+        {
+            "name": "meta",
+            "typeDB": "text",
+            "type": "text",
+            "select": "meta",
+            "create": ":meta",
+            "update": ":meta",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Meta"
+        },
+        {
+            "name": "periodo",
+            "typeDB": "text",
+            "type": "text",
+            "select": "periodo",
+            "create": ":periodo",
+            "update": ":periodo",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "label": "Periodo"
+        },
+        {
+            "name": "responsable_id",
+            "typeDB": "varchar(64)",
+            "type": "select",
+            "select": "responsable_id",
+            "create": ":responsable_id",
+            "update": ":responsable_id",
+            "extra": "{\"list\":{\"model\":\"users\",\"value\":\"${id}\",\"text\":\"${attributes.name}\",\"on:select\":[\"set('responsable',${name})\"]}}",
+            "showInList": false,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Responsable"
+        },
+        {
+            "name": "responsable",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "responsable",
+            "create": ":responsable",
+            "update": ":responsable",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "groupRows": false,
+            "label": "Responsable"
+        }
+    ],
+    "where": "and plan_anual_id=${$plan_anual_id}",
+    "sort": "objetivo",
+    "filters": [
+        {
+            "declaration": "findText(text)",
+            "expression": "and (objetivo like ${contains($text)} or actividad like ${contains($text)} or indicador like ${contains($text)} or meta like ${contains($text)} or periodo like ${contains($text)} or responsable like ${contains($text)})"
+        }
+    ],
+    "data": [
+        {
+            "objetivo": "1. Objetivo Principal",
+            "indicador": "porcentaje 1",
+            "meta": "100%",
+            "actividad": "1.1. Completar el porcentaje de uno",
+            "periodo": "enero,febrero",
+            "responsable_id": "1",
+            "responsable": "Juan Perez",
+            "plan_anual_id": "1"
+        },
+        {
+            "objetivo": "1. Objetivo Principal",
+            "indicador": "valor 2",
+            "meta": "5.6",
+            "actividad": "1.2. Subir el valor de dos a 5.6",
+            "periodo": "febrero,marzo",
+            "responsable_id": "2",
+            "responsable": "Maria Gonzales",
+            "plan_anual_id": "1"
+        }
+    ],
+    "actions": "edit",
+    "relationships": [],
+    "createButtons": [
+        {
+            "name": "Actividad",
+            "icon": "plus",
+            "type": "submit",
+            "attributes": {
+                "objetivo": "\"\""
+            }
+        }
+    ],
+    "loadMore": false,
+    "extra": ""
+}

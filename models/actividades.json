@@ -1,0 +1,137 @@
+{
+	"class": "JsonApi",
+	"url": "actividades",
+	"table": "actividades",
+	"id": "id",
+	"attributes": {
+		"plan_anual_id": "plan_anual_id",
+		"objetivo": "objetivo",
+		"actividad": "actividad",
+		"indicador": "indicador",
+		"meta": "meta",
+		"periodo": "periodo",
+		"responsable_id": "responsable_id",
+		"responsable": "responsable"
+	},
+	"where": [
+		"and plan_anual_id=${$plan_anual_id}"
+	],
+	"filters": {
+		"findText(text)": "and (objetivo like ${contains($text)} or actividad like ${contains($text)} or indicador like ${contains($text)} or meta like ${contains($text)} or periodo like ${contains($text)} or responsable like ${contains($text)})"
+	},
+	"sort": [
+		"objetivo"
+	],
+	"create": {
+		"plan_anual_id": ":plan_anual_id",
+		"objetivo": ":objetivo",
+		"actividad": ":actividad",
+		"indicador": ":indicador",
+		"meta": ":meta",
+		"periodo": ":periodo",
+		"responsable_id": ":responsable_id",
+		"responsable": ":responsable"
+	},
+	"update": {
+		"plan_anual_id": ":plan_anual_id",
+		"objetivo": ":objetivo",
+		"actividad": ":actividad",
+		"indicador": ":indicador",
+		"meta": ":meta",
+		"periodo": ":periodo",
+		"responsable_id": ":responsable_id",
+		"responsable": ":responsable"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Actividade",
+		"_models": "Actividades",
+		"plan_anual_id": "Plan Anual ID",
+		"objetivo": "Objetivo",
+		"actividad": "Actividad",
+		"indicador": "Indicador",
+		"meta": "Meta",
+		"periodo": "Periodo",
+		"responsable_id": "Responsable",
+		"responsable": "Responsable"
+	},
+	"ui": {
+		"plan_anual_id": {
+			"type": "text",
+			"showInList": false,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"objetivo": {
+			"type": "text",
+			"showInList": true,
+			"groupRows": true,
+			"list": {
+				"model": "actividades",
+				"value": "${attributes.objetivo}",
+				"params": {
+					"distinct": 1,
+					"fields": "objetivo",
+					"params": {
+						"plan_anual_id": "${context.attributes.plan_anual_id}"
+					}
+				}
+			}
+		},
+		"actividad": {
+			"type": "text",
+			"showInList": true
+		},
+		"indicador": {
+			"type": "text",
+			"showInList": true
+		},
+		"meta": {
+			"type": "text",
+			"showInList": true
+		},
+		"periodo": {
+			"type": "text",
+			"showInList": true
+		},
+		"responsable_id": {
+			"type": "select",
+			"showInList": false,
+			"list": {
+				"model": "users",
+				"value": "${id}",
+				"text": "${attributes.name}",
+				"on:select": [
+					"set('responsable',${name})"
+				]
+			}
+		},
+		"responsable": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit"
+			]
+		}
+	},
+	"createButtons": [
+		{
+			"name": "Actividad",
+			"icon": "plus",
+			"type": "submit",
+			"attributes": {
+				"objetivo": ""
+			}
+		}
+	],
+	"list": {
+		"loadMore": false
+	}
+}

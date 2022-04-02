@@ -6,136 +6,114 @@
     "id": "id",
     "fields": [
         {
-            "name": "objetivo",
-            "typeDB": "text",
-            "type": "text",
-            "select": "objetivo",
-            "create": ":objetivo",
-            "update": ":objetivo",
-            "showInList": true,
-            "showInCreate": true,
-            "showInUpdate": true,
-            "label": "Objetivo",
-            "groupRows": true,
-            "extra": "{\"list\":{\"model\":\"plan_anual\",\"value\":\"${attributes.objetivo}\",\"params\":{\"distinct\":1,\"fields\":\"objetivo\"}}}"
-        },
-        {
-            "name": "actividad",
-            "typeDB": "text",
-            "type": "text",
-            "select": "actividad",
-            "create": ":actividad",
-            "update": ":actividad",
-            "showInList": true,
-            "showInCreate": true,
-            "showInUpdate": true,
-            "label": "Actividad"
-        },
-        {
-            "name": "indicador",
+            "name": "titulo",
             "typeDB": "varchar(64)",
             "type": "text",
-            "select": "indicador",
-            "create": ":indicador",
-            "update": ":indicador",
+            "select": "titulo",
+            "create": ":titulo",
+            "update": ":titulo",
             "showInList": true,
             "showInCreate": true,
             "showInUpdate": true,
-            "label": "Indicador"
-        },
-        {
-            "name": "meta",
-            "typeDB": "text",
-            "type": "text",
-            "select": "meta",
-            "create": ":meta",
-            "update": ":meta",
-            "showInList": true,
-            "showInCreate": true,
-            "showInUpdate": true,
-            "label": "Meta"
+            "groupRows": false,
+            "label": "Titulo"
         },
         {
             "name": "periodo",
-            "typeDB": "text",
+            "typeDB": "varchar(64)",
             "type": "text",
             "select": "periodo",
             "create": ":periodo",
             "update": ":periodo",
+            "extra": null,
             "showInList": true,
             "showInCreate": true,
             "showInUpdate": true,
+            "groupRows": false,
             "label": "Periodo"
         },
         {
-            "name": "responsable_id",
-            "typeDB": "varchar(64)",
+            "name": "elaborado_por_id",
+            "typeDB": "integer",
             "type": "select",
-            "select": "responsable_id",
-            "create": ":responsable_id",
-            "update": ":responsable_id",
-            "extra": "{\"list\":{\"model\":\"users\",\"value\":\"${id}\",\"text\":\"${attributes.name}\",\"on:select\":[\"set('responsable',${name})\"]}}",
+            "select": "elaborado_por_id",
+            "create": ":elaborado_por_id",
+            "update": ":elaborado_por_id",
+            "extra": "{\"list\":{\"model\":\"users\",\"value\":\"${id}\",\"text\":\"${attributes.name}\",\"on:select\":[\"set('elaborado_por',${name})\"]}}",
             "showInList": false,
             "showInCreate": true,
             "showInUpdate": true,
             "groupRows": false,
-            "label": "Responsable"
+            "label": "Elaborado por"
         },
         {
-            "name": "responsable",
+            "name": "elaborado_por",
             "typeDB": "varchar(64)",
             "type": "text",
-            "select": "responsable",
-            "create": ":responsable",
-            "update": ":responsable",
-            "extra": null,
+            "select": "elaborado_por",
+            "create": ":elaborado_por",
+            "update": ":elaborado_por",
             "showInList": true,
             "showInCreate": false,
             "showInUpdate": false,
             "groupRows": false,
-            "label": "Responsable"
+            "label": "Elaborado por"
+        },
+        {
+            "name": "fecha",
+            "typeDB": "varchar(64)",
+            "type": "date",
+            "select": "fecha",
+            "create": ":fecha",
+            "update": ":fecha",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Fecha"
+        },
+        {
+            "name": "referencia",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "referencia",
+            "create": ":referencia",
+            "update": ":referencia",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Referencia"
         }
     ],
     "where": "",
-    "sort": "objetivo",
+    "sort": "",
     "filters": [
         {
-            "declaration": "findText(text)",
-            "expression": "and (objetivo like ${contains($text)} or actividad like ${contains($text)} or indicador like ${contains($text)} or meta like ${contains($text)} or periodo like ${contains($text)} or responsable like ${contains($text)})"
+            "declaration": "findByText(text)",
+            "expression": "and (entidad like ${contains($text)} or id=:text)"
         }
     ],
-    "data": [
+    "data": [],
+    "actions": "edit,open,print",
+    "relationships": [
         {
-            "objetivo": "Objetivo 1",
-            "indicador": "porcentaje 1",
-            "meta": "100%",
-            "actividad": "Completar el porcentaje de uno",
-            "periodo": "enero,febrero",
-            "responsable_id": "1",
-            "responsable": "Juan Perez"
-        },
-        {
-            "objetivo": "Objetivo 1",
-            "indicador": "valor 2",
-            "meta": "5.6",
-            "actividad": "Subir el valor de dos a 5.6",
-            "periodo": "febrero,marzo",
-            "responsable_id": "2",
-            "responsable": "Maria Gonzales"
+            "name": "movimientos",
+            "params": [
+                {
+                    "name": "informe_id",
+                    "value": "$id"
+                }
+            ],
+            "model": "movimientos"
         }
     ],
-    "actions": "edit",
-    "relationships": [],
-    "createButtons": [
+    "createButtons": [],
+    "rowActions": [
         {
-            "name": "Actividad",
-            "icon": "plus",
-            "type": "submit",
-            "attributes": {
-                "objetivo": "\"\""
-            }
+            "name": "open",
+            "action": "open('\/plan_anual\/${id}\/actividades')"
         }
     ],
-    "loadMore": false,
-    "extra": ""
+    "extra": "{\n  \"labels\": {\n    \"edit\": \"Modificar t\u00edtulo\",\n    \"open\": \"Llenar actividades\",\n    \"print\": \"Imprimir plan\"\n  }\n}"
 }
