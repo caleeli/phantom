@@ -12,6 +12,9 @@
 	let cien9231 = 109.231;
 	let cien803 = 108.03;
 
+	let tooltipX = "0px";
+	let tooltipY = "0px";
+
 	$:{
 		cien749 = width + 7.49;
 		cien9085 = width + 9.085;
@@ -32,15 +35,15 @@
 		// Consider the position of the tooltip
 		x -= 10;
 		y -= 32;
-		// Set the position of the tooltip
-		tooltip.style.left = x + "px";
-		tooltip.style.top = y + "px";
 		let target = event.target;
 		while (target && !target.getAttribute("tooltip")) {
 			target = target.parentElement;
 		}
 		if (target) {
 			text = target.getAttribute("tooltip");
+			// Set the position of the tooltip
+			tooltipX = x + "px";
+			tooltipY = y + "px";
 		} else {
 			text = "";
 		}
@@ -60,6 +63,8 @@
 	xmlns="http://www.w3.org/2000/svg"
 	style={`
 		display: ${text ? "block" : "none"};
+		left: ${tooltipX};
+		top: ${tooltipY};
 	`}
 >
 	<path
