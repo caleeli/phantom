@@ -5,8 +5,8 @@
 	import Auth from "../Auth";
 	import { translations as _ } from "../helpers";
 
-	let username;
-	let password;
+	let username = "";
+	let password = "";
 
 	const auth = new Auth();
 
