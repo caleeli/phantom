@@ -1,6 +1,5 @@
 <script>
 	import { translations } from "../helpers";
-	import api from "../api";
 	import InputFile from "./InputFile.svelte";
 	import InputList from "./InputList.svelte";
 	import InputSelect from "./InputSelect.svelte";
@@ -13,73 +12,82 @@
 </script>
 
 <dl>
-	{#each Object.entries(config.create) as [key, value]}
-		{#if config.ui[key]?.showInCreate === undefined || config.ui[key]?.showInCreate}
+	{#each Object.entries(config.ui) as [key, fieldConfig]}
+		{#if key !== "_actions"}
 			<dt>{_(key)}</dt>
 			<dd>
-				{#if config.ui[key]?.type === "file"}
+				{#if fieldConfig?.type === "file"}
 					<InputFile
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}
-						type={config.ui[key]?.type || "text"}
+						type={fieldConfig?.type || "text"}
 						value={registro.attributes[key]}
 						on:input={(event) => {
-							registro.attributes[key] = (event.target || event.detail).value;
+							registro.attributes[key] = (
+								event.target || event.detail
+							).value;
 						}}
 					/>
-				{:else if config.ui[key]?.type === "textarea"}
+				{:else if fieldConfig?.type === "textarea"}
 					<textarea
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}
-						type={config.ui[key]?.type || "text"}
+						type={fieldConfig?.type || "text"}
 						value={registro.attributes[key]}
 						on:input={(event) => {
 							registro.attributes[key] = event.target.value;
 						}}
 					/>
-				{:else if config.ui[key]?.type === "select"}
+				{:else if fieldConfig?.type === "select"}
 					<InputSelect
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}
-						type={config.ui[key]?.type || "text"}
+						type={fieldConfig?.type || "text"}
 						value={registro.attributes[key]}
 						context={registro}
-						config={config.ui[key]?.list}
+						config={fieldConfig?.list}
 						on:set={(event) => {
-							registro.attributes[event.detail.key] = event.detail.value;
+							registro.attributes[event.detail.key] =
+								event.detail.value;
 						}}
 						on:input={(event) => {
-							registro.attributes[key] = (event.target || event.detail).value;
+							registro.attributes[key] = (
+								event.target || event.detail
+							).value;
 						}}
 					/>
-				{:else if config.ui[key]?.type === "daterange"}
+				{:else if fieldConfig?.type === "daterange"}
 					<InputDateRange
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}
 						value={registro.attributes[key]}
-						separator={config.ui[key]?.separator || ' 🠖 '}
+						separator={fieldConfig?.separator || " 🠖 "}
 						context={registro}
 						on:input={(event) => {
-							registro.attributes[key] = (event.target || event.detail).value;
+							registro.attributes[key] = (
+								event.target || event.detail
+							).value;
 						}}
 					/>
-				{:else if config.ui[key]?.list}
+				{:else if fieldConfig?.list}
 					<InputList
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}
-						type={config.ui[key]?.type || "text"}
+						type={fieldConfig?.type || "text"}
 						value={registro.attributes[key]}
 						context={registro}
-						config={config.ui[key]?.list}
+						config={fieldConfig?.list}
 						on:input={(event) => {
-							registro.attributes[key] = (event.target || event.detail).value;
+							registro.attributes[key] = (
+								event.target || event.detail
+							).value;
 						}}
 					/>
 				{:else}
 					<input
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}
-						type={config.ui[key]?.type || "text"}
+						type={fieldConfig?.type || "text"}
 						value={registro.attributes[key]}
 						on:input={(event) => {
 							registro.attributes[key] = event.target.value;

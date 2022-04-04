@@ -1,0 +1,108 @@
+{
+    "name": "resultados",
+    "table": "resultados",
+    "join": "",
+    "url": "resultados",
+    "id": "id",
+    "fields": [
+        {
+            "name": "actividad_id",
+            "typeDB": "integer",
+            "type": "text",
+            "select": "actividad_id",
+            "create": ":actividad_id",
+            "update": ":actividad_id",
+            "extra": null,
+            "showInList": false,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "groupRows": false,
+            "label": "Actividad ID"
+        },
+        {
+            "name": "resultado_esperado",
+            "typeDB": "text",
+            "type": "text",
+            "select": "resultado_esperado",
+            "create": ":resultado_esperado",
+            "update": ":resultado_esperado",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Resultado esperado"
+        },
+        {
+            "name": "avance",
+            "typeDB": "integer",
+            "type": "progress",
+            "select": "avance",
+            "create": ":avance",
+            "update": ":avance",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Avance actual"
+        },
+        {
+            "name": "medio",
+            "typeDB": "text",
+            "type": "text",
+            "select": "medio",
+            "create": ":medio",
+            "update": ":medio",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Medio de verificaci\u00f3n"
+        },
+        {
+            "name": "resultado",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "resultado",
+            "create": ":resultado",
+            "update": ":resultado",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "groupRows": false,
+            "label": "Resultado"
+        },
+        {
+            "name": "verificacion",
+            "typeDB": "varchar(64)",
+            "type": "richtext",
+            "select": "verificacion",
+            "create": ":verificacion",
+            "update": ":verificacion",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": false,
+            "showInUpdate": false,
+            "groupRows": false,
+            "label": "Verificaci\u00f3n"
+        }
+    ],
+    "where": "and actividad_id=${$actividad_id}",
+    "sort": "",
+    "filters": [],
+    "data": [],
+    "actions": "edit,check",
+    "relationships": [],
+    "createButtons": [],
+    "rowActions": [
+        {
+            "name": "check",
+            "action": "edit({avance:{type:\"progress\"},resultado:{type:\"text\"},verificacion:{type:\"richtext\"}})"
+        }
+    ],
+    "loadMore": false,
+    "extra": ""
+}

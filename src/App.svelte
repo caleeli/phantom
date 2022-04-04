@@ -18,6 +18,7 @@
 	import Topbar from "./components/Topbar.svelte";
 	import Menu from "./components/Menu.svelte";
 	import Tooltip from "./components/Tooltip.svelte";
+	import Resultados from "./pages/Resultados.svelte";
 
 	let currentPage = "";
 
@@ -33,6 +34,7 @@
 		"/clientes": Clientes,
 		"/plan_anual": PlanAnual,
 		"/plan_anual/:id/actividades": Actividades,
+		"/actividades/:id/resultados": Resultados,
 		"/informes": Informes,
 		"/informe/:id/movimientos": Movimientos,
 	};

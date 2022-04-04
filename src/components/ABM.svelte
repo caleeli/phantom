@@ -1,5 +1,5 @@
-<script>
-	import {push, pop, replace} from 'svelte-spa-router'
+<script type="ts">
+	import { push, pop } from "svelte-spa-router";
 	import "../helpers/dialog.ts";
 	import { tick } from "svelte";
 	import api from "../api";
@@ -9,17 +9,26 @@
 	import GridTemplate from "../components/GridTemplate.svelte";
 	import { translations } from "../helpers";
 	import FormFields from "./FormFields.svelte";
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher } from "svelte";
 
 	export let config = {
+		url: "",
 		attributes: {},
+		create: {},
+		update: {},
 		ui: {},
+		// createButtons: [],
+		labels: {},
+		// pagination: {
+		// 	per_page: 10,
+		// },
+		sort: [],
+		// rowActions: [],
 	};
-	export let configCreate = {
-		attributes: {},
-		ui: {},
+	export let params = {
+		params: {},
 	};
-	export let params = {};
+	export let enable_goback = false;
 
 	let tableConfig = {
 		headers: [],
@@ -27,6 +36,16 @@
 		labels: config.labels,
 	};
 	let printRecord;
+	let configCreate = {
+		attributes: {},
+		ui: {},
+		labels: {},
+	};
+	let configUpdate = {
+		attributes: {},
+		ui: {},
+		labels: {},
+	};
 
 	const _ = translations.setLabels(config.labels);
 	const dispatch = createEventDispatcher();
@@ -77,8 +96,8 @@
 	}, {});
 
 	let create_buttons =
-		config.createButtons && config.createButtons.length
-			? config.createButtons
+		config["createButtons"] && config["createButtons"].length
+			? config["createButtons"]
 			: [
 					{
 						name: "_model",
@@ -88,12 +107,15 @@
 			  ];
 	let tableData = [];
 	let list;
-	let paramsList = Object.assign({
+	let paramsList = Object.assign(
+		{
 			page: 1,
-			per_page: config.pagination?.per_page || 10,
+			per_page: config["pagination"]?.per_page || 10,
 			filter: [],
 			sort: config.sort?.join(","),
-		}, params);
+		},
+		params
+	);
 	let edit, view, create;
 	let editRecord = null;
 	let newRecord = null;
@@ -102,23 +124,52 @@
 	}
 	function defaultValues(configAttributes, template) {
 		return Object.keys(configAttributes).reduce((acc, key) => {
-			acc[key] = template[key] || config.ui[key]?.default || params?.params?.[key] || "";
+			// if is object
+			const templateValue =
+				typeof template[key] === "object" ? null : template[key];
+			acc[key] =
+				templateValue ||
+				config.ui[key]?.default ||
+				params?.params?.[key] ||
+				"";
 			return acc;
 		}, {});
 	}
-	async function crear(template = {}) {
-		dispatch("popup", {action:"create"});
+	function formConfigByParam(param: string, template = {}) {
+		const configClone = JSON.parse(JSON.stringify(config));
+		const fields = {};
 		// apply template settings
 		if (template && Object.keys(template).length > 0) {
-			// deep clone config into configCreate
-			configCreate = JSON.parse(JSON.stringify(config));
-			Object.keys(configCreate.ui).forEach((key) => {
-				configCreate.ui[key].showInCreate = false;
-			});
 			Object.keys(template).forEach((key) => {
-				configCreate.ui[key].showInCreate = true;
+				fields[key] = Object.assign(
+					{},
+					configClone.ui[key],
+					{
+						name: key,
+					},
+					typeof template[key] === "object" ? template[key] : {}
+				);
+			});
+		} else {
+			Object.keys(configClone.ui).forEach((key) => {
+				if (
+					config.ui[key][param] ||
+					(config.ui[key][param] === undefined && key !== "_actions")
+				) {
+					fields[key] = Object.assign({}, configClone.ui[key], {
+						name: key,
+					});
+				}
 			});
 		}
+		configClone.ui = fields;
+		return configClone;
+	}
+	async function crear(template = {}) {
+		onpopup({ action: "create" });
+		dispatch("popup", { action: "create" });
+		// apply template settings
+		configCreate = formConfigByParam("showInCreate", template);
 		// init default values
 		newRecord = {
 			attributes: defaultValues(config.create, template),
@@ -126,25 +177,31 @@
 		await tick();
 		create.showModal();
 	}
-	async function editar(event) {
-		dispatch("popup", {action:"edit"});
+	async function editar(event, template = {}) {
+		onpopup({ action: "edit" });
+		dispatch("popup", { action: "edit" });
+		configUpdate = formConfigByParam("showInUpdate", template);
 		editRecord = JSON.parse(JSON.stringify(event.detail));
 		await tick();
 		edit.showModal();
 	}
 	async function visualizar(event) {
-		dispatch("popup", {action:"view"});
+		onpopup({ action: "view" });
+		dispatch("popup", { action: "view" });
 		editRecord = event.detail;
 		await tick();
 		view.showModal();
 	}
 	function closepopup() {
-		dispatch("popup", {action:"close"});
+		onpopup({ action: "close" });
+		dispatch("popup", { action: "close" });
 	}
-	async function openRow(event) {
+	async function doAction(actionName: string, event) {
 		const row = JSON.parse(JSON.stringify(event.detail));
-		if (config?.rowActions) {
-			const action = config.rowActions.find(action => action.name === "open");
+		if (config["rowActions"]) {
+			const action = config["rowActions"].find(
+				(action) => action.name === actionName
+			);
 			if (!action) {
 				throw "No action open defined";
 			}
@@ -188,16 +245,38 @@
 		textToFind = "";
 		paramsList.filter = [];
 	}
-	async function runActions(actions, data) {
-		const code = new Function(...Object.keys(data),"return `" +actions + "`")(...Object.values(data));
+	async function runActions(actions, data: Object) {
+		const code = new Function(
+			...Object.keys(data),
+			"return `" + actions + "`"
+		)(...Object.values(data));
 		const functions = {
 			open: (dest) => {
 				push(dest);
 			},
+			edit: (template) => {
+				editar({ detail: data }, template);
+			},
 		};
-		return new Function(...Object.keys(functions), code)(...Object.values(functions));
+		return new Function(...Object.keys(functions), code)(
+			...Object.values(functions)
+		);
+	}
+	// Listen ESC key to route back
+	let goback = enable_goback;
+	function handleKeydown(event: { keyCode: number }) {
+		if (event.keyCode === 27) {
+			if (goback) {
+				pop();
+			}
+		}
+	}
+	function onpopup(detail) {
+		goback = enable_goback && detail.action === "close";
 	}
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <main>
 	<GridTemplate>
@@ -252,9 +331,10 @@
 					on:edit={editar}
 					on:view={visualizar}
 					on:print={imprimir}
-					on:open={openRow}
+					on:open={(event) => doAction("open", event)}
+					on:check={(event) => doAction("check", event)}
 				/>
-				{#if config?.list?.loadMore}
+				{#if config["list"]?.loadMore}
 					<div class="center">
 						<br />
 						<button
@@ -323,9 +403,13 @@
 </main>
 
 <dialog bind:this={create} on:close={closepopup}>
-	{#if newRecord && config.create}
+	{#if newRecord && configCreate}
 		<form style="min-width:50vw">
-			<FormFields {config} bind:registro={newRecord} dataTest="create" />
+			<FormFields
+				config={configCreate}
+				bind:registro={newRecord}
+				dataTest="create"
+			/>
 			<footer>
 				<button
 					type="submit"
@@ -346,9 +430,13 @@
 </dialog>
 
 <dialog bind:this={edit} on:close={closepopup}>
-	{#if editRecord && config.update}
+	{#if editRecord && configUpdate}
 		<form style="min-width:50vw">
-			<FormFields {config} bind:registro={editRecord} dataTest="edit" />
+			<FormFields
+				config={configUpdate}
+				bind:registro={editRecord}
+				dataTest="edit"
+			/>
 			<footer>
 				<button
 					type="submit"

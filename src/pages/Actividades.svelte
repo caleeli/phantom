@@ -4,7 +4,6 @@
 	import * as planAnualConfig from "../../models/plan_anual.json";
 	import FormFields from "../components/FormFields.svelte";
 	import api from "../api";
-	import { pop } from "svelte-spa-router";
 
 	export let params = {
 		id: null,
@@ -20,31 +19,17 @@
 	let plan_anual = {
 		attributes,
 	};
-	let goback = true;
 	api("plan_anual")
 		.get(params.id)
 		.then((data) => {
 			plan_anual = data;
 		});
-	// Listen ESC key to route back
-	function handleKeydown(event: { keyCode: number }) {
-		if (event.keyCode === 27) {
-			if (goback) {
-				pop();
-			}
-		}
-	}
-	function onpopup(event) {
-		goback = event.detail.action === "close";
-	}
 </script>
-
-<svelte:window on:keydown={handleKeydown} />
 
 <Abm
 	{config}
 	params={{ params: { plan_anual_id: params.id } }}
-	on:popup={onpopup}
+	enable_goback={true}
 >
 	<div slot="header">
 		<FormFields

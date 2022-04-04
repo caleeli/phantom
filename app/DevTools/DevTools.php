@@ -222,6 +222,9 @@ class DevTools extends ResourceBase implements EndpointResourceInterface
         if ($_ENV['language'] === 'en') {
             $text = preg_replace('/ies$/', 'y', $text);
         }
+        if ($_ENV['language'] === 'es') {
+            $text = preg_replace('/es$/', '', $text);
+        }
         $text = preg_replace('/s$/', '', $text);
         return $text;
     }

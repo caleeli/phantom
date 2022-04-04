@@ -141,18 +141,15 @@
             "plan_anual_id": "1"
         }
     ],
-    "actions": "edit",
+    "actions": "edit,open",
     "relationships": [],
-    "createButtons": [
-        {
-            "name": "Actividad",
-            "icon": "plus",
-            "type": "submit",
-            "attributes": {
-                "objetivo": "\"\""
-            }
-        }
-    ],
+    "createButtons": [],
     "loadMore": false,
-    "extra": ""
+    "extra": "{\n  \"labels\": {\n    \"open\": \"Resultados programados\"\n  }\n}",
+    "rowActions": [
+        {
+            "name": "open",
+            "action": "open('\/actividades\/${id}\/resultados')"
+        }
+    ]
 }

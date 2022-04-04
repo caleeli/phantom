@@ -45,7 +45,7 @@
 	"delete": {},
 	"relationships": {},
 	"labels": {
-		"_model": "Actividade",
+		"_model": "Actividad",
 		"_models": "Actividades",
 		"plan_anual_id": "Plan Anual ID",
 		"objetivo": "Objetivo",
@@ -54,7 +54,8 @@
 		"meta": "Meta",
 		"periodo": "Periodo",
 		"responsable_id": "Responsable",
-		"responsable": "Responsable"
+		"responsable": "Responsable",
+		"open": "Resultados programados"
 	},
 	"ui": {
 		"plan_anual_id": {
@@ -128,18 +129,15 @@
 			"control": "actions",
 			"value": "attributes.id",
 			"actions": [
-				"edit"
+				"edit",
+				"open"
 			]
 		}
 	},
-	"createButtons": [
+	"rowActions": [
 		{
-			"name": "Actividad",
-			"icon": "plus",
-			"type": "submit",
-			"attributes": {
-				"objetivo": ""
-			}
+			"name": "open",
+			"action": "open('\/actividades\/${id}\/resultados')"
 		}
 	],
 	"list": {

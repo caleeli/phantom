@@ -1,0 +1,96 @@
+{
+	"class": "JsonApi",
+	"url": "resultados",
+	"table": "resultados",
+	"id": "id",
+	"attributes": {
+		"actividad_id": "actividad_id",
+		"resultado_esperado": "resultado_esperado",
+		"avance": "avance",
+		"medio": "medio",
+		"resultado": "resultado",
+		"verificacion": "verificacion"
+	},
+	"where": [
+		"and actividad_id=${$actividad_id}"
+	],
+	"filters": {},
+	"sort": [],
+	"create": {
+		"actividad_id": ":actividad_id",
+		"resultado_esperado": ":resultado_esperado",
+		"avance": ":avance",
+		"medio": ":medio",
+		"resultado": ":resultado",
+		"verificacion": ":verificacion"
+	},
+	"update": {
+		"actividad_id": ":actividad_id",
+		"resultado_esperado": ":resultado_esperado",
+		"avance": ":avance",
+		"medio": ":medio",
+		"resultado": ":resultado",
+		"verificacion": ":verificacion"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Resultado",
+		"_models": "Resultados",
+		"actividad_id": "Actividad ID",
+		"resultado_esperado": "Resultado esperado",
+		"avance": "Avance actual",
+		"medio": "Medio de verificaci\u00f3n",
+		"resultado": "Resultado",
+		"verificacion": "Verificaci\u00f3n"
+	},
+	"ui": {
+		"actividad_id": {
+			"type": "text",
+			"showInList": false,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"resultado_esperado": {
+			"type": "text",
+			"showInList": true
+		},
+		"avance": {
+			"type": "progress",
+			"showInList": true
+		},
+		"medio": {
+			"type": "text",
+			"showInList": true
+		},
+		"resultado": {
+			"type": "text",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"verificacion": {
+			"type": "richtext",
+			"showInList": true,
+			"showInCreate": false,
+			"showInUpdate": false
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"check"
+			]
+		}
+	},
+	"rowActions": [
+		{
+			"name": "check",
+			"action": "edit({avance:{type:\"progress\"},resultado:{type:\"text\"},verificacion:{type:\"richtext\"}})"
+		}
+	],
+	"list": {
+		"loadMore": false
+	}
+}
