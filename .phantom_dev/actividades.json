@@ -80,7 +80,7 @@
             "showInList": true,
             "showInCreate": true,
             "showInUpdate": true,
-            "label": "Periodo"
+            "label": "Per\u00edodo"
         },
         {
             "name": "responsable_id",

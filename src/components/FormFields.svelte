@@ -4,6 +4,7 @@
 	import InputList from "./InputList.svelte";
 	import InputSelect from "./InputSelect.svelte";
 	import InputDateRange from "./InputDateRange.svelte";
+import InputProgress from "./InputProgress.svelte";
 
 	export let config;
 	export let registro;
@@ -56,12 +57,26 @@
 							).value;
 						}}
 					/>
-				{:else if fieldConfig?.type === "daterange"}
+					{:else if fieldConfig?.type === "daterange"}
 					<InputDateRange
 						class="w-100"
 						data-testid={`${dataTest}-${key}`}
 						value={registro.attributes[key]}
 						separator={fieldConfig?.separator || " 🠖 "}
+						context={registro}
+						on:input={(event) => {
+							registro.attributes[key] = (
+								event.target || event.detail
+							).value;
+						}}
+					/>
+				{:else if fieldConfig?.type === "progress"}
+					<InputProgress
+						class="w-100"
+						data-testid={`${dataTest}-${key}`}
+						value={registro.attributes[key]}
+						min={fieldConfig?.min || 0}
+						max={fieldConfig?.max || 100}
 						context={registro}
 						on:input={(event) => {
 							registro.attributes[key] = (
