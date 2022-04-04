@@ -42,7 +42,8 @@
 		"avance": "Avance actual",
 		"medio": "Medio de verificaci\u00f3n",
 		"resultado": "Resultado",
-		"verificacion": "Verificaci\u00f3n"
+		"verificacion": "Verificaci\u00f3n",
+		"check": "Registrar avance y resultados"
 	},
 	"ui": {
 		"actividad_id": {

@@ -104,5 +104,5 @@
         }
     ],
     "loadMore": false,
-    "extra": ""
+    "extra": "{\n  \"labels\":{\n    \"check\": \"Registrar avance y resultados\"\n  }\n}"
 }
