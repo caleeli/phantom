@@ -109,7 +109,7 @@ $api->get('/api/{model}', function (Request $request, $model) use ($connection) 
         $sort = $request->get('sort', '');
         $sort = $sort ? explode(',', $sort) : [];
         $options['sort'] = $sort;
-        $options['per_page'] = intval($request->get('per_page', '10'));
+        $options['per_page'] = intval($request->get('per_page', '50'));
         $options['page'] = intval($request->get('page', '1'));
         return new Response(200, base_headers, json_encode($resource->index($options)));
     } catch (Exception $e) {
