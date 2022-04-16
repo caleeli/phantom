@@ -145,7 +145,7 @@
     "relationships": [],
     "createButtons": [],
     "loadMore": false,
-    "extra": "{\n  \"labels\": {\n    \"open\": \"Resultados programados\"\n  }\n}",
+    "extra": "{\n  \"labels\": {\n    \"open\": \"Resultados programados\"\n  },\n  \"per_page\": 50\n}",
     "rowActions": [
         {
             "name": "open",

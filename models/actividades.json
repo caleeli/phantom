@@ -142,5 +142,6 @@
 	],
 	"list": {
 		"loadMore": false
-	}
+	},
+	"per_page": 50
 }
