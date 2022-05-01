@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35731/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -1700,7 +1700,7 @@ var app = (function () {
     	}
     }
 
-    var _actions="";var edit="editar";var Login="Ingresar";var Password="Contraseña";var Search="Buscar";var Username="Nombre de usuario";var es = {_actions:_actions,"Choose a file":"Escoge un archivo",edit:edit,"Load more":"Cargar más",Login:Login,Password:Password,"Please enter your account":"Por favor ingrese su cuenta",Search:Search,Username:Username};
+    var _actions="";var edit="editar";var open="abrir";var print="imprimir";var view="ver";var Login="Ingresar";var Password="Contraseña";var Search="Buscar";var Username="Nombre de usuario";var es = {_actions:_actions,"Choose a file":"Escoge un archivo",edit:edit,open:open,print:print,view:view,"delete":"eliminar","Load more":"Cargar más",Login:Login,Password:Password,"Please enter your account":"Por favor ingrese su cuenta",Search:Search,Username:Username};
 
     const translations$1 = { es };
     function translation(language, labels = {}) {
@@ -1807,6 +1807,14 @@ var app = (function () {
                 method: 'PUT',
                 headers: this.headers,
                 body: JSON.stringify(data)
+            });
+        }
+        // delete resource
+        delete(id = null) {
+            const url = id ? `${this.url}/${id}` : this.url;
+            return fetch(url, {
+                method: 'DELETE',
+                headers: this.headers
             });
         }
         async processResponse(response) {

@@ -11,6 +11,16 @@
 
 	// initialize plan_anual with empty values
 	const attrs = Object.keys(planAnualConfig.attributes);
+    const form = JSON.parse(JSON.stringify(planAnualConfig));
+    form.ui = Object.keys(form.ui).reduce(
+        (res, key) => {
+            if (form.ui[key].showInUpdate !== false) {
+                res[key] = form.ui[key];
+            }
+            return res;
+        },
+        {}
+    );
 	const attributes = attrs.reduce((acc, key) => {
 		acc[key] = "";
 		return acc;
@@ -33,7 +43,7 @@
 >
 	<div slot="header">
 		<FormFields
-			config={planAnualConfig}
+			config={form}
 			bind:registro={plan_anual}
 			dataTest="plan_anual"
 		/>

@@ -11,6 +11,16 @@
 
     // initialize actividad with empty values
     const attrs = Object.keys(actividadesConfig.attributes);
+    const form = JSON.parse(JSON.stringify(actividadesConfig));
+    form.ui = Object.keys(form.ui).reduce(
+        (res, key) => {
+            if (form.ui[key].showInUpdate !== false) {
+                res[key] = form.ui[key];
+            }
+            return res;
+        },
+        {}
+    );
     const attributes = attrs.reduce((acc, key) => {
         acc[key] = "";
         return acc;
@@ -33,7 +43,7 @@
 >
     <div slot="header">
         <FormFields
-            config={actividadesConfig}
+            config={form}
             bind:registro={actividad}
             dataTest="actividad"
         />

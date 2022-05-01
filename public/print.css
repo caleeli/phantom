@@ -3,6 +3,9 @@
 	display: none;
 }
 @media print {
+	.tooltip {
+		display: none!important;
+	}
 	body {
 		font-size: 10pt;
 	}

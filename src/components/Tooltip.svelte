@@ -89,10 +89,3 @@
 		{text}
 	</text>
 </svg>
-
-<style>
-	.tooltip {
-		position: absolute;
-		pointer-events: none;
-	}
-</style>

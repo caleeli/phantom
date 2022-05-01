@@ -624,3 +624,7 @@ dialog {
 .date-range input:last-child{
 	margin-right: 0px;
 }
+.tooltip {
+	position: absolute;
+	pointer-events: none;
+}

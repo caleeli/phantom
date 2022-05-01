@@ -10,7 +10,7 @@ import svelte from 'rollup-plugin-svelte';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 
-require('dotenv').config()
+require('dotenv').config();
 
 const production = !process.env.ROLLUP_WATCH;
 
