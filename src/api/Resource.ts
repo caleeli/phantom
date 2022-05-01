@@ -85,6 +85,15 @@ class Resource {
         })
     }
 
+    // delete resource
+    public delete(id: string = null): Promise<any> {
+        const url = id ? `${this.url}/${id}` : this.url;
+        return fetch(url, {
+            method: 'DELETE',
+            headers: this.headers
+        })
+    }
+
     private async processResponse(response) {
         if (!response.ok) throw await response.json();
         return response.json();

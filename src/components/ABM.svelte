@@ -214,6 +214,11 @@
 		await tick();
 		window.print();
 	}
+	async function eliminar(event) {
+		await api(config.url).delete(event.detail.id);
+		await tick();
+		refreshList();
+	}
 	async function postRecord() {
 		api(config.url)
 			.post({ data: newRecord })
@@ -331,6 +336,7 @@
 					on:edit={editar}
 					on:view={visualizar}
 					on:print={imprimir}
+					on:delete={eliminar}
 					on:open={(event) => doAction("open", event)}
 					on:check={(event) => doAction("check", event)}
 				/>

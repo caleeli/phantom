@@ -39,7 +39,7 @@
 		}
 	},
 	"labels": {
-		"_model": "Informe",
+		"_model": "Inform",
 		"_models": "Informes",
 		"entidad": "Entidad",
 		"elaborado_por_id": "Elaborado por",
@@ -84,7 +84,8 @@
 			"actions": [
 				"edit",
 				"open",
-				"print"
+				"print",
+				"delete"
 			]
 		}
 	},

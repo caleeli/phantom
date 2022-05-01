@@ -70,6 +70,11 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
 
     public function destroy($id)
     {
+        $sql = "DELETE FROM `{$this->definition['table']}` WHERE {$this->definition['id']} = :id";
+        $this->query($sql, ['id' => $id]);
+        return [
+            'success' => true,
+        ];
     }
 
     public function report($id, array $options = [])

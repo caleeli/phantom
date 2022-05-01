@@ -81,7 +81,7 @@
         }
     ],
     "data": [],
-    "actions": "edit,open,print",
+    "actions": "edit,open,print,delete",
     "relationships": [
         {
             "name": "movimientos",

@@ -155,6 +155,21 @@ $api->put('/api/{model}/{id}', function (Request $request, $model, $id) use ($co
     }
 });
 
+$api->delete('/api/{model}/{id}', function (Request $request, $model, $id) use ($connection) {
+    try {
+        $resource = model($model, $connection, $request);
+    } catch (Exception $e) {
+        return new Response(404, base_headers, json_encode(['error' => $e->getMessage()]));
+    }
+    try {
+        $data = $request->post();
+        return new Response(200, base_headers, json_encode($resource->destroy($id, $data)));
+    } catch (Exception $e) {
+        error_log($e->getTraceAsString());
+        return new Response(500, base_headers, json_encode(['error' => $e->getMessage()]));
+    }
+});
+
 $api->options('/dev/{model}', function () {
     return new Response(201, base_headers, '');
 });

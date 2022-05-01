@@ -15,6 +15,7 @@
 	const actionIcons = {
 		view: "eye",
 		open: "folder-open",
+		delete: "times",
 	};
 	function iconAlias(icon) {
 		return actionIcons[icon] || icon;
