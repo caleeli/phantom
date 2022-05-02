@@ -7,7 +7,7 @@
   import { translations as _ } from "../helpers";
 
   let avatar = "images/avatar/avatar-1.jpg";
-  let notificationsMenu;
+  let showNotifications = false;
   let notifications = [];
   let refreshNotifications = 1;
   let fullname = "...";
@@ -17,8 +17,7 @@
   });
   function toggle_notifications() {
     refreshNotifications++;
-    const cmp = notificationsMenu.$capture_state();
-    cmp.toggle();
+    showNotifications = !showNotifications;
   }
   async function markNotificationRead(notification) {
     notification.attributes.read = 1;
@@ -38,7 +37,7 @@
     <div class="notifications" on:click|stopPropagation={toggle_notifications}>
       <i class="fas fa-bell" />
       <mark>{notifications.length}</mark>
-      <PopupMenu bind:this={notificationsMenu}>
+      <PopupMenu bind:show={showNotifications}>
         <Api
           path="notifications?filter[]=myUnreadNotifications()"
           bind:value={notifications}
