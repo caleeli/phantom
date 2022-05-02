@@ -1,4 +1,3 @@
-@import url('coredump.css');
 
 html, body {
 	margin: 0;
@@ -98,7 +97,7 @@ main {
 	overflow: auto;
 	background-color: var(--main-bg);
 }
-main h1, main form, main .content {
+main h1, main form, .content {
 	color: var(--main-content-color);
 	background-color: var(--main-content-bg);
 	margin: 0.5rem 0.5rem;
@@ -118,20 +117,6 @@ form footer {
 	justify-content: flex-end;
 	align-items: center;
 }
-/*
-@media only screen and (max-width: 767px){
-	main {
-		padding: 0.25rem;
-		height: calc(100% - 3.5rem);
-	}
-}
-@media only screen and (min-width: 768px){
-	main {
-		padding: 1rem;
-		height: calc(100% - 5rem);
-	}
-}
-*/
 main {
 	padding: 1rem;
 }
@@ -479,9 +464,10 @@ aside figure figcaption {
 	aside {
 		grid-column: span 2;
 		flex-direction: row;
+		min-height: 64px;
 	}
 	aside a {
-		padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+		padding: 1.5rem 0.5rem 1.5rem 0.5rem;
 		text-align: center;
 	}
 	aside #hide-sidebar {
@@ -491,6 +477,9 @@ aside figure figcaption {
 		display: none;
 	}
 	.figure-bg {
+		display: none;
+	}
+	footer {
 		display: none;
 	}
 }

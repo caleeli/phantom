@@ -1,13 +1,32 @@
 <script>
   import { user } from "../store";
-  export let width = 1;
-  $: cssVarStyles = `--width:${width}%`;
+  import PopupMenu from "./PopupMenu.svelte";
+  import dayjs from "dayjs";
+  import Api from "./Api.svelte";
+  import api from "../api";
+  import { translations as _ } from "../helpers";
+
   let avatar = "images/avatar/avatar-1.jpg";
+  let notificationsMenu;
+  let notifications = [];
+  let refreshNotifications = 1;
   let fullname = "...";
   user.subscribe((user) => {
     avatar = user.attributes.avatar || "images/avatar/avatar-1.jpg";
     fullname = user.attributes.name || "...";
   });
+  function toggle_notifications() {
+    refreshNotifications++;
+    const cmp = notificationsMenu.$capture_state();
+    cmp.toggle();
+  }
+  async function markNotificationRead(notification) {
+    notification.attributes.read = 1;
+    await api("notifications").put(notification.id, {
+      data: notification,
+    });
+    refreshNotifications++;
+  }
 </script>
 
 <header>
@@ -16,9 +35,37 @@
     <slot />
   </span>
   <div>
-    <div class="notifications">
+    <div class="notifications" on:click|stopPropagation={toggle_notifications}>
       <i class="fas fa-bell" />
-      <mark>5</mark>
+      <mark>{notifications.length}</mark>
+      <PopupMenu bind:this={notificationsMenu}>
+        <Api
+          path="notifications?filter[]=myUnreadNotifications()"
+          bind:value={notifications}
+          bind:refresh={refreshNotifications}
+        >
+          {#each notifications as notification}
+            <div
+              class="notification"
+              on:click={() => markNotificationRead(notification)}
+            >
+              <strong>{notification.attributes.title}</strong>
+              <div>{notification.attributes.message}</div>
+              <small
+                >{dayjs(
+                  notification.attributes.timeout * 1000
+                ).fromNow()}</small
+              >
+            </div>
+          {/each}
+        </Api>
+        {#if notifications.length === 0}
+          <div class="no-notifications">
+            <i class="fas fa-bell-slash" />
+            <span>{_("No notifications")}</span>
+          </div>
+        {/if}
+      </PopupMenu>
     </div>
     <figure>
       <img src={avatar} alt="user" />
@@ -32,18 +79,37 @@
 </header>
 
 <style>
-  /*.search {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-right: 1rem;
-  }*/
   .notifications {
     position: relative;
     width: 3rem;
+    cursor: pointer;
   }
   .notifications mark {
     position: absolute;
     top: -10px;
     left: 0.5rem;
+  }
+  .notification {
+    width: calc(100% - 1rem);
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--input-border);
+  }
+  .notification:hover {
+    background-color: var(--button-submit-bg);
+  }
+  .notification > strong {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .notification > div {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .notification > small {
+    grid-area: 1 / 2 / 3 / 3;
+    text-align: right;
   }
 </style>

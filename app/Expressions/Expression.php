@@ -25,6 +25,7 @@ final class Expression implements ExpressionInterface
         try {
             extract($variables);
             $_request = $this->request;
+            $_user_id = session($_request)->user_id;
             return eval('return ' . $this->expression . ';');
         } catch (Throwable $err) {
             throw new Exception($err->getMessage() .' in ' . $this->expression, $err->getCode(), $err);

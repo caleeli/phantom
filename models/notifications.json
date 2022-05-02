@@ -1,0 +1,83 @@
+{
+	"class": "JsonApi",
+	"url": "notifications",
+	"table": "notifications",
+	"id": "id",
+	"attributes": {
+		"user_id": "user_id",
+		"title": "title",
+		"message": "message",
+		"timeout": "timeout",
+		"read": "read"
+	},
+	"where": [],
+	"filters": {
+		"myUnreadNotifications()": "and user_id = ${$_user_id} and read = 0"
+	},
+	"sort": [
+		"-id"
+	],
+	"create": {
+		"user_id": ":user_id",
+		"title": ":title",
+		"message": ":message",
+		"timeout": ":timeout",
+		"read": ":read"
+	},
+	"update": {
+		"user_id": ":user_id",
+		"title": ":title",
+		"message": ":message",
+		"timeout": ":timeout",
+		"read": ":read"
+	},
+	"delete": {},
+	"relationships": {},
+	"labels": {
+		"_model": "Notification",
+		"_models": "Notifications",
+		"user_id": "Usuario",
+		"title": "T\u00edtulo",
+		"message": "Mensaje",
+		"timeout": "Timeout",
+		"read": "Leido"
+	},
+	"ui": {
+		"user_id": {
+			"type": "text",
+			"showInList": true,
+			"list": {
+				"model": "users",
+				"value": "${id}",
+				"text": "${attributes.name}"
+			}
+		},
+		"title": {
+			"type": "text",
+			"showInList": true
+		},
+		"message": {
+			"type": "text",
+			"showInList": true
+		},
+		"timeout": {
+			"type": "datetime",
+			"showInList": true
+		},
+		"read": {
+			"type": "checkbox",
+			"showInList": true
+		},
+		"_actions": {
+			"control": "actions",
+			"value": "attributes.id",
+			"actions": [
+				"edit",
+				"delete"
+			]
+		}
+	},
+	"list": {
+		"loadMore": false
+	}
+}

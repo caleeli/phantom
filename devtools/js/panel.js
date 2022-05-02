@@ -1700,7 +1700,7 @@ var app = (function () {
     	}
     }
 
-    var _actions="";var edit="editar";var open="abrir";var print="imprimir";var view="ver";var Login="Ingresar";var Password="Contraseña";var Search="Buscar";var Username="Nombre de usuario";var es = {_actions:_actions,"Choose a file":"Escoge un archivo",edit:edit,open:open,print:print,view:view,"delete":"eliminar","Load more":"Cargar más",Login:Login,Password:Password,"Please enter your account":"Por favor ingrese su cuenta",Search:Search,Username:Username};
+    var _actions="";var edit="editar";var open="abrir";var print="imprimir";var view="ver";var Login="Ingresar";var Password="Contraseña";var Search="Buscar";var Username="Nombre de usuario";var es = {_actions:_actions,"Choose a file":"Escoge un archivo",edit:edit,open:open,print:print,view:view,"delete":"eliminar","Load more":"Cargar más",Login:Login,Password:Password,"Please enter your account":"Por favor ingrese su cuenta","No notifications":"No hay notificaciones",Search:Search,Username:Username};
 
     const translations$1 = { es };
     function translation(language, labels = {}) {

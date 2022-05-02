@@ -1,0 +1,102 @@
+{
+    "name": "notifications",
+    "table": "notifications",
+    "join": "",
+    "url": "notifications",
+    "id": "id",
+    "fields": [
+        {
+            "name": "user_id",
+            "typeDB": "int",
+            "type": "text",
+            "select": "user_id",
+            "create": ":user_id",
+            "update": ":user_id",
+            "extra": "{\"list\":{\"model\":\"users\",\"value\":\"${id}\",\"text\":\"${attributes.name}\"}}",
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Usuario"
+        },
+        {
+            "name": "title",
+            "typeDB": "varchar(64)",
+            "type": "text",
+            "select": "title",
+            "create": ":title",
+            "update": ":title",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "T\u00edtulo"
+        },
+        {
+            "name": "message",
+            "typeDB": "varchar(128)",
+            "type": "text",
+            "select": "message",
+            "create": ":message",
+            "update": ":message",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Mensaje"
+        },
+        {
+            "name": "timeout",
+            "typeDB": "timestamp",
+            "type": "datetime",
+            "select": "timeout",
+            "create": ":timeout",
+            "update": ":timeout",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Timeout"
+        },
+        {
+            "name": "read",
+            "typeDB": "boolean",
+            "type": "checkbox",
+            "select": "read",
+            "create": ":read",
+            "update": ":read",
+            "extra": null,
+            "showInList": true,
+            "showInCreate": true,
+            "showInUpdate": true,
+            "groupRows": false,
+            "label": "Leido"
+        }
+    ],
+    "where": "",
+    "sort": "-id",
+    "filters": [
+        {
+            "declaration": "myUnreadNotifications()",
+            "expression": "and user_id = ${$_user_id} and read = 0"
+        }
+    ],
+    "data": [
+        {
+            "user_id": "1",
+            "title": "Alerta de cumplimiento",
+            "message": "Ejecuci\u00f3n de la actividad 1",
+            "timeout": "1652652000",
+            "read": "0"
+        }
+    ],
+    "actions": "edit,delete",
+    "relationships": [],
+    "createButtons": [],
+    "rowActions": [],
+    "loadMore": false,
+    "extra": ""
+}

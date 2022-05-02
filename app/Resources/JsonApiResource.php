@@ -53,6 +53,9 @@ class JsonApiResource extends ResourceBase implements JsonApiResourceInterface
     public function update($id, array $data)
     {
         $set = [];
+        if (!isset($data['data']) || !isset($data['data']['attributes'])) {
+            throw new Exception('Invalid data, expected {data:{attributes:{...}}}', 400);
+        }
         $params = $data['data']['attributes'];
         foreach ($this->definition['update'] as $name => $value) {
             if (!$this->hasRequiredParams($value, $params)) {
